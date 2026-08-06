@@ -252,7 +252,7 @@ const deleteOffice = (id: number) => {
         <!-- Shadcn Dialog Form Office -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-lg"
+                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-4xl"
             >
                 <DialogHeader>
                     <DialogTitle

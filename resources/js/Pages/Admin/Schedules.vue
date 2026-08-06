@@ -263,7 +263,7 @@ const deleteSchedule = (id: number) => {
         <!-- Shadcn Dialog Form Schedules -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-lg"
+                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-4xl"
             >
                 <DialogHeader>
                     <DialogTitle
