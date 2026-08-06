@@ -31,7 +31,6 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
 
       - name: Get Composer Cache Directory
         id: composer-cache

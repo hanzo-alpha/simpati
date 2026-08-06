@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/request-device-reset', [AuthController::class, 'requestDeviceReset']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {

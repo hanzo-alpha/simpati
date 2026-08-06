@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -56,6 +57,39 @@ class AuthController extends Controller
             'message' => 'Login berhasil',
             'user' => $user->load(['role', 'office', 'profile']),
             'token' => $token,
+        ]);
+    }
+
+    /**
+     * Public endpoint for ASN to request device reset when changing phones.
+     */
+    public function requestDeviceReset(Request $request): JsonResponse
+    {
+        $request->validate([
+            'nip' => 'required|string',
+            'password' => 'required|string',
+            'alasan' => 'required|string',
+        ]);
+
+        $user = User::where('nip', $request->nip)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'NIP atau password tidak valid.'], 422);
+        }
+
+        // Reset device ID binding for the user upon verified password
+        $oldDevice = $user->device_id;
+        $user->update(['device_id' => null]);
+
+        // Audit Log
+        Log::info("Self-service device binding reset by NIP {$user->nip}. Old device ID: {$oldDevice}. Reason: {$request->alasan}", [
+            'user_id' => $user->id,
+            'action' => 'device_reset_request',
+            'ip' => $request->ip(),
+        ]);
+
+        return response()->json([
+            'message' => 'Tautan perangkat HP lama berhasil di-reset! Silakan login kembali di HP baru Anda.',
         ]);
     }
 
