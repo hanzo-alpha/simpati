@@ -252,9 +252,7 @@ class AttendanceController extends Controller
     {
         $statusJenis = AttendanceType::tryFrom($jenis) ?? $jenis;
 
-        $schedule = $user->office?->workSchedules()
-            ->where('is_active', true)
-            ->first();
+        $schedule = WorkSchedule::getScheduleForOffice($user->office_id);
 
         if (! $schedule || $statusJenis !== AttendanceType::MASUK) {
             return AttendanceStatus::TEPAT_WAKTU;

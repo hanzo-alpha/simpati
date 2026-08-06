@@ -56,7 +56,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:285
+ * @see app/Http/Controllers/Api/AttendanceController.php:283
  * @route '/api/attendance/scan-qr'
  */
 export const scanQr = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ scanQr.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:285
+ * @see app/Http/Controllers/Api/AttendanceController.php:283
  * @route '/api/attendance/scan-qr'
  */
 scanQr.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ scanQr.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:285
+ * @see app/Http/Controllers/Api/AttendanceController.php:283
  * @route '/api/attendance/scan-qr'
  */
 scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:285
+ * @see app/Http/Controllers/Api/AttendanceController.php:283
  * @route '/api/attendance/scan-qr'
  */
     const scanQrForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:285
+ * @see app/Http/Controllers/Api/AttendanceController.php:283
  * @route '/api/attendance/scan-qr'
  */
         scanQrForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

@@ -652,8 +652,12 @@ class AdminController extends Controller
 
     public function storeSchedule(Request $request)
     {
+        if ($request->office_id === 'global' || $request->office_id === '') {
+            $request->merge(['office_id' => null]);
+        }
+
         $data = $request->validate([
-            'office_id' => 'required|exists:offices,id',
+            'office_id' => 'nullable|exists:offices,id',
             'type' => ['required', new Enum(ScheduleType::class)],
             'nama_jadwal' => 'required|string|max:255',
             'hari' => 'required|string',
@@ -665,13 +669,17 @@ class AdminController extends Controller
 
         WorkSchedule::create($data);
 
-        return back()->with('success', 'Schedule created successfully.');
+        return back()->with('success', 'Jadwal kerja berhasil dibuat.');
     }
 
     public function updateSchedule(Request $request, WorkSchedule $schedule)
     {
+        if ($request->office_id === 'global' || $request->office_id === '') {
+            $request->merge(['office_id' => null]);
+        }
+
         $data = $request->validate([
-            'office_id' => 'required|exists:offices,id',
+            'office_id' => 'nullable|exists:offices,id',
             'type' => ['required', new Enum(ScheduleType::class)],
             'nama_jadwal' => 'required|string|max:255',
             'hari' => 'required|string',
@@ -683,7 +691,7 @@ class AdminController extends Controller
 
         $schedule->update($data);
 
-        return back()->with('success', 'Schedule updated successfully.');
+        return back()->with('success', 'Jadwal kerja berhasil diperbarui.');
     }
 
     public function deleteSchedule(WorkSchedule $schedule)

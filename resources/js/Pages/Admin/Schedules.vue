@@ -31,7 +31,7 @@ interface Office {
 interface ScheduleItem {
     id: number;
     nama_jadwal: string;
-    office_id: number;
+    office_id: number | null;
     type: 'reguler' | 'shift' | 'khusus' | string;
     hari: string;
     jam_masuk: string;
@@ -59,7 +59,7 @@ const showForm = ref(false);
 const form = useForm({
     id: null as number | null,
     nama_jadwal: '',
-    office_id: '' as number | string,
+    office_id: 'global' as string,
     type: 'reguler',
     hari: 'Senin,Selasa,Rabu,Kamis,Jumat',
     jam_masuk: '07:30',
@@ -70,7 +70,7 @@ const form = useForm({
 const editSchedule = (sch: ScheduleItem) => {
     form.id = sch.id;
     form.nama_jadwal = sch.nama_jadwal;
-    form.office_id = String(sch.office_id);
+    form.office_id = sch.office_id ? String(sch.office_id) : 'global';
     form.type = sch.type;
     form.hari = sch.hari;
     form.jam_masuk = sch.jam_masuk;
@@ -82,6 +82,7 @@ const editSchedule = (sch: ScheduleItem) => {
 const resetForm = () => {
     form.reset();
     form.id = null;
+    form.office_id = 'global';
     showForm.value = false;
 };
 
@@ -163,8 +164,20 @@ const deleteSchedule = (id: number) => {
                                 >
                                     {{ sch.nama_jadwal }}
                                 </td>
-                                <td class="px-4 py-3.5 text-muted-foreground">
-                                    {{ sch.office?.opd_name || '-' }}
+                                <td class="px-4 py-3.5">
+                                    <Badge
+                                        v-if="!sch.office_id || !sch.office"
+                                        variant="outline"
+                                        class="rounded-none border-blue-500/30 bg-blue-500/10 text-[10px] font-bold tracking-wider text-blue-700 uppercase dark:text-blue-400"
+                                    >
+                                        Semua OPD (Global Pemda)
+                                    </Badge>
+                                    <span
+                                        v-else
+                                        class="font-medium text-muted-foreground"
+                                    >
+                                        {{ sch.office.opd_name }}
+                                    </span>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
                                     <Badge
@@ -289,17 +302,20 @@ const deleteSchedule = (id: number) => {
                         <div class="space-y-1.5">
                             <Label
                                 class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                >OPD / Kantor</Label
+                                >OPD / Kantor Target</Label
                             >
                             <Select v-model="form.office_id">
                                 <SelectTrigger
                                     class="h-10 rounded-none text-xs sm:text-sm"
                                 >
                                     <SelectValue
-                                        placeholder="Pilih OPD / Kantor"
+                                        placeholder="Pilih OPD / Global"
                                     />
                                 </SelectTrigger>
                                 <SelectContent>
+                                    <SelectItem value="global"
+                                        >Semua OPD (Global Pemda)</SelectItem
+                                    >
                                     <SelectItem
                                         v-for="o in offices"
                                         :key="o.id"

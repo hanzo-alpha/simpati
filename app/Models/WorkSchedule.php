@@ -50,4 +50,27 @@ class WorkSchedule extends Model
     {
         return in_array(strtolower($day), $this->getDaysArray());
     }
+
+    /**
+     * Resolve working schedule for a specific office.
+     * Falls back to Global (null office_id) if no office-specific schedule is set.
+     */
+    public static function getScheduleForOffice(?int $officeId, ?string $day = null): ?self
+    {
+        if ($officeId) {
+            $opdSchedule = static::where('office_id', $officeId)
+                ->where('is_active', true)
+                ->when($day, fn ($q) => $q->where('hari', 'like', "%{$day}%"))
+                ->first();
+
+            if ($opdSchedule) {
+                return $opdSchedule;
+            }
+        }
+
+        return static::whereNull('office_id')
+            ->where('is_active', true)
+            ->when($day, fn ($q) => $q->where('hari', 'like', "%{$day}%"))
+            ->first();
+    }
 }
