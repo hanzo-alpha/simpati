@@ -1,59 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏛️ SIMPATI - Sistem Informasi Presensi ASN Terpadu
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel CI](https://github.com/hanzo-alpha/simpati/actions/workflows/ci.yml/badge.svg)](https://github.com/hanzo-alpha/simpati/actions/workflows/ci.yml)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3%20%7C%208.5-777BB4?style=flat&logo=php)](https://php.net)
+[![Laravel Version](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat&logo=laravel)](https://laravel.com)
+[![Vue Version](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=flat&logo=vuedotjs)](https://vuejs.org)
+[![Inertia Version](https://img.shields.io/badge/Inertia.js-v3-9553E9?style=flat&logo=inertia)](https://inertiajs.com)
+[![Mobile Repo](https://img.shields.io/badge/Flutter_App-simpati--mobile-02569B?style=flat&logo=flutter)](https://github.com/hanzo-alpha/simpati-mobile)
 
-## About Laravel
+**SIMPATI** (Sistem Informasi Presensi ASN Terpadu) adalah platform manajemen kepegawaian, presensi digital geofencing GPS, dan otomatisasi kalkulasi TPP (*Tambahan Penghasilan Pegawai*) terpadu untuk Pemerintah Daerah Kabupaten Soppeng.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Fitur Utama Platform
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 📍 **Geofencing GPS Radius Kantor**: Presensi hanya sah apabila koordinat GPS berada dalam polygon/radius lokasi kantor OPD (misal 200 meter).
+- 🚫 **Anti-Fake GPS & Mock Location**: Proteksi otomatis pendeteksian aplikasi manipulasi GPS (Fake GPS/Spoofer).
+- 📸 **Verifikasi Selfie Biometrik Live**: Pengambilan foto presensi secara langsung menggunakan kamera depan.
+- 📱 **Single Device Binding Lock**: Mengunci 1 NIP pegawai pada 1 Hardware ID (IMEI) smartphone resmi untuk mencegah penitipan presensi.
+- 📊 **Kalkulasi Potongan TPP Otomatis**: Penghitungan estimasi potongan TPP bulanan berdasarkan akumulasi menit keterlambatan (TL1–TL4) & pulang cepat (PSW) sesuai Perbup.
+- 💼 **Manajemen Izin & Dinas Luar**: Alur verifikasi dan *approval* Atasan Langsung untuk pegawai dinas di luar radius.
+- 📢 **Broadcast Edaran OPD**: Penyampaian surat edaran resmi langsung ke aplikasi mobile seluruh ASN.
+- 🎨 **Shadcn Vue Preset Aesthetic**: Mengusung desain **Preset `a35Qlr3g` (Style: Sera | Base: Mist | Theme: Emerald | Font: Space Grotesk)**.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🛠️ Arsitektur & Teknologi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Backend Framework**: Laravel 12 (PHP 8.5)
+- **Frontend SPA**: Inertia.js v3 + Vue 3 (Options API / Script Setup)
+- **Desain & UI**: Tailwind CSS v4 + Shadcn Vue Preset (`Sera / Mist / Emerald`)
+- **Autentikasi & API**: Laravel Fortify + Laravel Sanctum REST API
+- **Testing**: PHPUnit Test Suite (100% Green Coverage)
+- **Code Formatter**: Laravel Pint (`vendor/bin/pint`)
+- **Aplikasi Mobile**: Flutter SDK (Repositori Terpisah: [`simpati-mobile`](https://github.com/hanzo-alpha/simpati-mobile))
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Panduan Instalasi & Pengembangan Lokal
 
-### Premium Partners
+### Prasyarat System:
+- PHP >= 8.3 dengan ekstensi `gd`, `pdo_sqlite` / `pdo_mysql`, `mbstring`, `zip`, `intl`
+- Node.js >= 20.x & NPM / Bun
+- Composer >= 2.x
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Langkah Instalasi:
 
-## Contributing
+1. **Clone Repositori**:
+   ```bash
+   git clone https://github.com/hanzo-alpha/simpati.git
+   cd simpati
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Instal Dependensi PHP & JavaScript**:
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Code of Conduct
+3. **Konfigurasi Environment**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Migrasi Database & Seeder**:
+   ```bash
+   php artisan migrate --seed
+   ```
 
-## Security Vulnerabilities
+5. **Jalankan Server Development**:
+   ```bash
+   # Terminal 1: Vite Dev Server
+   npm run dev
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   # Terminal 2: Laravel Artisan Server / Herd
+   php artisan serve
+   ```
 
-## License
+6. **Kompilasi Production Build**:
+   ```bash
+   npm run build
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🧪 Pengujian Otomatis (PHPUnit)
+
+Jalankan test suite otomatis menggunakan Artisan:
+
+```bash
+php artisan test
+```
+
+Untuk menjalankan pemeriksaan format kode Laravel Pint:
+```bash
+vendor/bin/pint --test
+```
+
+---
+
+## 📱 Repositori Terkait
+
+Aplikasi mobile Flutter untuk ASN Pemkab Soppeng dikelola di repositori terpisah:
+👉 **[hanzo-alpha/simpati-mobile](https://github.com/hanzo-alpha/simpati-mobile)**
+
+---
+
+## 📄 Lisensi & Hak Cipta
+
+&copy; {{ new Date().getFullYear() }} Pemerintah Kabupaten Soppeng. Seluruh Hak Cipta Dilindungi.
