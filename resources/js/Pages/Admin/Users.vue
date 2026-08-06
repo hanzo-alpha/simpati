@@ -601,15 +601,21 @@ const resetDevice = (user: UserItem) => {
                                         placeholder="Pilih OPD / Kantor"
                                     />
                                 </SelectTrigger>
-                                <SelectContent class="rounded-none border-border">
-                                    <div class="p-2 border-b border-border sticky top-0 bg-popover z-10">
+                                <SelectContent
+                                    class="rounded-none border-border"
+                                >
+                                    <div
+                                        class="sticky top-0 z-10 border-b border-border bg-popover p-2"
+                                    >
                                         <div class="relative">
-                                            <Search class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                                            <Search
+                                                class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+                                            />
                                             <Input
                                                 v-model="opdFormSearch"
                                                 type="text"
                                                 placeholder="Cari OPD / Kantor..."
-                                                class="h-8 rounded-none pl-8 text-xs bg-background border-input"
+                                                class="h-8 rounded-none border-input bg-background pl-8 text-xs"
                                                 @keydown.stop
                                             />
                                         </div>
@@ -622,7 +628,10 @@ const resetDevice = (user: UserItem) => {
                                         >
                                             {{ o.opd_name }}
                                         </SelectItem>
-                                        <div v-if="!filteredFormOffices.length" class="p-3 text-center text-xs text-muted-foreground">
+                                        <div
+                                            v-if="!filteredFormOffices.length"
+                                            class="p-3 text-center text-xs text-muted-foreground"
+                                        >
                                             OPD tidak ditemukan
                                         </div>
                                     </div>

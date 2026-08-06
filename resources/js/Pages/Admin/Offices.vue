@@ -62,9 +62,17 @@ const filteredOffices = computed(() => {
         const matchesSearch =
             !searchQuery.value.trim() ||
             o.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-            o.opd_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-            (o.unit_code && o.unit_code.toLowerCase().includes(searchQuery.value.toLowerCase())) ||
-            (o.parent && o.parent.opd_name.toLowerCase().includes(searchQuery.value.toLowerCase()));
+            o.opd_name
+                .toLowerCase()
+                .includes(searchQuery.value.toLowerCase()) ||
+            (o.unit_code &&
+                o.unit_code
+                    .toLowerCase()
+                    .includes(searchQuery.value.toLowerCase())) ||
+            (o.parent &&
+                o.parent.opd_name
+                    .toLowerCase()
+                    .includes(searchQuery.value.toLowerCase()));
 
         const matchesFilter =
             activeFilter.value === 'all' ||
@@ -91,7 +99,7 @@ const filteredParentOptions = computed(() => {
     }
     const q = parentSearch.value.toLowerCase();
     return parentOfficeOptions.value.filter((p) =>
-        p.opd_name.toLowerCase().includes(q)
+        p.opd_name.toLowerCase().includes(q),
     );
 });
 
@@ -161,48 +169,58 @@ const deleteOffice = (id: number) => {
         </template>
 
         <!-- Filter Card -->
-        <Card class="mb-4 rounded-none border border-border bg-card p-4 text-card-foreground shadow-xs">
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <Card
+            class="mb-4 rounded-none border border-border bg-card p-4 text-card-foreground shadow-xs"
+        >
+            <div
+                class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+            >
                 <!-- Tabs filter -->
                 <div class="flex items-center gap-1.5 overflow-x-auto">
                     <button
                         @click="activeFilter = 'all'"
-                        class="h-8 px-3 text-xs font-bold tracking-wider uppercase border transition-colors cursor-pointer"
+                        class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
                         :class="
                             activeFilter === 'all'
-                                ? 'bg-primary text-primary-foreground border-primary'
-                                : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted/60'
+                                ? 'border-primary bg-primary text-primary-foreground'
+                                : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
                         "
                     >
                         Semua ({{ offices.length }})
                     </button>
                     <button
                         @click="activeFilter = 'parent'"
-                        class="h-8 px-3 text-xs font-bold tracking-wider uppercase border transition-colors cursor-pointer"
+                        class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
                         :class="
                             activeFilter === 'parent'
-                                ? 'bg-primary text-primary-foreground border-primary'
-                                : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted/60'
+                                ? 'border-primary bg-primary text-primary-foreground'
+                                : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
                         "
                     >
-                        OPD Induk ({{ offices.filter((o) => !o.parent_id).length }})
+                        OPD Induk ({{
+                            offices.filter((o) => !o.parent_id).length
+                        }})
                     </button>
                     <button
                         @click="activeFilter = 'sub'"
-                        class="h-8 px-3 text-xs font-bold tracking-wider uppercase border transition-colors cursor-pointer"
+                        class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
                         :class="
                             activeFilter === 'sub'
-                                ? 'bg-primary text-primary-foreground border-primary'
-                                : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted/60'
+                                ? 'border-primary bg-primary text-primary-foreground'
+                                : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
                         "
                     >
-                        Sub OPD / UPTD ({{ offices.filter((o) => !!o.parent_id).length }})
+                        Sub OPD / UPTD ({{
+                            offices.filter((o) => !!o.parent_id).length
+                        }})
                     </button>
                 </div>
 
                 <!-- Search bar -->
                 <div class="relative w-full md:w-72">
-                    <Search class="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                    <Search
+                        class="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+                    />
                     <Input
                         v-model="searchQuery"
                         type="text"
@@ -224,14 +242,32 @@ const deleteOffice = (id: number) => {
                             <tr
                                 class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
-                                <th class="w-10 px-4 py-3.5 text-center font-bold">#</th>
-                                <th class="px-4 py-3.5 font-bold">Nama OPD / Sub Unit</th>
-                                <th class="px-4 py-3.5 text-center font-bold">Tipe Unit</th>
-                                <th class="px-4 py-3.5 font-bold">OPD Induk Utama</th>
-                                <th class="px-4 py-3.5 font-bold">Alamat Lengkap</th>
-                                <th class="px-4 py-3.5 text-center font-bold">Radius Geofence</th>
-                                <th class="px-4 py-3.5 text-center font-bold">GPS</th>
-                                <th class="px-4 py-3.5 text-center font-bold">Aksi</th>
+                                <th
+                                    class="w-10 px-4 py-3.5 text-center font-bold"
+                                >
+                                    #
+                                </th>
+                                <th class="px-4 py-3.5 font-bold">
+                                    Nama OPD / Sub Unit
+                                </th>
+                                <th class="px-4 py-3.5 text-center font-bold">
+                                    Tipe Unit
+                                </th>
+                                <th class="px-4 py-3.5 font-bold">
+                                    OPD Induk Utama
+                                </th>
+                                <th class="px-4 py-3.5 font-bold">
+                                    Alamat Lengkap
+                                </th>
+                                <th class="px-4 py-3.5 text-center font-bold">
+                                    Radius Geofence
+                                </th>
+                                <th class="px-4 py-3.5 text-center font-bold">
+                                    GPS
+                                </th>
+                                <th class="px-4 py-3.5 text-center font-bold">
+                                    Aksi
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
@@ -240,17 +276,30 @@ const deleteOffice = (id: number) => {
                                 :key="office.id"
                                 class="border-b border-border/40 transition-colors hover:bg-muted/30"
                             >
-                                <td class="px-4 py-3.5 text-center font-mono text-muted-foreground">
-                                    {{ (currentPage - 1) * itemsPerPage + i + 1 }}
+                                <td
+                                    class="px-4 py-3.5 text-center font-mono text-muted-foreground"
+                                >
+                                    {{
+                                        (currentPage - 1) * itemsPerPage + i + 1
+                                    }}
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <div class="font-bold text-foreground flex items-center gap-1.5">
-                                        <Building2 class="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                                    <div
+                                        class="flex items-center gap-1.5 font-bold text-foreground"
+                                    >
+                                        <Building2
+                                            class="h-3.5 w-3.5 shrink-0 text-muted-foreground"
+                                        />
                                         <span>{{ office.opd_name }}</span>
                                     </div>
-                                    <div class="text-[11px] text-muted-foreground mt-0.5 flex items-center gap-2">
+                                    <div
+                                        class="mt-0.5 flex items-center gap-2 text-[11px] text-muted-foreground"
+                                    >
                                         <span>{{ office.name }}</span>
-                                        <span v-if="office.unit_code" class="font-mono text-[10px] bg-muted px-1.5 py-0.5 font-bold text-foreground">
+                                        <span
+                                            v-if="office.unit_code"
+                                            class="bg-muted px-1.5 py-0.5 font-mono text-[10px] font-bold text-foreground"
+                                        >
                                             {{ office.unit_code }}
                                         </span>
                                     </div>
@@ -259,27 +308,35 @@ const deleteOffice = (id: number) => {
                                     <Badge
                                         v-if="!office.parent_id"
                                         variant="outline"
-                                        class="rounded-none border-blue-500/30 bg-blue-500/10 text-blue-700 dark:text-blue-400 font-bold uppercase tracking-wider text-[10px]"
+                                        class="rounded-none border-blue-500/30 bg-blue-500/10 text-[10px] font-bold tracking-wider text-blue-700 uppercase dark:text-blue-400"
                                     >
                                         Induk OPD
                                     </Badge>
                                     <Badge
                                         v-else
                                         variant="outline"
-                                        class="rounded-none border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-400 font-bold uppercase tracking-wider text-[10px]"
+                                        class="rounded-none border-purple-500/30 bg-purple-500/10 text-[10px] font-bold tracking-wider text-purple-700 uppercase dark:text-purple-400"
                                     >
                                         Sub OPD / UPTD
                                     </Badge>
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <span v-if="office.parent" class="font-medium text-foreground">
+                                    <span
+                                        v-if="office.parent"
+                                        class="font-medium text-foreground"
+                                    >
                                         {{ office.parent.opd_name }}
                                     </span>
-                                    <span v-else class="text-muted-foreground text-[11px]">
+                                    <span
+                                        v-else
+                                        class="text-[11px] text-muted-foreground"
+                                    >
                                         (Unit Utama)
                                     </span>
                                 </td>
-                                <td class="px-4 py-3.5 text-muted-foreground max-w-xs truncate">
+                                <td
+                                    class="max-w-xs truncate px-4 py-3.5 text-muted-foreground"
+                                >
                                     {{ office.alamat || '-' }}
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
@@ -290,18 +347,29 @@ const deleteOffice = (id: number) => {
                                         {{ office.radius_meters }}m
                                     </Badge>
                                 </td>
-                                <td class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground">
+                                <td
+                                    class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground"
+                                >
                                     <span
-                                        v-if="office.latitude && office.longitude"
+                                        v-if="
+                                            office.latitude && office.longitude
+                                        "
                                         class="flex items-center justify-center gap-1"
                                     >
-                                        <MapPin class="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" />
-                                        <span>{{ office.latitude }}, {{ office.longitude }}</span>
+                                        <MapPin
+                                            class="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400"
+                                        />
+                                        <span
+                                            >{{ office.latitude }},
+                                            {{ office.longitude }}</span
+                                        >
                                     </span>
                                     <span v-else>-</span>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <div class="flex items-center justify-center gap-1">
+                                    <div
+                                        class="flex items-center justify-center gap-1"
+                                    >
                                         <Button
                                             variant="ghost"
                                             size="sm"
@@ -330,7 +398,9 @@ const deleteOffice = (id: number) => {
                         v-if="!filteredOffices.length"
                         class="space-y-2 py-10 text-center text-muted-foreground"
                     >
-                        <Building2 class="mx-auto h-8 w-8 text-muted-foreground/50" />
+                        <Building2
+                            class="mx-auto h-8 w-8 text-muted-foreground/50"
+                        />
                         <p>Tidak ada data kantor OPD yang cocok.</p>
                     </div>
 
@@ -358,7 +428,11 @@ const deleteOffice = (id: number) => {
                         >
                             <Building2 class="h-4 w-4" />
                         </div>
-                        <span>{{ form.id ? 'Edit Data Kantor / Sub OPD' : 'Tambah Kantor OPD / Sub OPD Baru' }}</span>
+                        <span>{{
+                            form.id
+                                ? 'Edit Data Kantor / Sub OPD'
+                                : 'Tambah Kantor OPD / Sub OPD Baru'
+                        }}</span>
                     </DialogTitle>
                 </DialogHeader>
 
@@ -366,29 +440,42 @@ const deleteOffice = (id: number) => {
                     <!-- Row 1: Parent OPD & Kode Unit -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 OPD Induk Utama
                             </Label>
                             <Select v-model="form.parent_id">
-                                <SelectTrigger class="h-10 rounded-none text-xs sm:text-sm">
-                                    <SelectValue placeholder="Pilih OPD Induk / Tanpa Induk" />
+                                <SelectTrigger
+                                    class="h-10 rounded-none text-xs sm:text-sm"
+                                >
+                                    <SelectValue
+                                        placeholder="Pilih OPD Induk / Tanpa Induk"
+                                    />
                                 </SelectTrigger>
-                                <SelectContent class="rounded-none border-border">
-                                    <div class="p-2 border-b border-border sticky top-0 bg-popover z-10">
+                                <SelectContent
+                                    class="rounded-none border-border"
+                                >
+                                    <div
+                                        class="sticky top-0 z-10 border-b border-border bg-popover p-2"
+                                    >
                                         <div class="relative">
-                                            <Search class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                                            <Search
+                                                class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+                                            />
                                             <Input
                                                 v-model="parentSearch"
                                                 type="text"
                                                 placeholder="Cari OPD Induk..."
-                                                class="h-8 rounded-none pl-8 text-xs bg-background border-input"
+                                                class="h-8 rounded-none border-input bg-background pl-8 text-xs"
                                                 @keydown.stop
                                             />
                                         </div>
                                     </div>
                                     <div class="max-h-56 overflow-y-auto pt-1">
                                         <SelectItem value="none">
-                                            -- Berdiri Sendiri (OPD Induk Utama) --
+                                            -- Berdiri Sendiri (OPD Induk Utama)
+                                            --
                                         </SelectItem>
                                         <SelectItem
                                             v-for="p in filteredParentOptions"
@@ -402,14 +489,17 @@ const deleteOffice = (id: number) => {
                             </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="unit_code" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="unit_code"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 Kode Unit / Singkatan
                             </Label>
                             <Input
                                 id="unit_code"
                                 v-model="form.unit_code"
                                 placeholder="Contoh: SETDA, PKM-SALOTUNGO"
-                                class="h-10 rounded-none text-xs sm:text-sm font-mono"
+                                class="h-10 rounded-none font-mono text-xs sm:text-sm"
                             />
                         </div>
                     </div>
@@ -417,7 +507,10 @@ const deleteOffice = (id: number) => {
                     <!-- Row 2: Nama OPD & Nama Gedung -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label for="opd_name" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="opd_name"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 Nama OPD / Sub OPD
                             </Label>
                             <Input
@@ -429,7 +522,10 @@ const deleteOffice = (id: number) => {
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="name" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="name"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 Nama Kantor / Gedung
                             </Label>
                             <Input
@@ -443,7 +539,10 @@ const deleteOffice = (id: number) => {
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="alamat" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                        <Label
+                            for="alamat"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                        >
                             Alamat Lengkap Kantor
                         </Label>
                         <Input
@@ -456,7 +555,10 @@ const deleteOffice = (id: number) => {
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div class="space-y-1.5">
-                            <Label for="latitude" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="latitude"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 Latitude GPS
                             </Label>
                             <Input
@@ -467,7 +569,10 @@ const deleteOffice = (id: number) => {
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="longitude" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="longitude"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 Longitude GPS
                             </Label>
                             <Input
@@ -478,7 +583,10 @@ const deleteOffice = (id: number) => {
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="radius_meters" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="radius_meters"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 Radius Geofence (Meter)
                             </Label>
                             <Input
@@ -492,7 +600,9 @@ const deleteOffice = (id: number) => {
                         </div>
                     </div>
 
-                    <div class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4">
+                    <div
+                        class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4"
+                    >
                         <Button
                             type="button"
                             variant="outline"

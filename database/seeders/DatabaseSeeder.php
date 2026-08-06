@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
     private function seedOffices()
     {
         $opdHierarchies = [
+            // 1. Sekretariat Daerah
             [
                 'parent' => [
                     'name' => 'Kantor Bupati Soppeng',
@@ -90,6 +91,8 @@ class DatabaseSeeder extends Seeder
                     ['name' => 'Bagian Prokopim', 'opd_name' => 'Bagian Protokol & Komunikasi Pimpinan', 'unit_code' => 'SETDA-PROKOPIM', 'latitude' => -4.3422, 'longitude' => 120.0123, 'radius_meters' => 150, 'alamat' => 'Gedung Utama Kantor Bupati Soppeng'],
                 ],
             ],
+
+            // 2. Dinas Kesehatan (Menaungi RSUD Latemmamala, PSC 119, Labkesda, dan 17 Puskesmas)
             [
                 'parent' => [
                     'name' => 'Kantor Dinas Kesehatan',
@@ -101,29 +104,32 @@ class DatabaseSeeder extends Seeder
                     'alamat' => 'Jl. Salotungo No. 3, Watansoppeng',
                 ],
                 'subs' => [
+                    ['name' => 'RSUD Latemmamala Soppeng', 'opd_name' => 'RSUD Latemmamala Kabupaten Soppeng', 'unit_code' => 'RSUD-LATEMMAMALA', 'latitude' => -4.3510, 'longitude' => 120.0210, 'radius_meters' => 200, 'alamat' => 'Jl. Malaka Raya, Watansoppeng'],
+                    ['name' => 'PSC 119 Soppeng', 'opd_name' => 'PSC 119 Soppeng (Public Safety Center)', 'unit_code' => 'PSC-119', 'latitude' => -4.3452, 'longitude' => 120.0156, 'radius_meters' => 80, 'alamat' => 'Komp. Dinas Kesehatan Soppeng, Jl. Salotungo'],
+                    ['name' => 'UPTD Labkesda Soppeng', 'opd_name' => 'UPTD Laboratorium Kesehatan Daerah', 'unit_code' => 'LABKESDA', 'latitude' => -4.3452, 'longitude' => 120.0158, 'radius_meters' => 80, 'alamat' => 'Komp. Dinas Kesehatan Soppeng'],
+                    
+                    // 17 Puskesmas Kabupaten Soppeng
                     ['name' => 'UPTD Puskesmas Salotungo', 'opd_name' => 'UPTD Puskesmas Salotungo', 'unit_code' => 'PKM-SALOTUNGO', 'latitude' => -4.3461, 'longitude' => 120.0170, 'radius_meters' => 100, 'alamat' => 'Jl. Keselamatan No. 12, Salotungo, Watansoppeng'],
-                    ['name' => 'UPTD Puskesmas Lalabata Rilau', 'opd_name' => 'UPTD Puskesmas Lalabata Rilau', 'unit_code' => 'PKM-LALABATA', 'latitude' => -4.3390, 'longitude' => 120.0080, 'radius_meters' => 100, 'alamat' => 'Jl. Kemuning No. 5, Lalabata'],
-                    ['name' => 'UPTD Puskesmas Marioriwawo', 'opd_name' => 'UPTD Puskesmas Marioriwawo (Takalala)', 'unit_code' => 'PKM-TAKALALA', 'latitude' => -4.4210, 'longitude' => 119.9850, 'radius_meters' => 100, 'alamat' => 'Jl. Pasar Baru, Takalala, Marioriwawo'],
-                    ['name' => 'UPTD Puskesmas Liliriaja', 'opd_name' => 'UPTD Puskesmas Liliriaja (Cangadi)', 'unit_code' => 'PKM-CANGADI', 'latitude' => -4.3780, 'longitude' => 120.0820, 'radius_meters' => 100, 'alamat' => 'Jl. Poros Soppeng-Sidrap, Cangadi'],
-                    ['name' => 'UPTD Puskesmas Donri-Donri', 'opd_name' => 'UPTD Puskesmas Donri-Donri (Tajuncu)', 'unit_code' => 'PKM-TAJUNCU', 'latitude' => -4.2950, 'longitude' => 119.9700, 'radius_meters' => 100, 'alamat' => 'Jl. Tajuncu, Donri-Donri'],
-                    ['name' => 'UPTD Labkesda Soppeng', 'opd_name' => 'UPTD Laboratorium Kesehatan Daerah', 'unit_code' => 'LABKESDA', 'latitude' => -4.3452, 'longitude' => 120.0158, 'radius_meters' => 80, 'alamat' => 'Komp. Dinkes Soppeng'],
+                    ['name' => 'UPTD Puskesmas Sewo', 'opd_name' => 'UPTD Puskesmas Sewo', 'unit_code' => 'PKM-SEWO', 'latitude' => -4.3620, 'longitude' => 120.0050, 'radius_meters' => 100, 'alamat' => 'Kelurahan Sewo, Kec. Lalabata'],
+                    ['name' => 'UPTD Puskesmas Malaka', 'opd_name' => 'UPTD Puskesmas Malaka', 'unit_code' => 'PKM-MALAKA', 'latitude' => -4.3480, 'longitude' => 120.0250, 'radius_meters' => 100, 'alamat' => 'Jl. Malaka Raya, Kec. Lalabata'],
+                    ['name' => 'UPTD Puskesmas Takalala', 'opd_name' => 'UPTD Puskesmas Takalala', 'unit_code' => 'PKM-TAKALALA', 'latitude' => -4.4210, 'longitude' => 119.9850, 'radius_meters' => 100, 'alamat' => 'Jl. Pasar Baru, Takalala, Kec. Marioriwawo'],
+                    ['name' => 'UPTD Puskesmas Tanjonge', 'opd_name' => 'UPTD Puskesmas Tanjonge', 'unit_code' => 'PKM-TANJONGE', 'latitude' => -4.4500, 'longitude' => 119.9600, 'radius_meters' => 100, 'alamat' => 'Desa Tanjonge, Kec. Marioriwawo'],
+                    ['name' => 'UPTD Puskesmas Goarie', 'opd_name' => 'UPTD Puskesmas Goarie', 'unit_code' => 'PKM-GOARIE', 'latitude' => -4.4100, 'longitude' => 120.0100, 'radius_meters' => 100, 'alamat' => 'Desa Goarie, Kec. Marioriwawo'],
+                    ['name' => 'UPTD Puskesmas Cangadi', 'opd_name' => 'UPTD Puskesmas Cangadi', 'unit_code' => 'PKM-CANGADI', 'latitude' => -4.3780, 'longitude' => 120.0820, 'radius_meters' => 100, 'alamat' => 'Jl. Poros Soppeng-Sidrap, Cangadi, Kec. Liliriaja'],
+                    ['name' => 'UPTD Puskesmas Pacongkang', 'opd_name' => 'UPTD Puskesmas Pacongkang', 'unit_code' => 'PKM-PACONGKANG', 'latitude' => -4.3850, 'longitude' => 120.0950, 'radius_meters' => 100, 'alamat' => 'Desa Pacongkang, Kec. Liliriaja'],
+                    ['name' => 'UPTD Puskesmas Cabenge', 'opd_name' => 'UPTD Puskesmas Cabenge', 'unit_code' => 'PKM-CABENGE', 'latitude' => -4.3310, 'longitude' => 120.1450, 'radius_meters' => 100, 'alamat' => 'Kel. Cabenge, Kec. Lilirilau'],
+                    ['name' => 'UPTD Puskesmas Baringeng', 'opd_name' => 'UPTD Puskesmas Baringeng', 'unit_code' => 'PKM-BARINGENG', 'latitude' => -4.3100, 'longitude' => 120.1800, 'radius_meters' => 100, 'alamat' => 'Desa Baringeng, Kec. Lilirilau'],
+                    ['name' => 'UPTD Puskesmas Cakkuridi', 'opd_name' => 'UPTD Puskesmas Cakkuridi', 'unit_code' => 'PKM-CAKKURIDI', 'latitude' => -4.3400, 'longitude' => 120.1200, 'radius_meters' => 100, 'alamat' => 'Desa Cakkuridi, Kec. Lilirilau'],
+                    ['name' => 'UPTD Puskesmas Tajuncu', 'opd_name' => 'UPTD Puskesmas Tajuncu', 'unit_code' => 'PKM-TAJUNCU', 'latitude' => -4.2950, 'longitude' => 119.9700, 'radius_meters' => 100, 'alamat' => 'Jl. Tajuncu, Kec. Donri-Donri'],
+                    ['name' => 'UPTD Puskesmas Batu-Batu', 'opd_name' => 'UPTD Puskesmas Batu-Batu', 'unit_code' => 'PKM-BATUBATU', 'latitude' => -4.2300, 'longitude' => 119.9300, 'radius_meters' => 100, 'alamat' => 'Kel. Batu-Batu, Kec. Marioriawa'],
+                    ['name' => 'UPTD Puskesmas Leworeng', 'opd_name' => 'UPTD Puskesmas Leworeng', 'unit_code' => 'PKM-LEWORENG', 'latitude' => -4.2100, 'longitude' => 119.9100, 'radius_meters' => 100, 'alamat' => 'Desa Leworeng, Kec. Marioriawa'],
+                    ['name' => 'UPTD Puskesmas Panincong', 'opd_name' => 'UPTD Puskesmas Panincong', 'unit_code' => 'PKM-PANINCONG', 'latitude' => -4.2500, 'longitude' => 119.9500, 'radius_meters' => 100, 'alamat' => 'Desa Panincong, Kec. Marioriawa'],
+                    ['name' => 'UPTD Puskesmas Citta', 'opd_name' => 'UPTD Puskesmas Citta', 'unit_code' => 'PKM-CITTA', 'latitude' => -4.4300, 'longitude' => 120.0600, 'radius_meters' => 100, 'alamat' => 'Desa Citta, Kec. Citta'],
+                    ['name' => 'UPTD Puskesmas Ganra', 'opd_name' => 'UPTD Puskesmas Ganra', 'unit_code' => 'PKM-GANRA', 'latitude' => -4.3150, 'longitude' => 120.0400, 'radius_meters' => 100, 'alamat' => 'Desa Ganra, Kec. Ganra'],
                 ],
             ],
-            [
-                'parent' => [
-                    'name' => 'RSUD Latemmamala Soppeng',
-                    'opd_name' => 'RSUD Latemmamala Kabupaten Soppeng',
-                    'unit_code' => 'RSUD-LATEMMAMALA',
-                    'latitude' => -4.3510,
-                    'longitude' => 120.0210,
-                    'radius_meters' => 200,
-                    'alamat' => 'Jl. Malaka Raya, Watansoppeng',
-                ],
-                'subs' => [
-                    ['name' => 'Bidang Pelayanan Medis', 'opd_name' => 'Bidang Pelayanan Medis & Keperawatan RSUD', 'unit_code' => 'RSUD-YANMED', 'latitude' => -4.3510, 'longitude' => 120.0210, 'radius_meters' => 200, 'alamat' => 'Gedung Utama RSUD Latemmamala'],
-                    ['name' => 'Bagian Tata Usaha RSUD', 'opd_name' => 'Bagian Tata Usaha RSUD Latemmamala', 'unit_code' => 'RSUD-TU', 'latitude' => -4.3510, 'longitude' => 120.0210, 'radius_meters' => 200, 'alamat' => 'Gedung Administrasi RSUD Latemmamala'],
-                ],
-            ],
+
+            // 3. Dinas Pendidikan dan Kebudayaan
             [
                 'parent' => [
                     'name' => 'Kantor Dinas Pendidikan',
@@ -140,6 +146,8 @@ class DatabaseSeeder extends Seeder
                     ['name' => 'UPTD SKB Soppeng', 'opd_name' => 'UPTD Sanggar Kegiatan Belajar (SKB)', 'unit_code' => 'SKB-SOPPENG', 'latitude' => -4.3395, 'longitude' => 120.0090, 'radius_meters' => 100, 'alamat' => 'Jl. Pendidikan No. 8, Watansoppeng'],
                 ],
             ],
+
+            // 4. Badan Kepegawaian dan Pengembangan SDM (BKPSDM)
             [
                 'parent' => [
                     'name' => 'Kantor BKPSDM',
@@ -152,6 +160,8 @@ class DatabaseSeeder extends Seeder
                 ],
                 'subs' => [],
             ],
+
+            // 5. Badan Pengelola Keuangan dan Aset Daerah (BPKAD)
             [
                 'parent' => [
                     'name' => 'Kantor BPKAD',
@@ -164,6 +174,22 @@ class DatabaseSeeder extends Seeder
                 ],
                 'subs' => [],
             ],
+
+            // 6. Bappelitbangda
+            [
+                'parent' => [
+                    'name' => 'Kantor Bappelitbangda',
+                    'opd_name' => 'Badan Perencanaan Pembangunan, Penelitian dan Pengembangan Daerah',
+                    'unit_code' => 'BAPPELITBANGDA',
+                    'latitude' => -4.3425,
+                    'longitude' => 120.0128,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Pemuda No. 5, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+
+            // 7. Disdukcapil
             [
                 'parent' => [
                     'name' => 'Kantor Disdukcapil',
@@ -176,6 +202,8 @@ class DatabaseSeeder extends Seeder
                 ],
                 'subs' => [],
             ],
+
+            // 8. Satpol PP & Damkar
             [
                 'parent' => [
                     'name' => 'Kantor Satpol PP & Damkar',
@@ -188,6 +216,8 @@ class DatabaseSeeder extends Seeder
                 ],
                 'subs' => [],
             ],
+
+            // 9. Dinas Perhubungan
             [
                 'parent' => [
                     'name' => 'Kantor Dinas Perhubungan',
@@ -202,6 +232,37 @@ class DatabaseSeeder extends Seeder
                     ['name' => 'UPTD Pengujian Kendaraan (PKB)', 'opd_name' => 'UPTD Pengujian Kendaraan Bermotor (Kir)', 'unit_code' => 'PKB-DISHUB', 'latitude' => -4.3470, 'longitude' => 120.0180, 'radius_meters' => 100, 'alamat' => 'Komp. Terminal Watansoppeng'],
                 ],
             ],
+
+            // 10. Dinas Pekerjaan Umum dan Penataan Ruang (PUPR)
+            [
+                'parent' => [
+                    'name' => 'Kantor Dinas PUPR',
+                    'opd_name' => 'Dinas Pekerjaan Umum dan Penataan Ruang',
+                    'unit_code' => 'PUPR',
+                    'latitude' => -4.3460,
+                    'longitude' => 120.0165,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Merdeka No. 20, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+
+            // 11. Dinas Sosial
+            [
+                'parent' => [
+                    'name' => 'Kantor Dinas Sosial',
+                    'opd_name' => 'Dinas Sosial',
+                    'unit_code' => 'DINSOS',
+                    'latitude' => -4.3430,
+                    'longitude' => 120.0135,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Pengayoman No. 10, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+
+            // 12. 8 KECAMATAN DAN 21 KELURAHAN KABUPATEN SOPPENG
+            // (1) Kecamatan Lalabata + 7 Kelurahan
             [
                 'parent' => [
                     'name' => 'Kantor Camat Lalabata',
@@ -212,8 +273,18 @@ class DatabaseSeeder extends Seeder
                     'radius_meters' => 100,
                     'alamat' => 'Jl. Bila No. 4, Watansoppeng',
                 ],
-                'subs' => [],
+                'subs' => [
+                    ['name' => 'Kantor Kelurahan Bila', 'opd_name' => 'Kelurahan Bila', 'unit_code' => 'KEL-BILA', 'latitude' => -4.3410, 'longitude' => 120.0120, 'radius_meters' => 80, 'alamat' => 'Kelurahan Bila, Kec. Lalabata'],
+                    ['name' => 'Kantor Kelurahan Botto', 'opd_name' => 'Kelurahan Botto', 'unit_code' => 'KEL-BOTTO', 'latitude' => -4.3430, 'longitude' => 120.0100, 'radius_meters' => 80, 'alamat' => 'Kelurahan Botto, Kec. Lalabata'],
+                    ['name' => 'Kantor Kelurahan Lalabata Rilau', 'opd_name' => 'Kelurahan Lalabata Rilau', 'unit_code' => 'KEL-LALABATARILAU', 'latitude' => -4.3390, 'longitude' => 120.0080, 'radius_meters' => 80, 'alamat' => 'Kelurahan Lalabata Rilau, Kec. Lalabata'],
+                    ['name' => 'Kantor Kelurahan Lapajung', 'opd_name' => 'Kelurahan Lapajung', 'unit_code' => 'KEL-LAPAJUNG', 'latitude' => -4.3450, 'longitude' => 120.0140, 'radius_meters' => 80, 'alamat' => 'Kelurahan Lapajung, Kec. Lalabata'],
+                    ['name' => 'Kantor Kelurahan Lemba', 'opd_name' => 'Kelurahan Lemba', 'unit_code' => 'KEL-LEMBA', 'latitude' => -4.3380, 'longitude' => 120.0150, 'radius_meters' => 80, 'alamat' => 'Kelurahan Lemba, Kec. Lalabata'],
+                    ['name' => 'Kantor Kelurahan Ompo', 'opd_name' => 'Kelurahan Ompo', 'unit_code' => 'KEL-OMPO', 'latitude' => -4.3320, 'longitude' => 120.0200, 'radius_meters' => 80, 'alamat' => 'Kelurahan Ompo, Kec. Lalabata'],
+                    ['name' => 'Kantor Kelurahan Salokaraja', 'opd_name' => 'Kelurahan Salokaraja', 'unit_code' => 'KEL-SALOKARAJA', 'latitude' => -4.3470, 'longitude' => 120.0030, 'radius_meters' => 80, 'alamat' => 'Kelurahan Salokaraja, Kec. Lalabata'],
+                ],
             ],
+
+            // (2) Kecamatan Marioriwawo + 2 Kelurahan
             [
                 'parent' => [
                     'name' => 'Kantor Camat Marioriwawo',
@@ -223,6 +294,108 @@ class DatabaseSeeder extends Seeder
                     'longitude' => 119.9840,
                     'radius_meters' => 100,
                     'alamat' => 'Jl. Poros Takalala, Marioriwawo',
+                ],
+                'subs' => [
+                    ['name' => 'Kantor Kelurahan Labessi', 'opd_name' => 'Kelurahan Labessi', 'unit_code' => 'KEL-LABESSI', 'latitude' => -4.4215, 'longitude' => 119.9860, 'radius_meters' => 80, 'alamat' => 'Kelurahan Labessi, Kec. Marioriwawo'],
+                    ['name' => 'Kantor Kelurahan Tettikenrarae', 'opd_name' => 'Kelurahan Tettikenrarae', 'unit_code' => 'KEL-TETTIKENRARAE', 'latitude' => -4.4250, 'longitude' => 119.9890, 'radius_meters' => 80, 'alamat' => 'Kelurahan Tettikenrarae, Kec. Marioriwawo'],
+                ],
+            ],
+
+            // (3) Kecamatan Liliriaja + 3 Kelurahan
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Liliriaja',
+                    'opd_name' => 'Kecamatan Liliriaja',
+                    'unit_code' => 'KEC-LILIRIAJA',
+                    'latitude' => -4.3770,
+                    'longitude' => 120.0810,
+                    'radius_meters' => 100,
+                    'alamat' => 'Cangadi, Kec. Liliriaja',
+                ],
+                'subs' => [
+                    ['name' => 'Kantor Kelurahan Appanang', 'opd_name' => 'Kelurahan Appanang', 'unit_code' => 'KEL-APPANANG', 'latitude' => -4.3750, 'longitude' => 120.0780, 'radius_meters' => 80, 'alamat' => 'Kelurahan Appanang, Kec. Liliriaja'],
+                    ['name' => 'Kantor Kelurahan Galung', 'opd_name' => 'Kelurahan Galung', 'unit_code' => 'KEL-GALUNG', 'latitude' => -4.3790, 'longitude' => 120.0840, 'radius_meters' => 80, 'alamat' => 'Kelurahan Galung, Kec. Liliriaja'],
+                    ['name' => 'Kantor Kelurahan Jennae', 'opd_name' => 'Kelurahan Jennae', 'unit_code' => 'KEL-JENNAE', 'latitude' => -4.3820, 'longitude' => 120.0860, 'radius_meters' => 80, 'alamat' => 'Kelurahan Jennae, Kec. Liliriaja'],
+                ],
+            ],
+
+            // (4) Kecamatan Lilirilau + 4 Kelurahan
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Lilirilau',
+                    'opd_name' => 'Kecamatan Lilirilau',
+                    'unit_code' => 'KEC-LILIRILAU',
+                    'latitude' => -4.3300,
+                    'longitude' => 120.1440,
+                    'radius_meters' => 100,
+                    'alamat' => 'Cabenge, Kec. Lilirilau',
+                ],
+                'subs' => [
+                    ['name' => 'Kantor Kelurahan Cabenge', 'opd_name' => 'Kelurahan Cabenge', 'unit_code' => 'KEL-CABENGE', 'latitude' => -4.3310, 'longitude' => 120.1450, 'radius_meters' => 80, 'alamat' => 'Kelurahan Cabenge, Kec. Lilirilau'],
+                    ['name' => 'Kantor Kelurahan Macanre', 'opd_name' => 'Kelurahan Macanre', 'unit_code' => 'KEL-MACANRE', 'latitude' => -4.3350, 'longitude' => 120.1480, 'radius_meters' => 80, 'alamat' => 'Kelurahan Macanre, Kec. Lilirilau'],
+                    ['name' => 'Kantor Kelurahan Pajalesang', 'opd_name' => 'Kelurahan Pajalesang', 'unit_code' => 'KEL-PAJALESANG', 'latitude' => -4.3280, 'longitude' => 120.1420, 'radius_meters' => 80, 'alamat' => 'Kelurahan Pajalesang, Kec. Lilirilau'],
+                    ['name' => 'Kantor Kelurahan Ujung', 'opd_name' => 'Kelurahan Ujung', 'unit_code' => 'KEL-UJUNG', 'latitude' => -4.3250, 'longitude' => 120.1400, 'radius_meters' => 80, 'alamat' => 'Kelurahan Ujung, Kec. Lilirilau'],
+                ],
+            ],
+
+            // (5) Kecamatan Marioriawa + 5 Kelurahan
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Marioriawa',
+                    'opd_name' => 'Kecamatan Marioriawa',
+                    'unit_code' => 'KEC-MARIORIAWA',
+                    'latitude' => -4.2280,
+                    'longitude' => 119.9280,
+                    'radius_meters' => 100,
+                    'alamat' => 'Batu-Batu, Kec. Marioriawa',
+                ],
+                'subs' => [
+                    ['name' => 'Kantor Kelurahan Attang Salo', 'opd_name' => 'Kelurahan Attang Salo', 'unit_code' => 'KEL-ATTANGSALO', 'latitude' => -4.2260, 'longitude' => 119.9250, 'radius_meters' => 80, 'alamat' => 'Kelurahan Attang Salo, Kec. Marioriawa'],
+                    ['name' => 'Kantor Kelurahan Batu-Batu', 'opd_name' => 'Kelurahan Batu-Batu', 'unit_code' => 'KEL-BATUBATU', 'latitude' => -4.2300, 'longitude' => 119.9300, 'radius_meters' => 80, 'alamat' => 'Kelurahan Batu-Batu, Kec. Marioriawa'],
+                    ['name' => 'Kantor Kelurahan Kaca', 'opd_name' => 'Kelurahan Kaca', 'unit_code' => 'KEL-KACA', 'latitude' => -4.2350, 'longitude' => 119.9350, 'radius_meters' => 80, 'alamat' => 'Kelurahan Kaca, Kec. Marioriawa'],
+                    ['name' => 'Kantor Kelurahan Limpomajang', 'opd_name' => 'Kelurahan Limpomajang', 'unit_code' => 'KEL-LIMPOMAJANG', 'latitude' => -4.2200, 'longitude' => 119.9200, 'radius_meters' => 80, 'alamat' => 'Kelurahan Limpomajang, Kec. Marioriawa'],
+                    ['name' => 'Kantor Kelurahan Manorang Salo', 'opd_name' => 'Kelurahan Manorang Salo', 'unit_code' => 'KEL-MANORANGSALO', 'latitude' => -4.2230, 'longitude' => 119.9220, 'radius_meters' => 80, 'alamat' => 'Kelurahan Manorang Salo, Kec. Marioriawa'],
+                ],
+            ],
+
+            // (6) Kecamatan Donri-Donri
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Donri-Donri',
+                    'opd_name' => 'Kecamatan Donri-Donri',
+                    'unit_code' => 'KEC-DONRIDONRI',
+                    'latitude' => -4.2940,
+                    'longitude' => 119.9680,
+                    'radius_meters' => 100,
+                    'alamat' => 'Tajuncu, Kec. Donri-Donri',
+                ],
+                'subs' => [],
+            ],
+
+            // (7) Kecamatan Ganra
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Ganra',
+                    'opd_name' => 'Kecamatan Ganra',
+                    'unit_code' => 'KEC-GANRA',
+                    'latitude' => -4.3140,
+                    'longitude' => 120.0380,
+                    'radius_meters' => 100,
+                    'alamat' => 'Ganra, Kec. Ganra',
+                ],
+                'subs' => [],
+            ],
+
+            // (8) Kecamatan Citta
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Citta',
+                    'opd_name' => 'Kecamatan Citta',
+                    'unit_code' => 'KEC-CITTA',
+                    'latitude' => -4.4280,
+                    'longitude' => 120.0580,
+                    'radius_meters' => 100,
+                    'alamat' => 'Citta, Kec. Citta',
                 ],
                 'subs' => [],
             ],
