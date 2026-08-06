@@ -47,6 +47,8 @@ class SettingsTest extends TestCase
 
             'device_binding_enabled' => true,
             'fake_gps_block_enabled' => true,
+            'allow_rear_camera' => false,
+            'allow_gallery_upload' => false,
             'min_mobile_version' => '1.2.0',
             'force_mobile_update' => false,
 

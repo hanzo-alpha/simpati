@@ -8,6 +8,7 @@ enum AttendanceType: string
     case ISTIRAHAT = 'istirahat';
     case KEMBALI = 'kembali';
     case PULANG = 'pulang';
+    case DINAS_DALAM = 'dinas_dalam';
     case DINAS_LUAR = 'dinas_luar';
     case WFH = 'wfh';
 }

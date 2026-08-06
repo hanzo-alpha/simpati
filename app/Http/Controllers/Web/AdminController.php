@@ -898,7 +898,7 @@ class AdminController extends Controller
             'force_mobile_update' => Setting::get('force_mobile_update', 'false') === 'true',
 
             // SIMPEG Integration
-            'simpeg_api_url' => Setting::get('simpeg_api_url', 'https://simpeg.soppengkab.go.id/api'),
+            'simpeg_api_url' => Setting::get('simpeg_api_url', 'https://simpeg.soppeng.go.id/api'),
             'simpeg_secret_key' => Setting::get('simpeg_secret_key', 'sk_simpeg_soppeng_secret_key_9823'),
             'simpeg_auto_sync' => Setting::get('simpeg_auto_sync', 'true') === 'true',
         ];
@@ -925,8 +925,8 @@ class AdminController extends Controller
 
             'device_binding_enabled' => 'required|boolean',
             'fake_gps_block_enabled' => 'required|boolean',
-            'allow_rear_camera' => 'required|boolean',
-            'allow_gallery_upload' => 'required|boolean',
+            'allow_rear_camera' => 'nullable|boolean',
+            'allow_gallery_upload' => 'nullable|boolean',
             'min_mobile_version' => 'required|string',
             'force_mobile_update' => 'required|boolean',
 
