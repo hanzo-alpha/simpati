@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Web\AdminController::update
- * @see app/Http/Controllers/Web/AdminController.php:934
+ * @see app/Http/Controllers/Web/AdminController.php:950
  * @route '/admin/settings'
  */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::update
- * @see app/Http/Controllers/Web/AdminController.php:934
+ * @see app/Http/Controllers/Web/AdminController.php:950
  * @route '/admin/settings'
  */
 update.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::update
- * @see app/Http/Controllers/Web/AdminController.php:934
+ * @see app/Http/Controllers/Web/AdminController.php:950
  * @route '/admin/settings'
  */
 update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::update
- * @see app/Http/Controllers/Web/AdminController.php:934
+ * @see app/Http/Controllers/Web/AdminController.php:950
  * @route '/admin/settings'
  */
     const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::update
- * @see app/Http/Controllers/Web/AdminController.php:934
+ * @see app/Http/Controllers/Web/AdminController.php:950
  * @route '/admin/settings'
  */
         updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -56,7 +56,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::testSimpeg
- * @see app/Http/Controllers/Web/AdminController.php:975
+ * @see app/Http/Controllers/Web/AdminController.php:991
  * @route '/admin/settings/test-simpeg'
  */
 export const testSimpeg = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ testSimpeg.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::testSimpeg
- * @see app/Http/Controllers/Web/AdminController.php:975
+ * @see app/Http/Controllers/Web/AdminController.php:991
  * @route '/admin/settings/test-simpeg'
  */
 testSimpeg.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ testSimpeg.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::testSimpeg
- * @see app/Http/Controllers/Web/AdminController.php:975
+ * @see app/Http/Controllers/Web/AdminController.php:991
  * @route '/admin/settings/test-simpeg'
  */
 testSimpeg.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ testSimpeg.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::testSimpeg
- * @see app/Http/Controllers/Web/AdminController.php:975
+ * @see app/Http/Controllers/Web/AdminController.php:991
  * @route '/admin/settings/test-simpeg'
  */
     const testSimpegForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ testSimpeg.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::testSimpeg
- * @see app/Http/Controllers/Web/AdminController.php:975
+ * @see app/Http/Controllers/Web/AdminController.php:991
  * @route '/admin/settings/test-simpeg'
  */
         testSimpegForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
 export const exportMethod = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ exportMethod.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
 exportMethod.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ exportMethod.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
 exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
 exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
     const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
         exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:353
+ * @see app/Http/Controllers/Web/AdminController.php:369
  * @route '/admin/attendances/export'
  */
         exportMethodForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     exportMethod.form = exportMethodForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
 export const exportTpp = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ exportTpp.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ exportTpp.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ exportTpp.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
     const exportTppForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
         exportTppForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:736
+ * @see app/Http/Controllers/Web/AdminController.php:752
  * @route '/admin/attendances/export-tpp'
  */
         exportTppForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     exportTpp.form = exportTppForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
 export const exportRecap = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -172,7 +172,7 @@ exportRecap.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
 exportRecap.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ exportRecap.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
 exportRecap.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -190,7 +190,7 @@ exportRecap.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
 exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -200,7 +200,7 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
     const exportRecapForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -210,7 +210,7 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
         exportRecapForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -219,7 +219,7 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:397
+ * @see app/Http/Controllers/Web/AdminController.php:413
  * @route '/admin/attendances/export-recap'
  */
         exportRecapForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -235,7 +235,7 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     exportRecap.form = exportRecapForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
 export const exportSummary = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -250,7 +250,7 @@ exportSummary.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
 exportSummary.url = (options?: RouteQueryOptions) => {
@@ -259,7 +259,7 @@ exportSummary.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
 exportSummary.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -268,7 +268,7 @@ exportSummary.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
 exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -278,7 +278,7 @@ exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
     const exportSummaryForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -288,7 +288,7 @@ exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
         exportSummaryForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -297,7 +297,7 @@ exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
         })
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:456
+ * @see app/Http/Controllers/Web/AdminController.php:472
  * @route '/admin/attendances/export-summary'
  */
         exportSummaryForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -313,7 +313,7 @@ exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     exportSummary.form = exportSummaryForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:829
+ * @see app/Http/Controllers/Web/AdminController.php:845
  * @route '/admin/attendances/verify-qr'
  */
 export const verifyQr = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -328,7 +328,7 @@ verifyQr.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:829
+ * @see app/Http/Controllers/Web/AdminController.php:845
  * @route '/admin/attendances/verify-qr'
  */
 verifyQr.url = (options?: RouteQueryOptions) => {
@@ -337,7 +337,7 @@ verifyQr.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:829
+ * @see app/Http/Controllers/Web/AdminController.php:845
  * @route '/admin/attendances/verify-qr'
  */
 verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -347,7 +347,7 @@ verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:829
+ * @see app/Http/Controllers/Web/AdminController.php:845
  * @route '/admin/attendances/verify-qr'
  */
     const verifyQrForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -357,7 +357,7 @@ verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:829
+ * @see app/Http/Controllers/Web/AdminController.php:845
  * @route '/admin/attendances/verify-qr'
  */
         verifyQrForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

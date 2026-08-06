@@ -6,7 +6,10 @@ import {
     MapPin,
     Edit3,
     Trash2,
-    Navigation,
+    Search,
+    Layers,
+    Building,
+    Network,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
@@ -21,57 +24,109 @@ import {
 } from '@/Components/ui/dialog';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
+import {
+    Select,
+    SelectTrigger,
+    SelectValue,
+    SelectContent,
+    SelectItem,
+} from '@/Components/ui/select';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface OfficeItem {
     id: number;
+    parent_id?: number | null;
+    unit_code?: string | null;
     name: string;
     opd_name: string;
     alamat?: string;
     latitude?: number;
     longitude?: number;
     radius_meters?: number;
+    parent?: OfficeItem | null;
 }
 
 const props = defineProps<{
     offices: OfficeItem[];
 }>();
 
+const searchQuery = ref('');
+const activeFilter = ref('all'); // all, parent, sub
+const parentSearch = ref('');
 const currentPage = ref(1);
 const itemsPerPage = 10;
 
+// Filter offices list for table
+const filteredOffices = computed(() => {
+    return props.offices.filter((o) => {
+        const matchesSearch =
+            !searchQuery.value.trim() ||
+            o.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+            o.opd_name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+            (o.unit_code && o.unit_code.toLowerCase().includes(searchQuery.value.toLowerCase())) ||
+            (o.parent && o.parent.opd_name.toLowerCase().includes(searchQuery.value.toLowerCase()));
+
+        const matchesFilter =
+            activeFilter.value === 'all' ||
+            (activeFilter.value === 'parent' && !o.parent_id) ||
+            (activeFilter.value === 'sub' && !!o.parent_id);
+
+        return matchesSearch && matchesFilter;
+    });
+});
+
 const paginatedOffices = computed(() => {
     const start = (currentPage.value - 1) * itemsPerPage;
+    return filteredOffices.value.slice(start, start + itemsPerPage);
+});
 
-    return props.offices.slice(start, start + itemsPerPage);
+// Parent options for dialog
+const parentOfficeOptions = computed(() => {
+    return props.offices.filter((o) => !o.parent_id);
+});
+
+const filteredParentOptions = computed(() => {
+    if (!parentSearch.value.trim()) {
+        return parentOfficeOptions.value;
+    }
+    const q = parentSearch.value.toLowerCase();
+    return parentOfficeOptions.value.filter((p) =>
+        p.opd_name.toLowerCase().includes(q)
+    );
 });
 
 const showForm = ref(false);
 
 const form = useForm({
     id: null as number | null,
+    parent_id: 'none' as string | number,
+    unit_code: '',
     name: '',
     opd_name: '',
     alamat: '',
     latitude: '' as number | string,
     longitude: '' as number | string,
-    radius_meters: 200,
+    radius_meters: 100,
 });
 
 const editOffice = (office: OfficeItem) => {
     form.id = office.id;
+    form.parent_id = office.parent_id ? String(office.parent_id) : 'none';
+    form.unit_code = office.unit_code || '';
     form.name = office.name;
     form.opd_name = office.opd_name;
     form.alamat = office.alamat || '';
     form.latitude = office.latitude || '';
     form.longitude = office.longitude || '';
-    form.radius_meters = office.radius_meters || 200;
+    form.radius_meters = office.radius_meters || 100;
     showForm.value = true;
 };
 
 const resetForm = () => {
     form.reset();
     form.id = null;
+    form.parent_id = 'none';
+    parentSearch.value = '';
     showForm.value = false;
 };
 
@@ -92,8 +147,8 @@ const deleteOffice = (id: number) => {
 
 <template>
     <AdminLayout
-        title="Kelola Kantor / OPD"
-        :subtitle="`${offices.length} lokasi kantor terdaftar`"
+        title="Kelola Kantor / OPD & Sub OPD"
+        :subtitle="`${offices.length} unit kantor terdaftar di Kab. Soppeng`"
     >
         <template #actions>
             <Button
@@ -104,6 +159,59 @@ const deleteOffice = (id: number) => {
                 <span>Tambah Kantor OPD</span>
             </Button>
         </template>
+
+        <!-- Filter Card -->
+        <Card class="mb-4 rounded-none border border-border bg-card p-4 text-card-foreground shadow-xs">
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <!-- Tabs filter -->
+                <div class="flex items-center gap-1.5 overflow-x-auto">
+                    <button
+                        @click="activeFilter = 'all'"
+                        class="h-8 px-3 text-xs font-bold tracking-wider uppercase border transition-colors cursor-pointer"
+                        :class="
+                            activeFilter === 'all'
+                                ? 'bg-primary text-primary-foreground border-primary'
+                                : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted/60'
+                        "
+                    >
+                        Semua ({{ offices.length }})
+                    </button>
+                    <button
+                        @click="activeFilter = 'parent'"
+                        class="h-8 px-3 text-xs font-bold tracking-wider uppercase border transition-colors cursor-pointer"
+                        :class="
+                            activeFilter === 'parent'
+                                ? 'bg-primary text-primary-foreground border-primary'
+                                : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted/60'
+                        "
+                    >
+                        OPD Induk ({{ offices.filter((o) => !o.parent_id).length }})
+                    </button>
+                    <button
+                        @click="activeFilter = 'sub'"
+                        class="h-8 px-3 text-xs font-bold tracking-wider uppercase border transition-colors cursor-pointer"
+                        :class="
+                            activeFilter === 'sub'
+                                ? 'bg-primary text-primary-foreground border-primary'
+                                : 'bg-muted/30 text-muted-foreground border-border hover:bg-muted/60'
+                        "
+                    >
+                        Sub OPD / UPTD ({{ offices.filter((o) => !!o.parent_id).length }})
+                    </button>
+                </div>
+
+                <!-- Search bar -->
+                <div class="relative w-full md:w-72">
+                    <Search class="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                    <Input
+                        v-model="searchQuery"
+                        type="text"
+                        placeholder="Cari OPD / Sub OPD / Kode..."
+                        class="h-9 rounded-none pl-9 text-xs"
+                    />
+                </div>
+            </div>
+        </Card>
 
         <!-- Offices Table Card -->
         <Card
@@ -116,27 +224,14 @@ const deleteOffice = (id: number) => {
                             <tr
                                 class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
-                                <th
-                                    class="w-12 px-4 py-3.5 text-center font-bold"
-                                >
-                                    #
-                                </th>
-                                <th class="px-4 py-3.5 font-bold">
-                                    Nama Kantor
-                                </th>
-                                <th class="px-4 py-3.5 font-bold">OPD Utama</th>
-                                <th class="px-4 py-3.5 font-bold">
-                                    Alamat Lengkap
-                                </th>
-                                <th class="px-4 py-3.5 text-center font-bold">
-                                    Radius Geofence
-                                </th>
-                                <th class="px-4 py-3.5 text-center font-bold">
-                                    Koordinat GPS
-                                </th>
-                                <th class="px-4 py-3.5 text-center font-bold">
-                                    Aksi
-                                </th>
+                                <th class="w-10 px-4 py-3.5 text-center font-bold">#</th>
+                                <th class="px-4 py-3.5 font-bold">Nama OPD / Sub Unit</th>
+                                <th class="px-4 py-3.5 text-center font-bold">Tipe Unit</th>
+                                <th class="px-4 py-3.5 font-bold">OPD Induk Utama</th>
+                                <th class="px-4 py-3.5 font-bold">Alamat Lengkap</th>
+                                <th class="px-4 py-3.5 text-center font-bold">Radius Geofence</th>
+                                <th class="px-4 py-3.5 text-center font-bold">GPS</th>
+                                <th class="px-4 py-3.5 text-center font-bold">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
@@ -145,27 +240,46 @@ const deleteOffice = (id: number) => {
                                 :key="office.id"
                                 class="border-b border-border/40 transition-colors hover:bg-muted/30"
                             >
-                                <td
-                                    class="px-4 py-3.5 text-center font-mono text-muted-foreground"
-                                >
-                                    {{
-                                        (currentPage - 1) * itemsPerPage + i + 1
-                                    }}
-                                </td>
-                                <td
-                                    class="px-4 py-3.5 font-bold text-foreground"
-                                >
-                                    {{ office.name }}
+                                <td class="px-4 py-3.5 text-center font-mono text-muted-foreground">
+                                    {{ (currentPage - 1) * itemsPerPage + i + 1 }}
                                 </td>
                                 <td class="px-4 py-3.5">
+                                    <div class="font-bold text-foreground flex items-center gap-1.5">
+                                        <Building2 class="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                                        <span>{{ office.opd_name }}</span>
+                                    </div>
+                                    <div class="text-[11px] text-muted-foreground mt-0.5 flex items-center gap-2">
+                                        <span>{{ office.name }}</span>
+                                        <span v-if="office.unit_code" class="font-mono text-[10px] bg-muted px-1.5 py-0.5 font-bold text-foreground">
+                                            {{ office.unit_code }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3.5 text-center">
                                     <Badge
+                                        v-if="!office.parent_id"
                                         variant="outline"
-                                        class="rounded-none border-border bg-muted/50 font-mono text-[10px] font-bold text-foreground uppercase"
+                                        class="rounded-none border-blue-500/30 bg-blue-500/10 text-blue-700 dark:text-blue-400 font-bold uppercase tracking-wider text-[10px]"
                                     >
-                                        {{ office.opd_name }}
+                                        Induk OPD
+                                    </Badge>
+                                    <Badge
+                                        v-else
+                                        variant="outline"
+                                        class="rounded-none border-purple-500/30 bg-purple-500/10 text-purple-700 dark:text-purple-400 font-bold uppercase tracking-wider text-[10px]"
+                                    >
+                                        Sub OPD / UPTD
                                     </Badge>
                                 </td>
-                                <td class="px-4 py-3.5 text-muted-foreground">
+                                <td class="px-4 py-3.5">
+                                    <span v-if="office.parent" class="font-medium text-foreground">
+                                        {{ office.parent.opd_name }}
+                                    </span>
+                                    <span v-else class="text-muted-foreground text-[11px]">
+                                        (Unit Utama)
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3.5 text-muted-foreground max-w-xs truncate">
                                     {{ office.alamat || '-' }}
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
@@ -173,32 +287,21 @@ const deleteOffice = (id: number) => {
                                         variant="secondary"
                                         class="rounded-none font-mono text-[10px] font-bold tracking-wider uppercase"
                                     >
-                                        {{ office.radius_meters }} Meter
+                                        {{ office.radius_meters }}m
                                     </Badge>
                                 </td>
-                                <td
-                                    class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground"
-                                >
+                                <td class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground">
                                     <span
-                                        v-if="
-                                            office.latitude && office.longitude
-                                        "
+                                        v-if="office.latitude && office.longitude"
                                         class="flex items-center justify-center gap-1"
                                     >
-                                        <MapPin
-                                            class="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400"
-                                        />
-                                        <span
-                                            >{{ office.latitude }},
-                                            {{ office.longitude }}</span
-                                        >
+                                        <MapPin class="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                                        <span>{{ office.latitude }}, {{ office.longitude }}</span>
                                     </span>
                                     <span v-else>-</span>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <div
-                                        class="flex items-center justify-center gap-1"
-                                    >
+                                    <div class="flex items-center justify-center gap-1">
                                         <Button
                                             variant="ghost"
                                             size="sm"
@@ -224,19 +327,17 @@ const deleteOffice = (id: number) => {
                     </table>
 
                     <div
-                        v-if="!offices.length"
+                        v-if="!filteredOffices.length"
                         class="space-y-2 py-10 text-center text-muted-foreground"
                     >
-                        <Building2
-                            class="mx-auto h-8 w-8 text-muted-foreground/50"
-                        />
-                        <p>Belum ada data kantor OPD yang terdaftar.</p>
+                        <Building2 class="mx-auto h-8 w-8 text-muted-foreground/50" />
+                        <p>Tidak ada data kantor OPD yang cocok.</p>
                     </div>
 
                     <Pagination
-                        v-if="offices.length > 0"
+                        v-if="filteredOffices.length > 0"
                         v-model:currentPage="currentPage"
-                        :totalItems="offices.length"
+                        :totalItems="filteredOffices.length"
                         :itemsPerPage="itemsPerPage"
                     />
                 </div>
@@ -257,52 +358,94 @@ const deleteOffice = (id: number) => {
                         >
                             <Building2 class="h-4 w-4" />
                         </div>
-                        <span>{{
-                            form.id
-                                ? 'Edit Data Kantor'
-                                : 'Tambah Kantor OPD Baru'
-                        }}</span>
+                        <span>{{ form.id ? 'Edit Data Kantor / Sub OPD' : 'Tambah Kantor OPD / Sub OPD Baru' }}</span>
                     </DialogTitle>
                 </DialogHeader>
 
                 <form @submit.prevent="submitForm" class="space-y-4 pt-2">
+                    <!-- Row 1: Parent OPD & Kode Unit -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label
-                                for="name"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                >Nama Kantor / Gedung</Label
-                            >
-                            <Input
-                                id="name"
-                                v-model="form.name"
-                                required
-                                placeholder="Contoh: Kantor Bupati Soppeng"
-                                class="h-10 rounded-none text-xs sm:text-sm"
-                            />
+                            <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                OPD Induk Utama
+                            </Label>
+                            <Select v-model="form.parent_id">
+                                <SelectTrigger class="h-10 rounded-none text-xs sm:text-sm">
+                                    <SelectValue placeholder="Pilih OPD Induk / Tanpa Induk" />
+                                </SelectTrigger>
+                                <SelectContent class="rounded-none border-border">
+                                    <div class="p-2 border-b border-border sticky top-0 bg-popover z-10">
+                                        <div class="relative">
+                                            <Search class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                                            <Input
+                                                v-model="parentSearch"
+                                                type="text"
+                                                placeholder="Cari OPD Induk..."
+                                                class="h-8 rounded-none pl-8 text-xs bg-background border-input"
+                                                @keydown.stop
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="max-h-56 overflow-y-auto pt-1">
+                                        <SelectItem value="none">
+                                            -- Berdiri Sendiri (OPD Induk Utama) --
+                                        </SelectItem>
+                                        <SelectItem
+                                            v-for="p in filteredParentOptions"
+                                            :key="p.id"
+                                            :value="String(p.id)"
+                                        >
+                                            {{ p.opd_name }}
+                                        </SelectItem>
+                                    </div>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label
-                                for="opd_name"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                >Nama OPD Utama</Label
-                            >
+                            <Label for="unit_code" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                Kode Unit / Singkatan
+                            </Label>
+                            <Input
+                                id="unit_code"
+                                v-model="form.unit_code"
+                                placeholder="Contoh: SETDA, PKM-SALOTUNGO"
+                                class="h-10 rounded-none text-xs sm:text-sm font-mono"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Nama OPD & Nama Gedung -->
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="space-y-1.5">
+                            <Label for="opd_name" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                Nama OPD / Sub OPD
+                            </Label>
                             <Input
                                 id="opd_name"
                                 v-model="form.opd_name"
                                 required
-                                placeholder="Contoh: Sekretariat Daerah"
+                                placeholder="Contoh: UPTD Puskesmas Salotungo"
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
+                        </div>
+                        <div class="space-y-1.5">
+                            <Label for="name" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                Nama Kantor / Gedung
+                            </Label>
+                            <Input
+                                id="name"
+                                v-model="form.name"
+                                required
+                                placeholder="Contoh: Gedung Puskesmas Salotungo"
                                 class="h-10 rounded-none text-xs sm:text-sm"
                             />
                         </div>
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label
-                            for="alamat"
-                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                            >Alamat Lengkap Kantor</Label
-                        >
+                        <Label for="alamat" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            Alamat Lengkap Kantor
+                        </Label>
                         <Input
                             id="alamat"
                             v-model="form.alamat"
@@ -313,11 +456,9 @@ const deleteOffice = (id: number) => {
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div class="space-y-1.5">
-                            <Label
-                                for="latitude"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                >Latitude GPS</Label
-                            >
+                            <Label for="latitude" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                Latitude GPS
+                            </Label>
                             <Input
                                 id="latitude"
                                 v-model="form.latitude"
@@ -326,38 +467,32 @@ const deleteOffice = (id: number) => {
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label
-                                for="longitude"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                >Longitude GPS</Label
-                            >
+                            <Label for="longitude" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                Longitude GPS
+                            </Label>
                             <Input
                                 id="longitude"
                                 v-model="form.longitude"
-                                placeholder="119.8837"
+                                placeholder="120.0123"
                                 class="h-10 rounded-none font-mono text-xs sm:text-sm"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label
-                                for="radius_meters"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                >Radius Geofence (Meter)</Label
-                            >
+                            <Label for="radius_meters" class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                Radius Geofence (Meter)
+                            </Label>
                             <Input
                                 id="radius_meters"
                                 v-model="form.radius_meters"
                                 type="number"
                                 required
-                                placeholder="200"
+                                placeholder="100"
                                 class="h-10 rounded-none font-mono text-xs font-bold text-emerald-600 sm:text-sm dark:text-emerald-400"
                             />
                         </div>
                     </div>
 
-                    <div
-                        class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4"
-                    >
+                    <div class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4">
                         <Button
                             type="button"
                             variant="outline"

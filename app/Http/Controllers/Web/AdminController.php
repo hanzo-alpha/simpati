@@ -227,7 +227,7 @@ class AdminController extends Controller
 
     public function offices()
     {
-        $offices = Office::all();
+        $offices = Office::with(['parent', 'subOffices'])->latest()->get();
 
         return inertia('Admin/Offices', [
             'offices' => $offices,
@@ -236,30 +236,46 @@ class AdminController extends Controller
 
     public function storeOffice(Request $request)
     {
+        if ($request->parent_id === 'none' || $request->parent_id === '') {
+            $request->merge(['parent_id' => null]);
+        }
+
         $data = $request->validate([
+            'name' => 'required|string|max:255',
             'opd_name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:offices,id',
+            'unit_code' => 'nullable|string|max:50',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'radius_meters' => 'required|integer',
+            'alamat' => 'nullable|string',
         ]);
 
         Office::create($data);
 
-        return back()->with('success', 'Office created successfully.');
+        return back()->with('success', 'Data Kantor / OPD berhasil ditambahkan.');
     }
 
     public function updateOffice(Request $request, Office $office)
     {
+        if ($request->parent_id === 'none' || $request->parent_id === '') {
+            $request->merge(['parent_id' => null]);
+        }
+
         $data = $request->validate([
+            'name' => 'required|string|max:255',
             'opd_name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:offices,id',
+            'unit_code' => 'nullable|string|max:50',
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'radius_meters' => 'required|integer',
+            'alamat' => 'nullable|string',
         ]);
 
         $office->update($data);
 
-        return back()->with('success', 'Office updated successfully.');
+        return back()->with('success', 'Data Kantor / OPD berhasil diperbarui.');
     }
 
     public function attendances(Request $request)

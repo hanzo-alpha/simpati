@@ -72,52 +72,171 @@ class DatabaseSeeder extends Seeder
 
     private function seedOffices()
     {
-        $opdData = [
+        $opdHierarchies = [
             [
-                'name' => 'Kantor Bupati Soppeng',
-                'opd_name' => 'Sekretariat Daerah',
-                'latitude' => -4.3422,
-                'longitude' => 120.0123,
-                'radius_meters' => 150,
-                'alamat' => 'Jl. Kemakmuran No. 1, Watansoppeng',
+                'parent' => [
+                    'name' => 'Kantor Bupati Soppeng',
+                    'opd_name' => 'Sekretariat Daerah',
+                    'unit_code' => 'SETDA',
+                    'latitude' => -4.3422,
+                    'longitude' => 120.0123,
+                    'radius_meters' => 150,
+                    'alamat' => 'Jl. Pemuda No. 1, Watansoppeng',
+                ],
+                'subs' => [
+                    ['name' => 'Bagian Tata Pemerintahan', 'opd_name' => 'Bagian Tata Pemerintahan & Kerjasama', 'unit_code' => 'SETDA-PEM', 'latitude' => -4.3422, 'longitude' => 120.0123, 'radius_meters' => 150, 'alamat' => 'Gedung A Lantai 2 Kantor Bupati Soppeng'],
+                    ['name' => 'Bagian Hukum', 'opd_name' => 'Bagian Hukum & Perundang-Undangan', 'unit_code' => 'SETDA-HUKUM', 'latitude' => -4.3422, 'longitude' => 120.0123, 'radius_meters' => 150, 'alamat' => 'Gedung B Lantai 1 Kantor Bupati Soppeng'],
+                    ['name' => 'Bagian Organisasi', 'opd_name' => 'Bagian Organisasi & Laksana', 'unit_code' => 'SETDA-ORGBAG', 'latitude' => -4.3422, 'longitude' => 120.0123, 'radius_meters' => 150, 'alamat' => 'Gedung B Lantai 2 Kantor Bupati Soppeng'],
+                    ['name' => 'Bagian Prokopim', 'opd_name' => 'Bagian Protokol & Komunikasi Pimpinan', 'unit_code' => 'SETDA-PROKOPIM', 'latitude' => -4.3422, 'longitude' => 120.0123, 'radius_meters' => 150, 'alamat' => 'Gedung Utama Kantor Bupati Soppeng'],
+                ],
             ],
             [
-                'name' => 'Kantor BKPSDM',
-                'opd_name' => 'Badan Kepegawaian dan Pengembangan SDM',
-                'latitude' => -4.3435,
-                'longitude' => 120.0141,
-                'radius_meters' => 100,
-                'alamat' => 'Jl. Pengayoman No. 5, Watansoppeng',
+                'parent' => [
+                    'name' => 'Kantor Dinas Kesehatan',
+                    'opd_name' => 'Dinas Kesehatan',
+                    'unit_code' => 'DINKES',
+                    'latitude' => -4.3450,
+                    'longitude' => 120.0155,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Salotungo No. 3, Watansoppeng',
+                ],
+                'subs' => [
+                    ['name' => 'UPTD Puskesmas Salotungo', 'opd_name' => 'UPTD Puskesmas Salotungo', 'unit_code' => 'PKM-SALOTUNGO', 'latitude' => -4.3461, 'longitude' => 120.0170, 'radius_meters' => 100, 'alamat' => 'Jl. Keselamatan No. 12, Salotungo, Watansoppeng'],
+                    ['name' => 'UPTD Puskesmas Lalabata Rilau', 'opd_name' => 'UPTD Puskesmas Lalabata Rilau', 'unit_code' => 'PKM-LALABATA', 'latitude' => -4.3390, 'longitude' => 120.0080, 'radius_meters' => 100, 'alamat' => 'Jl. Kemuning No. 5, Lalabata'],
+                    ['name' => 'UPTD Puskesmas Marioriwawo', 'opd_name' => 'UPTD Puskesmas Marioriwawo (Takalala)', 'unit_code' => 'PKM-TAKALALA', 'latitude' => -4.4210, 'longitude' => 119.9850, 'radius_meters' => 100, 'alamat' => 'Jl. Pasar Baru, Takalala, Marioriwawo'],
+                    ['name' => 'UPTD Puskesmas Liliriaja', 'opd_name' => 'UPTD Puskesmas Liliriaja (Cangadi)', 'unit_code' => 'PKM-CANGADI', 'latitude' => -4.3780, 'longitude' => 120.0820, 'radius_meters' => 100, 'alamat' => 'Jl. Poros Soppeng-Sidrap, Cangadi'],
+                    ['name' => 'UPTD Puskesmas Donri-Donri', 'opd_name' => 'UPTD Puskesmas Donri-Donri (Tajuncu)', 'unit_code' => 'PKM-TAJUNCU', 'latitude' => -4.2950, 'longitude' => 119.9700, 'radius_meters' => 100, 'alamat' => 'Jl. Tajuncu, Donri-Donri'],
+                    ['name' => 'UPTD Labkesda Soppeng', 'opd_name' => 'UPTD Laboratorium Kesehatan Daerah', 'unit_code' => 'LABKESDA', 'latitude' => -4.3452, 'longitude' => 120.0158, 'radius_meters' => 80, 'alamat' => 'Komp. Dinkes Soppeng'],
+                ],
             ],
             [
-                'name' => 'Kantor Dinas Pendidikan',
-                'opd_name' => 'Dinas Pendidikan',
-                'latitude' => -4.3401,
-                'longitude' => 120.0098,
-                'radius_meters' => 120,
-                'alamat' => 'Jl. Pendidikan No. 10, Watansoppeng',
+                'parent' => [
+                    'name' => 'RSUD Latemmamala Soppeng',
+                    'opd_name' => 'RSUD Latemmamala Kabupaten Soppeng',
+                    'unit_code' => 'RSUD-LATEMMAMALA',
+                    'latitude' => -4.3510,
+                    'longitude' => 120.0210,
+                    'radius_meters' => 200,
+                    'alamat' => 'Jl. Malaka Raya, Watansoppeng',
+                ],
+                'subs' => [
+                    ['name' => 'Bidang Pelayanan Medis', 'opd_name' => 'Bidang Pelayanan Medis & Keperawatan RSUD', 'unit_code' => 'RSUD-YANMED', 'latitude' => -4.3510, 'longitude' => 120.0210, 'radius_meters' => 200, 'alamat' => 'Gedung Utama RSUD Latemmamala'],
+                    ['name' => 'Bagian Tata Usaha RSUD', 'opd_name' => 'Bagian Tata Usaha RSUD Latemmamala', 'unit_code' => 'RSUD-TU', 'latitude' => -4.3510, 'longitude' => 120.0210, 'radius_meters' => 200, 'alamat' => 'Gedung Administrasi RSUD Latemmamala'],
+                ],
             ],
             [
-                'name' => 'Kantor Dinas Kesehatan',
-                'opd_name' => 'Dinas Kesehatan',
-                'latitude' => -4.3450,
-                'longitude' => 120.0155,
-                'radius_meters' => 100,
-                'alamat' => 'Jl. Kesehatan No. 3, Watansoppeng',
+                'parent' => [
+                    'name' => 'Kantor Dinas Pendidikan',
+                    'opd_name' => 'Dinas Pendidikan dan Kebudayaan',
+                    'unit_code' => 'DISDIKBUD',
+                    'latitude' => -4.3401,
+                    'longitude' => 120.0098,
+                    'radius_meters' => 120,
+                    'alamat' => 'Jl. Satria No. 10, Watansoppeng',
+                ],
+                'subs' => [
+                    ['name' => 'UPTD SPF SMPN 1 Watansoppeng', 'opd_name' => 'UPTD SPF SMP Negeri 1 Watansoppeng', 'unit_code' => 'SMPN1-SOPPENG', 'latitude' => -4.3412, 'longitude' => 120.0105, 'radius_meters' => 120, 'alamat' => 'Jl. SMP No. 2, Watansoppeng'],
+                    ['name' => 'UPTD SPF SMPN 2 Watansoppeng', 'opd_name' => 'UPTD SPF SMP Negeri 2 Watansoppeng', 'unit_code' => 'SMPN2-SOPPENG', 'latitude' => -4.3440, 'longitude' => 120.0130, 'radius_meters' => 120, 'alamat' => 'Jl. Lapangan Sewo, Watansoppeng'],
+                    ['name' => 'UPTD SKB Soppeng', 'opd_name' => 'UPTD Sanggar Kegiatan Belajar (SKB)', 'unit_code' => 'SKB-SOPPENG', 'latitude' => -4.3395, 'longitude' => 120.0090, 'radius_meters' => 100, 'alamat' => 'Jl. Pendidikan No. 8, Watansoppeng'],
+                ],
             ],
             [
-                'name' => 'Kantor Disdukcapil',
-                'opd_name' => 'Dinas Kependudukan dan Pencatatan Sipil',
-                'latitude' => -4.3410,
-                'longitude' => 120.0110,
-                'radius_meters' => 80,
-                'alamat' => 'Jl. Merdeka No. 7, Watansoppeng',
+                'parent' => [
+                    'name' => 'Kantor BKPSDM',
+                    'opd_name' => 'Badan Kepegawaian dan Pengembangan SDM',
+                    'unit_code' => 'BKPSDM',
+                    'latitude' => -4.3435,
+                    'longitude' => 120.0141,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Salotungo No. 5, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+            [
+                'parent' => [
+                    'name' => 'Kantor BPKAD',
+                    'opd_name' => 'Badan Pengelola Keuangan dan Aset Daerah',
+                    'unit_code' => 'BPKAD',
+                    'latitude' => -4.3428,
+                    'longitude' => 120.0132,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Pemuda No. 3, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+            [
+                'parent' => [
+                    'name' => 'Kantor Disdukcapil',
+                    'opd_name' => 'Dinas Kependudukan dan Pencatatan Sipil',
+                    'unit_code' => 'DISDUKCAPIL',
+                    'latitude' => -4.3410,
+                    'longitude' => 120.0110,
+                    'radius_meters' => 80,
+                    'alamat' => 'Jl. Attang Salo No. 7, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+            [
+                'parent' => [
+                    'name' => 'Kantor Satpol PP & Damkar',
+                    'opd_name' => 'Dinas Satpol PP dan Pemadam Kebakaran',
+                    'unit_code' => 'SATPOLPP',
+                    'latitude' => -4.3445,
+                    'longitude' => 120.0150,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Merdeka No. 15, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+            [
+                'parent' => [
+                    'name' => 'Kantor Dinas Perhubungan',
+                    'opd_name' => 'Dinas Perhubungan',
+                    'unit_code' => 'DISHUB',
+                    'latitude' => -4.3470,
+                    'longitude' => 120.0180,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Terminal Watansoppeng',
+                ],
+                'subs' => [
+                    ['name' => 'UPTD Pengujian Kendaraan (PKB)', 'opd_name' => 'UPTD Pengujian Kendaraan Bermotor (Kir)', 'unit_code' => 'PKB-DISHUB', 'latitude' => -4.3470, 'longitude' => 120.0180, 'radius_meters' => 100, 'alamat' => 'Komp. Terminal Watansoppeng'],
+                ],
+            ],
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Lalabata',
+                    'opd_name' => 'Kecamatan Lalabata',
+                    'unit_code' => 'KEC-LALABATA',
+                    'latitude' => -4.3418,
+                    'longitude' => 120.0115,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Bila No. 4, Watansoppeng',
+                ],
+                'subs' => [],
+            ],
+            [
+                'parent' => [
+                    'name' => 'Kantor Camat Marioriwawo',
+                    'opd_name' => 'Kecamatan Marioriwawo',
+                    'unit_code' => 'KEC-MARIORIWAWO',
+                    'latitude' => -4.4200,
+                    'longitude' => 119.9840,
+                    'radius_meters' => 100,
+                    'alamat' => 'Jl. Poros Takalala, Marioriwawo',
+                ],
+                'subs' => [],
             ],
         ];
 
         $offices = collect();
-        foreach ($opdData as $data) {
-            $offices->push(Office::create($data));
+        foreach ($opdHierarchies as $item) {
+            $parentOffice = Office::create(array_merge($item['parent'], ['parent_id' => null]));
+            $offices->push($parentOffice);
+
+            foreach ($item['subs'] as $sub) {
+                $subOffice = Office::create(array_merge($sub, ['parent_id' => $parentOffice->id]));
+                $offices->push($subOffice);
+            }
         }
 
         return $offices;

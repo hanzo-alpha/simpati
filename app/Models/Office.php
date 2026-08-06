@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Office extends Model
 {
     protected $fillable = [
         'id',
+        'parent_id',
+        'unit_code',
         'name',
         'opd_name',
         'latitude',
@@ -23,6 +26,22 @@ class Office extends Model
         'longitude' => 'decimal:7',
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Parent OPD / Instansi Induk.
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Office::class, 'parent_id');
+    }
+
+    /**
+     * Sub OPD / UPTD / Sub Unit Kerja Children.
+     */
+    public function subOffices(): HasMany
+    {
+        return $this->hasMany(Office::class, 'parent_id');
+    }
 
     public function users(): HasMany
     {
