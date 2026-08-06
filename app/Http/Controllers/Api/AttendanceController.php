@@ -6,6 +6,7 @@ use App\Enums\AttendanceStatus;
 use App\Enums\AttendanceType;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
+use App\Models\Setting;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -145,6 +146,10 @@ class AttendanceController extends Controller
             'attendances' => $attendances,
             'office' => $user->office,
             'stats' => $stats,
+            'camera_settings' => [
+                'allow_rear_camera' => Setting::get('allow_rear_camera', 'false') === 'true',
+                'allow_gallery_upload' => Setting::get('allow_gallery_upload', 'false') === 'true',
+            ],
         ]);
     }
 

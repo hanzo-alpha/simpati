@@ -53,6 +53,12 @@ const form = useForm({
     enable_fake_gps_detection:
         props.settings.enable_fake_gps_detection === '1' ||
         props.settings.enable_fake_gps_detection === 'true',
+    allow_rear_camera:
+        props.settings.allow_rear_camera === '1' ||
+        props.settings.allow_rear_camera === 'true',
+    allow_gallery_upload:
+        props.settings.allow_gallery_upload === '1' ||
+        props.settings.allow_gallery_upload === 'true',
     enable_auto_checkout:
         props.settings.enable_auto_checkout === '1' ||
         props.settings.enable_auto_checkout === 'true',
@@ -414,6 +420,58 @@ const testSimpeg = async () => {
                                         @update:checked="
                                             form.enable_fake_gps_detection =
                                                 $event
+                                        "
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="border-t border-border/40 pt-3">
+                                <div
+                                    class="flex cursor-pointer items-center justify-between"
+                                >
+                                    <div>
+                                        <p
+                                            class="text-xs font-bold text-foreground"
+                                        >
+                                            Izinkan Kamera Belakang
+                                        </p>
+                                        <p
+                                            class="text-[11px] text-muted-foreground"
+                                        >
+                                            Izinkan ASN mengambil foto presensi menggunakan kamera belakang (Default: Hanya Kamera Depan).
+                                        </p>
+                                    </div>
+                                    <Checkbox
+                                        id="allow_rear_camera"
+                                        :checked="form.allow_rear_camera"
+                                        @update:checked="
+                                            form.allow_rear_camera = $event
+                                        "
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="border-t border-border/40 pt-3">
+                                <div
+                                    class="flex cursor-pointer items-center justify-between"
+                                >
+                                    <div>
+                                        <p
+                                            class="text-xs font-bold text-foreground"
+                                        >
+                                            Izinkan Unggah dari Galeri
+                                        </p>
+                                        <p
+                                            class="text-[11px] text-muted-foreground"
+                                        >
+                                            Izinkan ASN memilih foto dari galeri HP (Default: Nonaktif untuk cegah foto lama).
+                                        </p>
+                                    </div>
+                                    <Checkbox
+                                        id="allow_gallery_upload"
+                                        :checked="form.allow_gallery_upload"
+                                        @update:checked="
+                                            form.allow_gallery_upload = $event
                                         "
                                     />
                                 </div>

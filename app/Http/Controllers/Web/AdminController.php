@@ -892,6 +892,8 @@ class AdminController extends Controller
             // Mobile App Security
             'device_binding_enabled' => Setting::get('device_binding_enabled', 'true') === 'true',
             'fake_gps_block_enabled' => Setting::get('fake_gps_block_enabled', 'true') === 'true',
+            'allow_rear_camera' => Setting::get('allow_rear_camera', 'false') === 'true',
+            'allow_gallery_upload' => Setting::get('allow_gallery_upload', 'false') === 'true',
             'min_mobile_version' => Setting::get('min_mobile_version', '1.2.0'),
             'force_mobile_update' => Setting::get('force_mobile_update', 'false') === 'true',
 
@@ -923,6 +925,8 @@ class AdminController extends Controller
 
             'device_binding_enabled' => 'required|boolean',
             'fake_gps_block_enabled' => 'required|boolean',
+            'allow_rear_camera' => 'required|boolean',
+            'allow_gallery_upload' => 'required|boolean',
             'min_mobile_version' => 'required|string',
             'force_mobile_update' => 'required|boolean',
 
