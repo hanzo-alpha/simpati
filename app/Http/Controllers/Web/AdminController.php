@@ -636,6 +636,7 @@ class AdminController extends Controller
                 'tanggal_mulai' => $req->tanggal_mulai ? $req->tanggal_mulai->translatedFormat('d/m/Y') : '-',
                 'tanggal_selesai' => $req->tanggal_selesai ? $req->tanggal_selesai->translatedFormat('d/m/Y') : '-',
                 'alasan' => $req->alasan,
+                'lampiran_url' => $req->lampiran_url,
                 'duration' => $req->duration,
                 'status' => $req->status->value ?? $req->status,
                 'status_label' => $req->status_label,

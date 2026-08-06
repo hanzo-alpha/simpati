@@ -6,6 +6,9 @@ import {
     Calendar,
     Loader2,
     CheckCircle2,
+    Paperclip,
+    X,
+    FileCheck,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import { Badge } from '@/Components/ui/badge';
@@ -24,8 +27,11 @@ const form = useForm({
     tanggal_mulai: '',
     tanggal_selesai: '',
     alasan: '',
-    surat_tugas: null as File | null,
+    lampiran: null as File | null,
 });
+
+const filePreviewName = ref('');
+const filePreviewSize = ref('');
 
 const leaveTypes = [
     { value: 'cuti', label: 'Cuti Tahunan', icon: '🏖️' },
@@ -50,8 +56,17 @@ const handleFileChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
 
     if (target.files && target.files[0]) {
-        form.surat_tugas = target.files[0];
+        const file = target.files[0];
+        form.lampiran = file;
+        filePreviewName.value = file.name;
+        filePreviewSize.value = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
     }
+};
+
+const clearFile = () => {
+    form.lampiran = null;
+    filePreviewName.value = '';
+    filePreviewSize.value = '';
 };
 
 const submit = () => {
@@ -67,7 +82,7 @@ const submit = () => {
                 class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
             >
                 <CardHeader class="flex-row items-center gap-3 space-y-0 pb-3">
-                    <Link href="/leave-requests">
+                    <Link href="/pengajuan">
                         <Button
                             variant="outline"
                             size="icon"
@@ -189,21 +204,47 @@ const submit = () => {
                                 required
                                 rows="3"
                                 placeholder="Jelaskan alasan permohonan izin/cuti..."
-                                class="w-full rounded-md border border-input bg-background p-3 text-xs focus:ring-1 focus:ring-teal-500 focus:outline-none"
+                                class="w-full rounded-xl border border-input bg-background p-3 text-xs focus:ring-1 focus:ring-teal-500 focus:outline-none"
                             ></textarea>
                         </div>
 
                         <div class="space-y-1.5">
-                            <Label for="surat_tugas" class="text-xs"
-                                >Lampiran Surat Tugas / Bukti (PDF /
-                                Image)</Label
+                            <Label for="lampiran" class="text-xs"
+                                >Lampiran Surat Tugas / Bukti (PDF / JPG /
+                                PNG)</Label
                             >
                             <Input
-                                id="surat_tugas"
+                                id="lampiran"
                                 type="file"
+                                accept=".pdf,.jpg,.jpeg,.png"
                                 @change="handleFileChange"
                                 class="h-9 text-xs"
                             />
+
+                            <!-- Live File Selected Preview Badge -->
+                            <div
+                                v-if="filePreviewName"
+                                class="mt-2 flex items-center justify-between rounded-xl border border-teal-500/30 bg-teal-500/10 p-2.5 text-xs text-teal-700 dark:text-teal-300"
+                            >
+                                <div class="flex items-center gap-2 truncate">
+                                    <FileCheck
+                                        class="h-4 w-4 shrink-0 text-teal-600 dark:text-teal-400"
+                                    />
+                                    <span class="truncate font-semibold">{{
+                                        filePreviewName
+                                    }}</span>
+                                    <span class="text-[10px] opacity-75"
+                                        >({{ filePreviewSize }})</span
+                                    >
+                                </div>
+                                <button
+                                    type="button"
+                                    @click="clearFile"
+                                    class="ml-2 cursor-pointer text-rose-500 hover:text-rose-700"
+                                >
+                                    <X class="h-4 w-4" />
+                                </button>
+                            </div>
                         </div>
 
                         <Button

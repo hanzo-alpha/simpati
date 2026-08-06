@@ -22,6 +22,13 @@ class LeaveRequest extends Model
         'approved_at',
     ];
 
+    protected $appends = [
+        'duration',
+        'type_label',
+        'status_label',
+        'lampiran_url',
+    ];
+
     protected $casts = [
         'tanggal_mulai' => 'date',
         'tanggal_selesai' => 'date',
@@ -29,6 +36,15 @@ class LeaveRequest extends Model
         'type' => LeaveType::class,
         'status' => LeaveStatus::class,
     ];
+
+    public function getLampiranUrlAttribute(): ?string
+    {
+        if (! $this->lampiran_path) {
+            return null;
+        }
+
+        return asset('storage/'.$this->lampiran_path);
+    }
 
     public function user(): BelongsTo
     {

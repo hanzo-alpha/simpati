@@ -9,12 +9,22 @@ import {
     CheckCircle2,
     AlertCircle,
     Search,
+    Paperclip,
+    Eye,
+    ExternalLink,
+    Download,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from '@/Components/ui/dialog';
 import { Input } from '@/Components/ui/input';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
@@ -36,6 +46,7 @@ interface LeaveRequestItem {
     tanggal_mulai: string;
     tanggal_selesai: string;
     alasan: string;
+    lampiran_url?: string | null;
     duration?: number;
     status: 'menunggu' | 'disetujui' | 'ditolak' | string;
     status_label: string;
@@ -52,6 +63,19 @@ const props = withDefaults(
 
 const activeStatus = ref('all');
 const searchQuery = ref('');
+const showPreviewModal = ref(false);
+const previewUrl = ref('');
+const previewFileType = ref<'image' | 'pdf'>('image');
+
+const openPreview = (url: string) => {
+    previewUrl.value = url;
+    if (url.toLowerCase().endsWith('.pdf')) {
+        previewFileType.value = 'pdf';
+    } else {
+        previewFileType.value = 'image';
+    }
+    showPreviewModal.value = true;
+};
 
 const statusFilters = computed(() => {
     const counts = { menunggu: 0, disetujui: 0, ditolak: 0 };
@@ -198,6 +222,9 @@ const updateStatus = (id: number, status: string) => {
                                     Alasan Permohonan
                                 </th>
                                 <th class="px-5 py-3.5 text-center font-bold">
+                                    Lampiran
+                                </th>
+                                <th class="px-5 py-3.5 text-center font-bold">
                                     Status
                                 </th>
                                 <th class="px-5 py-3.5 text-center font-bold">
@@ -270,6 +297,23 @@ const updateStatus = (id: number, status: string) => {
                                     class="max-w-xs truncate px-5 py-3.5 text-muted-foreground"
                                 >
                                     {{ req.alasan }}
+                                </td>
+                                <td class="px-5 py-3.5 text-center">
+                                    <Button
+                                        v-if="req.lampiran_url"
+                                        variant="outline"
+                                        size="sm"
+                                        @click="openPreview(req.lampiran_url)"
+                                        class="h-7 rounded-none border-teal-500/30 bg-teal-500/10 text-[10px] font-bold text-teal-600 uppercase hover:bg-teal-500/20 dark:text-teal-400"
+                                    >
+                                        <Paperclip class="mr-1 h-3 w-3" />
+                                        <span>Lihat Berkas</span>
+                                    </Button>
+                                    <span
+                                        v-else
+                                        class="text-[11px] text-muted-foreground"
+                                        >-</span
+                                    >
                                 </td>
                                 <td class="px-5 py-3.5 text-center">
                                     <Badge
@@ -353,5 +397,64 @@ const updateStatus = (id: number, status: string) => {
                 </div>
             </CardContent>
         </Card>
+
+        <!-- Preview Modal Lampiran PDF / Image -->
+        <Dialog v-model:open="showPreviewModal">
+            <DialogContent
+                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-4xl"
+            >
+                <DialogHeader
+                    class="flex flex-row items-center justify-between border-b border-border/60 pb-3"
+                >
+                    <DialogTitle
+                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase"
+                    >
+                        <Paperclip
+                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
+                        />
+                        <span>Preview Lampiran Dokumen Permohonan</span>
+                    </DialogTitle>
+                </DialogHeader>
+
+                <div class="py-4">
+                    <iframe
+                        v-if="previewFileType === 'pdf'"
+                        :src="previewUrl"
+                        class="h-[550px] w-full rounded-none border border-border bg-background"
+                    ></iframe>
+                    <div
+                        v-else
+                        class="flex max-h-[550px] items-center justify-center overflow-auto rounded-none border border-border bg-muted/20 p-2"
+                    >
+                        <img
+                            :src="previewUrl"
+                            alt="Lampiran"
+                            class="max-h-[520px] w-auto object-contain"
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center justify-between border-t border-border pt-4"
+                >
+                    <a
+                        :href="previewUrl"
+                        target="_blank"
+                        download
+                        class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-600 hover:underline dark:text-teal-400"
+                    >
+                        <Download class="h-4 w-4" />
+                        <span>Unduh Dokumen</span>
+                    </a>
+                    <Button
+                        variant="outline"
+                        @click="showPreviewModal = false"
+                        class="h-9 rounded-none text-xs font-bold uppercase"
+                    >
+                        Tutup
+                    </Button>
+                </div>
+            </DialogContent>
+        </Dialog>
     </AdminLayout>
 </template>

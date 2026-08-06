@@ -79,7 +79,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     exportMethod.form = exportMethodForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
 export const exportTpp = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ exportTpp.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ exportTpp.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ exportTpp.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
     const exportTppForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
         exportTppForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:763
+ * @see app/Http/Controllers/Web/AdminController.php:764
  * @route '/admin/attendances/export-tpp'
  */
         exportTppForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -313,7 +313,7 @@ exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     exportSummary.form = exportSummaryForm
 /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:856
+ * @see app/Http/Controllers/Web/AdminController.php:857
  * @route '/admin/attendances/verify-qr'
  */
 export const verifyQr = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -328,7 +328,7 @@ verifyQr.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:856
+ * @see app/Http/Controllers/Web/AdminController.php:857
  * @route '/admin/attendances/verify-qr'
  */
 verifyQr.url = (options?: RouteQueryOptions) => {
@@ -337,7 +337,7 @@ verifyQr.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:856
+ * @see app/Http/Controllers/Web/AdminController.php:857
  * @route '/admin/attendances/verify-qr'
  */
 verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -347,7 +347,7 @@ verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:856
+ * @see app/Http/Controllers/Web/AdminController.php:857
  * @route '/admin/attendances/verify-qr'
  */
     const verifyQrForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -357,7 +357,7 @@ verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:856
+ * @see app/Http/Controllers/Web/AdminController.php:857
  * @route '/admin/attendances/verify-qr'
  */
         verifyQrForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

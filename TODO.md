@@ -92,9 +92,9 @@
   - [x] Auto-deduct leave quota upon supervisor approval in `LeaveRequestController@updateStatus`.
   - [x] Render interactive Sisa Kuota Cuti Card & live duration calculator in Mobile `pengajuan_screen.dart`.
 
-- [ ] **20. Upload & Preview Lampiran Surat Cuti/Dinas (PDF & Image)**
-  - [ ] Support PDF/image attachments in Leave Request screen.
-  - [ ] Add in-app preview modal for documents.
+- [x] **20. Upload & Preview Lampiran Surat Cuti/Dinas (PDF & Image)**
+  - [x] Support PDF/image attachments in Leave Request screen (`LeaveRequests/Create.vue`).
+  - [x] Add in-app preview modal for documents (`Admin/LeaveRequests.vue` & `LeaveRequests/Index.vue`).
 
 - [ ] **21. Multi-Level Approval Flow untuk Pengajuan Cuti/Dinas**
   - [ ] Support multi-stage approval (Atasan Langsung -> Kepala OPD/HR).

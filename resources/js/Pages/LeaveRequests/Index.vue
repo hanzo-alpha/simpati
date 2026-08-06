@@ -7,20 +7,31 @@ import {
     CheckCircle2,
     XCircle,
     AlertCircle,
+    Paperclip,
+    Download,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from '@/Components/ui/dialog';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 interface LeaveItem {
     id: number;
     type: string;
+    type_label?: string;
     tanggal_mulai: string;
     tanggal_selesai: string;
     alasan: string;
+    lampiran_url?: string | null;
     status: 'menunggu' | 'disetujui' | 'ditolak' | string;
+    status_label?: string;
     duration?: number;
 }
 
@@ -34,6 +45,19 @@ const props = withDefaults(
 );
 
 const activeFilter = ref('all');
+const showPreviewModal = ref(false);
+const previewUrl = ref('');
+const previewFileType = ref<'image' | 'pdf'>('image');
+
+const openPreview = (url: string) => {
+    previewUrl.value = url;
+    if (url.toLowerCase().endsWith('.pdf')) {
+        previewFileType.value = 'pdf';
+    } else {
+        previewFileType.value = 'image';
+    }
+    showPreviewModal.value = true;
+};
 
 const filterTabs = [
     { label: 'Semua', value: 'all' },
@@ -148,20 +172,20 @@ const summary = computed(() => {
             <div class="space-y-3">
                 <div
                     v-if="!filteredRequests.length"
-                    class="space-y-2 py-12 text-center text-muted-foreground"
+                    class="py-12 text-center text-muted-foreground"
                 >
-                    <FileText
-                        class="mx-auto h-10 w-10 text-muted-foreground/40"
+                    <AlertCircle
+                        class="mx-auto h-8 w-8 text-muted-foreground/50"
                     />
-                    <p class="text-sm font-medium">
-                        Belum ada catatan pengajuan izin.
+                    <p class="mt-2 text-xs">
+                        Belum ada data riwayat permohonan.
                     </p>
                 </div>
 
                 <Card
                     v-for="req in filteredRequests"
                     :key="req.id"
-                    class="overflow-hidden border-border/60 bg-card/95 shadow-sm backdrop-blur-xl transition-all hover:shadow-md"
+                    class="border-border/60 bg-card/95 shadow-xs transition-all hover:shadow-md"
                 >
                     <CardContent class="space-y-2 p-4">
                         <div class="flex items-center justify-between">
@@ -169,47 +193,130 @@ const summary = computed(() => {
                                 :variant="
                                     req.status === 'disetujui'
                                         ? 'default'
-                                        : req.status === 'ditolak'
-                                          ? 'destructive'
-                                          : 'outline'
+                                        : 'outline'
                                 "
-                                class="px-2.5 py-0.5 text-[10px] font-semibold uppercase"
+                                class="rounded-lg text-[10px] font-bold uppercase"
                                 :class="{
                                     'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400':
                                         req.status === 'menunggu',
+                                    'border-rose-500/30 bg-rose-500/10 text-rose-500':
+                                        req.status === 'ditolak',
                                     'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
                                         req.status === 'disetujui',
                                 }"
                             >
-                                {{
-                                    req.status === 'menunggu'
-                                        ? 'Pending Approval'
-                                        : req.status === 'disetujui'
-                                          ? 'Disetujui'
-                                          : 'Ditolak'
-                                }}
+                                {{ req.status_label || req.status }}
                             </Badge>
 
-                            <Badge
-                                variant="outline"
-                                class="text-[10px] font-semibold"
-                            >
-                                {{ req.type }}
-                            </Badge>
+                            <div class="flex items-center gap-2">
+                                <Badge
+                                    variant="outline"
+                                    class="rounded-lg text-[10px] font-semibold uppercase"
+                                >
+                                    {{ req.type_label || req.type }}
+                                </Badge>
+                            </div>
                         </div>
 
                         <div>
                             <p class="text-xs font-bold text-foreground">
                                 {{ req.tanggal_mulai }} —
                                 {{ req.tanggal_selesai }}
+                                <span
+                                    v-if="req.duration"
+                                    class="ml-1 text-emerald-600 dark:text-emerald-400"
+                                >
+                                    ({{ req.duration }} Hari)
+                                </span>
                             </p>
-                            <p class="mt-0.5 text-[11px] text-muted-foreground">
+                            <p class="mt-1 text-xs text-muted-foreground">
                                 Alasan: {{ req.alasan }}
                             </p>
+                        </div>
+
+                        <div
+                            v-if="req.lampiran_url"
+                            class="flex items-center justify-between border-t border-border/40 pt-2"
+                        >
+                            <span
+                                class="flex items-center gap-1 text-[11px] text-muted-foreground"
+                            >
+                                <Paperclip
+                                    class="h-3.5 w-3.5 text-teal-600 dark:text-teal-400"
+                                />
+                                <span>Lampiran Dokumen</span>
+                            </span>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                @click="openPreview(req.lampiran_url)"
+                                class="h-7 rounded-lg border-teal-500/30 bg-teal-500/10 text-[10px] font-bold text-teal-600 hover:bg-teal-500/20 dark:text-teal-400"
+                            >
+                                Lihat Berkas
+                            </Button>
                         </div>
                     </CardContent>
                 </Card>
             </div>
         </div>
+
+        <!-- Preview Modal Lampiran PDF / Image -->
+        <Dialog v-model:open="showPreviewModal">
+            <DialogContent
+                class="rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-3xl"
+            >
+                <DialogHeader
+                    class="flex flex-row items-center justify-between border-b border-border/60 pb-3"
+                >
+                    <DialogTitle
+                        class="flex items-center gap-2 text-base font-bold text-foreground"
+                    >
+                        <Paperclip
+                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
+                        />
+                        <span>Preview Lampiran Dokumen</span>
+                    </DialogTitle>
+                </DialogHeader>
+
+                <div class="py-4">
+                    <iframe
+                        v-if="previewFileType === 'pdf'"
+                        :src="previewUrl"
+                        class="h-[500px] w-full rounded-xl border border-border bg-background"
+                    ></iframe>
+                    <div
+                        v-else
+                        class="flex max-h-[500px] items-center justify-center overflow-auto rounded-xl border border-border bg-muted/20 p-2"
+                    >
+                        <img
+                            :src="previewUrl"
+                            alt="Lampiran"
+                            class="max-h-[470px] w-auto object-contain"
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center justify-between border-t border-border pt-4"
+                >
+                    <a
+                        :href="previewUrl"
+                        target="_blank"
+                        download
+                        class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-600 hover:underline dark:text-teal-400"
+                    >
+                        <Download class="h-4 w-4" />
+                        <span>Unduh Dokumen</span>
+                    </a>
+                    <Button
+                        variant="outline"
+                        @click="showPreviewModal = false"
+                        class="h-9 rounded-xl text-xs font-semibold"
+                    >
+                        Tutup
+                    </Button>
+                </div>
+            </DialogContent>
+        </Dialog>
     </AppLayout>
 </template>
