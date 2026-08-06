@@ -102,5 +102,5 @@
 - [x] **22. Push Notifications Realtime via FCM (Firebase Cloud Messaging)**
   - [x] Push notifications for attendance reminders & leave approval updates (`FcmService.php` & `SendAttendanceReminders.php`).
 
-- [ ] **23. Autentikasi Biometrik (Fingerprint / Face ID)**
-  - [ ] Local auth integration with `local_auth` package in Flutter.
+- [x] **23. Autentikasi Biometrik (Fingerprint / Face ID)**
+  - [x] Local auth integration with `local_auth` package in Flutter (`BiometricService.dart` & `login_screen.dart`).
