@@ -24,7 +24,7 @@ class LeaveRequestController extends Controller
             ->with('approver:id,name')
             ->orderBy('created_at', 'desc');
 
-        if ($request->has('status')) {
+        if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
