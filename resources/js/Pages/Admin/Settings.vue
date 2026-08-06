@@ -144,260 +144,257 @@ const testSimpeg = async () => {
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <!-- Card 1: Branding & Identitas Web -->
                 <Card
-                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
+                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs flex flex-col justify-between"
                 >
-                    <CardHeader
-                        class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border/60"
-                    >
-                        <div
-                            class="flex h-10 w-10 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                    <div>
+                        <CardHeader
+                            class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border"
                         >
-                            <Globe class="h-5 w-5" />
-                        </div>
-                        <div>
-                            <CardTitle class="text-base font-bold uppercase tracking-wider text-foreground"
-                                >Branding & Identitas Web</CardTitle
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
                             >
-                            <p class="text-xs text-muted-foreground">
-                                Pengaturan nama portal, subtitle, dan kontak
-                                bantuan
-                            </p>
-                        </div>
-                    </CardHeader>
-                    <CardContent class="space-y-4 pt-4">
-                        <div class="space-y-1.5">
-                            <Label for="app_name" class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                >Nama Aplikasi / Portal</Label
-                            >
-                            <Input
-                                id="app_name"
-                                v-model="form.app_name"
-                                required
-                                class="h-10 rounded-none text-xs"
-                            />
-                        </div>
-
-                        <div class="space-y-1.5">
-                            <Label
-                                for="app_tagline"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                >Tagline / Subtitle Sistem</Label
-                            >
-                            <Input
-                                id="app_tagline"
-                                v-model="form.app_tagline"
-                                required
-                                class="h-10 rounded-none text-xs"
-                            />
-                        </div>
-
-                        <div class="space-y-1.5">
-                            <Label
-                                for="pemda_name"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                >Nama Pemda / Instansi Induk</Label
-                            >
-                            <Input
-                                id="pemda_name"
-                                v-model="form.pemda_name"
-                                required
-                                class="h-10 rounded-none text-xs"
-                            />
-                        </div>
-
-                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <Globe class="h-4 w-4" />
+                            </div>
+                            <div>
+                                <CardTitle class="text-sm font-bold uppercase tracking-wider text-foreground"
+                                    >Branding & Identitas Web</CardTitle
+                                >
+                                <p class="text-xs text-muted-foreground">
+                                    Pengaturan nama portal, subtitle, dan kontak bantuan
+                                </p>
+                            </div>
+                        </CardHeader>
+                        <CardContent class="space-y-4 pt-4">
                             <div class="space-y-1.5">
-                                <Label
-                                    for="admin_email"
-                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                    >Email Support Admin</Label
+                                <Label for="app_name" class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                    >Nama Aplikasi / Portal</Label
                                 >
                                 <Input
-                                    id="admin_email"
-                                    v-model="form.admin_email"
-                                    type="email"
+                                    id="app_name"
+                                    v-model="form.app_name"
                                     required
-                                    class="h-10 rounded-none text-xs"
+                                    class="h-10 rounded-none text-xs bg-background"
                                 />
                             </div>
+
                             <div class="space-y-1.5">
                                 <Label
-                                    for="admin_phone"
+                                    for="app_tagline"
                                     class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                    >WhatsApp Support Admin</Label
+                                    >Tagline / Subtitle Sistem</Label
                                 >
                                 <Input
-                                    id="admin_phone"
-                                    v-model="form.admin_phone"
-                                    class="h-10 rounded-none text-xs"
+                                    id="app_tagline"
+                                    v-model="form.app_tagline"
+                                    required
+                                    class="h-10 rounded-none text-xs bg-background"
                                 />
                             </div>
-                        </div>
-                    </CardContent>
+
+                            <div class="space-y-1.5">
+                                <Label
+                                    for="pemda_name"
+                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                    >Nama Pemda / Instansi Induk</Label
+                                >
+                                <Input
+                                    id="pemda_name"
+                                    v-model="form.pemda_name"
+                                    required
+                                    class="h-10 rounded-none text-xs bg-background"
+                                />
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <div class="space-y-1.5">
+                                    <Label
+                                        for="admin_email"
+                                        class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                        >Email Support Admin</Label
+                                    >
+                                    <Input
+                                        id="admin_email"
+                                        v-model="form.admin_email"
+                                        type="email"
+                                        required
+                                        class="h-10 rounded-none text-xs bg-background"
+                                    />
+                                </div>
+                                <div class="space-y-1.5">
+                                    <Label
+                                        for="admin_phone"
+                                        class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                        >WhatsApp Support Admin</Label
+                                    >
+                                    <Input
+                                        id="admin_phone"
+                                        v-model="form.admin_phone"
+                                        class="h-10 rounded-none text-xs bg-background"
+                                    />
+                                </div>
+                            </div>
+                        </CardContent>
+                    </div>
                 </Card>
 
                 <!-- Card 2: Aturan Presensi & Cutoff -->
                 <Card
-                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
+                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs flex flex-col justify-between"
                 >
-                    <CardHeader
-                        class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border/60"
-                    >
-                        <div
-                            class="flex h-10 w-10 items-center justify-center rounded-none border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                    <div>
+                        <CardHeader
+                            class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border"
                         >
-                            <Clock class="h-5 w-5" />
-                        </div>
-                        <div>
-                            <CardTitle class="text-base font-bold uppercase tracking-wider text-foreground"
-                                >Aturan Presensi & Cutoff</CardTitle
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-none border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
                             >
-                            <p class="text-xs text-muted-foreground">
-                                Batas waktu presensi, toleransi, dan pemotongan
-                                TPP
-                            </p>
-                        </div>
-                    </CardHeader>
-                    <CardContent class="space-y-4 pt-4">
-                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            <div class="space-y-1.5">
-                                <Label
-                                    for="tolerance"
-                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                    >Toleransi Keterlambatan (Menit)</Label
-                                >
-                                <Input
-                                    id="tolerance"
-                                    v-model="form.attendance_tolerance_minutes"
-                                    type="number"
-                                    required
-                                    class="h-10 rounded-none text-xs font-mono"
-                                />
+                                <Clock class="h-4 w-4" />
                             </div>
-                            <div class="space-y-1.5">
-                                <Label
-                                    for="radius"
-                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                    >Default Radius Geofence (Meter)</Label
+                            <div>
+                                <CardTitle class="text-sm font-bold uppercase tracking-wider text-foreground"
+                                    >Aturan Presensi & Cutoff</CardTitle
                                 >
-                                <Input
-                                    id="radius"
-                                    v-model="form.default_geofence_radius"
-                                    type="number"
-                                    required
-                                    class="h-10 rounded-none text-xs font-mono"
-                                />
+                                <p class="text-xs text-muted-foreground">
+                                    Batas waktu presensi, toleransi, dan pemotongan TPP
+                                </p>
                             </div>
-                        </div>
+                        </CardHeader>
+                        <CardContent class="space-y-4 pt-4">
+                            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <div class="space-y-1.5">
+                                    <Label
+                                        for="tolerance"
+                                        class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                        >Toleransi Keterlambatan (Menit)</Label
+                                    >
+                                    <Input
+                                        id="tolerance"
+                                        v-model="form.attendance_tolerance_minutes"
+                                        type="number"
+                                        required
+                                        class="h-10 rounded-none text-xs font-mono bg-background"
+                                    />
+                                </div>
+                                <div class="space-y-1.5">
+                                    <Label
+                                        for="radius"
+                                        class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                        >Default Radius Geofence (Meter)</Label
+                                    >
+                                    <Input
+                                        id="radius"
+                                        v-model="form.default_geofence_radius"
+                                        type="number"
+                                        required
+                                        class="h-10 rounded-none text-xs font-mono bg-background"
+                                    />
+                                </div>
+                            </div>
 
-                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            <div class="space-y-1.5">
-                                <Label
-                                    for="late_tpp"
-                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                    >Potongan TPP Terlambat (%)</Label
-                                >
-                                <Input
-                                    id="late_tpp"
-                                    v-model="form.tpp_deduction_late_percent"
-                                    type="number"
-                                    step="0.1"
-                                    required
-                                    class="h-10 rounded-none text-xs font-mono"
-                                />
+                            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <div class="space-y-1.5">
+                                    <Label
+                                        for="late_tpp"
+                                        class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                        >Potongan TPP Terlambat (%)</Label
+                                    >
+                                    <Input
+                                        id="late_tpp"
+                                        v-model="form.tpp_deduction_late_percent"
+                                        type="number"
+                                        step="0.1"
+                                        required
+                                        class="h-10 rounded-none text-xs font-mono bg-background"
+                                    />
+                                </div>
+                                <div class="space-y-1.5">
+                                    <Label
+                                        for="absent_tpp"
+                                        class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                        >Potongan TPP Alpha (%)</Label
+                                    >
+                                    <Input
+                                        id="absent_tpp"
+                                        v-model="form.tpp_deduction_absent_percent"
+                                        type="number"
+                                        step="0.1"
+                                        required
+                                        class="h-10 rounded-none text-xs font-mono bg-background"
+                                    />
+                                </div>
                             </div>
-                            <div class="space-y-1.5">
-                                <Label
-                                    for="absent_tpp"
-                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                    >Potongan TPP Alpha (%)</Label
-                                >
-                                <Input
-                                    id="absent_tpp"
-                                    v-model="form.tpp_deduction_absent_percent"
-                                    type="number"
-                                    step="0.1"
-                                    required
-                                    class="h-10 rounded-none text-xs font-mono"
-                                />
-                            </div>
-                        </div>
 
-                        <div class="pt-2">
-                            <div class="flex cursor-pointer items-center gap-2">
-                                <Checkbox
-                                    id="auto_checkout"
-                                    :checked="form.enable_auto_checkout"
-                                    @update:checked="
-                                        form.enable_auto_checkout = $event
-                                    "
-                                />
-                                <Label
-                                    for="auto_checkout"
-                                    class="cursor-pointer text-xs font-bold uppercase tracking-wider text-muted-foreground select-none hover:text-foreground"
-                                >
-                                    Otomatiskan Checkout Sistem jika ASN lupa
-                                    presensi pulang
-                                </Label>
+                            <div class="pt-2">
+                                <div class="flex cursor-pointer items-center gap-2.5 rounded-none border border-border bg-background p-3.5 hover:bg-muted/20 transition-colors">
+                                    <Checkbox
+                                        id="auto_checkout"
+                                        :checked="form.enable_auto_checkout"
+                                        @update:checked="
+                                            form.enable_auto_checkout = $event
+                                        "
+                                    />
+                                    <Label
+                                        for="auto_checkout"
+                                        class="cursor-pointer text-xs font-bold uppercase tracking-wider text-muted-foreground select-none hover:text-foreground"
+                                    >
+                                        Otomatiskan Checkout Sistem jika ASN lupa presensi pulang
+                                    </Label>
+                                </div>
                             </div>
-                        </div>
-                    </CardContent>
+                        </CardContent>
+                    </div>
                 </Card>
 
                 <!-- Card 3: Keamanan Mobile App -->
                 <Card
-                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
+                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs flex flex-col justify-between"
                 >
-                    <CardHeader
-                        class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border/60"
-                    >
-                        <div
-                            class="flex h-10 w-10 items-center justify-center rounded-none border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400"
-                        >
-                            <Smartphone class="h-5 w-5" />
-                        </div>
-                        <div>
-                            <CardTitle class="text-base font-bold uppercase tracking-wider text-foreground"
-                                >Keamanan Mobile App</CardTitle
-                            >
-                            <p class="text-xs text-muted-foreground">
-                                Penguncian HP (Device Binding) & Deteksi Fake
-                                GPS
-                            </p>
-                        </div>
-                    </CardHeader>
-                    <CardContent class="space-y-4 pt-4">
-                        <div
-                            class="space-y-3 rounded-none border border-border bg-muted/30 p-4"
+                    <div>
+                        <CardHeader
+                            class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border"
                         >
                             <div
-                                class="flex cursor-pointer items-center justify-between"
+                                class="flex h-9 w-9 items-center justify-center rounded-none border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400"
                             >
-                                <div>
-                                    <p
-                                        class="text-xs font-bold text-foreground"
-                                    >
-                                        Device Binding (Single Device ID)
-                                    </p>
-                                    <p
-                                        class="text-[11px] text-muted-foreground"
-                                    >
-                                        ASN hanya dapat login pada 1 perangkat
-                                        HP yang terdaftar.
-                                    </p>
-                                </div>
-                                <Checkbox
-                                    id="device_binding"
-                                    :checked="form.enable_device_binding"
-                                    @update:checked="
-                                        form.enable_device_binding = $event
-                                    "
-                                />
+                                <Smartphone class="h-4 w-4" />
                             </div>
-
-                            <div class="border-t border-border/40 pt-3">
+                            <div>
+                                <CardTitle class="text-sm font-bold uppercase tracking-wider text-foreground"
+                                    >Keamanan Mobile App</CardTitle
+                                >
+                                <p class="text-xs text-muted-foreground">
+                                    Penguncian HP (Device Binding) & Deteksi Fake GPS
+                                </p>
+                            </div>
+                        </CardHeader>
+                        <CardContent class="space-y-4 pt-4">
+                            <div class="divide-y divide-border border border-border bg-background">
                                 <div
-                                    class="flex cursor-pointer items-center justify-between"
+                                    class="flex cursor-pointer items-center justify-between p-3.5 hover:bg-muted/30 transition-colors"
+                                >
+                                    <div>
+                                        <p
+                                            class="text-xs font-bold text-foreground"
+                                        >
+                                            Device Binding (Single Device ID)
+                                        </p>
+                                        <p
+                                            class="text-[11px] text-muted-foreground"
+                                        >
+                                            ASN hanya dapat login pada 1 perangkat HP yang terdaftar.
+                                        </p>
+                                    </div>
+                                    <Checkbox
+                                        id="device_binding"
+                                        :checked="form.enable_device_binding"
+                                        @update:checked="
+                                            form.enable_device_binding = $event
+                                        "
+                                    />
+                                </div>
+
+                                <div
+                                    class="flex cursor-pointer items-center justify-between p-3.5 hover:bg-muted/30 transition-colors"
                                 >
                                     <div>
                                         <p
@@ -408,8 +405,7 @@ const testSimpeg = async () => {
                                         <p
                                             class="text-[11px] text-muted-foreground"
                                         >
-                                            Tolak otomatis presensi jika
-                                            terdeteksi lokasi palsu/GPS spoofer.
+                                            Tolak otomatis presensi jika terdeteksi lokasi palsu/GPS spoofer.
                                         </p>
                                     </div>
                                     <Checkbox
@@ -423,11 +419,9 @@ const testSimpeg = async () => {
                                         "
                                     />
                                 </div>
-                            </div>
 
-                            <div class="border-t border-border/40 pt-3">
                                 <div
-                                    class="flex cursor-pointer items-center justify-between"
+                                    class="flex cursor-pointer items-center justify-between p-3.5 hover:bg-muted/30 transition-colors"
                                 >
                                     <div>
                                         <p
@@ -438,9 +432,7 @@ const testSimpeg = async () => {
                                         <p
                                             class="text-[11px] text-muted-foreground"
                                         >
-                                            Izinkan ASN mengambil foto presensi
-                                            menggunakan kamera belakang
-                                            (Default: Hanya Kamera Depan).
+                                            Izinkan ASN mengambil foto presensi menggunakan kamera belakang.
                                         </p>
                                     </div>
                                     <Checkbox
@@ -451,11 +443,9 @@ const testSimpeg = async () => {
                                         "
                                     />
                                 </div>
-                            </div>
 
-                            <div class="border-t border-border/40 pt-3">
                                 <div
-                                    class="flex cursor-pointer items-center justify-between"
+                                    class="flex cursor-pointer items-center justify-between p-3.5 hover:bg-muted/30 transition-colors"
                                 >
                                     <div>
                                         <p
@@ -466,9 +456,7 @@ const testSimpeg = async () => {
                                         <p
                                             class="text-[11px] text-muted-foreground"
                                         >
-                                            Izinkan ASN memilih foto dari galeri
-                                            HP (Default: Nonaktif untuk cegah
-                                            foto lama).
+                                            Izinkan ASN memilih foto dari galeri HP (Default: Nonaktif).
                                         </p>
                                     </div>
                                     <Checkbox
@@ -480,95 +468,96 @@ const testSimpeg = async () => {
                                     />
                                 </div>
                             </div>
-                        </div>
-                    </CardContent>
+                        </CardContent>
+                    </div>
                 </Card>
 
                 <!-- Card 4: Integrasi SIMPEG -->
                 <Card
-                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
+                    class="rounded-none border border-border bg-card text-card-foreground shadow-xs flex flex-col justify-between"
                 >
-                    <CardHeader
-                        class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border/60"
-                    >
-                        <div
-                            class="flex h-10 w-10 items-center justify-center rounded-none border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                    <div>
+                        <CardHeader
+                            class="flex-row items-center gap-3 space-y-0 pb-3 border-b border-border"
                         >
-                            <RefreshCw class="h-5 w-5" />
-                        </div>
-                        <div>
-                            <CardTitle class="text-base font-bold uppercase tracking-wider text-foreground"
-                                >Integrasi API SIMPEG</CardTitle
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-none border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
                             >
-                            <p class="text-xs text-muted-foreground">
-                                Sinkronisasi Master Pegawai & Rekap TPP ke
-                                SIMPEG
-                            </p>
-                        </div>
-                    </CardHeader>
-                    <CardContent class="space-y-4 pt-4">
-                        <div class="space-y-1.5">
-                            <Label
-                                for="simpeg_url"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                >Endpoint Base URL SIMPEG</Label
-                            >
-                            <Input
-                                id="simpeg_url"
-                                v-model="form.simpeg_api_url"
-                                placeholder="https://simpeg.soppengkab.go.id/api/v1"
-                                class="h-10 rounded-none text-xs font-mono"
-                            />
-                        </div>
-
-                        <div class="space-y-1.5">
-                            <Label
-                                for="simpeg_key"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
-                                >Secret Bearer API Key SIMPEG</Label
-                            >
-                            <Input
-                                id="simpeg_key"
-                                v-model="form.simpeg_api_key"
-                                type="password"
-                                placeholder="••••••••••••"
-                                class="h-10 rounded-none text-xs font-mono"
-                            />
-                        </div>
-
-                        <div class="flex items-center justify-between pt-2">
-                            <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                @click="testSimpeg"
-                                :disabled="testingConnection"
-                                class="h-10 rounded-none cursor-pointer border-border font-bold uppercase tracking-wider text-xs flex items-center gap-2"
-                            >
-                                <Loader2
-                                    v-if="testingConnection"
-                                    class="h-3.5 w-3.5 animate-spin"
+                                <RefreshCw class="h-4 w-4" />
+                            </div>
+                            <div>
+                                <CardTitle class="text-sm font-bold uppercase tracking-wider text-foreground"
+                                    >Integrasi API SIMPEG</CardTitle
+                                >
+                                <p class="text-xs text-muted-foreground">
+                                    Sinkronisasi Master Pegawai & Rekap TPP ke SIMPEG
+                                </p>
+                            </div>
+                        </CardHeader>
+                        <CardContent class="space-y-4 pt-4">
+                            <div class="space-y-1.5">
+                                <Label
+                                    for="simpeg_url"
+                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                    >Endpoint Base URL SIMPEG</Label
+                                >
+                                <Input
+                                    id="simpeg_url"
+                                    v-model="form.simpeg_api_url"
+                                    placeholder="https://simpeg.soppengkab.go.id/api/v1"
+                                    class="h-10 rounded-none text-xs font-mono bg-background"
                                 />
-                                <Zap
-                                    v-else
-                                    class="h-3.5 w-3.5 text-amber-500"
-                                />
-                                <span>Tes Koneksi API SIMPEG</span>
-                            </Button>
+                            </div>
 
-                            <Badge
-                                v-if="simpegTestResult"
-                                :variant="
-                                    simpegTestResult.success
-                                        ? 'default'
-                                        : 'destructive'
-                                "
-                                class="rounded-none text-[10px] font-bold uppercase tracking-wider"
-                            >
-                                {{ simpegTestResult.message }}
-                            </Badge>
-                        </div>
-                    </CardContent>
+                            <div class="space-y-1.5">
+                                <Label
+                                    for="simpeg_key"
+                                    class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                    >Secret Bearer API Key SIMPEG</Label
+                                >
+                                <Input
+                                    id="simpeg_key"
+                                    v-model="form.simpeg_api_key"
+                                    type="password"
+                                    placeholder="••••••••••••"
+                                    class="h-10 rounded-none text-xs font-mono bg-background"
+                                />
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    size="sm"
+                                    @click="testSimpeg"
+                                    :disabled="testingConnection"
+                                    class="h-10 rounded-none cursor-pointer border-border font-bold uppercase tracking-wider text-xs flex items-center gap-2"
+                                >
+                                    <Loader2
+                                        v-if="testingConnection"
+                                        class="h-3.5 w-3.5 animate-spin"
+                                    />
+                                    <Zap
+                                        v-else
+                                        class="h-3.5 w-3.5 text-amber-500"
+                                    />
+                                    <span>Tes Koneksi API SIMPEG</span>
+                                </Button>
+
+                                <Badge
+                                    v-if="simpegTestResult"
+                                    :variant="
+                                        simpegTestResult.success
+                                            ? 'default'
+                                            : 'destructive'
+                                    "
+                                    class="rounded-none text-[10px] font-bold uppercase tracking-wider"
+                                >
+                                    {{ simpegTestResult.message }}
+                                </Badge>
+                            </div>
+                        </CardContent>
+                    </div>
                 </Card>
             </div>
         </form>

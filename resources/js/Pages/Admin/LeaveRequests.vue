@@ -8,12 +8,14 @@ import {
     Calendar,
     CheckCircle2,
     AlertCircle,
+    Search,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
+import { Input } from '@/Components/ui/input';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
@@ -49,6 +51,7 @@ const props = withDefaults(
 );
 
 const activeStatus = ref('all');
+const searchQuery = ref('');
 
 const statusFilters = computed(() => {
     const counts = { menunggu: 0, disetujui: 0, ditolak: 0 };
@@ -67,11 +70,25 @@ const statusFilters = computed(() => {
 });
 
 const filteredRequests = computed(() => {
-    if (activeStatus.value === 'all') {
-        return props.requests;
+    let list = props.requests;
+
+    if (activeStatus.value !== 'all') {
+        list = list.filter((r) => r.status === activeStatus.value);
     }
 
-    return props.requests.filter((r) => r.status === activeStatus.value);
+    if (searchQuery.value.trim()) {
+        const q = searchQuery.value.toLowerCase();
+        list = list.filter(
+            (r) =>
+                (r.user?.name && r.user.name.toLowerCase().includes(q)) ||
+                (r.user?.office?.opd_name &&
+                    r.user.office.opd_name.toLowerCase().includes(q)) ||
+                (r.alasan && r.alasan.toLowerCase().includes(q)) ||
+                (r.type_label && r.type_label.toLowerCase().includes(q)),
+        );
+    }
+
+    return list;
 });
 
 const currentPage = ref(1);
@@ -97,30 +114,58 @@ const updateStatus = (id: number, status: string) => {
         title="Kelola Pengajuan Izin / Cuti"
         :subtitle="`${requests.length} total permohonan masuk`"
     >
-        <!-- Status Filter Tabs Card -->
+        <!-- Search & Status Filter Toolbar Card -->
         <Card
             class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
-            <CardContent class="flex items-center gap-2 overflow-x-auto p-4">
-                <Button
-                    v-for="sf in statusFilters"
-                    :key="sf.value"
-                    size="sm"
-                    :variant="activeStatus === sf.value ? 'default' : 'outline'"
-                    @click="activeStatus = sf.value"
-                    class="flex h-9 rounded-none cursor-pointer items-center gap-2 font-bold uppercase tracking-wider text-xs"
-                    :class="{
-                        'bg-primary text-primary-foreground hover:bg-primary/90':
-                            activeStatus === sf.value,
-                    }"
+            <CardContent
+                class="flex flex-col items-center justify-between gap-3 p-4 md:flex-row"
+            >
+                <!-- Search Box -->
+                <div class="relative w-full md:w-80">
+                    <Search
+                        class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                    />
+                    <Input
+                        v-model="searchQuery"
+                        type="text"
+                        placeholder="Cari Nama Pegawai, OPD, atau Alasan..."
+                        class="h-9 rounded-none pl-9 text-xs"
+                    />
+                </div>
+
+                <!-- Status Filter Tabs -->
+                <div
+                    class="flex w-full items-center gap-1.5 overflow-x-auto md:w-auto"
                 >
-                    <span>{{ sf.label }}</span>
-                    <span
-                        class="rounded-none bg-background/20 px-1.5 py-0.5 text-[10px] font-bold"
+                    <Button
+                        v-for="sf in statusFilters"
+                        :key="sf.value"
+                        size="sm"
+                        :variant="
+                            activeStatus === sf.value ? 'default' : 'outline'
+                        "
+                        @click="activeStatus = sf.value"
+                        class="flex h-9 cursor-pointer items-center gap-1.5 rounded-none px-3 font-bold text-[11px] tracking-wider uppercase transition-all"
+                        :class="
+                            activeStatus === sf.value
+                                ? 'bg-primary text-primary-foreground shadow-none'
+                                : 'border-border bg-background text-muted-foreground hover:text-foreground'
+                        "
                     >
-                        {{ sf.count }}
-                    </span>
-                </Button>
+                        <span>{{ sf.label }}</span>
+                        <span
+                            class="rounded-none px-1.5 py-0.5 text-[10px] font-bold"
+                            :class="
+                                activeStatus === sf.value
+                                    ? 'bg-primary-foreground/20 text-primary-foreground'
+                                    : 'bg-muted text-muted-foreground'
+                            "
+                        >
+                            {{ sf.count }}
+                        </span>
+                    </Button>
+                </div>
             </CardContent>
         </Card>
 
