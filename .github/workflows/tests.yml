@@ -43,6 +43,9 @@ jobs:
       - name: Generate App Key
         run: php artisan key:generate
 
+      - name: Build Frontend Assets (Vite)
+        run: npm run build
+
       - name: Run Tests
         run: php artisan test --compact
         env:
