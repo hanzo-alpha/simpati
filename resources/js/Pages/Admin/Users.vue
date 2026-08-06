@@ -246,11 +246,15 @@ const resetDevice = (user: UserItem) => {
                     />
                 </div>
 
-                <div class="flex w-full items-center gap-1.5 overflow-x-auto md:w-auto">
+                <div
+                    class="flex w-full items-center gap-1.5 overflow-x-auto md:w-auto"
+                >
                     <Button
                         v-for="f in filters"
                         :key="f.value"
-                        :variant="activeFilter === f.value ? 'default' : 'outline'"
+                        :variant="
+                            activeFilter === f.value ? 'default' : 'outline'
+                        "
                         size="sm"
                         @click="activeFilter = f.value"
                         class="cursor-pointer rounded-none text-[11px] font-bold tracking-wider uppercase transition-all"

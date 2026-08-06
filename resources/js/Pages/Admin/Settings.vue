@@ -145,23 +145,23 @@ const testSimpeg = async () => {
                 >
                     <div>
                         <CardHeader
-                            class="flex-row items-center gap-3 space-y-0 border-b border-border pb-3"
+                            class="space-y-1 border-b border-border pb-3"
                         >
-                            <div
-                                class="flex h-9 w-9 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                            >
-                                <Globe class="h-4 w-4" />
-                            </div>
-                            <div>
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="flex h-7 w-7 shrink-0 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                                >
+                                    <Globe class="h-3.5 w-3.5" />
+                                </div>
                                 <CardTitle
                                     class="text-sm font-bold tracking-wider text-foreground uppercase"
                                     >Branding & Identitas Web</CardTitle
                                 >
-                                <p class="text-xs text-muted-foreground">
-                                    Pengaturan nama portal, subtitle, dan kontak
-                                    bantuan
-                                </p>
                             </div>
+                            <p class="text-xs text-muted-foreground">
+                                Pengaturan nama portal, subtitle, dan kontak
+                                bantuan
+                            </p>
                         </CardHeader>
                         <CardContent class="space-y-4 pt-4">
                             <div class="space-y-1.5">
@@ -244,23 +244,23 @@ const testSimpeg = async () => {
                 >
                     <div>
                         <CardHeader
-                            class="flex-row items-center gap-3 space-y-0 border-b border-border pb-3"
+                            class="space-y-1 border-b border-border pb-3"
                         >
-                            <div
-                                class="flex h-9 w-9 items-center justify-center rounded-none border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                            >
-                                <Clock class="h-4 w-4" />
-                            </div>
-                            <div>
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="flex h-7 w-7 shrink-0 items-center justify-center rounded-none border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                                >
+                                    <Clock class="h-3.5 w-3.5" />
+                                </div>
                                 <CardTitle
                                     class="text-sm font-bold tracking-wider text-foreground uppercase"
                                     >Aturan Presensi & Cutoff</CardTitle
                                 >
-                                <p class="text-xs text-muted-foreground">
-                                    Batas waktu presensi, toleransi, dan
-                                    pemotongan TPP
-                                </p>
                             </div>
+                            <p class="text-xs text-muted-foreground">
+                                Batas waktu presensi, toleransi, dan pemotongan
+                                TPP
+                            </p>
                         </CardHeader>
                         <CardContent class="space-y-4 pt-4">
                             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -363,23 +363,23 @@ const testSimpeg = async () => {
                 >
                     <div>
                         <CardHeader
-                            class="flex-row items-center gap-3 space-y-0 border-b border-border pb-3"
+                            class="space-y-1 border-b border-border pb-3"
                         >
-                            <div
-                                class="flex h-9 w-9 items-center justify-center rounded-none border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400"
-                            >
-                                <Smartphone class="h-4 w-4" />
-                            </div>
-                            <div>
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="flex h-7 w-7 shrink-0 items-center justify-center rounded-none border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400"
+                                >
+                                    <Smartphone class="h-3.5 w-3.5" />
+                                </div>
                                 <CardTitle
                                     class="text-sm font-bold tracking-wider text-foreground uppercase"
                                     >Keamanan Mobile App</CardTitle
                                 >
-                                <p class="text-xs text-muted-foreground">
-                                    Penguncian HP (Device Binding) & Deteksi
-                                    Fake GPS
-                                </p>
                             </div>
+                            <p class="text-xs text-muted-foreground">
+                                Penguncian HP (Device Binding) & Deteksi Fake
+                                GPS
+                            </p>
                         </CardHeader>
                         <CardContent class="space-y-4 pt-4">
                             <div
@@ -498,23 +498,23 @@ const testSimpeg = async () => {
                 >
                     <div>
                         <CardHeader
-                            class="flex-row items-center gap-3 space-y-0 border-b border-border pb-3"
+                            class="space-y-1 border-b border-border pb-3"
                         >
-                            <div
-                                class="flex h-9 w-9 items-center justify-center rounded-none border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                            >
-                                <RefreshCw class="h-4 w-4" />
-                            </div>
-                            <div>
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="flex h-7 w-7 shrink-0 items-center justify-center rounded-none border border-indigo-500/30 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                                >
+                                    <RefreshCw class="h-3.5 w-3.5" />
+                                </div>
                                 <CardTitle
                                     class="text-sm font-bold tracking-wider text-foreground uppercase"
                                     >Integrasi API SIMPEG</CardTitle
                                 >
-                                <p class="text-xs text-muted-foreground">
-                                    Sinkronisasi Master Pegawai & Rekap TPP ke
-                                    SIMPEG
-                                </p>
                             </div>
+                            <p class="text-xs text-muted-foreground">
+                                Sinkronisasi Master Pegawai & Rekap TPP ke
+                                SIMPEG
+                            </p>
                         </CardHeader>
                         <CardContent class="space-y-4 pt-4">
                             <div class="space-y-1.5">
