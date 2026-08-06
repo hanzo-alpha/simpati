@@ -26,6 +26,7 @@ class AttendanceController extends Controller
             'longitude' => 'required|numeric',
             'foto_selfie' => 'required|image|max:5120', // 5MB max
             'is_mocked' => 'nullable|boolean',
+            'is_live_photo' => 'nullable|boolean',
             'device_id' => 'nullable|string',
         ]);
 

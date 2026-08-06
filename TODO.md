@@ -78,3 +78,29 @@
 - [x] **17. Cetak Kartu ID / QR Code ASN Digital**
   - [x] Add QR Code generation for ASN profile in `resources/js/Pages/Admin/Users.vue`.
   - [x] Create printable ID Card card layout for official ASN attendance & event verification.
+
+---
+
+## 🛡️ Phase 5: Next Level Security & Feature Upgrades (New Roadmap)
+- [/] **18. Active Liveness Detection & Anti-Spoofing for Selfie Presensi**
+  - [x] Verify Fake GPS & Mock Location detection (Already active in `presensi_screen.dart` & `AttendanceController.php`).
+  - [x] Verify Offline Attendance Queue & Auto-Sync (Already active in `offline_sync_service.dart`).
+  - [ ] Add Active Face Liveness prompt (e.g. blink/smile/head tilt detection or prompt overlay before snapshot) on Flutter selfie camera.
+
+- [ ] **19. Kuota & Balance Cuti (Leave Balance & Quota Management)**
+  - [ ] Add `leave_quota` to User model / migration.
+  - [ ] Auto-deduct leave quota upon approval of leave request.
+  - [ ] Display remaining leave balance on Mobile Leave Screen.
+
+- [ ] **20. Upload & Preview Lampiran Surat Cuti/Dinas (PDF & Image)**
+  - [ ] Support PDF/image attachments in Leave Request screen.
+  - [ ] Add in-app preview modal for documents.
+
+- [ ] **21. Multi-Level Approval Flow untuk Pengajuan Cuti/Dinas**
+  - [ ] Support multi-stage approval (Atasan Langsung -> Kepala OPD/HR).
+
+- [ ] **22. Push Notifications Realtime via FCM (Firebase Cloud Messaging)**
+  - [ ] Push notifications for attendance reminders & leave approval updates.
+
+- [ ] **23. Autentikasi Biometrik (Fingerprint / Face ID)**
+  - [ ] Local auth integration with `local_auth` package in Flutter.
