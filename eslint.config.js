@@ -39,6 +39,8 @@ export default defineConfigWithVueTs(
         },
         rules: {
             'vue/multi-word-component-names': 'off',
+            'vue/block-lang': 'off',
+            '@typescript-eslint/no-unused-vars': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/consistent-type-imports': [
                 'error',
@@ -81,7 +83,8 @@ export default defineConfigWithVueTs(
             'tailwind.config.js',
             'vite.config.ts',
             'resources/js/actions/**',
-            'resources/js/components/ui/*',
+            'resources/js/components/ui/**',
+            'resources/js/Components/ui/**',
             'resources/js/routes/**',
             'resources/js/wayfinder/**',
         ],

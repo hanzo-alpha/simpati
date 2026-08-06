@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { usePage, Link } from '@inertiajs/vue3';
-import AppLayout from '@/Layouts/AppLayout.vue';
-import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, ShieldCheck, KeyRound, Palette } from '@lucide/vue';
+import { computed } from 'vue';
+import { Card, CardHeader, CardTitle } from '@/Components/ui/card';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps<{
     isAdmin?: boolean;
@@ -38,35 +38,50 @@ const navItems = [
 </script>
 
 <template>
-    <component :is="isAdmin ? AdminLayout : AppLayout" :title="isAdmin ? 'Pengaturan Akun' : undefined">
+    <component
+        :is="isAdmin ? AdminLayout : AppLayout"
+        :title="isAdmin ? 'Pengaturan Akun' : undefined"
+    >
         <div class="w-full space-y-6 pb-8">
             <!-- Header Card for Non-Admin -->
-            <Card v-if="!isAdmin" class="rounded-none border border-border bg-card text-card-foreground shadow-xs">
-                <CardHeader class="p-5 flex-row items-center justify-between space-y-0">
+            <Card
+                v-if="!isAdmin"
+                class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
+            >
+                <CardHeader
+                    class="flex-row items-center justify-between space-y-0 p-5"
+                >
                     <div>
-                        <CardTitle class="text-sm font-bold uppercase tracking-wider text-foreground flex items-center gap-2">
-                            <User class="w-4 h-4 text-emerald-500" />
+                        <CardTitle
+                            class="flex items-center gap-2 text-sm font-bold tracking-wider text-foreground uppercase"
+                        >
+                            <User class="h-4 w-4 text-emerald-500" />
                             <span>Pengaturan Akun & Profil</span>
                         </CardTitle>
-                        <p class="text-xs text-muted-foreground mt-0.5">Kelola data diri, keamanan kata sandi, dan preferensi tampilan</p>
+                        <p class="mt-0.5 text-xs text-muted-foreground">
+                            Kelola data diri, keamanan kata sandi, dan
+                            preferensi tampilan
+                        </p>
                     </div>
                 </CardHeader>
             </Card>
 
             <!-- Horizontal Tab Bar Nav (Sera Preset Tab Style) -->
-            <div class="flex items-center gap-1.5 bg-card p-1 rounded-none border border-border shadow-xs w-full overflow-x-auto">
+            <div
+                class="flex w-full items-center gap-1.5 overflow-x-auto rounded-none border border-border bg-card p-1 shadow-xs"
+            >
                 <Link
                     v-for="item in navItems"
                     :key="item.href"
                     :href="item.href"
-                    class="px-4 py-2 rounded-none text-xs font-semibold transition-all cursor-pointer flex items-center gap-2 whitespace-nowrap border"
+                    class="flex cursor-pointer items-center gap-2 rounded-none border px-4 py-2 text-xs font-semibold whitespace-nowrap transition-all"
                     :class="
                         item.match(page.url)
-                            ? 'bg-primary text-primary-foreground font-bold border-primary'
-                            : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                            ? 'border-primary bg-primary font-bold text-primary-foreground'
+                            : 'border-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground'
                     "
                 >
-                    <component :is="item.icon" class="w-4 h-4 shrink-0" />
+                    <component :is="item.icon" class="h-4 w-4 shrink-0" />
                     <span>{{ item.title }}</span>
                 </Link>
             </div>

@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import {
+    Calendar,
+    ChevronLeft,
+    ChevronRight,
+    Clock,
+    Filter,
+    CheckCircle2,
+    AlertTriangle,
+} from '@lucide/vue';
 import { ref, computed } from 'vue';
+import { Badge } from '@/Components/ui/badge';
+import { Button } from '@/Components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Calendar, ChevronLeft, ChevronRight, Clock, Filter, CheckCircle2, AlertTriangle } from '@lucide/vue';
 
 interface AttendanceRecord {
     id: number;
@@ -17,7 +25,12 @@ interface AttendanceRecord {
 
 const props = defineProps<{
     attendances: Record<string, AttendanceRecord[]>;
-    summary?: { totalDays?: number; hadir?: number; terlambat?: number; izin?: number };
+    summary?: {
+        totalDays?: number;
+        hadir?: number;
+        terlambat?: number;
+        izin?: number;
+    };
     month?: number;
     year?: number;
 }>();
@@ -26,11 +39,23 @@ const showFilter = ref(false);
 const expandedDates = ref<Record<string, boolean>>({});
 
 const monthNames = [
-    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember',
 ];
 
-const currentMonthIndex = ref(props.month ? props.month - 1 : new Date().getMonth());
+const currentMonthIndex = ref(
+    props.month ? props.month - 1 : new Date().getMonth(),
+);
 const currentYearNum = ref(props.year || new Date().getFullYear());
 
 const monthLabel = computed(() => {
@@ -70,16 +95,26 @@ const formatDate = (dateStr: string) => {
 
 <template>
     <AppLayout>
-        <div class="max-w-2xl mx-auto space-y-6 pb-8">
+        <div class="mx-auto max-w-2xl space-y-6 pb-8">
             <!-- Page Header & Month Navigator Card -->
-            <Card class="border-border/60 shadow-md backdrop-blur-xl bg-card/95">
-                <CardHeader class="pb-3 flex-row items-center justify-between space-y-0">
+            <Card
+                class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
+            >
+                <CardHeader
+                    class="flex-row items-center justify-between space-y-0 pb-3"
+                >
                     <div>
-                        <CardTitle class="text-xl font-extrabold flex items-center gap-2">
-                            <Calendar class="w-5 h-5 text-teal-600 dark:text-teal-400" />
+                        <CardTitle
+                            class="flex items-center gap-2 text-xl font-extrabold"
+                        >
+                            <Calendar
+                                class="h-5 w-5 text-teal-600 dark:text-teal-400"
+                            />
                             <span>Riwayat Kehadiran</span>
                         </CardTitle>
-                        <p class="text-xs text-muted-foreground mt-0.5">Catatan presensi harian ASN</p>
+                        <p class="mt-0.5 text-xs text-muted-foreground">
+                            Catatan presensi harian ASN
+                        </p>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -87,82 +122,120 @@ const formatDate = (dateStr: string) => {
                             variant="outline"
                             size="icon"
                             @click="prevMonth"
-                            class="h-8 w-8 rounded-xl cursor-pointer"
+                            class="h-8 w-8 cursor-pointer rounded-xl"
                         >
-                            <ChevronLeft class="w-4 h-4" />
+                            <ChevronLeft class="h-4 w-4" />
                         </Button>
-                        <span class="text-xs font-bold font-mono min-w-[120px] text-center text-foreground">
+                        <span
+                            class="min-w-[120px] text-center font-mono text-xs font-bold text-foreground"
+                        >
                             {{ monthLabel }}
                         </span>
                         <Button
                             variant="outline"
                             size="icon"
                             @click="nextMonth"
-                            class="h-8 w-8 rounded-xl cursor-pointer"
+                            class="h-8 w-8 cursor-pointer rounded-xl"
                         >
-                            <ChevronRight class="w-4 h-4" />
+                            <ChevronRight class="h-4 w-4" />
                         </Button>
                     </div>
                 </CardHeader>
 
-                <CardContent class="pt-0 border-t border-border/40 mt-2">
-                    <div class="flex items-center justify-around text-xs text-muted-foreground pt-3 font-semibold">
-                        <span class="text-emerald-600 dark:text-emerald-400 font-bold">Hadir: {{ summary?.hadir || 0 }}</span>
-                        <span class="text-amber-600 dark:text-amber-400 font-bold">Terlambat: {{ summary?.terlambat || 0 }}</span>
-                        <span class="text-sky-600 dark:text-sky-400 font-bold">Izin/Cuti: {{ summary?.izin || 0 }}</span>
+                <CardContent class="mt-2 border-t border-border/40 pt-0">
+                    <div
+                        class="flex items-center justify-around pt-3 text-xs font-semibold text-muted-foreground"
+                    >
+                        <span
+                            class="font-bold text-emerald-600 dark:text-emerald-400"
+                            >Hadir: {{ summary?.hadir || 0 }}</span
+                        >
+                        <span
+                            class="font-bold text-amber-600 dark:text-amber-400"
+                            >Terlambat: {{ summary?.terlambat || 0 }}</span
+                        >
+                        <span class="font-bold text-sky-600 dark:text-sky-400"
+                            >Izin/Cuti: {{ summary?.izin || 0 }}</span
+                        >
                     </div>
                 </CardContent>
             </Card>
 
             <!-- Attendance Records List -->
             <div class="space-y-3">
-                <div v-if="!attendances || Object.keys(attendances).length === 0" class="text-center py-12 text-muted-foreground space-y-2">
-                    <Clock class="w-10 h-10 mx-auto text-muted-foreground/40" />
-                    <p class="text-sm font-medium">Belum ada catatan presensi bulan ini.</p>
+                <div
+                    v-if="!attendances || Object.keys(attendances).length === 0"
+                    class="space-y-2 py-12 text-center text-muted-foreground"
+                >
+                    <Clock class="mx-auto h-10 w-10 text-muted-foreground/40" />
+                    <p class="text-sm font-medium">
+                        Belum ada catatan presensi bulan ini.
+                    </p>
                 </div>
 
                 <Card
                     v-for="(records, date) in attendances"
                     :key="date"
-                    class="border-border/60 shadow-sm hover:shadow-md transition-all backdrop-blur-xl bg-card/95 overflow-hidden"
+                    class="overflow-hidden border-border/60 bg-card/95 shadow-sm backdrop-blur-xl transition-all hover:shadow-md"
                 >
                     <CardHeader
                         @click="toggleExpand(date)"
-                        class="p-4 cursor-pointer hover:bg-muted/30 transition-colors flex-row items-center justify-between space-y-0"
+                        class="cursor-pointer flex-row items-center justify-between space-y-0 p-4 transition-colors hover:bg-muted/30"
                     >
                         <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-600 dark:text-teal-400 font-bold">
-                                <Clock class="w-4 h-4" />
+                            <div
+                                class="flex h-9 w-9 items-center justify-center rounded-xl border border-teal-500/30 bg-teal-500/15 font-bold text-teal-600 dark:text-teal-400"
+                            >
+                                <Clock class="h-4 w-4" />
                             </div>
                             <div>
-                                <CardTitle class="text-xs font-bold text-foreground">
+                                <CardTitle
+                                    class="text-xs font-bold text-foreground"
+                                >
                                     {{ formatDate(date) }}
                                 </CardTitle>
-                                <p class="text-[10px] text-muted-foreground font-mono">{{ date }}</p>
+                                <p
+                                    class="font-mono text-[10px] text-muted-foreground"
+                                >
+                                    {{ date }}
+                                </p>
                             </div>
                         </div>
 
-                        <Badge variant="outline" class="text-[10px] font-semibold bg-muted/60">
+                        <Badge
+                            variant="outline"
+                            class="bg-muted/60 text-[10px] font-semibold"
+                        >
                             {{ records.length }} Log Presensi
                         </Badge>
                     </CardHeader>
 
-                    <CardContent class="p-4 pt-0 border-t border-border/40 space-y-2 bg-muted/20">
+                    <CardContent
+                        class="space-y-2 border-t border-border/40 bg-muted/20 p-4 pt-0"
+                    >
                         <div
                             v-for="r in records"
                             :key="r.id"
-                            class="flex items-center justify-between p-2.5 rounded-xl bg-card border border-border/40 text-xs"
+                            class="flex items-center justify-between rounded-xl border border-border/40 bg-card p-2.5 text-xs"
                         >
                             <div class="flex items-center gap-2">
-                                <span class="capitalize font-semibold text-foreground">{{ r.jenis }}</span>
-                                <span class="font-mono text-teal-600 dark:text-teal-400 font-bold">@ {{ r.waktu }}</span>
+                                <span
+                                    class="font-semibold text-foreground capitalize"
+                                    >{{ r.jenis }}</span
+                                >
+                                <span
+                                    class="font-mono font-bold text-teal-600 dark:text-teal-400"
+                                    >@ {{ r.waktu }}</span
+                                >
                             </div>
                             <Badge
                                 :variant="r.is_late ? 'outline' : 'default'"
-                                class="text-[10px] font-semibold uppercase px-2 py-0.5"
+                                class="px-2 py-0.5 text-[10px] font-semibold uppercase"
                                 :class="{
-                                    'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30': !r.is_late,
-                                    'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30': r.is_late,
+                                    'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
+                                        !r.is_late,
+                                    'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400':
+                                        r.is_late,
                                 }"
                             >
                                 {{ r.status_label || r.status }}

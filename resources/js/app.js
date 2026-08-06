@@ -1,9 +1,9 @@
 import './bootstrap';
 import '../css/app.css';
 
-import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createApp, h } from 'vue';
 import { initTheme } from './Utils/theme';
 
 initTheme();
@@ -11,7 +11,10 @@ initTheme();
 const appName = import.meta.env.VITE_APP_NAME || 'SIMPATI';
 
 createInertiaApp({
-    title: (title) => title ? `${title} | SIMPATI Kab. Soppeng` : 'SIMPATI - Presensi ASN Kab. Soppeng',
+    title: (title) =>
+        title
+            ? `${title} | SIMPATI Kab. Soppeng`
+            : 'SIMPATI - Presensi ASN Kab. Soppeng',
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,

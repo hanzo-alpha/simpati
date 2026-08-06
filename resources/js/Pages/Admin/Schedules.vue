@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
+import { Clock, Plus, Edit3, Trash2 } from '@lucide/vue';
+import { ref, computed } from 'vue';
+import Pagination from '@/Components/Pagination.vue';
+import { Badge } from '@/Components/ui/badge';
+import { Button } from '@/Components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from '@/Components/ui/dialog';
+import { Input } from '@/Components/ui/input';
+import { Label } from '@/Components/ui/label';
 import {
     Select,
     SelectTrigger,
     SelectValue,
     SelectContent,
     SelectItem,
-} from '@/components/ui/select';
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-} from '@/components/ui/dialog';
-import Pagination from '@/Components/Pagination.vue';
-import { Clock, Plus, Edit3, Trash2 } from '@lucide/vue';
+} from '@/Components/ui/select';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
     id: number;
@@ -50,6 +50,7 @@ const itemsPerPage = 10;
 
 const paginatedSchedules = computed(() => {
     const start = (currentPage.value - 1) * itemsPerPage;
+
     return props.schedules.slice(start, start + itemsPerPage);
 });
 
@@ -86,7 +87,9 @@ const resetForm = () => {
 
 const submitForm = () => {
     if (form.id) {
-        form.put(`/admin/schedules/${form.id}`, { onSuccess: () => resetForm() });
+        form.put(`/admin/schedules/${form.id}`, {
+            onSuccess: () => resetForm(),
+        });
     } else {
         form.post('/admin/schedules', { onSuccess: () => resetForm() });
     }
@@ -100,84 +103,136 @@ const deleteSchedule = (id: number) => {
 </script>
 
 <template>
-    <AdminLayout title="Kelola Jam Kerja" :subtitle="`${schedules.length} jadwal terdaftar`">
+    <AdminLayout
+        title="Kelola Jam Kerja"
+        :subtitle="`${schedules.length} jadwal terdaftar`"
+    >
         <template #actions>
             <Button
                 @click="showForm = true"
-                class="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-semibold shadow-md shadow-teal-600/20 rounded-xl cursor-pointer"
+                class="cursor-pointer rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 font-semibold text-white shadow-md shadow-teal-600/20 hover:from-teal-700 hover:to-emerald-700"
             >
-                <Plus class="w-4 h-4 mr-2" />
+                <Plus class="mr-2 h-4 w-4" />
                 <span>Tambah Jam Kerja</span>
             </Button>
         </template>
 
         <!-- Schedules Table Card -->
-        <Card class="border-border/60 shadow-md backdrop-blur-xl bg-card/95">
+        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl">
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
-                            <tr class="text-left text-muted-foreground border-b border-border bg-muted/30">
-                                <th class="px-5 py-3.5 font-semibold">Nama Jadwal</th>
-                                <th class="px-5 py-3.5 font-semibold">OPD Utama</th>
-                                <th class="px-5 py-3.5 font-semibold text-center">Tipe</th>
-                                <th class="px-5 py-3.5 font-semibold text-center">Jam Masuk</th>
-                                <th class="px-5 py-3.5 font-semibold text-center">Jam Pulang</th>
-                                <th class="px-5 py-3.5 font-semibold text-center">Toleransi</th>
-                                <th class="px-5 py-3.5 font-semibold">Hari Berlaku</th>
-                                <th class="px-5 py-3.5 font-semibold text-center">Aksi</th>
+                            <tr
+                                class="border-b border-border bg-muted/30 text-left text-muted-foreground"
+                            >
+                                <th class="px-5 py-3.5 font-semibold">
+                                    Nama Jadwal
+                                </th>
+                                <th class="px-5 py-3.5 font-semibold">
+                                    OPD Utama
+                                </th>
+                                <th
+                                    class="px-5 py-3.5 text-center font-semibold"
+                                >
+                                    Tipe
+                                </th>
+                                <th
+                                    class="px-5 py-3.5 text-center font-semibold"
+                                >
+                                    Jam Masuk
+                                </th>
+                                <th
+                                    class="px-5 py-3.5 text-center font-semibold"
+                                >
+                                    Jam Pulang
+                                </th>
+                                <th
+                                    class="px-5 py-3.5 text-center font-semibold"
+                                >
+                                    Toleransi
+                                </th>
+                                <th class="px-5 py-3.5 font-semibold">
+                                    Hari Berlaku
+                                </th>
+                                <th
+                                    class="px-5 py-3.5 text-center font-semibold"
+                                >
+                                    Aksi
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
                             <tr
                                 v-for="sch in paginatedSchedules"
                                 :key="sch.id"
-                                class="hover:bg-muted/40 transition-colors"
+                                class="transition-colors hover:bg-muted/40"
                             >
-                                <td class="px-5 py-3.5 font-bold text-foreground">{{ sch.nama_jadwal }}</td>
-                                <td class="px-5 py-3.5 text-muted-foreground">{{ sch.office?.opd_name || '-' }}</td>
+                                <td
+                                    class="px-5 py-3.5 font-bold text-foreground"
+                                >
+                                    {{ sch.nama_jadwal }}
+                                </td>
+                                <td class="px-5 py-3.5 text-muted-foreground">
+                                    {{ sch.office?.opd_name || '-' }}
+                                </td>
                                 <td class="px-5 py-3.5 text-center">
                                     <Badge
                                         variant="outline"
-                                        class="uppercase text-[10px] font-semibold"
+                                        class="text-[10px] font-semibold uppercase"
                                         :class="{
-                                            'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30': sch.type === 'reguler',
-                                            'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30': sch.type === 'shift',
-                                            'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30': sch.type === 'khusus',
+                                            'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
+                                                sch.type === 'reguler',
+                                            'border-purple-500/30 bg-purple-500/10 text-purple-600 dark:text-purple-400':
+                                                sch.type === 'shift',
+                                            'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400':
+                                                sch.type === 'khusus',
                                         }"
                                     >
                                         {{ sch.type }}
                                     </Badge>
                                 </td>
-                                <td class="px-5 py-3.5 text-center font-mono font-bold text-teal-600 dark:text-teal-400">
+                                <td
+                                    class="px-5 py-3.5 text-center font-mono font-bold text-teal-600 dark:text-teal-400"
+                                >
                                     {{ sch.jam_masuk }} WITA
                                 </td>
-                                <td class="px-5 py-3.5 text-center font-mono font-bold text-purple-600 dark:text-purple-400">
+                                <td
+                                    class="px-5 py-3.5 text-center font-mono font-bold text-purple-600 dark:text-purple-400"
+                                >
                                     {{ sch.jam_pulang }} WITA
                                 </td>
-                                <td class="px-5 py-3.5 text-center font-mono text-muted-foreground">
+                                <td
+                                    class="px-5 py-3.5 text-center font-mono text-muted-foreground"
+                                >
                                     {{ sch.toleransi_menit || 0 }} mnt
                                 </td>
-                                <td class="px-5 py-3.5 text-muted-foreground text-[11px]">{{ sch.hari }}</td>
+                                <td
+                                    class="px-5 py-3.5 text-[11px] text-muted-foreground"
+                                >
+                                    {{ sch.hari }}
+                                </td>
                                 <td class="px-5 py-3.5 text-center">
-                                    <div class="flex items-center justify-center gap-1">
+                                    <div
+                                        class="flex items-center justify-center gap-1"
+                                    >
                                         <Button
                                             variant="ghost"
                                             size="sm"
                                             @click="editSchedule(sch)"
-                                            class="h-7 w-7 p-0 text-muted-foreground hover:text-foreground hover:bg-muted cursor-pointer"
+                                            class="h-7 w-7 cursor-pointer p-0 text-muted-foreground hover:bg-muted hover:text-foreground"
                                             title="Edit Jam Kerja"
                                         >
-                                            <Edit3 class="w-3.5 h-3.5" />
+                                            <Edit3 class="h-3.5 w-3.5" />
                                         </Button>
                                         <Button
                                             variant="ghost"
                                             size="sm"
                                             @click="deleteSchedule(sch.id)"
-                                            class="h-7 w-7 p-0 text-rose-500 hover:bg-rose-500/10 cursor-pointer"
+                                            class="h-7 w-7 cursor-pointer p-0 text-rose-500 hover:bg-rose-500/10"
                                             title="Hapus Jam Kerja"
                                         >
-                                            <Trash2 class="w-3.5 h-3.5" />
+                                            <Trash2 class="h-3.5 w-3.5" />
                                         </Button>
                                     </div>
                                 </td>
@@ -185,8 +240,13 @@ const deleteSchedule = (id: number) => {
                         </tbody>
                     </table>
 
-                    <div v-if="!schedules.length" class="text-center text-muted-foreground py-10 space-y-2">
-                        <Clock class="w-8 h-8 mx-auto text-muted-foreground/50" />
+                    <div
+                        v-if="!schedules.length"
+                        class="space-y-2 py-10 text-center text-muted-foreground"
+                    >
+                        <Clock
+                            class="mx-auto h-8 w-8 text-muted-foreground/50"
+                        />
                         <p>Belum ada jadwal jam kerja yang terdaftar.</p>
                     </div>
 
@@ -202,28 +262,50 @@ const deleteSchedule = (id: number) => {
 
         <!-- Shadcn Dialog Form Schedules -->
         <Dialog v-model:open="showForm">
-            <DialogContent class="sm:max-w-lg bg-card/95 border-border/80 backdrop-blur-2xl">
+            <DialogContent
+                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-lg"
+            >
                 <DialogHeader>
-                    <DialogTitle class="text-base font-bold flex items-center gap-2">
-                        <Clock class="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                        <span>{{ form.id ? 'Edit Jam Kerja' : 'Tambah Jam Kerja Baru' }}</span>
+                    <DialogTitle
+                        class="flex items-center gap-2 text-base font-bold"
+                    >
+                        <Clock
+                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
+                        />
+                        <span>{{
+                            form.id ? 'Edit Jam Kerja' : 'Tambah Jam Kerja Baru'
+                        }}</span>
                     </DialogTitle>
                 </DialogHeader>
 
                 <form @submit.prevent="submitForm" class="space-y-4 pt-2">
                     <div class="grid grid-cols-2 gap-3">
                         <div class="space-y-1.5">
-                            <Label for="nama_jadwal" class="text-xs">Nama Jam Kerja</Label>
-                            <Input id="nama_jadwal" v-model="form.nama_jadwal" required placeholder="Contoh: Reguler Senin-Kamis" class="h-9 text-xs" />
+                            <Label for="nama_jadwal" class="text-xs"
+                                >Nama Jam Kerja</Label
+                            >
+                            <Input
+                                id="nama_jadwal"
+                                v-model="form.nama_jadwal"
+                                required
+                                placeholder="Contoh: Reguler Senin-Kamis"
+                                class="h-9 text-xs"
+                            />
                         </div>
                         <div class="space-y-1.5">
                             <Label class="text-xs">OPD / Kantor</Label>
                             <Select v-model="form.office_id">
-                                <SelectTrigger class="h-9 text-xs bg-background">
+                                <SelectTrigger
+                                    class="h-9 bg-background text-xs"
+                                >
                                     <SelectValue placeholder="Pilih OPD" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem v-for="o in offices" :key="o.id" :value="String(o.id)">
+                                    <SelectItem
+                                        v-for="o in offices"
+                                        :key="o.id"
+                                        :value="String(o.id)"
+                                    >
                                         {{ o.opd_name }}
                                     </SelectItem>
                                 </SelectContent>
@@ -235,43 +317,93 @@ const deleteSchedule = (id: number) => {
                         <div class="space-y-1.5">
                             <Label class="text-xs">Tipe Jadwal</Label>
                             <Select v-model="form.type">
-                                <SelectTrigger class="h-9 text-xs bg-background">
+                                <SelectTrigger
+                                    class="h-9 bg-background text-xs"
+                                >
                                     <SelectValue placeholder="Pilih Tipe" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="reguler">Reguler</SelectItem>
+                                    <SelectItem value="reguler"
+                                        >Reguler</SelectItem
+                                    >
                                     <SelectItem value="shift">Shift</SelectItem>
-                                    <SelectItem value="khusus">Khusus / Ramadan</SelectItem>
+                                    <SelectItem value="khusus"
+                                        >Khusus / Ramadan</SelectItem
+                                    >
                                 </SelectContent>
                             </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="toleransi_menit" class="text-xs">Toleransi (Menit)</Label>
-                            <Input id="toleransi_menit" v-model="form.toleransi_menit" type="number" required class="h-9 text-xs" />
+                            <Label for="toleransi_menit" class="text-xs"
+                                >Toleransi (Menit)</Label
+                            >
+                            <Input
+                                id="toleransi_menit"
+                                v-model="form.toleransi_menit"
+                                type="number"
+                                required
+                                class="h-9 text-xs"
+                            />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div class="space-y-1.5">
-                            <Label for="jam_masuk" class="text-xs">Jam Masuk</Label>
-                            <Input id="jam_masuk" v-model="form.jam_masuk" type="time" required class="h-9 text-xs" />
+                            <Label for="jam_masuk" class="text-xs"
+                                >Jam Masuk</Label
+                            >
+                            <Input
+                                id="jam_masuk"
+                                v-model="form.jam_masuk"
+                                type="time"
+                                required
+                                class="h-9 text-xs"
+                            />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="jam_pulang" class="text-xs">Jam Pulang</Label>
-                            <Input id="jam_pulang" v-model="form.jam_pulang" type="time" required class="h-9 text-xs" />
+                            <Label for="jam_pulang" class="text-xs"
+                                >Jam Pulang</Label
+                            >
+                            <Input
+                                id="jam_pulang"
+                                v-model="form.jam_pulang"
+                                type="time"
+                                required
+                                class="h-9 text-xs"
+                            />
                         </div>
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="hari" class="text-xs">Hari Berlaku (Dipisah koma)</Label>
-                        <Input id="hari" v-model="form.hari" required placeholder="Senin,Selasa,Rabu,Kamis,Jumat" class="h-9 text-xs" />
+                        <Label for="hari" class="text-xs"
+                            >Hari Berlaku (Dipisah koma)</Label
+                        >
+                        <Input
+                            id="hari"
+                            v-model="form.hari"
+                            required
+                            placeholder="Senin,Selasa,Rabu,Kamis,Jumat"
+                            class="h-9 text-xs"
+                        />
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-border">
-                        <Button type="button" variant="outline" size="sm" @click="resetForm" class="cursor-pointer">
+                    <div
+                        class="flex items-center justify-end gap-2 border-t border-border pt-3"
+                    >
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            @click="resetForm"
+                            class="cursor-pointer"
+                        >
                             Batal
                         </Button>
-                        <Button type="submit" size="sm" class="bg-teal-600 hover:bg-teal-700 text-white cursor-pointer">
+                        <Button
+                            type="submit"
+                            size="sm"
+                            class="cursor-pointer bg-teal-600 text-white hover:bg-teal-700"
+                        >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah Jadwal' }}
                         </Button>
                     </div>

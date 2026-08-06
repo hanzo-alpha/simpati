@@ -1,10 +1,12 @@
 export const initTheme = () => {
     const savedTheme = localStorage.getItem('simpati_theme') || 'dark';
+
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
     } else {
         document.documentElement.classList.remove('dark');
     }
+
     return savedTheme;
 };
 
@@ -19,9 +21,12 @@ export const toggleTheme = () => {
     }
 
     localStorage.setItem('simpati_theme', newTheme);
+
     return newTheme;
 };
 
 export const currentTheme = () => {
-    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    return document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light';
 };

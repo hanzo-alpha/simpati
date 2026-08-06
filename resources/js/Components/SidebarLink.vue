@@ -11,9 +11,10 @@ import {
     Megaphone,
     ShieldCheck,
     Trophy,
-    Settings,
-    type LucideIcon,
+    Settings
+    
 } from '@lucide/vue';
+import type {LucideIcon} from '@lucide/vue';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -57,17 +58,21 @@ const iconComponent = computed<LucideIcon>(() => {
 <template>
     <Link
         :href="href"
-        class="group relative flex items-center gap-3 px-3 py-2.5 rounded-none text-xs transition-all duration-200 cursor-pointer"
+        class="group relative flex cursor-pointer items-center gap-3 rounded-none px-3 py-2.5 text-xs transition-all duration-200"
         :class="[
             active
-                ? 'bg-primary/10 text-primary font-bold border-l-2 border-l-primary border-y border-r border-primary/30 shadow-xs'
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50 border border-transparent'
+                ? 'border-y border-r border-l-2 border-primary/30 border-l-primary bg-primary/10 font-bold text-primary shadow-xs'
+                : 'border border-transparent text-muted-foreground hover:bg-muted/50 hover:text-foreground',
         ]"
     >
         <component
             :is="iconComponent"
-            class="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:scale-110"
-            :class="active ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'"
+            class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:scale-110"
+            :class="
+                active
+                    ? 'text-primary'
+                    : 'text-muted-foreground group-hover:text-foreground'
+            "
         />
         <span class="truncate">
             <slot />

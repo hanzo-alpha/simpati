@@ -1,12 +1,22 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
 import { usePage, Link } from '@inertiajs/vue3';
-import AppLayout from '@/Layouts/AppLayout.vue';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Clock, MapPin, Calendar, ChevronRight, Sparkles, CheckCircle2, AlertTriangle, FileText, Navigation } from '@lucide/vue';
+import {
+    Clock,
+    MapPin,
+    Calendar,
+    ChevronRight,
+    Sparkles,
+    CheckCircle2,
+    AlertTriangle,
+    FileText,
+    Navigation,
+} from '@lucide/vue';
 import L from 'leaflet';
+import { ref, computed, onMounted } from 'vue';
+import { Badge } from '@/Components/ui/badge';
+import { Button } from '@/Components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
+import AppLayout from '@/Layouts/AppLayout.vue';
 import 'leaflet/dist/leaflet.css';
 
 interface TodayAttendance {
@@ -48,20 +58,38 @@ const officeLng = computed(() => props.office?.longitude || 119.8837);
 const officeRadius = computed(() => props.office?.radius_meters || 200);
 
 const isInRadius = computed(() => {
-    if (distance.value === null) return false;
+    if (distance.value === null) {
+return false;
+}
+
     return distance.value <= officeRadius.value;
 });
 
 const distanceText = computed(() => {
-    if (distance.value === null) return 'Mendeteksi...';
-    return distance.value < 1000 ? `${Math.round(distance.value)}m` : `${(distance.value / 1000).toFixed(1)}km`;
+    if (distance.value === null) {
+return 'Mendeteksi...';
+}
+
+    return distance.value < 1000
+        ? `${Math.round(distance.value)}m`
+        : `${(distance.value / 1000).toFixed(1)}km`;
 });
 
 const greeting = computed(() => {
     const hour = new Date().getHours();
-    if (hour < 11) return 'Selamat Pagi 🌅';
-    if (hour < 15) return 'Selamat Siang ☀️';
-    if (hour < 18) return 'Selamat Sore 🌤️';
+
+    if (hour < 11) {
+return 'Selamat Pagi 🌅';
+}
+
+    if (hour < 15) {
+return 'Selamat Siang ☀️';
+}
+
+    if (hour < 18) {
+return 'Selamat Sore 🌤️';
+}
+
     return 'Selamat Malam 🌙';
 });
 
@@ -76,17 +104,52 @@ const currentDate = computed(() => {
 
 const initials = computed(() => {
     const name = user.value.name || 'A';
-    return name.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase();
+
+    return name
+        .split(' ')
+        .map((n: string) => n[0])
+        .slice(0, 2)
+        .join('')
+        .toUpperCase();
 });
 
 const todayStatus = computed(() => [
-    { type: 'masuk', label: 'Presensi Masuk', icon: '🌅', time: props.todayAttendance?.masuk, done: !!props.todayAttendance?.masuk },
-    { type: 'istirahat', label: 'Presensi Istirahat', icon: '☕', time: props.todayAttendance?.istirahat, done: !!props.todayAttendance?.istirahat },
-    { type: 'kembali', label: 'Presensi Kembali', icon: '💼', time: props.todayAttendance?.kembali, done: !!props.todayAttendance?.kembali },
-    { type: 'pulang', label: 'Presensi Pulang', icon: '🏠', time: props.todayAttendance?.pulang, done: !!props.todayAttendance?.pulang },
+    {
+        type: 'masuk',
+        label: 'Presensi Masuk',
+        icon: '🌅',
+        time: props.todayAttendance?.masuk,
+        done: !!props.todayAttendance?.masuk,
+    },
+    {
+        type: 'istirahat',
+        label: 'Presensi Istirahat',
+        icon: '☕',
+        time: props.todayAttendance?.istirahat,
+        done: !!props.todayAttendance?.istirahat,
+    },
+    {
+        type: 'kembali',
+        label: 'Presensi Kembali',
+        icon: '💼',
+        time: props.todayAttendance?.kembali,
+        done: !!props.todayAttendance?.kembali,
+    },
+    {
+        type: 'pulang',
+        label: 'Presensi Pulang',
+        icon: '🏠',
+        time: props.todayAttendance?.pulang,
+        done: !!props.todayAttendance?.pulang,
+    },
 ]);
 
-const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+const calculateDistance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number,
+) => {
     const R = 6371e3;
     const φ1 = (lat1 * Math.PI) / 180;
     const φ2 = (lat2 * Math.PI) / 180;
@@ -106,7 +169,10 @@ let userMarker: L.CircleMarker | null = null;
 
 const initMap = () => {
     const mapEl = document.getElementById('userMap');
-    if (!mapEl) return;
+
+    if (!mapEl) {
+return;
+}
 
     map = L.map('userMap').setView([officeLat.value, officeLng.value], 14);
 
@@ -127,10 +193,18 @@ const locateUser = () => {
         navigator.geolocation.getCurrentPosition((pos) => {
             userLat.value = pos.coords.latitude;
             userLng.value = pos.coords.longitude;
-            distance.value = calculateDistance(userLat.value, userLng.value, officeLat.value, officeLng.value);
+            distance.value = calculateDistance(
+                userLat.value,
+                userLng.value,
+                officeLat.value,
+                officeLng.value,
+            );
 
             if (map) {
-                if (userMarker) map.removeLayer(userMarker);
+                if (userMarker) {
+map.removeLayer(userMarker);
+}
+
                 userMarker = L.circleMarker([userLat.value, userLng.value], {
                     color: isInRadius.value ? '#10b981' : '#f43f5e',
                     fillColor: isInRadius.value ? '#10b981' : '#f43f5e',
@@ -151,56 +225,94 @@ onMounted(() => {
 
 <template>
     <AppLayout>
-        <div class="max-w-2xl mx-auto space-y-6 pb-8">
+        <div class="mx-auto max-w-2xl space-y-6 pb-8">
             <!-- Header User Greeting Card -->
-            <Card class="border-border/60 shadow-md backdrop-blur-xl bg-card/95">
-                <CardContent class="p-5 flex items-center justify-between">
+            <Card
+                class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
+            >
+                <CardContent class="flex items-center justify-between p-5">
                     <div class="space-y-1">
-                        <p class="text-xs text-muted-foreground font-semibold">{{ greeting }}</p>
-                        <h1 class="text-2xl font-extrabold tracking-tight text-foreground">{{ user.name }}</h1>
-                        <p class="text-[11px] text-teal-600 dark:text-teal-400 font-mono font-bold">{{ currentDate }}</p>
+                        <p class="text-xs font-semibold text-muted-foreground">
+                            {{ greeting }}
+                        </p>
+                        <h1
+                            class="text-2xl font-extrabold tracking-tight text-foreground"
+                        >
+                            {{ user.name }}
+                        </h1>
+                        <p
+                            class="font-mono text-[11px] font-bold text-teal-600 dark:text-teal-400"
+                        >
+                            {{ currentDate }}
+                        </p>
                     </div>
 
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white flex items-center justify-center font-extrabold text-base shadow-md shadow-teal-500/20">
+                    <div
+                        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 text-base font-extrabold text-white shadow-md shadow-teal-500/20"
+                    >
                         {{ initials }}
                     </div>
                 </CardContent>
             </Card>
 
             <!-- Map Card -->
-            <Card class="border-border/60 shadow-md backdrop-blur-xl bg-card/95 overflow-hidden">
-                <CardContent class="p-0 relative">
-                    <div id="userMap" class="w-full h-44 z-0"></div>
-                    <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10">
+            <Card
+                class="overflow-hidden border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
+            >
+                <CardContent class="relative p-0">
+                    <div id="userMap" class="z-0 h-44 w-full"></div>
+                    <div
+                        class="absolute right-3 bottom-3 left-3 z-10 flex items-center justify-between"
+                    >
                         <Badge
                             :variant="isInRadius ? 'default' : 'destructive'"
-                            class="text-[10px] font-bold px-2.5 py-1 shadow-md flex items-center gap-1"
+                            class="flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold shadow-md"
                         >
-                            <Navigation class="w-3 h-3" />
-                            <span>{{ isInRadius ? 'Dalam Radius Geofence' : 'Di Luar Radius Kantor' }} ({{ distanceText }})</span>
+                            <Navigation class="h-3 w-3" />
+                            <span
+                                >{{
+                                    isInRadius
+                                        ? 'Dalam Radius Geofence'
+                                        : 'Di Luar Radius Kantor'
+                                }}
+                                ({{ distanceText }})</span
+                            >
                         </Badge>
                         <Button
                             size="icon"
                             variant="secondary"
                             @click="locateUser"
-                            class="h-8 w-8 rounded-xl shadow-md cursor-pointer"
+                            class="h-8 w-8 cursor-pointer rounded-xl shadow-md"
                             title="Refresh Lokasi GPS"
                         >
-                            <MapPin class="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                            <MapPin
+                                class="h-4 w-4 text-teal-600 dark:text-teal-400"
+                            />
                         </Button>
                     </div>
                 </CardContent>
             </Card>
 
             <!-- Today Status Card -->
-            <Card class="border-border/60 shadow-md backdrop-blur-xl bg-card/95">
-                <CardHeader class="pb-3 flex-row items-center justify-between space-y-0">
-                    <CardTitle class="text-base font-bold flex items-center gap-2">
-                        <Clock class="w-4 h-4 text-teal-600 dark:text-teal-400" />
+            <Card
+                class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
+            >
+                <CardHeader
+                    class="flex-row items-center justify-between space-y-0 pb-3"
+                >
+                    <CardTitle
+                        class="flex items-center gap-2 text-base font-bold"
+                    >
+                        <Clock
+                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
+                        />
                         <span>Status Presensi Hari Ini</span>
                     </CardTitle>
                     <Link href="/presensi">
-                        <Button size="sm" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-xl cursor-pointer">
+                        <Button
+                            size="sm"
+                            class="cursor-pointer rounded-xl bg-teal-600 text-xs font-semibold text-white hover:bg-teal-700"
+                        >
                             Presensi Sekarang
                         </Button>
                     </Link>
@@ -210,20 +322,33 @@ onMounted(() => {
                         <div
                             v-for="item in todayStatus"
                             :key="item.type"
-                            class="flex items-center justify-between p-3 rounded-xl bg-muted/40 border border-border/40"
+                            class="flex items-center justify-between rounded-xl border border-border/40 bg-muted/40 p-3"
                         >
                             <div class="flex items-center gap-3">
                                 <span class="text-xl">{{ item.icon }}</span>
-                                <span class="text-xs font-semibold text-foreground">{{ item.label }}</span>
+                                <span
+                                    class="text-xs font-semibold text-foreground"
+                                    >{{ item.label }}</span
+                                >
                             </div>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono text-xs font-bold" :class="item.done ? 'text-emerald-600 dark:text-emerald-400' : 'text-muted-foreground/40'">
+                                <span
+                                    class="font-mono text-xs font-bold"
+                                    :class="
+                                        item.done
+                                            ? 'text-emerald-600 dark:text-emerald-400'
+                                            : 'text-muted-foreground/40'
+                                    "
+                                >
                                     {{ item.time || '--:--' }}
                                 </span>
                                 <Badge
                                     :variant="item.done ? 'default' : 'outline'"
-                                    class="text-[9px] font-semibold uppercase px-2 py-0.5"
-                                    :class="{ 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30': item.done }"
+                                    class="px-2 py-0.5 text-[9px] font-semibold uppercase"
+                                    :class="{
+                                        'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
+                                            item.done,
+                                    }"
                                 >
                                     {{ item.done ? 'Sudah' : 'Belum' }}
                                 </Badge>
@@ -234,30 +359,77 @@ onMounted(() => {
             </Card>
 
             <!-- Monthly Summary KPI Card -->
-            <Card v-if="monthlyStats" class="border-border/60 shadow-md backdrop-blur-xl bg-card/95">
+            <Card
+                v-if="monthlyStats"
+                class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
+            >
                 <CardHeader class="pb-3">
-                    <CardTitle class="text-base font-bold flex items-center gap-2">
-                        <Calendar class="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <CardTitle
+                        class="flex items-center gap-2 text-base font-bold"
+                    >
+                        <Calendar
+                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
+                        />
                         <span>Ringkasan Kehadiran Bulan Ini</span>
                     </CardTitle>
                 </CardHeader>
                 <CardContent class="pt-0">
                     <div class="grid grid-cols-4 gap-2 text-center">
-                        <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                            <p class="text-lg font-black text-emerald-600 dark:text-emerald-400">{{ monthlyStats.hadir }}</p>
-                            <p class="text-[10px] font-semibold text-muted-foreground">Hadir</p>
+                        <div
+                            class="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-2.5"
+                        >
+                            <p
+                                class="text-lg font-black text-emerald-600 dark:text-emerald-400"
+                            >
+                                {{ monthlyStats.hadir }}
+                            </p>
+                            <p
+                                class="text-[10px] font-semibold text-muted-foreground"
+                            >
+                                Hadir
+                            </p>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
-                            <p class="text-lg font-black text-amber-600 dark:text-amber-400">{{ monthlyStats.terlambat }}</p>
-                            <p class="text-[10px] font-semibold text-muted-foreground">Telat</p>
+                        <div
+                            class="rounded-xl border border-amber-500/20 bg-amber-500/10 p-2.5"
+                        >
+                            <p
+                                class="text-lg font-black text-amber-600 dark:text-amber-400"
+                            >
+                                {{ monthlyStats.terlambat }}
+                            </p>
+                            <p
+                                class="text-[10px] font-semibold text-muted-foreground"
+                            >
+                                Telat
+                            </p>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-sky-500/10 border border-sky-500/20">
-                            <p class="text-lg font-black text-sky-600 dark:text-sky-400">{{ monthlyStats.izin }}</p>
-                            <p class="text-[10px] font-semibold text-muted-foreground">Izin</p>
+                        <div
+                            class="rounded-xl border border-sky-500/20 bg-sky-500/10 p-2.5"
+                        >
+                            <p
+                                class="text-lg font-black text-sky-600 dark:text-sky-400"
+                            >
+                                {{ monthlyStats.izin }}
+                            </p>
+                            <p
+                                class="text-[10px] font-semibold text-muted-foreground"
+                            >
+                                Izin
+                            </p>
                         </div>
-                        <div class="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20">
-                            <p class="text-lg font-black text-rose-600 dark:text-rose-400">{{ monthlyStats.alpha }}</p>
-                            <p class="text-[10px] font-semibold text-muted-foreground">Alpha</p>
+                        <div
+                            class="rounded-xl border border-rose-500/20 bg-rose-500/10 p-2.5"
+                        >
+                            <p
+                                class="text-lg font-black text-rose-600 dark:text-rose-400"
+                            >
+                                {{ monthlyStats.alpha }}
+                            </p>
+                            <p
+                                class="text-[10px] font-semibold text-muted-foreground"
+                            >
+                                Alpha
+                            </p>
                         </div>
                     </div>
                 </CardContent>

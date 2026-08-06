@@ -2,10 +2,10 @@
 import { Form } from '@inertiajs/vue3';
 import { ShieldCheck } from '@lucide/vue';
 import { onUnmounted, ref } from 'vue';
-import Heading from '@/components/Heading.vue';
-import TwoFactorRecoveryCodes from '@/components/TwoFactorRecoveryCodes.vue';
-import TwoFactorSetupModal from '@/components/TwoFactorSetupModal.vue';
-import { Button } from '@/components/ui/button';
+import Heading from '@/Components/Heading.vue';
+import TwoFactorRecoveryCodes from '@/Components/TwoFactorRecoveryCodes.vue';
+import TwoFactorSetupModal from '@/Components/TwoFactorSetupModal.vue';
+import { Button } from '@/Components/ui/button';
 import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
 import { disable, enable } from '@/routes/two-factor';
 

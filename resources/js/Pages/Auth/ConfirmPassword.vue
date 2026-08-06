@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useForm, Head } from '@inertiajs/vue3';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { ShieldAlert, Lock, Eye, EyeOff, Loader2 } from '@lucide/vue';
+import { ref } from 'vue';
+import { Button } from '@/Components/ui/button';
 import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
-} from '@/components/ui/card';
-import { ShieldAlert, Lock, Eye, EyeOff, Loader2 } from '@lucide/vue';
+} from '@/Components/ui/card';
+import { Input } from '@/Components/ui/input';
+import { Label } from '@/Components/ui/label';
 
 const showPassword = ref(false);
 
@@ -29,34 +29,55 @@ const submit = () => {
 <template>
     <Head title="Konfirmasi Kata Sandi - SIMPATI" />
 
-    <div class="relative min-h-screen flex items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300">
+    <div
+        class="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12 transition-colors duration-300 sm:px-6 lg:px-8"
+    >
         <div class="relative w-full max-w-md space-y-6">
             <!-- Branding -->
-            <div class="text-center space-y-2">
-                <div class="inline-flex p-2 rounded-2xl bg-teal-500/10 border border-teal-500/30 dark:bg-teal-500/20 shadow-lg backdrop-blur-md">
-                    <img src="/images/logo.png" alt="Logo SIMPATI" class="w-14 h-14 rounded-xl object-cover" />
+            <div class="space-y-2 text-center">
+                <div
+                    class="inline-flex rounded-2xl border border-teal-500/30 bg-teal-500/10 p-2 shadow-lg backdrop-blur-md dark:bg-teal-500/20"
+                >
+                    <img
+                        src="/images/logo.png"
+                        alt="Logo SIMPATI"
+                        class="h-14 w-14 rounded-xl object-cover"
+                    />
                 </div>
-                <h1 class="text-2xl font-bold tracking-tight text-foreground">Konfirmasi Keamanan</h1>
+                <h1 class="text-2xl font-bold tracking-tight text-foreground">
+                    Konfirmasi Keamanan
+                </h1>
             </div>
 
             <!-- Card -->
-            <Card class="border-border/60 shadow-2xl backdrop-blur-xl bg-card/95">
+            <Card
+                class="border-border/60 bg-card/95 shadow-2xl backdrop-blur-xl"
+            >
                 <CardHeader class="space-y-1 pb-4">
-                    <CardTitle class="text-xl font-bold tracking-tight flex items-center justify-between">
+                    <CardTitle
+                        class="flex items-center justify-between text-xl font-bold tracking-tight"
+                    >
                         <span>Verifikasi Akses Sensitif</span>
-                        <ShieldAlert class="w-5 h-5 text-amber-500" />
+                        <ShieldAlert class="h-5 w-5 text-amber-500" />
                     </CardTitle>
                     <CardDescription>
-                        Ini adalah area aman aplikasi. Harap konfirmasi kata sandi Anda sebelum melanjutkan.
+                        Ini adalah area aman aplikasi. Harap konfirmasi kata
+                        sandi Anda sebelum melanjutkan.
                     </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                     <form @submit.prevent="submit" class="space-y-4">
                         <div class="space-y-2">
-                            <Label for="password" class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Kata Sandi Anda</Label>
+                            <Label
+                                for="password"
+                                class="text-xs font-semibold tracking-wider text-muted-foreground uppercase"
+                                >Kata Sandi Anda</Label
+                            >
                             <div class="relative">
-                                <Lock class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                                <Lock
+                                    class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                                />
                                 <Input
                                     id="password"
                                     v-model="form.password"
@@ -64,19 +85,28 @@ const submit = () => {
                                     placeholder="••••••••••••"
                                     required
                                     autofocus
-                                    class="pl-9 pr-10 h-11 transition-all focus-visible:ring-teal-500"
-                                    :class="{ 'border-destructive focus-visible:ring-destructive': form.errors.password }"
+                                    class="h-11 pr-10 pl-9 transition-all focus-visible:ring-teal-500"
+                                    :class="{
+                                        'border-destructive focus-visible:ring-destructive':
+                                            form.errors.password,
+                                    }"
                                 />
                                 <button
                                     type="button"
                                     @click="showPassword = !showPassword"
-                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors p-1 rounded-md"
+                                    class="absolute top-1/2 right-3 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground"
                                 >
-                                    <EyeOff v-if="showPassword" class="w-4 h-4" />
-                                    <Eye v-else class="w-4 h-4" />
+                                    <EyeOff
+                                        v-if="showPassword"
+                                        class="h-4 w-4"
+                                    />
+                                    <Eye v-else class="h-4 w-4" />
                                 </button>
                             </div>
-                            <p v-if="form.errors.password" class="text-xs font-medium text-destructive mt-1">
+                            <p
+                                v-if="form.errors.password"
+                                class="mt-1 text-xs font-medium text-destructive"
+                            >
                                 {{ form.errors.password }}
                             </p>
                         </div>
@@ -84,9 +114,12 @@ const submit = () => {
                         <Button
                             type="submit"
                             :disabled="form.processing"
-                            class="w-full h-11 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-semibold shadow-lg shadow-teal-600/20 transition-all rounded-xl cursor-pointer"
+                            class="h-11 w-full cursor-pointer rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 font-semibold text-white shadow-lg shadow-teal-600/20 transition-all hover:from-teal-700 hover:to-emerald-700"
                         >
-                            <Loader2 v-if="form.processing" class="w-4 h-4 mr-2 animate-spin" />
+                            <Loader2
+                                v-if="form.processing"
+                                class="mr-2 h-4 w-4 animate-spin"
+                            />
                             <span v-if="!form.processing">Konfirmasi</span>
                             <span v-else>Memverifikasi...</span>
                         </Button>

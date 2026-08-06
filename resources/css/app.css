@@ -75,9 +75,9 @@
     body,
     html {
         --font-sans:
-            'Space Grotesk', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-            'Noto Color Emoji';
+            'Space Grotesk', 'Instrument Sans', ui-sans-serif, system-ui,
+            sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol', 'Noto Color Emoji';
     }
 }
 
@@ -96,31 +96,31 @@
     --card-foreground: hsl(215 25% 12%);
     --popover: hsl(0 0% 100%);
     --popover-foreground: hsl(215 25% 12%);
-    
+
     /* Emerald Theme Colors */
     --primary: hsl(158 64% 40%);
     --primary-foreground: hsl(0 0% 100%);
     --secondary: hsl(210 15% 93%);
     --secondary-foreground: hsl(215 25% 12%);
-    
+
     --muted: hsl(210 15% 93%);
     --muted-foreground: hsl(215 15% 46%);
     --accent: hsl(158 30% 92%);
     --accent-foreground: hsl(158 64% 25%);
-    
+
     --destructive: hsl(0 84.2% 60.2%);
     --destructive-foreground: hsl(0 0% 98%);
-    
+
     --border: hsl(210 15% 88%);
     --input: hsl(210 15% 88%);
     --ring: hsl(158 64% 40%);
-    
+
     --chart-1: hsl(158 64% 40%);
     --chart-2: hsl(160 60% 45%);
     --chart-3: hsl(197 37% 24%);
     --chart-4: hsl(43 74% 66%);
     --chart-5: hsl(27 87% 67%);
-    
+
     /* Crisp Rectangular Radius (None) */
     --radius: 0rem;
 
@@ -143,31 +143,31 @@
     --card-foreground: hsl(210 20% 98%);
     --popover: hsl(213 25% 13%);
     --popover-foreground: hsl(210 20% 98%);
-    
+
     /* Emerald Theme Colors Dark Mode */
     --primary: hsl(158 64% 45%);
     --primary-foreground: hsl(0 0% 100%);
     --secondary: hsl(213 20% 18%);
     --secondary-foreground: hsl(210 20% 98%);
-    
+
     --muted: hsl(213 20% 17%);
     --muted-foreground: hsl(215 15% 65%);
     --accent: hsl(158 25% 18%);
     --accent-foreground: hsl(210 20% 98%);
-    
+
     --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(0 0% 98%);
-    
+
     --border: hsl(215 20% 20%);
     --input: hsl(215 20% 20%);
     --ring: hsl(158 64% 45%);
-    
+
     --chart-1: hsl(158 64% 45%);
     --chart-2: hsl(160 60% 45%);
     --chart-3: hsl(30 80% 55%);
     --chart-4: hsl(280 65% 60%);
     --chart-5: hsl(340 75% 55%);
-    
+
     --sidebar-background: hsl(213 28% 8%);
     --sidebar-foreground: hsl(210 20% 98%);
     --sidebar-primary: hsl(158 64% 45%);
@@ -184,6 +184,6 @@
         @apply border-border outline-ring/50;
     }
     body {
-        @apply bg-background text-foreground font-sans;
+        @apply bg-background font-sans text-foreground;
     }
 }
