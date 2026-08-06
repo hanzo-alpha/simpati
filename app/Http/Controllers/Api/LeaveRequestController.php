@@ -6,8 +6,11 @@ use App\Enums\LeaveStatus;
 use App\Enums\LeaveType;
 use App\Http\Controllers\Controller;
 use App\Models\LeaveRequest;
+use App\Models\User;
+use App\Services\FcmService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Enum;
 
 class LeaveRequestController extends Controller
@@ -104,11 +107,51 @@ class LeaveRequestController extends Controller
             'tanggal_selesai' => $validated['tanggal_selesai'],
             'alasan' => $validated['alasan'],
             'lampiran_path' => $lampiranPath,
+            'status' => LeaveStatus::MENUNGGU->value,
         ]);
+
+        // Send Real-time Push Notification to Atasan & Admin OPD
+        try {
+            $typeLabel = $leaveRequest->type_label;
+            $title = "Pengajuan {$typeLabel} Baru";
+            $body = "Pegawai {$user->name} (NIP: {$user->nip}) mengajukan {$typeLabel} mulai tanggal ".now()->parse($validated['tanggal_mulai'])->format('d/m/Y').'.';
+
+            // 1. Notify Direct Supervisor
+            if ($user->supervisor) {
+                FcmService::sendToUser(
+                    $user->supervisor,
+                    $title,
+                    $body,
+                    ['type' => 'leave_request', 'id' => $leaveRequest->id]
+                );
+            }
+
+            // 2. Notify OPD Admins & Super Admins
+            $adminTokens = User::where(function ($q) use ($user) {
+                $q->where('office_id', $user->office_id)
+                    ->whereHas('role', fn ($r) => $r->where('name', 'admin_opd'));
+            })
+                ->orWhereHas('role', fn ($r) => $r->where('name', 'super_admin'))
+                ->whereNotNull('fcm_token')
+                ->pluck('fcm_token')
+                ->filter()
+                ->toArray();
+
+            if (! empty($adminTokens)) {
+                FcmService::send(
+                    $adminTokens,
+                    $title,
+                    $body,
+                    ['type' => 'leave_request', 'id' => $leaveRequest->id]
+                );
+            }
+        } catch (\Throwable $e) {
+            Log::error('Notification error on leave request creation: '.$e->getMessage());
+        }
 
         return response()->json([
             'message' => 'Pengajuan berhasil diajukan.',
-            'leave_request' => $leaveRequest,
+            'leave_request' => $leaveRequest->load('user'),
         ], 201);
     }
 
