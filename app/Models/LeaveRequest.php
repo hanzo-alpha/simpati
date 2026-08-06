@@ -20,6 +20,10 @@ class LeaveRequest extends Model
         'approved_by',
         'catatan_approval',
         'approved_at',
+        'atasan_approved_by',
+        'atasan_status',
+        'catatan_atasan',
+        'atasan_approved_at',
     ];
 
     protected $appends = [
@@ -33,6 +37,7 @@ class LeaveRequest extends Model
         'tanggal_mulai' => 'date',
         'tanggal_selesai' => 'date',
         'approved_at' => 'datetime',
+        'atasan_approved_at' => 'datetime',
         'type' => LeaveType::class,
         'status' => LeaveStatus::class,
     ];
@@ -54,6 +59,11 @@ class LeaveRequest extends Model
     public function approver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approved_by');
+    }
+
+    public function atasanApprover(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'atasan_approved_by');
     }
 
     /**

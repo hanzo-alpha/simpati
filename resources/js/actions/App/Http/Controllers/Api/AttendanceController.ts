@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::store
- * @see app/Http/Controllers/Api/AttendanceController.php:21
+ * @see app/Http/Controllers/Api/AttendanceController.php:22
  * @route '/api/attendance'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::store
- * @see app/Http/Controllers/Api/AttendanceController.php:21
+ * @see app/Http/Controllers/Api/AttendanceController.php:22
  * @route '/api/attendance'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::store
- * @see app/Http/Controllers/Api/AttendanceController.php:21
+ * @see app/Http/Controllers/Api/AttendanceController.php:22
  * @route '/api/attendance'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::store
- * @see app/Http/Controllers/Api/AttendanceController.php:21
+ * @see app/Http/Controllers/Api/AttendanceController.php:22
  * @route '/api/attendance'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::store
- * @see app/Http/Controllers/Api/AttendanceController.php:21
+ * @see app/Http/Controllers/Api/AttendanceController.php:22
  * @route '/api/attendance'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -56,7 +56,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:283
+ * @see app/Http/Controllers/Api/AttendanceController.php:284
  * @route '/api/attendance/scan-qr'
  */
 export const scanQr = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ scanQr.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:283
+ * @see app/Http/Controllers/Api/AttendanceController.php:284
  * @route '/api/attendance/scan-qr'
  */
 scanQr.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ scanQr.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:283
+ * @see app/Http/Controllers/Api/AttendanceController.php:284
  * @route '/api/attendance/scan-qr'
  */
 scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:283
+ * @see app/Http/Controllers/Api/AttendanceController.php:284
  * @route '/api/attendance/scan-qr'
  */
     const scanQrForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::scanQr
- * @see app/Http/Controllers/Api/AttendanceController.php:283
+ * @see app/Http/Controllers/Api/AttendanceController.php:284
  * @route '/api/attendance/scan-qr'
  */
         scanQrForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -111,7 +111,7 @@ scanQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     scanQr.form = scanQrForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
 export const today = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -126,7 +126,7 @@ today.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
 today.url = (options?: RouteQueryOptions) => {
@@ -135,7 +135,7 @@ today.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
 today.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -144,7 +144,7 @@ today.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
 today.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -154,7 +154,7 @@ today.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
     const todayForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -164,7 +164,7 @@ today.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
         todayForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -173,7 +173,7 @@ today.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::today
- * @see app/Http/Controllers/Api/AttendanceController.php:126
+ * @see app/Http/Controllers/Api/AttendanceController.php:127
  * @route '/api/attendance/today'
  */
         todayForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -189,7 +189,7 @@ today.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     today.form = todayForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
 export const history = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -204,7 +204,7 @@ history.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
 history.url = (options?: RouteQueryOptions) => {
@@ -213,7 +213,7 @@ history.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
 history.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -222,7 +222,7 @@ history.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
 history.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -232,7 +232,7 @@ history.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
     const historyForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -242,7 +242,7 @@ history.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
         historyForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -251,7 +251,7 @@ history.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::history
- * @see app/Http/Controllers/Api/AttendanceController.php:160
+ * @see app/Http/Controllers/Api/AttendanceController.php:161
  * @route '/api/attendance/history'
  */
         historyForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -267,7 +267,7 @@ history.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     history.form = historyForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
 export const getSchedule = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -282,7 +282,7 @@ getSchedule.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
 getSchedule.url = (options?: RouteQueryOptions) => {
@@ -291,7 +291,7 @@ getSchedule.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
 getSchedule.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -300,7 +300,7 @@ getSchedule.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
 getSchedule.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -310,7 +310,7 @@ getSchedule.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
     const getScheduleForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -320,7 +320,7 @@ getSchedule.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
         getScheduleForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -329,7 +329,7 @@ getSchedule.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::getSchedule
- * @see app/Http/Controllers/Api/AttendanceController.php:183
+ * @see app/Http/Controllers/Api/AttendanceController.php:184
  * @route '/api/attendance/schedule'
  */
         getScheduleForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -345,7 +345,7 @@ getSchedule.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     getSchedule.form = getScheduleForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
 export const exportPdf = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -360,7 +360,7 @@ exportPdf.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
 exportPdf.url = (options?: RouteQueryOptions) => {
@@ -369,7 +369,7 @@ exportPdf.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
 exportPdf.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -378,7 +378,7 @@ exportPdf.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
 exportPdf.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -388,7 +388,7 @@ exportPdf.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
     const exportPdfForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -398,7 +398,7 @@ exportPdf.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
         exportPdfForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -407,7 +407,7 @@ exportPdf.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::exportPdf
- * @see app/Http/Controllers/Api/AttendanceController.php:200
+ * @see app/Http/Controllers/Api/AttendanceController.php:201
  * @route '/api/attendance/export-pdf'
  */
         exportPdfForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -423,7 +423,7 @@ exportPdf.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     exportPdf.form = exportPdfForm
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
 export const liveLocations = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -438,7 +438,7 @@ liveLocations.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
 liveLocations.url = (options?: RouteQueryOptions) => {
@@ -447,7 +447,7 @@ liveLocations.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
 liveLocations.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -456,7 +456,7 @@ liveLocations.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
 liveLocations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -466,7 +466,7 @@ liveLocations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 
     /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
     const liveLocationsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -476,7 +476,7 @@ liveLocations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
         liveLocationsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -485,7 +485,7 @@ liveLocations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
         })
             /**
 * @see \App\Http\Controllers\Api\AttendanceController::liveLocations
- * @see app/Http/Controllers/Api/AttendanceController.php:231
+ * @see app/Http/Controllers/Api/AttendanceController.php:232
  * @route '/api/supervision/live-locations'
  */
         liveLocationsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

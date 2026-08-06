@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
                     ['name' => 'RSUD Latemmamala Soppeng', 'opd_name' => 'RSUD Latemmamala Kabupaten Soppeng', 'unit_code' => 'RSUD-LATEMMAMALA', 'latitude' => -4.3510, 'longitude' => 120.0210, 'radius_meters' => 200, 'alamat' => 'Jl. Malaka Raya, Watansoppeng'],
                     ['name' => 'PSC 119 Soppeng', 'opd_name' => 'PSC 119 Soppeng (Public Safety Center)', 'unit_code' => 'PSC-119', 'latitude' => -4.3452, 'longitude' => 120.0156, 'radius_meters' => 80, 'alamat' => 'Komp. Dinas Kesehatan Soppeng, Jl. Salotungo'],
                     ['name' => 'UPTD Labkesda Soppeng', 'opd_name' => 'UPTD Laboratorium Kesehatan Daerah', 'unit_code' => 'LABKESDA', 'latitude' => -4.3452, 'longitude' => 120.0158, 'radius_meters' => 80, 'alamat' => 'Komp. Dinas Kesehatan Soppeng'],
-                    
+
                     // 17 Puskesmas Kabupaten Soppeng
                     ['name' => 'UPTD Puskesmas Salotungo', 'opd_name' => 'UPTD Puskesmas Salotungo', 'unit_code' => 'PKM-SALOTUNGO', 'latitude' => -4.3461, 'longitude' => 120.0170, 'radius_meters' => 100, 'alamat' => 'Jl. Keselamatan No. 12, Salotungo, Watansoppeng'],
                     ['name' => 'UPTD Puskesmas Sewo', 'opd_name' => 'UPTD Puskesmas Sewo', 'unit_code' => 'PKM-SEWO', 'latitude' => -4.3620, 'longitude' => 120.0050, 'radius_meters' => 100, 'alamat' => 'Kelurahan Sewo, Kec. Lalabata'],
