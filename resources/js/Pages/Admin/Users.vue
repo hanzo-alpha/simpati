@@ -476,15 +476,15 @@ const resetDevice = (user: UserItem) => {
         <!-- Shadcn Dialog Add/Edit ASN -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-4xl"
+                class="border-border/60 bg-card/98 shadow-2xl backdrop-blur-2xl sm:max-w-3xl rounded-2xl p-6 sm:p-8"
             >
-                <DialogHeader>
+                <DialogHeader class="pb-2">
                     <DialogTitle
-                        class="flex items-center gap-2 text-base font-bold"
+                        class="flex items-center gap-3 text-lg font-bold text-foreground"
                     >
-                        <UserPlus
-                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
-                        />
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                            <UserPlus class="h-5 w-5" />
+                        </div>
                         <span>{{
                             form.id
                                 ? 'Edit Data Pegawai ASN'
@@ -493,51 +493,67 @@ const resetDevice = (user: UserItem) => {
                     </DialogTitle>
                 </DialogHeader>
 
-                <form @submit.prevent="submitForm" class="space-y-4 pt-2">
-                    <div class="grid grid-cols-2 gap-3">
+                <form @submit.prevent="submitForm" class="space-y-5 pt-2">
+                    <!-- Row 1: Identitas utama (2 cols) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
-                            <Label for="nip" class="text-xs">NIP Pegawai</Label>
+                            <Label for="nip" class="text-xs font-semibold text-foreground/80">NIP Pegawai</Label>
                             <Input
                                 id="nip"
                                 v-model="form.nip"
                                 required
                                 placeholder="19850101..."
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="name" class="text-xs"
-                                >Nama Lengkap</Label
-                            >
+                            <Label for="name" class="text-xs font-semibold text-foreground/80">Nama Lengkap & Gelar</Label>
                             <Input
                                 id="name"
                                 v-model="form.name"
                                 required
                                 placeholder="Nama & Gelar"
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                     </div>
 
-                    <div class="space-y-1.5">
-                        <Label for="email" class="text-xs">Email Status</Label>
-                        <Input
-                            id="email"
-                            v-model="form.email"
-                            type="email"
-                            placeholder="email@soppengkab.go.id"
-                            class="h-9 text-xs"
-                        />
+                    <!-- Row 2: Email & Password (2 cols) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <Label for="email" class="text-xs font-semibold text-foreground/80">Email Kedinasan</Label>
+                            <Input
+                                id="email"
+                                v-model="form.email"
+                                type="email"
+                                placeholder="email@soppengkab.go.id"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
+                            />
+                        </div>
+                        <div class="space-y-1.5">
+                            <Label for="password" class="text-xs font-semibold text-foreground/80">
+                                {{ form.id ? 'Password Baru (Opsional)' : 'Password Akun' }}
+                            </Label>
+                            <Input
+                                id="password"
+                                v-model="form.password"
+                                type="password"
+                                :required="!form.id"
+                                placeholder="••••••••"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
+                            />
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
+                    <!-- Row 3: Struktur Penugasan & Role (2 cols) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
-                            <Label class="text-xs">OPD / Kantor</Label>
+                            <Label class="text-xs font-semibold text-foreground/80">OPD / Instansi Kantor</Label>
                             <Select v-model="form.office_id">
                                 <SelectTrigger
-                                    class="h-9 bg-background text-xs"
+                                    class="h-10 bg-background text-xs sm:text-sm rounded-xl"
                                 >
-                                    <SelectValue placeholder="Pilih OPD" />
+                                    <SelectValue placeholder="Pilih OPD / Kantor" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem
@@ -551,12 +567,12 @@ const resetDevice = (user: UserItem) => {
                             </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label class="text-xs">Role Hak Akses</Label>
+                            <Label class="text-xs font-semibold text-foreground/80">Role Hak Akses System</Label>
                             <Select v-model="form.role_id">
                                 <SelectTrigger
-                                    class="h-9 bg-background text-xs"
+                                    class="h-10 bg-background text-xs sm:text-sm rounded-xl"
                                 >
-                                    <SelectValue placeholder="Pilih Role" />
+                                    <SelectValue placeholder="Pilih Role System" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem
@@ -571,31 +587,28 @@ const resetDevice = (user: UserItem) => {
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3">
+                    <!-- Row 4: Jabatan, Sub OPD, & Kuota Cuti (3 cols) -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="space-y-1.5">
-                            <Label for="jabatan" class="text-xs">Jabatan</Label>
+                            <Label for="jabatan" class="text-xs font-semibold text-foreground/80">Jabatan Pegawai</Label>
                             <Input
                                 id="jabatan"
                                 v-model="form.jabatan"
                                 placeholder="Kepala Bidang..."
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="unit_kerja" class="text-xs"
-                                >Sub OPD / Unit Kerja</Label
-                            >
+                            <Label for="unit_kerja" class="text-xs font-semibold text-foreground/80">Sub OPD / Unit Kerja</Label>
                             <Input
                                 id="unit_kerja"
                                 v-model="form.unit_kerja"
                                 placeholder="Sekretariat / Bidang..."
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="sisa_cuti_tahunan" class="text-xs"
-                                >Sisa Cuti (Hari)</Label
-                            >
+                            <Label for="sisa_cuti_tahunan" class="text-xs font-semibold text-foreground/80">Sisa Cuti Tahunan (Hari)</Label>
                             <Input
                                 id="sisa_cuti_tahunan"
                                 v-model.number="form.sisa_cuti_tahunan"
@@ -603,27 +616,25 @@ const resetDevice = (user: UserItem) => {
                                 min="0"
                                 max="100"
                                 placeholder="12"
-                                class="h-9 text-xs font-bold text-teal-600 dark:text-teal-400"
+                                class="h-10 text-xs sm:text-sm font-bold text-teal-600 dark:text-teal-400 rounded-xl"
                             />
                         </div>
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-2 border-t border-border pt-3"
+                        class="flex items-center justify-end gap-3 border-t border-border/60 pt-4 mt-6"
                     >
                         <Button
                             type="button"
                             variant="outline"
-                            size="sm"
                             @click="resetForm"
-                            class="cursor-pointer"
+                            class="h-10 px-5 rounded-xl cursor-pointer text-xs sm:text-sm"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            size="sm"
-                            class="cursor-pointer bg-teal-600 text-white hover:bg-teal-700"
+                            class="h-10 px-6 rounded-xl cursor-pointer bg-teal-600 text-white hover:bg-teal-700 shadow-md font-semibold text-xs sm:text-sm"
                         >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah ASN' }}
                         </Button>

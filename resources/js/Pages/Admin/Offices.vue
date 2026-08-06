@@ -252,15 +252,15 @@ const deleteOffice = (id: number) => {
         <!-- Shadcn Dialog Form Office -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-4xl"
+                class="border-border/60 bg-card/98 shadow-2xl backdrop-blur-2xl sm:max-w-3xl rounded-2xl p-6 sm:p-8"
             >
-                <DialogHeader>
+                <DialogHeader class="pb-2">
                     <DialogTitle
-                        class="flex items-center gap-2 text-base font-bold"
+                        class="flex items-center gap-3 text-lg font-bold text-foreground"
                     >
-                        <Building2
-                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
-                        />
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                            <Building2 class="h-5 w-5" />
+                        </div>
                         <span>{{
                             form.id
                                 ? 'Edit Data Kantor'
@@ -269,97 +269,86 @@ const deleteOffice = (id: number) => {
                     </DialogTitle>
                 </DialogHeader>
 
-                <form @submit.prevent="submitForm" class="space-y-4 pt-2">
-                    <div class="space-y-1.5">
-                        <Label for="name" class="text-xs">Nama Kantor</Label>
-                        <Input
-                            id="name"
-                            v-model="form.name"
-                            required
-                            placeholder="Contoh: Kantor Bupati Soppeng"
-                            class="h-9 text-xs"
-                        />
+                <form @submit.prevent="submitForm" class="space-y-5 pt-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <Label for="name" class="text-xs font-semibold text-foreground/80">Nama Kantor / Gedung</Label>
+                            <Input
+                                id="name"
+                                v-model="form.name"
+                                required
+                                placeholder="Contoh: Kantor Bupati Soppeng"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
+                            />
+                        </div>
+                        <div class="space-y-1.5">
+                            <Label for="opd_name" class="text-xs font-semibold text-foreground/80">Nama OPD Utama</Label>
+                            <Input
+                                id="opd_name"
+                                v-model="form.opd_name"
+                                required
+                                placeholder="Contoh: Sekretariat Daerah"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
+                            />
+                        </div>
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="opd_name" class="text-xs"
-                            >Nama OPD Utama</Label
-                        >
-                        <Input
-                            id="opd_name"
-                            v-model="form.opd_name"
-                            required
-                            placeholder="Contoh: Sekretariat Daerah"
-                            class="h-9 text-xs"
-                        />
-                    </div>
-
-                    <div class="space-y-1.5">
-                        <Label for="alamat" class="text-xs"
-                            >Alamat Kantor</Label
-                        >
+                        <Label for="alamat" class="text-xs font-semibold text-foreground/80">Alamat Lengkap Kantor</Label>
                         <Input
                             id="alamat"
                             v-model="form.alamat"
                             placeholder="Jl. Salotungo No. 1..."
-                            class="h-9 text-xs"
+                            class="h-10 text-xs sm:text-sm rounded-xl"
                         />
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="space-y-1.5">
-                            <Label for="latitude" class="text-xs"
-                                >Latitude GPS</Label
-                            >
+                            <Label for="latitude" class="text-xs font-semibold text-foreground/80">Latitude GPS</Label>
                             <Input
                                 id="latitude"
                                 v-model="form.latitude"
                                 placeholder="-4.3484"
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl font-mono"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="longitude" class="text-xs"
-                                >Longitude GPS</Label
-                            >
+                            <Label for="longitude" class="text-xs font-semibold text-foreground/80">Longitude GPS</Label>
                             <Input
                                 id="longitude"
                                 v-model="form.longitude"
                                 placeholder="119.8837"
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl font-mono"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="radius_meters" class="text-xs"
-                                >Radius (Meter)</Label
-                            >
+                            <Label for="radius_meters" class="text-xs font-semibold text-foreground/80">Radius Geofence (Meter)</Label>
                             <Input
                                 id="radius_meters"
                                 v-model="form.radius_meters"
                                 type="number"
                                 required
                                 placeholder="200"
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl font-bold text-teal-600 dark:text-teal-400"
                             />
                         </div>
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-2 border-t border-border pt-3"
+                        class="flex items-center justify-end gap-3 border-t border-border/60 pt-4 mt-6"
                     >
                         <Button
                             type="button"
                             variant="outline"
-                            size="sm"
                             @click="resetForm"
-                            class="cursor-pointer"
+                            class="h-10 px-5 rounded-xl cursor-pointer text-xs sm:text-sm"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            size="sm"
-                            class="cursor-pointer bg-teal-600 text-white hover:bg-teal-700"
+                            class="h-10 px-6 rounded-xl cursor-pointer bg-teal-600 text-white hover:bg-teal-700 shadow-md font-semibold text-xs sm:text-sm"
                         >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah Kantor' }}
                         </Button>

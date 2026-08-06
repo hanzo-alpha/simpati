@@ -154,15 +154,15 @@ const deleteAnnouncement = (id: number) => {
         <!-- Shadcn Dialog Form Announcement -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-4xl"
+                class="border-border/60 bg-card/98 shadow-2xl backdrop-blur-2xl sm:max-w-3xl rounded-2xl p-6 sm:p-8"
             >
-                <DialogHeader>
+                <DialogHeader class="pb-2">
                     <DialogTitle
-                        class="flex items-center gap-2 text-base font-bold"
+                        class="flex items-center gap-3 text-lg font-bold text-foreground"
                     >
-                        <Megaphone
-                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
-                        />
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                            <Megaphone class="h-5 w-5" />
+                        </div>
                         <span>{{
                             form.id
                                 ? 'Edit Broadcast Edaran'
@@ -171,31 +171,27 @@ const deleteAnnouncement = (id: number) => {
                     </DialogTitle>
                 </DialogHeader>
 
-                <form @submit.prevent="submitForm" class="space-y-4 pt-2">
+                <form @submit.prevent="submitForm" class="space-y-5 pt-2">
                     <div class="space-y-1.5">
-                        <Label for="judul" class="text-xs"
-                            >Judul Pengumuman</Label
-                        >
+                        <Label for="judul" class="text-xs font-semibold text-foreground/80">Judul Pengumuman</Label>
                         <Input
                             id="judul"
                             v-model="form.judul"
                             required
                             placeholder="Contoh: Edaran Jam Kerja Ramadan 1447H"
-                            class="h-9 text-xs"
+                            class="h-10 text-xs sm:text-sm rounded-xl"
                         />
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="isi" class="text-xs"
-                            >Isi Lengkap Edaran</Label
-                        >
+                        <Label for="isi" class="text-xs font-semibold text-foreground/80">Isi Lengkap Edaran</Label>
                         <textarea
                             id="isi"
                             v-model="form.isi"
                             required
                             rows="5"
                             placeholder="Tuliskan detail pengumuman untuk seluruh ASN..."
-                            class="w-full rounded-md border border-input bg-background p-3 text-xs focus:ring-1 focus:ring-teal-500 focus:outline-none"
+                            class="w-full rounded-xl border border-input bg-background p-3.5 text-xs sm:text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none"
                         ></textarea>
                     </div>
 
@@ -205,27 +201,25 @@ const deleteAnnouncement = (id: number) => {
                             :checked="form.pinned"
                             @update:checked="form.pinned = $event"
                         />
-                        <Label for="pinned" class="cursor-pointer text-xs"
+                        <Label for="pinned" class="cursor-pointer text-xs font-semibold text-foreground/80 select-none"
                             >Sematkan di Atas (Pin Announcement)</Label
                         >
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-2 border-t border-border pt-3"
+                        class="flex items-center justify-end gap-3 border-t border-border/60 pt-4 mt-6"
                     >
                         <Button
                             type="button"
                             variant="outline"
-                            size="sm"
                             @click="resetForm"
-                            class="cursor-pointer"
+                            class="h-10 px-5 rounded-xl cursor-pointer text-xs sm:text-sm"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            size="sm"
-                            class="cursor-pointer bg-teal-600 text-white hover:bg-teal-700"
+                            class="h-10 px-6 rounded-xl cursor-pointer bg-teal-600 text-white hover:bg-teal-700 shadow-md font-semibold text-xs sm:text-sm"
                         >
                             {{
                                 form.id ? 'Simpan Perubahan' : 'Siarkan Edaran'

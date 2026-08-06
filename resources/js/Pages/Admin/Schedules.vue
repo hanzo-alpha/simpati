@@ -263,42 +263,40 @@ const deleteSchedule = (id: number) => {
         <!-- Shadcn Dialog Form Schedules -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-4xl"
+                class="border-border/60 bg-card/98 shadow-2xl backdrop-blur-2xl sm:max-w-3xl rounded-2xl p-6 sm:p-8"
             >
-                <DialogHeader>
+                <DialogHeader class="pb-2">
                     <DialogTitle
-                        class="flex items-center gap-2 text-base font-bold"
+                        class="flex items-center gap-3 text-lg font-bold text-foreground"
                     >
-                        <Clock
-                            class="h-4 w-4 text-teal-600 dark:text-teal-400"
-                        />
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
+                            <Clock class="h-5 w-5" />
+                        </div>
                         <span>{{
                             form.id ? 'Edit Jam Kerja' : 'Tambah Jam Kerja Baru'
                         }}</span>
                     </DialogTitle>
                 </DialogHeader>
 
-                <form @submit.prevent="submitForm" class="space-y-4 pt-2">
-                    <div class="grid grid-cols-2 gap-3">
+                <form @submit.prevent="submitForm" class="space-y-5 pt-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
-                            <Label for="nama_jadwal" class="text-xs"
-                                >Nama Jam Kerja</Label
-                            >
+                            <Label for="nama_jadwal" class="text-xs font-semibold text-foreground/80">Nama Jam Kerja</Label>
                             <Input
                                 id="nama_jadwal"
                                 v-model="form.nama_jadwal"
                                 required
                                 placeholder="Contoh: Reguler Senin-Kamis"
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label class="text-xs">OPD / Kantor</Label>
+                            <Label class="text-xs font-semibold text-foreground/80">OPD / Kantor</Label>
                             <Select v-model="form.office_id">
                                 <SelectTrigger
-                                    class="h-9 bg-background text-xs"
+                                    class="h-10 bg-background text-xs sm:text-sm rounded-xl"
                                 >
-                                    <SelectValue placeholder="Pilih OPD" />
+                                    <SelectValue placeholder="Pilih OPD / Kantor" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem
@@ -313,96 +311,82 @@ const deleteSchedule = (id: number) => {
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
-                            <Label class="text-xs">Tipe Jadwal</Label>
+                            <Label class="text-xs font-semibold text-foreground/80">Tipe Jadwal</Label>
                             <Select v-model="form.type">
                                 <SelectTrigger
-                                    class="h-9 bg-background text-xs"
+                                    class="h-10 bg-background text-xs sm:text-sm rounded-xl"
                                 >
-                                    <SelectValue placeholder="Pilih Tipe" />
+                                    <SelectValue placeholder="Pilih Tipe Jadwal" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="reguler"
-                                        >Reguler</SelectItem
-                                    >
+                                    <SelectItem value="reguler">Reguler</SelectItem>
                                     <SelectItem value="shift">Shift</SelectItem>
-                                    <SelectItem value="khusus"
-                                        >Khusus / Ramadan</SelectItem
-                                    >
+                                    <SelectItem value="khusus">Khusus / Ramadan</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="toleransi_menit" class="text-xs"
-                                >Toleransi (Menit)</Label
-                            >
+                            <Label for="toleransi_menit" class="text-xs font-semibold text-foreground/80">Toleransi Keterlambatan (Menit)</Label>
                             <Input
                                 id="toleransi_menit"
                                 v-model="form.toleransi_menit"
                                 type="number"
                                 required
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1.5">
-                            <Label for="jam_masuk" class="text-xs"
-                                >Jam Masuk</Label
-                            >
+                            <Label for="jam_masuk" class="text-xs font-semibold text-foreground/80">Jam Masuk</Label>
                             <Input
                                 id="jam_masuk"
                                 v-model="form.jam_masuk"
                                 type="time"
                                 required
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="jam_pulang" class="text-xs"
-                                >Jam Pulang</Label
-                            >
+                            <Label for="jam_pulang" class="text-xs font-semibold text-foreground/80">Jam Pulang</Label>
                             <Input
                                 id="jam_pulang"
                                 v-model="form.jam_pulang"
                                 type="time"
                                 required
-                                class="h-9 text-xs"
+                                class="h-10 text-xs sm:text-sm rounded-xl"
                             />
                         </div>
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="hari" class="text-xs"
-                            >Hari Berlaku (Dipisah koma)</Label
-                        >
+                        <Label for="hari" class="text-xs font-semibold text-foreground/80">Hari Berlaku (Dipisah koma)</Label>
                         <Input
                             id="hari"
                             v-model="form.hari"
                             required
                             placeholder="Senin,Selasa,Rabu,Kamis,Jumat"
-                            class="h-9 text-xs"
+                            class="h-10 text-xs sm:text-sm rounded-xl"
                         />
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-2 border-t border-border pt-3"
+                        class="flex items-center justify-end gap-3 border-t border-border/60 pt-4 mt-6"
                     >
                         <Button
                             type="button"
                             variant="outline"
-                            size="sm"
                             @click="resetForm"
-                            class="cursor-pointer"
+                            class="h-10 px-5 rounded-xl cursor-pointer text-xs sm:text-sm"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            size="sm"
-                            class="cursor-pointer bg-teal-600 text-white hover:bg-teal-700"
+                            class="h-10 px-6 rounded-xl cursor-pointer bg-teal-600 text-white hover:bg-teal-700 shadow-md font-semibold text-xs sm:text-sm"
                         >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah Jadwal' }}
                         </Button>
