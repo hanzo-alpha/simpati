@@ -96,8 +96,8 @@
   - [x] Support PDF/image attachments in Leave Request screen (`LeaveRequests/Create.vue`).
   - [x] Add in-app preview modal for documents (`Admin/LeaveRequests.vue` & `LeaveRequests/Index.vue`).
 
-- [ ] **21. Multi-Level Approval Flow untuk Pengajuan Cuti/Dinas**
-  - [ ] Support multi-stage approval (Atasan Langsung -> Kepala OPD/HR).
+- [x] **21. Multi-Level Approval Flow untuk Pengajuan Cuti/Dinas**
+  - [x] Support multi-stage approval (Atasan Langsung -> Kepala OPD/HR).
 
 - [ ] **22. Push Notifications Realtime via FCM (Firebase Cloud Messaging)**
   - [ ] Push notifications for attendance reminders & leave approval updates.
