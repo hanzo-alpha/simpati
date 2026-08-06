@@ -95,7 +95,9 @@ const filteredFormOffices = computed(() => {
     if (!opdFormSearch.value.trim()) {
         return props.offices;
     }
+
     const q = opdFormSearch.value.toLowerCase();
+
     return props.offices.filter((o) => o.opd_name.toLowerCase().includes(q));
 });
 

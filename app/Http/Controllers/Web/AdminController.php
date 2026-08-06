@@ -484,13 +484,20 @@ class AdminController extends Controller
         $users = $userQuery->orderBy('name')->get();
 
         // Calculate effective working days in the month (Mon-Fri)
-        $startOfMonth = Carbon::createFromDate($year, $month, 1);
-        $endOfMonth = $startOfMonth->copy()->endOfMonth();
+        $startOfMonth = Carbon::createFromDate($year, $month, 1)->startOfDay();
+        $endOfMonth = $startOfMonth->copy()->endOfMonth()->endOfDay();
+
+        $today = now()->startOfDay();
         $workingDays = 0;
+        $passedWorkingDays = 0;
+
         $cursor = $startOfMonth->copy();
         while ($cursor->lte($endOfMonth)) {
             if ($cursor->isWeekday()) {
                 $workingDays++;
+                if ($cursor->lte($today)) {
+                    $passedWorkingDays++;
+                }
             }
             $cursor->addDay();
         }
@@ -523,10 +530,8 @@ class AdminController extends Controller
 
             // Determine schedule type / mode kerja
             $schedule = $user->office?->workSchedules?->first();
-            $scheduleType = $schedule?->type?->value ?? 'reguler';
-            $scheduleDays = $schedule ? count($schedule->getDaysArray()) : 5;
+            $scheduleType = $schedule?->type?->value ?? ($schedule?->type ?? 'reguler');
             $modeKerja = match ($scheduleType) {
-                'reguler' => 'Reguler '.$scheduleDays.' Hari',
                 'shift' => 'Shift',
                 'fleksibel' => 'Fleksibel',
                 default => 'Reguler 5 Hari',
@@ -544,24 +549,30 @@ class AdminController extends Controller
             $terlambat = $userAtts->whereIn('status', [AttendanceStatus::TERLAMBAT, AttendanceStatus::SANGAT_TERLAMBAT])->count();
             $psw = $userAtts->where('status', AttendanceStatus::PULANG_CEPAT)->count();
 
-            // Count leave days (only overlapping with this month)
+            // Count leave days strictly as integers
             $sakitDays = 0;
             $cutiDays = 0;
             $ddDays = 0;
             $dlDays = 0;
             foreach ($userLeaves as $leave) {
-                $leaveStart = $leave->tanggal_mulai->max($startOfMonth);
-                $leaveEnd = $leave->tanggal_selesai->min($endOfMonth);
-                $days = $leaveStart->diffInDays($leaveEnd) + 1;
+                $tMulai = Carbon::parse($leave->tanggal_mulai)->startOfDay();
+                $tSelesai = Carbon::parse($leave->tanggal_selesai)->startOfDay();
 
-                $leaveType = $leave->type instanceof LeaveType ? $leave->type : LeaveType::tryFrom($leave->type);
-                match ($leaveType) {
-                    LeaveType::SAKIT => $sakitDays += $days,
-                    LeaveType::CUTI => $cutiDays += $days,
-                    LeaveType::DINAS_DALAM => $ddDays += $days,
-                    LeaveType::DINAS_LUAR => $dlDays += $days,
-                    default => null,
-                };
+                $lStart = $tMulai->max($startOfMonth);
+                $lEnd = $tSelesai->min($endOfMonth);
+
+                if ($lStart->lte($lEnd)) {
+                    $days = (int) $lStart->diffInDays($lEnd) + 1;
+
+                    $lType = $leave->type instanceof LeaveType ? $leave->type->value : (string) $leave->type;
+                    match ($lType) {
+                        LeaveType::SAKIT->value, 'sakit' => $sakitDays += $days,
+                        LeaveType::CUTI->value, 'cuti' => $cutiDays += $days,
+                        LeaveType::DINAS_DALAM->value, 'dinas_dalam' => $ddDays += $days,
+                        LeaveType::DINAS_LUAR->value, 'dinas_luar' => $dlDays += $days,
+                        default => null,
+                    };
+                }
             }
 
             // Unique hadir days (unique tanggal where user has masuk or wfh)
@@ -571,27 +582,27 @@ class AdminController extends Controller
                 ->unique()
                 ->count();
 
-            // TK = working days - hadir days - sakit - cuti - dinas dalam - dinas luar (leave)
+            // TK = passed working days up to today - hadir - sakit - cuti - dinas
             $hariKerja = $workingDays;
-            $tk = max(0, $hariKerja - $hadirDays - $sakitDays - $cutiDays - $ddDays - $dlDays);
+            $tk = (int) max(0, $passedWorkingDays - $hadirDays - $sakitDays - $cutiDays - $ddDays - $dlDays);
 
             $row = [
                 'nip' => $user->profile?->nip ?? $user->nip ?? '-',
                 'name' => $user->name,
                 'mode_kerja' => $modeKerja,
                 'hari_kerja' => $hariKerja,
-                'hadir' => $hadirDays,
-                'masuk' => $masuk,
-                'istirahat' => $istirahat,
-                'kembali' => $kembali,
-                'pulang' => $pulang,
-                'terlambat' => $terlambat,
-                'psw' => $psw,
-                'tk' => $tk,
-                'dd' => $ddDays,
-                'dl' => $dlDays + $dinasLuar, // combine leave DL + attendance DL
-                'sakit' => $sakitDays,
-                'cuti' => $cutiDays,
+                'hadir' => (int) $hadirDays,
+                'masuk' => (int) $masuk,
+                'istirahat' => (int) $istirahat,
+                'kembali' => (int) $kembali,
+                'pulang' => (int) $pulang,
+                'terlambat' => (int) $terlambat,
+                'psw' => (int) $psw,
+                'tk' => (int) $tk,
+                'dd' => (int) $ddDays,
+                'dl' => (int) ($dlDays + $dinasLuar),
+                'sakit' => (int) $sakitDays,
+                'cuti' => (int) $cutiDays,
             ];
 
             $rows[] = $row;

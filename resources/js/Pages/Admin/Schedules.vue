@@ -51,7 +51,9 @@ const filteredOffices = computed(() => {
     if (!opdSearch.value.trim()) {
         return props.offices;
     }
+
     const q = opdSearch.value.toLowerCase();
+
     return props.offices.filter((o) => o.opd_name.toLowerCase().includes(q));
 });
 

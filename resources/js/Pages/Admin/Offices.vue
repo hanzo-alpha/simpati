@@ -85,6 +85,7 @@ const filteredOffices = computed(() => {
 
 const paginatedOffices = computed(() => {
     const start = (currentPage.value - 1) * itemsPerPage;
+
     return filteredOffices.value.slice(start, start + itemsPerPage);
 });
 
@@ -97,7 +98,9 @@ const filteredParentOptions = computed(() => {
     if (!parentSearch.value.trim()) {
         return parentOfficeOptions.value;
     }
+
     const q = parentSearch.value.toLowerCase();
+
     return parentOfficeOptions.value.filter((p) =>
         p.opd_name.toLowerCase().includes(q),
     );
