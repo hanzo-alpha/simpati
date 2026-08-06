@@ -99,7 +99,7 @@ const updateStatus = (id: number, status: string) => {
     >
         <!-- Status Filter Tabs Card -->
         <Card
-            class="mb-6 border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
+            class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardContent class="flex items-center gap-2 overflow-x-auto p-4">
                 <Button
@@ -108,15 +108,15 @@ const updateStatus = (id: number, status: string) => {
                     size="sm"
                     :variant="activeStatus === sf.value ? 'default' : 'outline'"
                     @click="activeStatus = sf.value"
-                    class="flex h-8 cursor-pointer items-center gap-1.5 rounded-lg text-xs"
+                    class="flex h-9 rounded-none cursor-pointer items-center gap-2 font-bold uppercase tracking-wider text-xs"
                     :class="{
-                        'bg-teal-600 text-white hover:bg-teal-700':
+                        'bg-primary text-primary-foreground hover:bg-primary/90':
                             activeStatus === sf.value,
                     }"
                 >
                     <span>{{ sf.label }}</span>
                     <span
-                        class="rounded-full bg-background/20 px-1.5 py-0.5 text-[10px] font-bold"
+                        class="rounded-none bg-background/20 px-1.5 py-0.5 text-[10px] font-bold"
                     >
                         {{ sf.count }}
                     </span>
@@ -136,29 +136,29 @@ const updateStatus = (id: number, status: string) => {
                                 class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
                             >
                                 <th
-                                    class="w-10 px-5 py-3.5 text-center font-semibold"
+                                    class="w-10 px-5 py-3.5 text-center font-bold"
                                 >
                                     #
                                 </th>
-                                <th class="px-5 py-3.5 font-semibold">
+                                <th class="px-5 py-3.5 font-bold">
                                     Pegawai ASN
                                 </th>
-                                <th class="px-5 py-3.5 font-semibold">
+                                <th class="px-5 py-3.5 font-bold">
                                     Kategori Izin
                                 </th>
-                                <th class="px-5 py-3.5 font-semibold">
+                                <th class="px-5 py-3.5 font-bold">
                                     Periode Tanggal
                                 </th>
-                                <th class="px-5 py-3.5 font-semibold">
+                                <th class="px-5 py-3.5 font-bold">
                                     Alasan Permohonan
                                 </th>
                                 <th
-                                    class="px-5 py-3.5 text-center font-semibold"
+                                    class="px-5 py-3.5 text-center font-bold"
                                 >
                                     Status
                                 </th>
                                 <th
-                                    class="px-5 py-3.5 text-center font-semibold"
+                                    class="px-5 py-3.5 text-center font-bold"
                                 >
                                     Aksi Keputusan
                                 </th>
@@ -166,35 +166,33 @@ const updateStatus = (id: number, status: string) => {
                         </thead>
                         <tbody class="divide-y divide-border/40">
                             <tr
-                                v-for="(req, i) in paginatedRequests"
+                                v-for="(req, idx) in paginatedRequests"
                                 :key="req.id"
-                                class="transition-colors hover:bg-muted/40"
+                                class="border-b border-border/40 hover:bg-muted/30 transition-colors"
                             >
                                 <td
-                                    class="px-5 py-3.5 text-center font-mono text-muted-foreground"
+                                    class="px-5 py-3.5 text-center font-mono font-bold text-muted-foreground"
                                 >
                                     {{
-                                        (currentPage - 1) * itemsPerPage + i + 1
+                                        (currentPage - 1) * itemsPerPage +
+                                        idx +
+                                        1
                                     }}
                                 </td>
                                 <td class="px-5 py-3.5">
-                                    <p class="font-bold text-foreground">
-                                        {{ req.user?.name || 'Pegawai ASN' }}
-                                    </p>
+                                    <div class="font-bold text-foreground">
+                                        {{ req.user?.name || '-' }}
+                                    </div>
                                     <div
-                                        class="mt-0.5 flex items-center gap-1.5"
+                                        class="flex items-center gap-2 text-[11px] text-muted-foreground"
                                     >
-                                        <span
-                                            class="text-[11px] text-muted-foreground"
-                                        >
-                                            {{
-                                                req.user?.office?.opd_name ||
-                                                '-'
-                                            }}
-                                        </span>
+                                        <span>{{
+                                            req.user?.office?.opd_name || '-'
+                                        }}</span>
                                         <Badge
+                                            v-if="req.type === 'cuti'"
                                             variant="outline"
-                                            class="border-teal-500/30 bg-teal-500/10 text-[10px] font-semibold text-teal-600 dark:text-teal-400"
+                                            class="rounded-none border-teal-500/30 text-[9px] font-bold text-teal-600 uppercase dark:text-teal-400"
                                         >
                                             Sisa Cuti:
                                             {{
@@ -208,7 +206,7 @@ const updateStatus = (id: number, status: string) => {
                                 <td class="px-5 py-3.5">
                                     <Badge
                                         variant="outline"
-                                        class="font-semibold"
+                                        class="rounded-none text-[10px] font-bold uppercase tracking-wider"
                                     >
                                         {{ req.type_label || req.type }}
                                     </Badge>
@@ -222,7 +220,7 @@ const updateStatus = (id: number, status: string) => {
                                     </p>
                                     <p
                                         v-if="req.duration"
-                                        class="mt-0.5 font-sans font-semibold text-teal-600 dark:text-teal-400"
+                                        class="mt-0.5 font-sans font-bold text-emerald-600 dark:text-emerald-400"
                                     >
                                         Durasi: {{ req.duration }} Hari
                                     </p>
@@ -239,7 +237,7 @@ const updateStatus = (id: number, status: string) => {
                                                 ? 'default'
                                                 : 'outline'
                                         "
-                                        class="text-[10px] font-semibold uppercase"
+                                        class="rounded-none text-[10px] font-bold uppercase tracking-wider"
                                         :class="{
                                             'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
                                                 req.status === 'disetujui',
@@ -255,7 +253,7 @@ const updateStatus = (id: number, status: string) => {
                                 <td class="px-5 py-3.5 text-center">
                                     <div
                                         v-if="req.status === 'menunggu'"
-                                        class="flex items-center justify-center gap-1"
+                                        class="flex items-center justify-center gap-1.5"
                                     >
                                         <Button
                                             size="sm"
@@ -265,7 +263,7 @@ const updateStatus = (id: number, status: string) => {
                                                     'disetujui',
                                                 )
                                             "
-                                            class="h-7 cursor-pointer bg-emerald-600 text-xs text-white hover:bg-emerald-700"
+                                            class="h-8 rounded-none cursor-pointer bg-emerald-600 px-3 font-bold uppercase text-[11px] text-white shadow-none hover:bg-emerald-700"
                                         >
                                             <Check class="mr-1 h-3.5 w-3.5" />
                                             Approve
@@ -276,7 +274,7 @@ const updateStatus = (id: number, status: string) => {
                                             @click="
                                                 updateStatus(req.id, 'ditolak')
                                             "
-                                            class="h-7 cursor-pointer text-xs"
+                                            class="h-8 rounded-none cursor-pointer px-3 font-bold uppercase text-[11px] shadow-none"
                                         >
                                             <X class="mr-1 h-3.5 w-3.5" />
                                             Reject
@@ -284,9 +282,10 @@ const updateStatus = (id: number, status: string) => {
                                     </div>
                                     <span
                                         v-else
-                                        class="text-[11px] font-semibold text-muted-foreground"
-                                        >Telah Diproses</span
+                                        class="text-xs italic text-muted-foreground"
                                     >
+                                        Telah Diproses
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
