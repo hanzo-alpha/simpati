@@ -82,15 +82,15 @@
 ---
 
 ## 🛡️ Phase 5: Next Level Security & Feature Upgrades (New Roadmap)
-- [/] **18. Active Liveness Detection & Anti-Spoofing for Selfie Presensi**
+- [x] **18. Active Liveness Detection & Anti-Spoofing for Selfie Presensi**
   - [x] Verify Fake GPS & Mock Location detection (Already active in `presensi_screen.dart` & `AttendanceController.php`).
   - [x] Verify Offline Attendance Queue & Auto-Sync (Already active in `offline_sync_service.dart`).
-  - [ ] Add Active Face Liveness prompt (e.g. blink/smile/head tilt detection or prompt overlay before snapshot) on Flutter selfie camera.
+  - [x] Add Active Face Liveness challenge prompt overlay before selfie snapshot on Flutter camera.
 
-- [ ] **19. Kuota & Balance Cuti (Leave Balance & Quota Management)**
-  - [ ] Add `leave_quota` to User model / migration.
-  - [ ] Auto-deduct leave quota upon approval of leave request.
-  - [ ] Display remaining leave balance on Mobile Leave Screen.
+- [x] **19. Kuota & Balance Cuti (Leave Balance & Quota Management)**
+  - [x] Support `sisa_cuti_tahunan` in UserProfile model & Laravel migration.
+  - [x] Auto-deduct leave quota upon supervisor approval in `LeaveRequestController@updateStatus`.
+  - [x] Render interactive Sisa Kuota Cuti Card & live duration calculator in Mobile `pengajuan_screen.dart`.
 
 - [ ] **20. Upload & Preview Lampiran Surat Cuti/Dinas (PDF & Image)**
   - [ ] Support PDF/image attachments in Leave Request screen.
