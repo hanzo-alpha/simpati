@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
-import { Clock, Plus, Edit3, Trash2 } from '@lucide/vue';
+import { Clock, Plus, Edit3, Trash2, Search } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
 import { Badge } from '@/Components/ui/badge';
@@ -44,6 +44,16 @@ const props = defineProps<{
     schedules: ScheduleItem[];
     offices: Office[];
 }>();
+
+const opdSearch = ref('');
+
+const filteredOffices = computed(() => {
+    if (!opdSearch.value.trim()) {
+        return props.offices;
+    }
+    const q = opdSearch.value.toLowerCase();
+    return props.offices.filter((o) => o.opd_name.toLowerCase().includes(q));
+});
 
 const currentPage = ref(1);
 const itemsPerPage = 10;
@@ -312,17 +322,34 @@ const deleteSchedule = (id: number) => {
                                         placeholder="Pilih OPD / Global"
                                     />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="global"
-                                        >Semua OPD (Global Pemda)</SelectItem
-                                    >
-                                    <SelectItem
-                                        v-for="o in offices"
-                                        :key="o.id"
-                                        :value="String(o.id)"
-                                    >
-                                        {{ o.opd_name }}
-                                    </SelectItem>
+                                <SelectContent class="rounded-none border-border">
+                                    <div class="p-2 border-b border-border sticky top-0 bg-popover z-10">
+                                        <div class="relative">
+                                            <Search class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                                            <Input
+                                                v-model="opdSearch"
+                                                type="text"
+                                                placeholder="Cari OPD / Kantor..."
+                                                class="h-8 rounded-none pl-8 text-xs bg-background border-input"
+                                                @keydown.stop
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="max-h-56 overflow-y-auto pt-1">
+                                        <SelectItem value="global"
+                                            >Semua OPD (Global Pemda)</SelectItem
+                                        >
+                                        <SelectItem
+                                            v-for="o in filteredOffices"
+                                            :key="o.id"
+                                            :value="String(o.id)"
+                                        >
+                                            {{ o.opd_name }}
+                                        </SelectItem>
+                                        <div v-if="!filteredOffices.length" class="p-3 text-center text-xs text-muted-foreground">
+                                            OPD tidak ditemukan
+                                        </div>
+                                    </div>
                                 </SelectContent>
                             </Select>
                         </div>

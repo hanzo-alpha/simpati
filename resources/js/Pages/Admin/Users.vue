@@ -86,9 +86,18 @@ const props = defineProps<{
 
 const activeFilter = ref('all');
 const searchQuery = ref('');
+const opdFormSearch = ref('');
 const showForm = ref(false);
 const showCardModal = ref(false);
 const selectedCardUser = ref<UserItem | null>(null);
+
+const filteredFormOffices = computed(() => {
+    if (!opdFormSearch.value.trim()) {
+        return props.offices;
+    }
+    const q = opdFormSearch.value.toLowerCase();
+    return props.offices.filter((o) => o.opd_name.toLowerCase().includes(q));
+});
 
 const filters = [
     { label: 'Semua', value: 'all' },
@@ -592,14 +601,31 @@ const resetDevice = (user: UserItem) => {
                                         placeholder="Pilih OPD / Kantor"
                                     />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem
-                                        v-for="o in offices"
-                                        :key="o.id"
-                                        :value="String(o.id)"
-                                    >
-                                        {{ o.opd_name }}
-                                    </SelectItem>
+                                <SelectContent class="rounded-none border-border">
+                                    <div class="p-2 border-b border-border sticky top-0 bg-popover z-10">
+                                        <div class="relative">
+                                            <Search class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                                            <Input
+                                                v-model="opdFormSearch"
+                                                type="text"
+                                                placeholder="Cari OPD / Kantor..."
+                                                class="h-8 rounded-none pl-8 text-xs bg-background border-input"
+                                                @keydown.stop
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="max-h-56 overflow-y-auto pt-1">
+                                        <SelectItem
+                                            v-for="o in filteredFormOffices"
+                                            :key="o.id"
+                                            :value="String(o.id)"
+                                        >
+                                            {{ o.opd_name }}
+                                        </SelectItem>
+                                        <div v-if="!filteredFormOffices.length" class="p-3 text-center text-xs text-muted-foreground">
+                                            OPD tidak ditemukan
+                                        </div>
+                                    </div>
                                 </SelectContent>
                             </Select>
                         </div>
