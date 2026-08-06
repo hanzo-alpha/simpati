@@ -2,7 +2,7 @@
 
 [![Laravel CI](https://github.com/hanzo-alpha/simpati/actions/workflows/ci.yml/badge.svg)](https://github.com/hanzo-alpha/simpati/actions/workflows/ci.yml)
 [![PHP Version](https://img.shields.io/badge/PHP-8.3%20%7C%208.5-777BB4?style=flat&logo=php)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat&logo=laravel)](https://laravel.com)
+[![Laravel Version](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat&logo=laravel)](https://laravel.com)
 [![Vue Version](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=flat&logo=vuedotjs)](https://vuejs.org)
 [![Inertia Version](https://img.shields.io/badge/Inertia.js-v3-9553E9?style=flat&logo=inertia)](https://inertiajs.com)
 [![Mobile Repo](https://img.shields.io/badge/Flutter_App-simpati--mobile-02569B?style=flat&logo=flutter)](https://github.com/hanzo-alpha/simpati-mobile)
@@ -26,7 +26,7 @@
 
 ## 🛠️ Arsitektur & Teknologi
 
-- **Backend Framework**: Laravel 12 (PHP 8.5)
+- **Backend Framework**: Laravel 13 (PHP 8.5)
 - **Frontend SPA**: Inertia.js v3 + Vue 3 (Options API / Script Setup)
 - **Desain & UI**: Tailwind CSS v4 + Shadcn Vue Preset (`Sera / Mist / Emerald`)
 - **Autentikasi & API**: Laravel Fortify + Laravel Sanctum REST API
