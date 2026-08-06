@@ -212,34 +212,54 @@ const resetDevice = (user: UserItem) => {
 </script>
 
 <template>
-    <AdminLayout title="Kelola Pengguna ASN" subtitle="Manajemen Data Pegawai ASN, OPD, Role, & Binding Device HP">
+    <AdminLayout
+        title="Kelola Pengguna ASN"
+        subtitle="Manajemen Data Pegawai ASN, OPD, Role, & Binding Device HP"
+    >
         <!-- Header Toolbar -->
         <template #actions>
-            <Button @click="showForm = true"
-                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90">
+            <Button
+                @click="showForm = true"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
+            >
                 <UserPlus class="h-4 w-4" />
                 <span>Tambah ASN Baru</span>
             </Button>
         </template>
 
         <!-- Search & Filter Card -->
-        <Card class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs">
-            <CardContent class="flex flex-col items-center justify-between gap-4 p-4 md:flex-row">
+        <Card
+            class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
+        >
+            <CardContent
+                class="flex flex-col items-center justify-between gap-4 p-4 md:flex-row"
+            >
                 <div class="relative w-full md:w-80">
                     <Search
-                        class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input v-model="searchQuery" type="text" placeholder="Cari NIP, Nama, atau OPD..."
-                        class="h-9 pl-9 text-xs" />
+                        class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                    />
+                    <Input
+                        v-model="searchQuery"
+                        type="text"
+                        placeholder="Cari NIP, Nama, atau OPD..."
+                        class="h-9 pl-9 text-xs"
+                    />
                 </div>
 
                 <div class="flex w-full items-center gap-1.5 overflow-x-auto md:w-auto">
-                    <Button v-for="f in filterStatusList" :key="f.key" :variant="statusFilter === f.key ? 'default' : 'outline'
-                        " size="sm" @click="statusFilter = f.key"
+                    <Button
+                        v-for="f in filters"
+                        :key="f.value"
+                        :variant="activeFilter === f.value ? 'default' : 'outline'"
+                        size="sm"
+                        @click="activeFilter = f.value"
                         class="cursor-pointer rounded-none text-[11px] font-bold tracking-wider uppercase transition-all"
-                        :class="statusFilter === f.key
-                            ? 'bg-primary text-primary-foreground shadow-none'
-                            : 'text-muted-foreground hover:text-foreground'
-                            ">
+                        :class="
+                            activeFilter === f.value
+                                ? 'bg-primary text-primary-foreground shadow-none'
+                                : 'text-muted-foreground hover:text-foreground'
+                        "
+                    >
                         {{ f.label }}
                     </Button>
                 </div>
@@ -247,14 +267,19 @@ const resetDevice = (user: UserItem) => {
         </Card>
 
         <!-- Table Card -->
-        <Card class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs">
+        <Card
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
+        >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase">
-                                <th class="w-10 px-4 py-3.5 text-center font-bold">
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
+                            >
+                                <th
+                                    class="w-10 px-4 py-3.5 text-center font-bold"
+                                >
                                     #
                                 </th>
                                 <th class="px-4 py-3.5 font-bold">
@@ -278,9 +303,14 @@ const resetDevice = (user: UserItem) => {
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
-                            <tr v-for="(user, i) in paginatedUsers" :key="user.id"
-                                class="border-b border-border/40 transition-colors hover:bg-muted/30">
-                                <td class="px-4 py-3.5 text-center font-mono text-muted-foreground">
+                            <tr
+                                v-for="(user, i) in paginatedUsers"
+                                :key="user.id"
+                                class="border-b border-border/40 transition-colors hover:bg-muted/30"
+                            >
+                                <td
+                                    class="px-4 py-3.5 text-center font-mono text-muted-foreground"
+                                >
                                     {{
                                         (currentPage - 1) * itemsPerPage + i + 1
                                     }}
@@ -288,14 +318,19 @@ const resetDevice = (user: UserItem) => {
                                 <td class="px-4 py-3.5">
                                     <div class="flex items-center gap-3">
                                         <div
-                                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-xs font-bold text-emerald-600 dark:text-emerald-400"
+                                        >
                                             {{ user.name.charAt(0) }}
                                         </div>
                                         <div>
-                                            <p class="font-bold text-foreground">
+                                            <p
+                                                class="font-bold text-foreground"
+                                            >
                                                 {{ user.name }}
                                             </p>
-                                            <p class="font-mono text-[11px] text-muted-foreground">
+                                            <p
+                                                class="font-mono text-[11px] text-muted-foreground"
+                                            >
                                                 NIP. {{ user.nip }}
                                             </p>
                                         </div>
@@ -306,14 +341,18 @@ const resetDevice = (user: UserItem) => {
                                         {{ user.office?.opd_name || '-' }}
                                     </p>
                                     <div class="flex items-center gap-2">
-                                        <p class="text-[11px] text-muted-foreground">
+                                        <p
+                                            class="text-[11px] text-muted-foreground"
+                                        >
                                             {{
                                                 user.profile?.jabatan ||
                                                 'Analis Kepegawaian'
                                             }}
                                         </p>
-                                        <Badge variant="outline"
-                                            class="rounded-none border-emerald-500/30 bg-emerald-500/10 text-[10px] font-bold tracking-wider text-emerald-700 uppercase dark:text-emerald-400">
+                                        <Badge
+                                            variant="outline"
+                                            class="rounded-none border-emerald-500/30 bg-emerald-500/10 text-[10px] font-bold tracking-wider text-emerald-700 uppercase dark:text-emerald-400"
+                                        >
                                             Cuti:
                                             {{
                                                 user.profile
@@ -324,8 +363,10 @@ const resetDevice = (user: UserItem) => {
                                     </div>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <Badge variant="outline"
-                                        class="rounded-none font-mono text-[10px] font-bold tracking-wider uppercase">
+                                    <Badge
+                                        variant="outline"
+                                        class="rounded-none font-mono text-[10px] font-bold tracking-wider uppercase"
+                                    >
                                         {{
                                             user.role?.display_name ||
                                             user.role?.name ||
@@ -334,22 +375,33 @@ const resetDevice = (user: UserItem) => {
                                     </Badge>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <span v-if="user.device_id"
-                                        class="font-mono text-[11px] font-medium text-amber-600 dark:text-amber-400">
+                                    <span
+                                        v-if="user.device_id"
+                                        class="font-mono text-[11px] font-medium text-amber-600 dark:text-amber-400"
+                                    >
                                         Locked
                                     </span>
-                                    <span v-else class="font-mono text-[11px] text-muted-foreground">
+                                    <span
+                                        v-else
+                                        class="font-mono text-[11px] text-muted-foreground"
+                                    >
                                         Unlocked
                                     </span>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <Badge :variant="user.is_active
-                                        ? 'default'
-                                        : 'secondary'
-                                        " class="rounded-none text-[10px] font-bold tracking-wider uppercase" :class="user.is_active
-                                            ? 'border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 shadow-none dark:text-emerald-400'
-                                            : ''
-                                            ">
+                                    <Badge
+                                        :variant="
+                                            user.is_active
+                                                ? 'default'
+                                                : 'secondary'
+                                        "
+                                        class="rounded-none text-[10px] font-bold tracking-wider uppercase"
+                                        :class="
+                                            user.is_active
+                                                ? 'border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 shadow-none dark:text-emerald-400'
+                                                : ''
+                                        "
+                                    >
                                         {{
                                             user.is_active
                                                 ? 'AKTIF'
@@ -358,29 +410,48 @@ const resetDevice = (user: UserItem) => {
                                     </Badge>
                                 </td>
                                 <td class="px-4 py-3.5 text-right">
-                                    <div class="flex items-center justify-end gap-1">
-                                        <Button v-if="user.device_id" variant="ghost" size="sm"
-                                            @click="resetDevice(user.id)"
+                                    <div
+                                        class="flex items-center justify-end gap-1"
+                                    >
+                                        <Button
+                                            v-if="user.device_id"
+                                            variant="ghost"
+                                            size="sm"
+                                            @click="resetDevice(user)"
                                             class="h-8 w-8 cursor-pointer rounded-none p-0 text-amber-600 hover:border-border hover:bg-amber-500/10 dark:text-amber-400"
-                                            title="Reset Device Binding HP">
+                                            title="Reset Device Binding HP"
+                                        >
                                             <Smartphone class="h-3.5 w-3.5" />
                                         </Button>
-                                        <Button variant="ghost" size="sm" @click="openCardModal(user)"
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            @click="openCardModal(user)"
                                             class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
-                                            title="Lihat KARTU ASN Digital">
+                                            title="Lihat KARTU ASN Digital"
+                                        >
                                             <CreditCard class="h-3.5 w-3.5" />
                                         </Button>
-                                        <Button variant="ghost" size="sm" @click="editUser(user)"
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            @click="editUser(user)"
                                             class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
-                                            title="Edit Data ASN">
+                                            title="Edit Data ASN"
+                                        >
                                             <Edit3 class="h-3.5 w-3.5" />
                                         </Button>
-                                        <Button variant="ghost" size="sm" @click="toggleUserStatus(user)"
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            @click="toggleUserStatus(user)"
                                             class="h-8 w-8 cursor-pointer rounded-none p-0 text-rose-500 hover:bg-rose-500/10"
-                                            :title="user.is_active
-                                                ? 'Nonaktifkan Akun'
-                                                : 'Aktifkan Akun'
-                                                ">
+                                            :title="
+                                                user.is_active
+                                                    ? 'Nonaktifkan Akun'
+                                                    : 'Aktifkan Akun'
+                                            "
+                                        >
                                             <Power class="h-3.5 w-3.5" />
                                         </Button>
                                     </div>
@@ -389,13 +460,22 @@ const resetDevice = (user: UserItem) => {
                         </tbody>
                     </table>
 
-                    <div v-if="!filteredUsers.length" class="space-y-2 py-10 text-center text-muted-foreground">
-                        <UserPlus class="mx-auto h-8 w-8 text-muted-foreground/50" />
+                    <div
+                        v-if="!filteredUsers.length"
+                        class="space-y-2 py-10 text-center text-muted-foreground"
+                    >
+                        <UserPlus
+                            class="mx-auto h-8 w-8 text-muted-foreground/50"
+                        />
                         <p>Tidak ada data Pegawai ASN yang ditemukan.</p>
                     </div>
 
-                    <Pagination v-if="filteredUsers.length > 0" v-model:currentPage="currentPage"
-                        :totalItems="filteredUsers.length" :itemsPerPage="itemsPerPage" />
+                    <Pagination
+                        v-if="filteredUsers.length > 0"
+                        v-model:currentPage="currentPage"
+                        :totalItems="filteredUsers.length"
+                        :itemsPerPage="itemsPerPage"
+                    />
                 </div>
             </CardContent>
         </Card>
@@ -403,12 +483,15 @@ const resetDevice = (user: UserItem) => {
         <!-- Shadcn Dialog Add/Edit ASN -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-2xl">
+                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-2xl"
+            >
                 <DialogHeader class="border-b border-border/60 pb-3">
                     <DialogTitle
-                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase">
+                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase"
+                    >
                         <div
-                            class="flex h-7 w-7 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                            class="flex h-7 w-7 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                        >
                             <UserPlus class="h-4 w-4" />
                         </div>
                         <span>{{
@@ -423,71 +506,118 @@ const resetDevice = (user: UserItem) => {
                     <!-- Row 1: Identitas utama (2 cols) -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label for="nip"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">NIP
-                                Pegawai</Label>
-                            <Input id="nip" v-model="form.nip" required placeholder="19850101..."
-                                class="h-10 rounded-none text-xs sm:text-sm" />
+                            <Label
+                                for="nip"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >NIP Pegawai</Label
+                            >
+                            <Input
+                                id="nip"
+                                v-model="form.nip"
+                                required
+                                placeholder="19850101..."
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="name"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Nama
-                                Lengkap & Gelar</Label>
-                            <Input id="name" v-model="form.name" required placeholder="Nama & Gelar"
-                                class="h-10 rounded-none text-xs sm:text-sm" />
+                            <Label
+                                for="name"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Nama Lengkap & Gelar</Label
+                            >
+                            <Input
+                                id="name"
+                                v-model="form.name"
+                                required
+                                placeholder="Nama & Gelar"
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
                         </div>
                     </div>
 
                     <!-- Row 2: Email & Password (2 cols) -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label for="email"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Email
-                                Kedinasan</Label>
-                            <Input id="email" v-model="form.email" type="email" placeholder="email@soppengkab.go.id"
-                                class="h-10 rounded-none text-xs sm:text-sm" />
+                            <Label
+                                for="email"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Email Kedinasan</Label
+                            >
+                            <Input
+                                id="email"
+                                v-model="form.email"
+                                type="email"
+                                placeholder="email@soppengkab.go.id"
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="password"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                            <Label
+                                for="password"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >
                                 {{
                                     form.id
                                         ? 'Password Baru (Opsional)'
                                         : 'Password Akun'
                                 }}
                             </Label>
-                            <Input id="password" v-model="form.password" type="password" :required="!form.id"
-                                placeholder="••••••••" class="h-10 rounded-none text-xs sm:text-sm" />
+                            <Input
+                                id="password"
+                                v-model="form.password"
+                                type="password"
+                                :required="!form.id"
+                                placeholder="••••••••"
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
                         </div>
                     </div>
 
                     <!-- Row 3: Struktur Penugasan & Role (2 cols) -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">OPD /
-                                Instansi
-                                Kantor</Label>
+                            <Label
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >OPD / Instansi Kantor</Label
+                            >
                             <Select v-model="form.office_id">
-                                <SelectTrigger class="h-10 rounded-none text-xs sm:text-sm">
-                                    <SelectValue placeholder="Pilih OPD / Kantor" />
+                                <SelectTrigger
+                                    class="h-10 rounded-none text-xs sm:text-sm"
+                                >
+                                    <SelectValue
+                                        placeholder="Pilih OPD / Kantor"
+                                    />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem v-for="o in offices" :key="o.id" :value="String(o.id)">
+                                    <SelectItem
+                                        v-for="o in offices"
+                                        :key="o.id"
+                                        :value="String(o.id)"
+                                    >
                                         {{ o.opd_name }}
                                     </SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Role Hak
-                                Akses
-                                System</Label>
+                            <Label
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Role Hak Akses System</Label
+                            >
                             <Select v-model="form.role_id">
-                                <SelectTrigger class="h-10 rounded-none text-xs sm:text-sm">
-                                    <SelectValue placeholder="Pilih Role System" />
+                                <SelectTrigger
+                                    class="h-10 rounded-none text-xs sm:text-sm"
+                                >
+                                    <SelectValue
+                                        placeholder="Pilih Role System"
+                                    />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem v-for="r in roles" :key="r.id" :value="String(r.id)">
+                                    <SelectItem
+                                        v-for="r in roles"
+                                        :key="r.id"
+                                        :value="String(r.id)"
+                                    >
                                         {{ r.display_name }}
                                     </SelectItem>
                                 </SelectContent>
@@ -498,38 +628,64 @@ const resetDevice = (user: UserItem) => {
                     <!-- Row 4: Jabatan, Sub OPD, & Kuota Cuti (3 cols) -->
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div class="space-y-1.5">
-                            <Label for="jabatan"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Jabatan
-                                Pegawai</Label>
-                            <Input id="jabatan" v-model="form.jabatan" placeholder="Kepala Bidang..."
-                                class="h-10 rounded-none text-xs sm:text-sm" />
+                            <Label
+                                for="jabatan"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Jabatan Pegawai</Label
+                            >
+                            <Input
+                                id="jabatan"
+                                v-model="form.jabatan"
+                                placeholder="Kepala Bidang..."
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="unit_kerja"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Sub OPD /
-                                Unit
-                                Kerja</Label>
-                            <Input id="unit_kerja" v-model="form.unit_kerja" placeholder="Sekretariat / Bidang..."
-                                class="h-10 rounded-none text-xs sm:text-sm" />
+                            <Label
+                                for="unit_kerja"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Sub OPD / Unit Kerja</Label
+                            >
+                            <Input
+                                id="unit_kerja"
+                                v-model="form.unit_kerja"
+                                placeholder="Sekretariat / Bidang..."
+                                class="h-10 rounded-none text-xs sm:text-sm"
+                            />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="sisa_cuti_tahunan"
-                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Sisa Cuti
-                                Tahunan
-                                (Hari)</Label>
-                            <Input id="sisa_cuti_tahunan" v-model.number="form.sisa_cuti_tahunan" type="number" min="0"
-                                max="100" placeholder="12"
-                                class="h-10 rounded-none font-mono text-xs font-bold text-emerald-600 sm:text-sm dark:text-emerald-400" />
+                            <Label
+                                for="sisa_cuti_tahunan"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Sisa Cuti Tahunan (Hari)</Label
+                            >
+                            <Input
+                                id="sisa_cuti_tahunan"
+                                v-model.number="form.sisa_cuti_tahunan"
+                                type="number"
+                                min="0"
+                                max="100"
+                                placeholder="12"
+                                class="h-10 rounded-none font-mono text-xs font-bold text-emerald-600 sm:text-sm dark:text-emerald-400"
+                            />
                         </div>
                     </div>
 
-                    <div class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4">
-                        <Button type="button" variant="outline" @click="resetForm"
-                            class="h-10 cursor-pointer rounded-none px-5 text-xs font-bold tracking-wider uppercase">
+                    <div
+                        class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4"
+                    >
+                        <Button
+                            type="button"
+                            variant="outline"
+                            @click="resetForm"
+                            class="h-10 cursor-pointer rounded-none px-5 text-xs font-bold tracking-wider uppercase"
+                        >
                             Batal
                         </Button>
-                        <Button type="submit"
-                            class="h-10 cursor-pointer rounded-none bg-primary px-6 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90">
+                        <Button
+                            type="submit"
+                            class="h-10 cursor-pointer rounded-none bg-primary px-6 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
+                        >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah ASN' }}
                         </Button>
                     </div>
@@ -540,12 +696,19 @@ const resetDevice = (user: UserItem) => {
         <!-- Shadcn Dialog ID Card Digital ASN -->
         <Dialog v-model:open="showCardModal">
             <DialogContent
-                class="border-teal-500/30 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 text-white sm:max-w-sm">
+                class="border-teal-500/30 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 text-white sm:max-w-sm"
+            >
                 <div v-if="selectedCardUser" class="space-y-3 pt-2 text-center">
                     <div class="flex items-center justify-center gap-2">
-                        <img src="/images/logo.png" class="h-8 w-8 object-contain" alt="Logo Pemda" />
+                        <img
+                            src="/images/logo.png"
+                            class="h-8 w-8 object-contain"
+                            alt="Logo Pemda"
+                        />
                         <div class="text-left">
-                            <h4 class="text-xs font-black tracking-wider text-teal-400">
+                            <h4
+                                class="text-xs font-black tracking-wider text-teal-400"
+                            >
                                 PEMKAB SOPPENG
                             </h4>
                             <p class="text-[9px] font-medium text-slate-300">
@@ -555,7 +718,8 @@ const resetDevice = (user: UserItem) => {
                     </div>
 
                     <div
-                        class="mx-auto my-3 flex h-20 w-20 items-center justify-center rounded-full border-2 border-teal-400 bg-teal-500/20 text-xl font-bold text-teal-300 shadow-inner">
+                        class="mx-auto my-3 flex h-20 w-20 items-center justify-center rounded-full border-2 border-teal-400 bg-teal-500/20 text-xl font-bold text-teal-300 shadow-inner"
+                    >
                         {{
                             selectedCardUser.name
                                 .split(' ')
@@ -575,7 +739,9 @@ const resetDevice = (user: UserItem) => {
                         </p>
                     </div>
 
-                    <div class="space-y-1 border-t border-slate-700/60 pt-2 text-xs">
+                    <div
+                        class="space-y-1 border-t border-slate-700/60 pt-2 text-xs"
+                    >
                         <p class="font-semibold text-slate-300">
                             {{
                                 selectedCardUser.office?.opd_name ||

@@ -61,14 +61,14 @@ const updateStatus = (swap: ShiftSwapItem, status: string) => {
     >
         <!-- Swaps Table Card -->
         <Card
-            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
                                 <th class="px-5 py-3.5 font-semibold">
                                     Pemohon (ASN)

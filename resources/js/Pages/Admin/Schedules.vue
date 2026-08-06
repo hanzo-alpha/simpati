@@ -110,7 +110,7 @@ const deleteSchedule = (id: number) => {
         <template #actions>
             <Button
                 @click="showForm = true"
-                class="cursor-pointer rounded-none bg-primary font-bold uppercase tracking-wider text-xs text-primary-foreground hover:bg-primary/90 shadow-none h-10 px-4 flex items-center gap-2"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
             >
                 <Plus class="h-4 w-4" />
                 <span>Tambah Jam Kerja</span>
@@ -119,47 +119,35 @@ const deleteSchedule = (id: number) => {
 
         <!-- Schedules Table Card -->
         <Card
-            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
                                 <th class="px-4 py-3.5 font-bold">
                                     Nama Jadwal
                                 </th>
-                                <th class="px-4 py-3.5 font-bold">
-                                    OPD Utama
-                                </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-4 py-3.5 font-bold">OPD Utama</th>
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Tipe
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Jam Masuk
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Jam Pulang
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Toleransi
                                 </th>
                                 <th class="px-4 py-3.5 font-bold">
                                     Hari Berlaku
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Aksi
                                 </th>
                             </tr>
@@ -168,7 +156,7 @@ const deleteSchedule = (id: number) => {
                             <tr
                                 v-for="sch in paginatedSchedules"
                                 :key="sch.id"
-                                class="border-b border-border/40 hover:bg-muted/30 transition-colors"
+                                class="border-b border-border/40 transition-colors hover:bg-muted/30"
                             >
                                 <td
                                     class="px-4 py-3.5 font-bold text-foreground"
@@ -181,7 +169,7 @@ const deleteSchedule = (id: number) => {
                                 <td class="px-4 py-3.5 text-center">
                                     <Badge
                                         variant="outline"
-                                        class="rounded-none text-[10px] font-bold uppercase tracking-wider"
+                                        class="rounded-none text-[10px] font-bold tracking-wider uppercase"
                                         :class="{
                                             'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
                                                 sch.type === 'reguler',
@@ -222,7 +210,7 @@ const deleteSchedule = (id: number) => {
                                             variant="ghost"
                                             size="sm"
                                             @click="editSchedule(sch)"
-                                            class="h-8 w-8 rounded-none cursor-pointer p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
                                             title="Edit Jam Kerja"
                                         >
                                             <Edit3 class="h-3.5 w-3.5" />
@@ -231,7 +219,7 @@ const deleteSchedule = (id: number) => {
                                             variant="ghost"
                                             size="sm"
                                             @click="deleteSchedule(sch.id)"
-                                            class="h-8 w-8 rounded-none cursor-pointer p-0 text-rose-500 hover:bg-rose-500/10"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-rose-500 hover:bg-rose-500/10"
                                             title="Hapus Jam Kerja"
                                         >
                                             <Trash2 class="h-3.5 w-3.5" />
@@ -265,11 +253,11 @@ const deleteSchedule = (id: number) => {
         <!-- Shadcn Dialog Form Schedules -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="rounded-none border border-border bg-card text-card-foreground shadow-xl sm:max-w-2xl p-6"
+                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-2xl"
             >
                 <DialogHeader class="border-b border-border/60 pb-3">
                     <DialogTitle
-                        class="flex items-center gap-2.5 text-base font-bold uppercase tracking-wider text-foreground"
+                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase"
                     >
                         <div
                             class="flex h-7 w-7 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
@@ -287,7 +275,7 @@ const deleteSchedule = (id: number) => {
                         <div class="space-y-1.5">
                             <Label
                                 for="nama_jadwal"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                                 >Nama Jam Kerja</Label
                             >
                             <Input
@@ -300,7 +288,7 @@ const deleteSchedule = (id: number) => {
                         </div>
                         <div class="space-y-1.5">
                             <Label
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                                 >OPD / Kantor</Label
                             >
                             <Select v-model="form.office_id">
@@ -327,7 +315,7 @@ const deleteSchedule = (id: number) => {
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
                             <Label
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                                 >Tipe Jadwal</Label
                             >
                             <Select v-model="form.type">
@@ -352,7 +340,7 @@ const deleteSchedule = (id: number) => {
                         <div class="space-y-1.5">
                             <Label
                                 for="toleransi_menit"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                                 >Toleransi Keterlambatan (Menit)</Label
                             >
                             <Input
@@ -369,7 +357,7 @@ const deleteSchedule = (id: number) => {
                         <div class="space-y-1.5">
                             <Label
                                 for="jam_masuk"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                                 >Jam Masuk</Label
                             >
                             <Input
@@ -383,7 +371,7 @@ const deleteSchedule = (id: number) => {
                         <div class="space-y-1.5">
                             <Label
                                 for="jam_pulang"
-                                class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                                 >Jam Pulang</Label
                             >
                             <Input
@@ -399,7 +387,7 @@ const deleteSchedule = (id: number) => {
                     <div class="space-y-1.5">
                         <Label
                             for="hari"
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Hari Berlaku (Dipisah koma)</Label
                         >
                         <Input
@@ -412,19 +400,19 @@ const deleteSchedule = (id: number) => {
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-2 border-t border-border pt-4 mt-6"
+                        class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4"
                     >
                         <Button
                             type="button"
                             variant="outline"
                             @click="resetForm"
-                            class="h-10 px-5 rounded-none font-bold uppercase tracking-wider text-xs cursor-pointer"
+                            class="h-10 cursor-pointer rounded-none px-5 text-xs font-bold tracking-wider uppercase"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            class="h-10 px-6 rounded-none font-bold uppercase tracking-wider text-xs cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 shadow-none"
+                            class="h-10 cursor-pointer rounded-none bg-primary px-6 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
                         >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah Jadwal' }}
                         </Button>

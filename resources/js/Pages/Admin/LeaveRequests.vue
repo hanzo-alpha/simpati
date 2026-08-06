@@ -146,7 +146,7 @@ const updateStatus = (id: number, status: string) => {
                             activeStatus === sf.value ? 'default' : 'outline'
                         "
                         @click="activeStatus = sf.value"
-                        class="flex h-9 cursor-pointer items-center gap-1.5 rounded-none px-3 font-bold text-[11px] tracking-wider uppercase transition-all"
+                        class="flex h-9 cursor-pointer items-center gap-1.5 rounded-none px-3 text-[11px] font-bold tracking-wider uppercase transition-all"
                         :class="
                             activeStatus === sf.value
                                 ? 'bg-primary text-primary-foreground shadow-none'
@@ -171,14 +171,14 @@ const updateStatus = (id: number, status: string) => {
 
         <!-- Requests Table Card -->
         <Card
-            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
                                 <th
                                     class="w-10 px-5 py-3.5 text-center font-bold"
@@ -197,14 +197,10 @@ const updateStatus = (id: number, status: string) => {
                                 <th class="px-5 py-3.5 font-bold">
                                     Alasan Permohonan
                                 </th>
-                                <th
-                                    class="px-5 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-5 py-3.5 text-center font-bold">
                                     Status
                                 </th>
-                                <th
-                                    class="px-5 py-3.5 text-center font-bold"
-                                >
+                                <th class="px-5 py-3.5 text-center font-bold">
                                     Aksi Keputusan
                                 </th>
                             </tr>
@@ -213,7 +209,7 @@ const updateStatus = (id: number, status: string) => {
                             <tr
                                 v-for="(req, idx) in paginatedRequests"
                                 :key="req.id"
-                                class="border-b border-border/40 hover:bg-muted/30 transition-colors"
+                                class="border-b border-border/40 transition-colors hover:bg-muted/30"
                             >
                                 <td
                                     class="px-5 py-3.5 text-center font-mono font-bold text-muted-foreground"
@@ -251,7 +247,7 @@ const updateStatus = (id: number, status: string) => {
                                 <td class="px-5 py-3.5">
                                     <Badge
                                         variant="outline"
-                                        class="rounded-none text-[10px] font-bold uppercase tracking-wider"
+                                        class="rounded-none text-[10px] font-bold tracking-wider uppercase"
                                     >
                                         {{ req.type_label || req.type }}
                                     </Badge>
@@ -282,7 +278,7 @@ const updateStatus = (id: number, status: string) => {
                                                 ? 'default'
                                                 : 'outline'
                                         "
-                                        class="rounded-none text-[10px] font-bold uppercase tracking-wider"
+                                        class="rounded-none text-[10px] font-bold tracking-wider uppercase"
                                         :class="{
                                             'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
                                                 req.status === 'disetujui',
@@ -308,7 +304,7 @@ const updateStatus = (id: number, status: string) => {
                                                     'disetujui',
                                                 )
                                             "
-                                            class="h-8 rounded-none cursor-pointer bg-emerald-600 px-3 font-bold uppercase text-[11px] text-white shadow-none hover:bg-emerald-700"
+                                            class="h-8 cursor-pointer rounded-none bg-emerald-600 px-3 text-[11px] font-bold text-white uppercase shadow-none hover:bg-emerald-700"
                                         >
                                             <Check class="mr-1 h-3.5 w-3.5" />
                                             Approve
@@ -319,7 +315,7 @@ const updateStatus = (id: number, status: string) => {
                                             @click="
                                                 updateStatus(req.id, 'ditolak')
                                             "
-                                            class="h-8 rounded-none cursor-pointer px-3 font-bold uppercase text-[11px] shadow-none"
+                                            class="h-8 cursor-pointer rounded-none px-3 text-[11px] font-bold uppercase shadow-none"
                                         >
                                             <X class="mr-1 h-3.5 w-3.5" />
                                             Reject
@@ -327,7 +323,7 @@ const updateStatus = (id: number, status: string) => {
                                     </div>
                                     <span
                                         v-else
-                                        class="text-xs italic text-muted-foreground"
+                                        class="text-xs text-muted-foreground italic"
                                     >
                                         Telah Diproses
                                     </span>

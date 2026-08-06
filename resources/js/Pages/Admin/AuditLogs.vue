@@ -75,9 +75,13 @@ const paginatedLogs = computed(() => {
             <Card
                 class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
             >
-                <CardContent class="flex items-center justify-between p-4 sm:p-5">
+                <CardContent
+                    class="flex items-center justify-between p-4 sm:p-5"
+                >
                     <div>
-                        <p class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <p
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                        >
                             Perangkat HP Terikat
                         </p>
                         <p
@@ -86,7 +90,7 @@ const paginatedLogs = computed(() => {
                             {{ summary.total_bound_devices }}
                         </p>
                         <p
-                            class="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80"
+                            class="mt-0.5 text-[10px] font-bold tracking-wider text-muted-foreground/80 uppercase"
                         >
                             Single Device Lock Active
                         </p>
@@ -102,9 +106,13 @@ const paginatedLogs = computed(() => {
             <Card
                 class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
             >
-                <CardContent class="flex items-center justify-between p-4 sm:p-5">
+                <CardContent
+                    class="flex items-center justify-between p-4 sm:p-5"
+                >
                     <div>
-                        <p class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <p
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                        >
                             HP Belum Terikat
                         </p>
                         <p
@@ -113,7 +121,7 @@ const paginatedLogs = computed(() => {
                             {{ summary.unbound_devices }}
                         </p>
                         <p
-                            class="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80"
+                            class="mt-0.5 text-[10px] font-bold tracking-wider text-muted-foreground/80 uppercase"
                         >
                             Free Login Device
                         </p>
@@ -129,9 +137,13 @@ const paginatedLogs = computed(() => {
             <Card
                 class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
             >
-                <CardContent class="flex items-center justify-between p-4 sm:p-5">
+                <CardContent
+                    class="flex items-center justify-between p-4 sm:p-5"
+                >
                     <div>
-                        <p class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <p
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                        >
                             Presensi Luar Radius
                         </p>
                         <p
@@ -140,7 +152,7 @@ const paginatedLogs = computed(() => {
                             {{ summary.out_of_radius_count }}
                         </p>
                         <p
-                            class="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80"
+                            class="mt-0.5 text-[10px] font-bold tracking-wider text-muted-foreground/80 uppercase"
                         >
                             Di Luar Geofence Kantor
                         </p>
@@ -156,9 +168,13 @@ const paginatedLogs = computed(() => {
             <Card
                 class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
             >
-                <CardContent class="flex items-center justify-between p-4 sm:p-5">
+                <CardContent
+                    class="flex items-center justify-between p-4 sm:p-5"
+                >
                     <div>
-                        <p class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <p
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                        >
                             Pending Approval Atasan
                         </p>
                         <p
@@ -167,7 +183,7 @@ const paginatedLogs = computed(() => {
                             {{ summary.pending_approval_count }}
                         </p>
                         <p
-                            class="mt-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/80"
+                            class="mt-0.5 text-[10px] font-bold tracking-wider text-muted-foreground/80 uppercase"
                         >
                             Dinas Luar / WFH
                         </p>
@@ -183,12 +199,14 @@ const paginatedLogs = computed(() => {
 
         <!-- Logs Table Card -->
         <Card
-            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardHeader
                 class="flex-row items-center justify-between space-y-0 border-b border-border pb-3"
             >
-                <CardTitle class="flex items-center gap-2 text-base font-bold uppercase tracking-wider text-foreground">
+                <CardTitle
+                    class="flex items-center gap-2 text-base font-bold tracking-wider text-foreground uppercase"
+                >
                     <ShieldAlert class="h-4 w-4 text-rose-500" />
                     <span>Riwayat Presensi Di Luar Radius Geofence</span>
                 </CardTitle>
@@ -204,7 +222,7 @@ const paginatedLogs = computed(() => {
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
                                 <th
                                     class="w-12 px-5 py-3.5 text-center font-semibold"

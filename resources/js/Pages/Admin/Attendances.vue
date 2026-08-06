@@ -322,7 +322,7 @@ const downloadRecapPdf = (type: string) => {
         <template #actions>
             <Button
                 @click="openQrModal"
-                class="cursor-pointer rounded-none bg-primary font-bold uppercase tracking-wider text-xs text-primary-foreground hover:bg-primary/90 shadow-none h-10 px-4 flex items-center gap-2"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
             >
                 <QrCode class="h-4 w-4" />
                 <span>Scan QR Presensi ASN</span>
@@ -334,13 +334,15 @@ const downloadRecapPdf = (type: string) => {
             <Card
                 v-for="s in summaryCards"
                 :key="s.label"
-                class="rounded-none border border-border bg-card text-card-foreground shadow-xs text-center"
+                class="rounded-none border border-border bg-card text-center text-card-foreground shadow-xs"
             >
                 <CardContent class="p-4">
                     <p class="text-xl font-bold" :class="s.color">
                         {{ s.value }}
                     </p>
-                    <p class="mt-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <p
+                        class="mt-1 text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                    >
                         {{ s.label }}
                     </p>
                 </CardContent>
@@ -352,10 +354,14 @@ const downloadRecapPdf = (type: string) => {
             class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardHeader
-                class="flex-row items-center justify-between space-y-0 pb-3 border-b border-border/60"
+                class="flex-row items-center justify-between space-y-0 border-b border-border/60 pb-3"
             >
-                <CardTitle class="flex items-center gap-2 text-base font-bold uppercase tracking-wider text-foreground">
-                    <Filter class="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <CardTitle
+                    class="flex items-center gap-2 text-base font-bold tracking-wider text-foreground uppercase"
+                >
+                    <Filter
+                        class="h-4 w-4 text-emerald-600 dark:text-emerald-400"
+                    />
                     <span>Pencarian & Filter Rekap Presensi</span>
                 </CardTitle>
 
@@ -364,7 +370,7 @@ const downloadRecapPdf = (type: string) => {
                     variant="ghost"
                     size="sm"
                     @click="resetFilters"
-                    class="h-8 rounded-none cursor-pointer text-xs font-bold uppercase tracking-wider text-rose-500 hover:bg-rose-500/10"
+                    class="h-8 cursor-pointer rounded-none text-xs font-bold tracking-wider text-rose-500 uppercase hover:bg-rose-500/10"
                 >
                     <RotateCcw class="mr-1 h-3.5 w-3.5" />
                     <span>Reset Filter</span>
@@ -386,7 +392,7 @@ const downloadRecapPdf = (type: string) => {
                             @keyup.enter="reload"
                             type="text"
                             placeholder="Ketik Nama / NIP Pegawai lalu Tekan Enter..."
-                            class="h-10 rounded-none w-full pl-9 text-xs transition-all focus-visible:ring-primary"
+                            class="h-10 w-full rounded-none pl-9 text-xs transition-all focus-visible:ring-primary"
                         />
                     </div>
 
@@ -399,7 +405,7 @@ const downloadRecapPdf = (type: string) => {
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    class="h-10 rounded-none cursor-pointer border-border font-bold uppercase tracking-wider text-xs"
+                                    class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
                                 >
                                     <FileText
                                         class="mr-1.5 h-3.5 w-3.5 text-sky-500"
@@ -422,7 +428,7 @@ const downloadRecapPdf = (type: string) => {
                                     v-for="opt in recapTypeOptions"
                                     :key="opt.value"
                                     @click="downloadRecapPdf(opt.value)"
-                                    class="flex cursor-pointer items-center gap-2.5 text-xs font-medium rounded-none"
+                                    class="flex cursor-pointer items-center gap-2.5 rounded-none text-xs font-medium"
                                 >
                                     <span
                                         class="h-2 w-2 rounded-none"
@@ -439,7 +445,7 @@ const downloadRecapPdf = (type: string) => {
                             variant="outline"
                             size="sm"
                             @click="downloadSummaryReport"
-                            class="h-10 rounded-none cursor-pointer border-border font-bold uppercase tracking-wider text-xs"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
                         >
                             <FileSpreadsheet
                                 class="mr-1.5 h-3.5 w-3.5 text-amber-500"
@@ -451,7 +457,7 @@ const downloadRecapPdf = (type: string) => {
                             variant="outline"
                             size="sm"
                             @click="downloadTppReport"
-                            class="h-10 rounded-none cursor-pointer border-border font-bold uppercase tracking-wider text-xs"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
                         >
                             <FileText
                                 class="mr-1.5 h-3.5 w-3.5 text-emerald-500"
@@ -463,7 +469,7 @@ const downloadRecapPdf = (type: string) => {
                             variant="outline"
                             size="sm"
                             @click="downloadCsv"
-                            class="h-10 rounded-none cursor-pointer border-border font-bold uppercase tracking-wider text-xs"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
                         >
                             <Download
                                 class="mr-1.5 h-3.5 w-3.5 text-teal-500"
@@ -480,7 +486,7 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter Bulan -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Bulan</Label
                         >
                         <Select
@@ -488,7 +494,7 @@ const downloadRecapPdf = (type: string) => {
                             @update:model-value="reload"
                         >
                             <SelectTrigger
-                                class="h-10 rounded-none w-full bg-background text-xs"
+                                class="h-10 w-full rounded-none bg-background text-xs"
                             >
                                 <SelectValue placeholder="Pilih Bulan" />
                             </SelectTrigger>
@@ -507,7 +513,7 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter Tahun -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Tahun</Label
                         >
                         <Select
@@ -515,7 +521,7 @@ const downloadRecapPdf = (type: string) => {
                             @update:model-value="reload"
                         >
                             <SelectTrigger
-                                class="h-10 rounded-none w-full bg-background text-xs"
+                                class="h-10 w-full rounded-none bg-background text-xs"
                             >
                                 <SelectValue placeholder="Pilih Tahun" />
                             </SelectTrigger>
@@ -534,7 +540,7 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter OPD Utama -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >OPD Utama</Label
                         >
                         <Select
@@ -542,7 +548,7 @@ const downloadRecapPdf = (type: string) => {
                             @update:model-value="reload"
                         >
                             <SelectTrigger
-                                class="h-10 rounded-none w-full bg-background text-xs"
+                                class="h-10 w-full rounded-none bg-background text-xs"
                             >
                                 <SelectValue placeholder="Semua OPD" />
                             </SelectTrigger>
@@ -562,7 +568,7 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter Sub OPD / Unit Kerja -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Sub Unit Kerja</Label
                         >
                         <Select
@@ -570,7 +576,7 @@ const downloadRecapPdf = (type: string) => {
                             @update:model-value="reload"
                         >
                             <SelectTrigger
-                                class="h-10 rounded-none w-full bg-background text-xs"
+                                class="h-10 w-full rounded-none bg-background text-xs"
                             >
                                 <SelectValue placeholder="Semua Unit Kerja" />
                             </SelectTrigger>
@@ -592,7 +598,7 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter Jenis Presensi -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Jenis Presensi</Label
                         >
                         <Select
@@ -600,7 +606,7 @@ const downloadRecapPdf = (type: string) => {
                             @update:model-value="reload"
                         >
                             <SelectTrigger
-                                class="h-10 rounded-none w-full bg-background text-xs"
+                                class="h-10 w-full rounded-none bg-background text-xs"
                             >
                                 <SelectValue placeholder="Semua Jenis" />
                             </SelectTrigger>
@@ -623,7 +629,7 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter Status Presensi -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Status Presensi</Label
                         >
                         <Select
@@ -631,7 +637,7 @@ const downloadRecapPdf = (type: string) => {
                             @update:model-value="reload"
                         >
                             <SelectTrigger
-                                class="h-10 rounded-none w-full bg-background text-xs"
+                                class="h-10 w-full rounded-none bg-background text-xs"
                             >
                                 <SelectValue placeholder="Semua Status" />
                             </SelectTrigger>
@@ -654,14 +660,14 @@ const downloadRecapPdf = (type: string) => {
 
         <!-- 3. Table Presensi Card -->
         <Card
-            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
                                 <th
                                     class="w-10 px-4 py-3.5 text-center font-semibold"

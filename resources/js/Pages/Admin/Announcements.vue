@@ -76,7 +76,7 @@ const deleteAnnouncement = (id: number) => {
         <template #actions>
             <Button
                 @click="showForm = true"
-                class="cursor-pointer rounded-none bg-primary font-bold uppercase tracking-wider text-xs text-primary-foreground hover:bg-primary/90 shadow-none h-10 px-4 flex items-center gap-2"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
             >
                 <Plus class="h-4 w-4" />
                 <span>Buat Broadcast Baru</span>
@@ -111,7 +111,7 @@ const deleteAnnouncement = (id: number) => {
                                 variant="ghost"
                                 size="sm"
                                 @click="editAnnouncement(ann)"
-                                class="h-8 w-8 rounded-none cursor-pointer p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
+                                class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
                                 title="Edit Pengumuman"
                             >
                                 <Edit3 class="h-3.5 w-3.5" />
@@ -120,7 +120,7 @@ const deleteAnnouncement = (id: number) => {
                                 variant="ghost"
                                 size="sm"
                                 @click="deleteAnnouncement(ann.id)"
-                                class="h-8 w-8 rounded-none cursor-pointer p-0 text-rose-500 hover:bg-rose-500/10"
+                                class="h-8 w-8 cursor-pointer rounded-none p-0 text-rose-500 hover:bg-rose-500/10"
                                 title="Hapus Pengumuman"
                             >
                                 <Trash2 class="h-3.5 w-3.5" />
@@ -128,7 +128,7 @@ const deleteAnnouncement = (id: number) => {
                         </div>
                     </div>
                     <CardTitle
-                        class="mt-2 text-base font-bold tracking-wider uppercase text-foreground"
+                        class="mt-2 text-base font-bold tracking-wider text-foreground uppercase"
                     >
                         {{ ann.judul }}
                     </CardTitle>
@@ -154,11 +154,11 @@ const deleteAnnouncement = (id: number) => {
         <!-- Shadcn Dialog Form Announcement -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="rounded-none border border-border bg-card text-card-foreground shadow-xl sm:max-w-2xl p-6"
+                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-2xl"
             >
                 <DialogHeader class="border-b border-border/60 pb-3">
                     <DialogTitle
-                        class="flex items-center gap-2.5 text-base font-bold uppercase tracking-wider text-foreground"
+                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase"
                     >
                         <div
                             class="flex h-7 w-7 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
@@ -177,7 +177,7 @@ const deleteAnnouncement = (id: number) => {
                     <div class="space-y-1.5">
                         <Label
                             for="judul"
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Judul Pengumuman</Label
                         >
                         <Input
@@ -192,7 +192,7 @@ const deleteAnnouncement = (id: number) => {
                     <div class="space-y-1.5">
                         <Label
                             for="isi"
-                            class="text-[11px] font-bold uppercase tracking-wider text-muted-foreground"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
                             >Isi Lengkap Edaran</Label
                         >
                         <textarea
@@ -201,7 +201,7 @@ const deleteAnnouncement = (id: number) => {
                             required
                             rows="5"
                             placeholder="Tuliskan detail pengumuman untuk seluruh ASN..."
-                            class="w-full rounded-none border border-input bg-background dark:bg-card p-3.5 text-xs text-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors sm:text-sm"
+                            class="w-full rounded-none border border-input bg-background p-3.5 text-xs text-foreground transition-colors outline-none focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm dark:bg-card"
                         ></textarea>
                     </div>
 
@@ -213,25 +213,25 @@ const deleteAnnouncement = (id: number) => {
                         />
                         <Label
                             for="pinned"
-                            class="cursor-pointer text-xs font-bold uppercase tracking-wider text-muted-foreground select-none"
+                            class="cursor-pointer text-xs font-bold tracking-wider text-muted-foreground uppercase select-none"
                             >Sematkan di Atas (Pin Announcement)</Label
                         >
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-2 border-t border-border pt-4 mt-6"
+                        class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4"
                     >
                         <Button
                             type="button"
                             variant="outline"
                             @click="resetForm"
-                            class="h-10 px-5 rounded-none font-bold uppercase tracking-wider text-xs cursor-pointer"
+                            class="h-10 cursor-pointer rounded-none px-5 text-xs font-bold tracking-wider uppercase"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            class="h-10 px-6 rounded-none font-bold uppercase tracking-wider text-xs cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 shadow-none"
+                            class="h-10 cursor-pointer rounded-none bg-primary px-6 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
                         >
                             {{
                                 form.id ? 'Simpan Perubahan' : 'Siarkan Edaran'
