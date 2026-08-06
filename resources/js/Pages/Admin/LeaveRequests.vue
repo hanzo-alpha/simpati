@@ -125,13 +125,13 @@ const updateStatus = (id: number, status: string) => {
         </Card>
 
         <!-- Requests Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl">
+        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/30 text-left text-muted-foreground"
+                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
                             >
                                 <th
                                     class="w-10 px-5 py-3.5 text-center font-semibold"

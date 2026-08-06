@@ -182,7 +182,7 @@ const paginatedLogs = computed(() => {
         </div>
 
         <!-- Logs Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl">
+        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
             <CardHeader
                 class="flex-row items-center justify-between space-y-0 border-b border-border pb-3"
             >
@@ -202,7 +202,7 @@ const paginatedLogs = computed(() => {
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/30 text-left text-muted-foreground"
+                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
                             >
                                 <th
                                     class="w-12 px-5 py-3.5 text-center font-semibold"
