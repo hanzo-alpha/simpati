@@ -49,6 +49,7 @@ interface UserProfile {
     jabatan?: string;
     golongan?: string;
     unit_kerja?: string;
+    sisa_cuti_tahunan?: number;
 }
 
 interface UserItem {
@@ -98,6 +99,7 @@ const form = useForm({
     jabatan: '',
     golongan: '',
     unit_kerja: '',
+    sisa_cuti_tahunan: 12,
     is_active: true,
 });
 
@@ -151,6 +153,7 @@ const editUser = (user: UserItem) => {
     form.jabatan = user.profile?.jabatan || '';
     form.golongan = user.profile?.golongan || '';
     form.unit_kerja = user.profile?.unit_kerja || '';
+    form.sisa_cuti_tahunan = user.profile?.sisa_cuti_tahunan ?? 12;
     form.is_active = user.is_active;
 
     showForm.value = true;
@@ -338,9 +341,17 @@ const resetDevice = (user: UserItem) => {
                                             user.office?.opd_name || 'Tanpa OPD'
                                         }}
                                     </p>
-                                    <p class="text-[11px]">
-                                        {{ user.profile?.jabatan || '-' }}
-                                    </p>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <span class="text-[11px]">
+                                            {{ user.profile?.jabatan || '-' }}
+                                        </span>
+                                        <Badge
+                                            variant="outline"
+                                            class="border-teal-500/30 bg-teal-500/10 text-[10px] font-semibold text-teal-600 dark:text-teal-400"
+                                        >
+                                            Cuti: {{ user.profile?.sisa_cuti_tahunan ?? 12 }} Hari
+                                        </Badge>
+                                    </div>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
                                     <Badge
@@ -560,7 +571,7 @@ const resetDevice = (user: UserItem) => {
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-3 gap-3">
                         <div class="space-y-1.5">
                             <Label for="jabatan" class="text-xs">Jabatan</Label>
                             <Input
@@ -579,6 +590,20 @@ const resetDevice = (user: UserItem) => {
                                 v-model="form.unit_kerja"
                                 placeholder="Sekretariat / Bidang..."
                                 class="h-9 text-xs"
+                            />
+                        </div>
+                        <div class="space-y-1.5">
+                            <Label for="sisa_cuti_tahunan" class="text-xs"
+                                >Sisa Cuti (Hari)</Label
+                            >
+                            <Input
+                                id="sisa_cuti_tahunan"
+                                v-model.number="form.sisa_cuti_tahunan"
+                                type="number"
+                                min="0"
+                                max="100"
+                                placeholder="12"
+                                class="h-9 text-xs font-bold text-teal-600 dark:text-teal-400"
                             />
                         </div>
                     </div>

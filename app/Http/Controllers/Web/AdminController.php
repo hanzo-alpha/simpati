@@ -169,6 +169,7 @@ class AdminController extends Controller
             'role_id' => 'required|exists:roles,id',
             'office_id' => 'nullable|exists:offices,id',
             'nip' => 'nullable|string|unique:user_profiles,nip',
+            'sisa_cuti_tahunan' => 'nullable|integer|min:0',
         ]);
 
         $user = User::create([
@@ -182,6 +183,7 @@ class AdminController extends Controller
         UserProfile::create([
             'user_id' => $user->id,
             'nip' => $data['nip'],
+            'sisa_cuti_tahunan' => $data['sisa_cuti_tahunan'] ?? 12,
         ]);
 
         return back()->with('success', 'User created successfully.');
@@ -195,6 +197,7 @@ class AdminController extends Controller
             'role_id' => 'required|exists:roles,id',
             'office_id' => 'nullable|exists:offices,id',
             'nip' => 'nullable|string|unique:user_profiles,nip,'.$user->profile?->id,
+            'sisa_cuti_tahunan' => 'nullable|integer|min:0',
         ]);
 
         $user->update([
@@ -206,7 +209,10 @@ class AdminController extends Controller
 
         UserProfile::updateOrCreate(
             ['user_id' => $user->id],
-            ['nip' => $data['nip']]
+            [
+                'nip' => $data['nip'],
+                'sisa_cuti_tahunan' => $data['sisa_cuti_tahunan'] ?? 12,
+            ]
         );
 
         return back()->with('success', 'User updated successfully.');
@@ -588,7 +594,7 @@ class AdminController extends Controller
 
     public function leaveRequests()
     {
-        $requests = LeaveRequest::with('user.office', 'approver')->latest()->get()->map(function ($req) {
+        $requests = LeaveRequest::with('user.office', 'user.profile', 'approver')->latest()->get()->map(function ($req) {
             return [
                 'id' => $req->id,
                 'user' => [
@@ -596,12 +602,14 @@ class AdminController extends Controller
                     'office' => [
                         'opd_name' => $req->user->office->opd_name ?? '-',
                     ],
+                    'sisa_cuti_tahunan' => $req->user->profile->sisa_cuti_tahunan ?? 12,
                 ],
                 'type' => $req->type->value ?? $req->type,
                 'type_label' => $req->type_label,
                 'tanggal_mulai' => $req->tanggal_mulai ? $req->tanggal_mulai->translatedFormat('d/m/Y') : '-',
                 'tanggal_selesai' => $req->tanggal_selesai ? $req->tanggal_selesai->translatedFormat('d/m/Y') : '-',
                 'alasan' => $req->alasan,
+                'duration' => $req->duration,
                 'status' => $req->status->value ?? $req->status,
                 'status_label' => $req->status_label,
             ];
@@ -621,7 +629,14 @@ class AdminController extends Controller
             'approved_at' => now(),
         ]);
 
-        return back()->with('success', 'Leave request updated successfully.');
+        if (($data['status'] === LeaveStatus::DISETUJUI->value || $data['status'] === LeaveStatus::DISETUJUI) && $leaveRequest->type === LeaveType::CUTI) {
+            $profile = $leaveRequest->user->profile;
+            if ($profile) {
+                $profile->decrement('sisa_cuti_tahunan', $leaveRequest->duration);
+            }
+        }
+
+        return back()->with('success', 'Pengajuan izin/cuti berhasil diperbarui.');
     }
 
     public function schedules()

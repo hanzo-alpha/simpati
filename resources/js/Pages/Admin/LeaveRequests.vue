@@ -23,6 +23,7 @@ interface Office {
 interface User {
     name?: string;
     office?: Office;
+    sisa_cuti_tahunan?: number;
 }
 
 interface LeaveRequestItem {
@@ -33,6 +34,7 @@ interface LeaveRequestItem {
     tanggal_mulai: string;
     tanggal_selesai: string;
     alasan: string;
+    duration?: number;
     status: 'menunggu' | 'disetujui' | 'ditolak' | string;
     status_label: string;
 }
@@ -177,11 +179,17 @@ const updateStatus = (id: number, status: string) => {
                                     <p class="font-bold text-foreground">
                                         {{ req.user?.name || 'Pegawai ASN' }}
                                     </p>
-                                    <p
-                                        class="text-[11px] text-muted-foreground"
-                                    >
-                                        {{ req.user?.office?.opd_name || '-' }}
-                                    </p>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <span class="text-[11px] text-muted-foreground">
+                                            {{ req.user?.office?.opd_name || '-' }}
+                                        </span>
+                                        <Badge
+                                            variant="outline"
+                                            class="border-teal-500/30 bg-teal-500/10 text-[10px] font-semibold text-teal-600 dark:text-teal-400"
+                                        >
+                                            Sisa Cuti: {{ req.user?.sisa_cuti_tahunan ?? 12 }} Hari
+                                        </Badge>
+                                    </div>
                                 </td>
                                 <td class="px-5 py-3.5">
                                     <Badge
@@ -194,8 +202,10 @@ const updateStatus = (id: number, status: string) => {
                                 <td
                                     class="px-5 py-3.5 font-mono text-[11px] text-muted-foreground"
                                 >
-                                    {{ req.tanggal_mulai }} s/d
-                                    {{ req.tanggal_selesai }}
+                                    <p>{{ req.tanggal_mulai }} s/d {{ req.tanggal_selesai }}</p>
+                                    <p v-if="req.duration" class="font-sans font-semibold text-teal-600 dark:text-teal-400 mt-0.5">
+                                        Durasi: {{ req.duration }} Hari
+                                    </p>
                                 </td>
                                 <td
                                     class="max-w-xs truncate px-5 py-3.5 text-muted-foreground"
