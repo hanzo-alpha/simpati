@@ -182,17 +182,19 @@ const paginatedLogs = computed(() => {
         </div>
 
         <!-- Logs Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
+        <Card
+            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+        >
             <CardHeader
                 class="flex-row items-center justify-between space-y-0 border-b border-border pb-3"
             >
-                <CardTitle class="flex items-center gap-2 text-base font-bold">
+                <CardTitle class="flex items-center gap-2 text-base font-bold uppercase tracking-wider text-foreground">
                     <ShieldAlert class="h-4 w-4 text-rose-500" />
                     <span>Riwayat Presensi Di Luar Radius Geofence</span>
                 </CardTitle>
                 <Badge
                     variant="outline"
-                    class="border-rose-500/30 bg-rose-500/10 text-[10px] font-bold text-rose-600 uppercase dark:text-rose-400"
+                    class="rounded-none border-rose-500/30 bg-rose-500/10 text-[10px] font-bold text-rose-600 uppercase dark:text-rose-400"
                 >
                     Audit System Active
                 </Badge>
@@ -202,7 +204,7 @@ const paginatedLogs = computed(() => {
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
                             >
                                 <th
                                     class="w-12 px-5 py-3.5 text-center font-semibold"

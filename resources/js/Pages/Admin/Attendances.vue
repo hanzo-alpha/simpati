@@ -153,15 +153,15 @@ const openQrModal = () => {
     qrInput.value = '';
     nextTick(() => {
         if (qrInputRef.value) {
-qrInputRef.value.focus();
-}
+            qrInputRef.value.focus();
+        }
     });
 };
 
 const submitQrScan = async () => {
     if (!qrInput.value) {
-return;
-}
+        return;
+    }
 
     isVerifying.value = true;
     qrResult.value = null;
@@ -177,8 +177,8 @@ return;
         qrInput.value = '';
         nextTick(() => {
             if (qrInputRef.value) {
-qrInputRef.value.focus();
-}
+                qrInputRef.value.focus();
+            }
         });
     } catch (err: any) {
         qrError.value =
@@ -653,13 +653,15 @@ const downloadRecapPdf = (type: string) => {
         </Card>
 
         <!-- 3. Table Presensi Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
+        <Card
+            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+        >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
                             >
                                 <th
                                     class="w-10 px-4 py-3.5 text-center font-semibold"

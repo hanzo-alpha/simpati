@@ -113,8 +113,8 @@ const activeTrendTab = ref<'month' | 'weekly'>('month');
 
 const maxDailyTotal = computed(() => {
     if (!props.dailyTrend || !props.dailyTrend.length) {
-return 1;
-}
+        return 1;
+    }
 
     return Math.max(...props.dailyTrend.map((d) => d.total || 0), 1);
 });
@@ -123,8 +123,8 @@ onMounted(() => {
     const mapElement = document.getElementById('dashboardMap');
 
     if (!mapElement) {
-return;
-}
+        return;
+    }
 
     const map = L.map('dashboardMap').setView([-4.3484, 119.8837], 13);
 
@@ -143,18 +143,18 @@ return;
 
     props.liveLocations.forEach((loc) => {
         if (!loc.latitude || !loc.longitude) {
-return;
-}
+            return;
+        }
 
         let color = '#10b981';
 
         if (loc.status === 'terlambat' || loc.status === 'sangat_terlambat') {
-color = '#f59e0b';
-}
+            color = '#f59e0b';
+        }
 
         if (loc.jenis === 'dinas_luar' || loc.jenis === 'wfh') {
-color = '#6366f1';
-}
+            color = '#6366f1';
+        }
 
         const marker = L.circleMarker([loc.latitude, loc.longitude], {
             color: color,

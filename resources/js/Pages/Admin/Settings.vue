@@ -438,7 +438,9 @@ const testSimpeg = async () => {
                                         <p
                                             class="text-[11px] text-muted-foreground"
                                         >
-                                            Izinkan ASN mengambil foto presensi menggunakan kamera belakang (Default: Hanya Kamera Depan).
+                                            Izinkan ASN mengambil foto presensi
+                                            menggunakan kamera belakang
+                                            (Default: Hanya Kamera Depan).
                                         </p>
                                     </div>
                                     <Checkbox
@@ -464,7 +466,9 @@ const testSimpeg = async () => {
                                         <p
                                             class="text-[11px] text-muted-foreground"
                                         >
-                                            Izinkan ASN memilih foto dari galeri HP (Default: Nonaktif untuk cegah foto lama).
+                                            Izinkan ASN memilih foto dari galeri
+                                            HP (Default: Nonaktif untuk cegah
+                                            foto lama).
                                         </p>
                                     </div>
                                     <Checkbox

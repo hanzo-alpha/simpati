@@ -98,49 +98,43 @@ const deleteOffice = (id: number) => {
         <template #actions>
             <Button
                 @click="showForm = true"
-                class="cursor-pointer rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 font-semibold text-white shadow-md shadow-teal-600/20 hover:from-teal-700 hover:to-emerald-700"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
             >
-                <Plus class="mr-2 h-4 w-4" />
+                <Plus class="h-4 w-4" />
                 <span>Tambah Kantor OPD</span>
             </Button>
         </template>
 
         <!-- Offices Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
+        <Card
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
+        >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
                             >
                                 <th
-                                    class="w-12 px-5 py-3.5 text-center font-semibold"
+                                    class="w-12 px-4 py-3.5 text-center font-bold"
                                 >
                                     #
                                 </th>
-                                <th class="px-5 py-3.5 font-semibold">
+                                <th class="px-4 py-3.5 font-bold">
                                     Nama Kantor
                                 </th>
-                                <th class="px-5 py-3.5 font-semibold">
-                                    OPD Utama
-                                </th>
-                                <th class="px-5 py-3.5 font-semibold">
+                                <th class="px-4 py-3.5 font-bold">OPD Utama</th>
+                                <th class="px-4 py-3.5 font-bold">
                                     Alamat Lengkap
                                 </th>
-                                <th
-                                    class="px-5 py-3.5 text-center font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Radius Geofence
                                 </th>
-                                <th
-                                    class="px-5 py-3.5 text-center font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Koordinat GPS
                                 </th>
-                                <th
-                                    class="px-5 py-3.5 text-center font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Aksi
                                 </th>
                             </tr>
@@ -149,41 +143,41 @@ const deleteOffice = (id: number) => {
                             <tr
                                 v-for="(office, i) in paginatedOffices"
                                 :key="office.id"
-                                class="transition-colors hover:bg-muted/40"
+                                class="border-b border-border/40 transition-colors hover:bg-muted/30"
                             >
                                 <td
-                                    class="px-5 py-3.5 text-center font-mono text-muted-foreground"
+                                    class="px-4 py-3.5 text-center font-mono text-muted-foreground"
                                 >
                                     {{
                                         (currentPage - 1) * itemsPerPage + i + 1
                                     }}
                                 </td>
                                 <td
-                                    class="px-5 py-3.5 font-bold text-foreground"
+                                    class="px-4 py-3.5 font-bold text-foreground"
                                 >
                                     {{ office.name }}
                                 </td>
-                                <td class="px-5 py-3.5">
+                                <td class="px-4 py-3.5">
                                     <Badge
                                         variant="outline"
-                                        class="font-semibold"
+                                        class="rounded-none border-border bg-muted/50 font-mono text-[10px] font-bold text-foreground uppercase"
                                     >
                                         {{ office.opd_name }}
                                     </Badge>
                                 </td>
-                                <td class="px-5 py-3.5 text-muted-foreground">
+                                <td class="px-4 py-3.5 text-muted-foreground">
                                     {{ office.alamat || '-' }}
                                 </td>
-                                <td class="px-5 py-3.5 text-center">
+                                <td class="px-4 py-3.5 text-center">
                                     <Badge
                                         variant="secondary"
-                                        class="font-mono text-[10px]"
+                                        class="rounded-none font-mono text-[10px] font-bold tracking-wider uppercase"
                                     >
                                         {{ office.radius_meters }} Meter
                                     </Badge>
                                 </td>
                                 <td
-                                    class="px-5 py-3.5 text-center font-mono text-[11px] text-muted-foreground"
+                                    class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground"
                                 >
                                     <span
                                         v-if="
@@ -192,7 +186,7 @@ const deleteOffice = (id: number) => {
                                         class="flex items-center justify-center gap-1"
                                     >
                                         <MapPin
-                                            class="h-3 w-3 shrink-0 text-teal-600 dark:text-teal-400"
+                                            class="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400"
                                         />
                                         <span
                                             >{{ office.latitude }},
@@ -201,7 +195,7 @@ const deleteOffice = (id: number) => {
                                     </span>
                                     <span v-else>-</span>
                                 </td>
-                                <td class="px-5 py-3.5 text-center">
+                                <td class="px-4 py-3.5 text-center">
                                     <div
                                         class="flex items-center justify-center gap-1"
                                     >
@@ -209,7 +203,7 @@ const deleteOffice = (id: number) => {
                                             variant="ghost"
                                             size="sm"
                                             @click="editOffice(office)"
-                                            class="h-7 w-7 cursor-pointer p-0 text-muted-foreground hover:bg-muted hover:text-foreground"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
                                             title="Edit Kantor"
                                         >
                                             <Edit3 class="h-3.5 w-3.5" />
@@ -218,7 +212,7 @@ const deleteOffice = (id: number) => {
                                             variant="ghost"
                                             size="sm"
                                             @click="deleteOffice(office.id)"
-                                            class="h-7 w-7 cursor-pointer p-0 text-rose-500 hover:bg-rose-500/10"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-rose-500 hover:bg-rose-500/10"
                                             title="Hapus Kantor"
                                         >
                                             <Trash2 class="h-3.5 w-3.5" />
@@ -252,14 +246,16 @@ const deleteOffice = (id: number) => {
         <!-- Shadcn Dialog Form Office -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/60 bg-card/98 shadow-2xl backdrop-blur-2xl sm:max-w-3xl rounded-2xl p-6 sm:p-8"
+                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-2xl"
             >
-                <DialogHeader class="pb-2">
+                <DialogHeader class="border-b border-border/60 pb-3">
                     <DialogTitle
-                        class="flex items-center gap-3 text-lg font-bold text-foreground"
+                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase"
                     >
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
-                            <Building2 class="h-5 w-5" />
+                        <div
+                            class="flex h-7 w-7 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                        >
+                            <Building2 class="h-4 w-4" />
                         </div>
                         <span>{{
                             form.id
@@ -269,86 +265,110 @@ const deleteOffice = (id: number) => {
                     </DialogTitle>
                 </DialogHeader>
 
-                <form @submit.prevent="submitForm" class="space-y-5 pt-2">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form @submit.prevent="submitForm" class="space-y-4 pt-2">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label for="name" class="text-xs font-semibold text-foreground/80">Nama Kantor / Gedung</Label>
+                            <Label
+                                for="name"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Nama Kantor / Gedung</Label
+                            >
                             <Input
                                 id="name"
                                 v-model="form.name"
                                 required
                                 placeholder="Contoh: Kantor Bupati Soppeng"
-                                class="h-10 text-xs sm:text-sm rounded-xl"
+                                class="h-10 rounded-none text-xs sm:text-sm"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="opd_name" class="text-xs font-semibold text-foreground/80">Nama OPD Utama</Label>
+                            <Label
+                                for="opd_name"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Nama OPD Utama</Label
+                            >
                             <Input
                                 id="opd_name"
                                 v-model="form.opd_name"
                                 required
                                 placeholder="Contoh: Sekretariat Daerah"
-                                class="h-10 text-xs sm:text-sm rounded-xl"
+                                class="h-10 rounded-none text-xs sm:text-sm"
                             />
                         </div>
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="alamat" class="text-xs font-semibold text-foreground/80">Alamat Lengkap Kantor</Label>
+                        <Label
+                            for="alamat"
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >Alamat Lengkap Kantor</Label
+                        >
                         <Input
                             id="alamat"
                             v-model="form.alamat"
                             placeholder="Jl. Salotungo No. 1..."
-                            class="h-10 text-xs sm:text-sm rounded-xl"
+                            class="h-10 rounded-none text-xs sm:text-sm"
                         />
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div class="space-y-1.5">
-                            <Label for="latitude" class="text-xs font-semibold text-foreground/80">Latitude GPS</Label>
+                            <Label
+                                for="latitude"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Latitude GPS</Label
+                            >
                             <Input
                                 id="latitude"
                                 v-model="form.latitude"
                                 placeholder="-4.3484"
-                                class="h-10 text-xs sm:text-sm rounded-xl font-mono"
+                                class="h-10 rounded-none font-mono text-xs sm:text-sm"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="longitude" class="text-xs font-semibold text-foreground/80">Longitude GPS</Label>
+                            <Label
+                                for="longitude"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Longitude GPS</Label
+                            >
                             <Input
                                 id="longitude"
                                 v-model="form.longitude"
                                 placeholder="119.8837"
-                                class="h-10 text-xs sm:text-sm rounded-xl font-mono"
+                                class="h-10 rounded-none font-mono text-xs sm:text-sm"
                             />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="radius_meters" class="text-xs font-semibold text-foreground/80">Radius Geofence (Meter)</Label>
+                            <Label
+                                for="radius_meters"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >Radius Geofence (Meter)</Label
+                            >
                             <Input
                                 id="radius_meters"
                                 v-model="form.radius_meters"
                                 type="number"
                                 required
                                 placeholder="200"
-                                class="h-10 text-xs sm:text-sm rounded-xl font-bold text-teal-600 dark:text-teal-400"
+                                class="h-10 rounded-none font-mono text-xs font-bold text-emerald-600 sm:text-sm dark:text-emerald-400"
                             />
                         </div>
                     </div>
 
                     <div
-                        class="flex items-center justify-end gap-3 border-t border-border/60 pt-4 mt-6"
+                        class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4"
                     >
                         <Button
                             type="button"
                             variant="outline"
                             @click="resetForm"
-                            class="h-10 px-5 rounded-xl cursor-pointer text-xs sm:text-sm"
+                            class="h-10 cursor-pointer rounded-none px-5 text-xs font-bold tracking-wider uppercase"
                         >
                             Batal
                         </Button>
                         <Button
                             type="submit"
-                            class="h-10 px-6 rounded-xl cursor-pointer bg-teal-600 text-white hover:bg-teal-700 shadow-md font-semibold text-xs sm:text-sm"
+                            class="h-10 cursor-pointer rounded-none bg-primary px-6 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
                         >
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah Kantor' }}
                         </Button>

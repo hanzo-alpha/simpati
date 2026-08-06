@@ -112,16 +112,16 @@ const officeName = computed(
 
 const isInRadius = computed(() => {
     if (distance.value === null) {
-return false;
-}
+        return false;
+    }
 
     return distance.value <= officeRadius.value;
 });
 
 const distanceText = computed(() => {
     if (distance.value === null) {
-return 'Mendeteksi GPS...';
-}
+        return 'Mendeteksi GPS...';
+    }
 
     return distance.value < 1000
         ? `${Math.round(distance.value)} m`
@@ -187,8 +187,8 @@ const startPresensi = () => {
         !userLat.value ||
         !userLng.value
     ) {
-return;
-}
+        return;
+    }
 
     form.type = selectedType.value;
     form.latitude = userLat.value;

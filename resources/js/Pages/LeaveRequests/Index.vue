@@ -44,8 +44,8 @@ const filterTabs = [
 
 const filteredRequests = computed(() => {
     if (activeFilter.value === 'all') {
-return props.requests;
-}
+        return props.requests;
+    }
 
     return props.requests.filter((r) => r.status === activeFilter.value);
 });
@@ -59,16 +59,16 @@ const summary = computed(() => {
     };
     props.requests.forEach((r) => {
         if (r.status === 'menunggu') {
-s.menunggu++;
-}
+            s.menunggu++;
+        }
 
         if (r.status === 'disetujui') {
-s.disetujui++;
-}
+            s.disetujui++;
+        }
 
         if (r.status === 'ditolak') {
-s.ditolak++;
-}
+            s.ditolak++;
+        }
     });
 
     return s;

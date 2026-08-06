@@ -36,8 +36,8 @@ const leaveTypes = [
 
 const duration = computed(() => {
     if (!form.tanggal_mulai || !form.tanggal_selesai) {
-return 0;
-}
+        return 0;
+    }
 
     const start = new Date(form.tanggal_mulai);
     const end = new Date(form.tanggal_selesai);

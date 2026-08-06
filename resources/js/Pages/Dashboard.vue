@@ -59,16 +59,16 @@ const officeRadius = computed(() => props.office?.radius_meters || 200);
 
 const isInRadius = computed(() => {
     if (distance.value === null) {
-return false;
-}
+        return false;
+    }
 
     return distance.value <= officeRadius.value;
 });
 
 const distanceText = computed(() => {
     if (distance.value === null) {
-return 'Mendeteksi...';
-}
+        return 'Mendeteksi...';
+    }
 
     return distance.value < 1000
         ? `${Math.round(distance.value)}m`
@@ -79,16 +79,16 @@ const greeting = computed(() => {
     const hour = new Date().getHours();
 
     if (hour < 11) {
-return 'Selamat Pagi 🌅';
-}
+        return 'Selamat Pagi 🌅';
+    }
 
     if (hour < 15) {
-return 'Selamat Siang ☀️';
-}
+        return 'Selamat Siang ☀️';
+    }
 
     if (hour < 18) {
-return 'Selamat Sore 🌤️';
-}
+        return 'Selamat Sore 🌤️';
+    }
 
     return 'Selamat Malam 🌙';
 });
@@ -171,8 +171,8 @@ const initMap = () => {
     const mapEl = document.getElementById('userMap');
 
     if (!mapEl) {
-return;
-}
+        return;
+    }
 
     map = L.map('userMap').setView([officeLat.value, officeLng.value], 14);
 
@@ -202,8 +202,8 @@ const locateUser = () => {
 
             if (map) {
                 if (userMarker) {
-map.removeLayer(userMarker);
-}
+                    map.removeLayer(userMarker);
+                }
 
                 userMarker = L.circleMarker([userLat.value, userLng.value], {
                     color: isInRadius.value ? '#10b981' : '#f43f5e',

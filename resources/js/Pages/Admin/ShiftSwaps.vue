@@ -60,13 +60,15 @@ const updateStatus = (swap: ShiftSwapItem, status: string) => {
         :subtitle="`${swaps.length} pengajuan pertukaran jadwal`"
     >
         <!-- Swaps Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
+        <Card
+            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+        >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
                             >
                                 <th class="px-5 py-3.5 font-semibold">
                                     Pemohon (ASN)

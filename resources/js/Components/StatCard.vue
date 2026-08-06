@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import {
-    Users,
-    CheckCircle2,
-    AlertTriangle,
-    FileText
-    
-} from '@lucide/vue';
-import type {LucideIcon} from '@lucide/vue';
+import { Users, CheckCircle2, AlertTriangle, FileText } from '@lucide/vue';
+import type { LucideIcon } from '@lucide/vue';
 import { computed } from 'vue';
 import { Card, CardContent } from '@/Components/ui/card';
 

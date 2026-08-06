@@ -32,6 +32,16 @@ import {
     SelectContent,
     SelectItem,
 } from '@/Components/ui/select';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/Components/ui/table';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
@@ -106,16 +116,16 @@ const form = useForm({
 const filteredUsers = computed(() => {
     return props.users.filter((u) => {
         if (activeFilter.value === 'active' && !u.is_active) {
-return false;
-}
+            return false;
+        }
 
         if (activeFilter.value === 'inactive' && u.is_active) {
-return false;
-}
+            return false;
+        }
 
         if (activeFilter.value === 'locked' && !u.device_id) {
-return false;
-}
+            return false;
+        }
 
         if (searchQuery.value) {
             const q = searchQuery.value.toLowerCase();
@@ -202,57 +212,34 @@ const resetDevice = (user: UserItem) => {
 </script>
 
 <template>
-    <AdminLayout
-        title="Kelola Pengguna ASN"
-        subtitle="Manajemen Data Pegawai ASN, OPD, Role, & Binding Device HP"
-    >
+    <AdminLayout title="Kelola Pengguna ASN" subtitle="Manajemen Data Pegawai ASN, OPD, Role, & Binding Device HP">
         <!-- Header Toolbar -->
         <template #actions>
-            <Button
-                @click="showForm = true"
-                class="cursor-pointer rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 text-xs font-semibold text-white shadow-md shadow-teal-600/20 hover:from-teal-700 hover:to-emerald-700"
-            >
-                <UserPlus class="mr-2 h-4 w-4" />
+            <Button @click="showForm = true"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90">
+                <UserPlus class="h-4 w-4" />
                 <span>Tambah ASN Baru</span>
             </Button>
         </template>
 
         <!-- Search & Filter Card -->
-        <Card
-            class="mb-6 border-border/60 bg-card/95 shadow-md backdrop-blur-xl"
-        >
-            <CardContent
-                class="flex flex-col items-center justify-between gap-4 p-4 md:flex-row"
-            >
+        <Card class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs">
+            <CardContent class="flex flex-col items-center justify-between gap-4 p-4 md:flex-row">
                 <div class="relative w-full md:w-80">
                     <Search
-                        class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-                    />
-                    <Input
-                        v-model="searchQuery"
-                        type="text"
-                        placeholder="Cari NIP, Nama, atau OPD..."
-                        class="h-9 pl-9 text-xs transition-all focus-visible:ring-teal-500"
-                    />
+                        class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input v-model="searchQuery" type="text" placeholder="Cari NIP, Nama, atau OPD..."
+                        class="h-9 pl-9 text-xs" />
                 </div>
 
-                <div
-                    class="flex w-full items-center gap-1.5 overflow-x-auto md:w-auto"
-                >
-                    <Button
-                        v-for="f in filters"
-                        :key="f.value"
-                        size="sm"
-                        :variant="
-                            activeFilter === f.value ? 'default' : 'outline'
-                        "
-                        @click="activeFilter = f.value"
-                        class="h-8 cursor-pointer rounded-lg text-xs"
-                        :class="{
-                            'bg-teal-600 text-white hover:bg-teal-700':
-                                activeFilter === f.value,
-                        }"
-                    >
+                <div class="flex w-full items-center gap-1.5 overflow-x-auto md:w-auto">
+                    <Button v-for="f in filterStatusList" :key="f.key" :variant="statusFilter === f.key ? 'default' : 'outline'
+                        " size="sm" @click="statusFilter = f.key"
+                        class="cursor-pointer rounded-none text-[11px] font-bold tracking-wider uppercase transition-all"
+                        :class="statusFilter === f.key
+                            ? 'bg-primary text-primary-foreground shadow-none'
+                            : 'text-muted-foreground hover:text-foreground'
+                            ">
                         {{ f.label }}
                     </Button>
                 </div>
@@ -260,56 +247,40 @@ const resetDevice = (user: UserItem) => {
         </Card>
 
         <!-- Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
+        <Card class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs">
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
-                            >
-                                <th
-                                    class="w-10 px-4 py-3.5 text-center font-semibold"
-                                >
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase">
+                                <th class="w-10 px-4 py-3.5 text-center font-bold">
                                     #
                                 </th>
-                                <th class="px-4 py-3.5 font-semibold">
+                                <th class="px-4 py-3.5 font-bold">
                                     Pegawai ASN
                                 </th>
-                                <th class="px-4 py-3.5 font-semibold">
+                                <th class="px-4 py-3.5 font-bold">
                                     OPD & Unit Kerja
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Role Akses
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Device Binding
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-center font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-center font-bold">
                                     Status
                                 </th>
-                                <th
-                                    class="px-4 py-3.5 text-right font-semibold"
-                                >
+                                <th class="px-4 py-3.5 text-right font-bold">
                                     Aksi
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
-                            <tr
-                                v-for="(user, i) in paginatedUsers"
-                                :key="user.id"
-                                class="transition-colors hover:bg-muted/40"
-                            >
-                                <td
-                                    class="px-4 py-3.5 text-center font-mono text-muted-foreground"
-                                >
+                            <tr v-for="(user, i) in paginatedUsers" :key="user.id"
+                                class="border-b border-border/40 transition-colors hover:bg-muted/30">
+                                <td class="px-4 py-3.5 text-center font-mono text-muted-foreground">
                                     {{
                                         (currentPage - 1) * itemsPerPage + i + 1
                                     }}
@@ -317,134 +288,99 @@ const resetDevice = (user: UserItem) => {
                                 <td class="px-4 py-3.5">
                                     <div class="flex items-center gap-3">
                                         <div
-                                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-500/10 text-xs font-bold text-teal-600 dark:text-teal-400"
-                                        >
-                                            {{ user.name[0].toUpperCase() }}
+                                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                            {{ user.name.charAt(0) }}
                                         </div>
                                         <div>
-                                            <p
-                                                class="font-bold text-foreground"
-                                            >
+                                            <p class="font-bold text-foreground">
                                                 {{ user.name }}
                                             </p>
-                                            <p
-                                                class="font-mono text-[10px] font-semibold text-teal-600 dark:text-teal-400"
-                                            >
+                                            <p class="font-mono text-[11px] text-muted-foreground">
                                                 NIP. {{ user.nip }}
                                             </p>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-4 py-3.5 text-muted-foreground">
-                                    <p class="font-semibold text-foreground">
-                                        {{
-                                            user.office?.opd_name || 'Tanpa OPD'
-                                        }}
+                                <td class="px-4 py-3.5">
+                                    <p class="font-medium text-foreground">
+                                        {{ user.office?.opd_name || '-' }}
                                     </p>
-                                    <div class="flex items-center gap-1.5 mt-0.5">
-                                        <span class="text-[11px]">
-                                            {{ user.profile?.jabatan || '-' }}
-                                        </span>
-                                        <Badge
-                                            variant="outline"
-                                            class="border-teal-500/30 bg-teal-500/10 text-[10px] font-semibold text-teal-600 dark:text-teal-400"
-                                        >
-                                            Cuti: {{ user.profile?.sisa_cuti_tahunan ?? 12 }} Hari
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-[11px] text-muted-foreground">
+                                            {{
+                                                user.profile?.jabatan ||
+                                                'Analis Kepegawaian'
+                                            }}
+                                        </p>
+                                        <Badge variant="outline"
+                                            class="rounded-none border-emerald-500/30 bg-emerald-500/10 text-[10px] font-bold tracking-wider text-emerald-700 uppercase dark:text-emerald-400">
+                                            Cuti:
+                                            {{
+                                                user.profile
+                                                    ?.sisa_cuti_tahunan ?? 12
+                                            }}
+                                            Hari
                                         </Badge>
                                     </div>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <Badge
-                                        variant="outline"
-                                        class="px-2 py-0.5 text-[10px] font-semibold uppercase"
-                                    >
-                                        {{ user.role?.display_name || 'ASN' }}
+                                    <Badge variant="outline"
+                                        class="rounded-none font-mono text-[10px] font-bold tracking-wider uppercase">
+                                        {{
+                                            user.role?.display_name ||
+                                            user.role?.name ||
+                                            'ASN'
+                                        }}
                                     </Badge>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <span
-                                        v-if="user.device_id"
-                                        class="inline-flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-600 dark:text-emerald-400"
-                                    >
-                                        <Smartphone class="h-3 w-3" />
-                                        <span>Locked</span>
+                                    <span v-if="user.device_id"
+                                        class="font-mono text-[11px] font-medium text-amber-600 dark:text-amber-400">
+                                        Locked
                                     </span>
-                                    <span
-                                        v-else
-                                        class="font-mono text-[10px] text-muted-foreground"
-                                        >Unlocked</span
-                                    >
+                                    <span v-else class="font-mono text-[11px] text-muted-foreground">
+                                        Unlocked
+                                    </span>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <Badge
-                                        :variant="
-                                            user.is_active
-                                                ? 'default'
-                                                : 'outline'
-                                        "
-                                        class="px-2 py-0.5 text-[10px] font-semibold uppercase"
-                                        :class="{
-                                            'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
-                                                user.is_active,
-                                            'border-rose-500/30 bg-rose-500/10 text-rose-500':
-                                                !user.is_active,
-                                        }"
-                                    >
+                                    <Badge :variant="user.is_active
+                                        ? 'default'
+                                        : 'secondary'
+                                        " class="rounded-none text-[10px] font-bold tracking-wider uppercase" :class="user.is_active
+                                            ? 'border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 shadow-none dark:text-emerald-400'
+                                            : ''
+                                            ">
                                         {{
                                             user.is_active
-                                                ? 'Aktif'
-                                                : 'Nonaktif'
+                                                ? 'AKTIF'
+                                                : 'NONAKTIF'
                                         }}
                                     </Badge>
                                 </td>
                                 <td class="px-4 py-3.5 text-right">
-                                    <div
-                                        class="flex items-center justify-end gap-1"
-                                    >
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            @click="openCardModal(user)"
-                                            class="h-7 w-7 cursor-pointer p-0 text-teal-600 hover:bg-teal-500/10 dark:text-teal-400"
-                                            title="ID Card Digital ASN"
-                                        >
-                                            <CreditCard class="h-3.5 w-3.5" />
-                                        </Button>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            @click="editUser(user)"
-                                            class="h-7 w-7 cursor-pointer p-0 text-muted-foreground hover:bg-muted hover:text-foreground"
-                                            title="Edit Data ASN"
-                                        >
-                                            <Edit3 class="h-3.5 w-3.5" />
-                                        </Button>
-                                        <Button
-                                            v-if="user.device_id"
-                                            variant="ghost"
-                                            size="sm"
-                                            @click="resetDevice(user)"
-                                            class="h-7 w-7 cursor-pointer p-0 text-amber-500 hover:bg-amber-500/10"
-                                            title="Reset Device Binding"
-                                        >
+                                    <div class="flex items-center justify-end gap-1">
+                                        <Button v-if="user.device_id" variant="ghost" size="sm"
+                                            @click="resetDevice(user.id)"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-amber-600 hover:border-border hover:bg-amber-500/10 dark:text-amber-400"
+                                            title="Reset Device Binding HP">
                                             <Smartphone class="h-3.5 w-3.5" />
                                         </Button>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            @click="toggleUserStatus(user)"
-                                            class="h-7 w-7 cursor-pointer p-0"
-                                            :class="
-                                                user.is_active
-                                                    ? 'text-rose-500 hover:bg-rose-500/10'
-                                                    : 'text-emerald-500 hover:bg-emerald-500/10'
-                                            "
-                                            :title="
-                                                user.is_active
-                                                    ? 'Nonaktifkan Akun'
-                                                    : 'Aktifkan Akun'
-                                            "
-                                        >
+                                        <Button variant="ghost" size="sm" @click="openCardModal(user)"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
+                                            title="Lihat KARTU ASN Digital">
+                                            <CreditCard class="h-3.5 w-3.5" />
+                                        </Button>
+                                        <Button variant="ghost" size="sm" @click="editUser(user)"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-muted-foreground hover:border-border hover:bg-muted/50 hover:text-foreground"
+                                            title="Edit Data ASN">
+                                            <Edit3 class="h-3.5 w-3.5" />
+                                        </Button>
+                                        <Button variant="ghost" size="sm" @click="toggleUserStatus(user)"
+                                            class="h-8 w-8 cursor-pointer rounded-none p-0 text-rose-500 hover:bg-rose-500/10"
+                                            :title="user.is_active
+                                                ? 'Nonaktifkan Akun'
+                                                : 'Aktifkan Akun'
+                                                ">
                                             <Power class="h-3.5 w-3.5" />
                                         </Button>
                                     </div>
@@ -453,22 +389,13 @@ const resetDevice = (user: UserItem) => {
                         </tbody>
                     </table>
 
-                    <div
-                        v-if="!filteredUsers.length"
-                        class="space-y-2 py-10 text-center text-muted-foreground"
-                    >
-                        <UsersIcon
-                            class="mx-auto h-8 w-8 text-muted-foreground/50"
-                        />
-                        <p>Tidak ada data pegawai ASN yang ditemukan.</p>
+                    <div v-if="!filteredUsers.length" class="space-y-2 py-10 text-center text-muted-foreground">
+                        <UserPlus class="mx-auto h-8 w-8 text-muted-foreground/50" />
+                        <p>Tidak ada data Pegawai ASN yang ditemukan.</p>
                     </div>
 
-                    <Pagination
-                        v-if="filteredUsers.length > 0"
-                        v-model:currentPage="currentPage"
-                        :totalItems="filteredUsers.length"
-                        :itemsPerPage="itemsPerPage"
-                    />
+                    <Pagination v-if="filteredUsers.length > 0" v-model:currentPage="currentPage"
+                        :totalItems="filteredUsers.length" :itemsPerPage="itemsPerPage" />
                 </div>
             </CardContent>
         </Card>
@@ -476,14 +403,13 @@ const resetDevice = (user: UserItem) => {
         <!-- Shadcn Dialog Add/Edit ASN -->
         <Dialog v-model:open="showForm">
             <DialogContent
-                class="border-border/60 bg-card/98 shadow-2xl backdrop-blur-2xl sm:max-w-3xl rounded-2xl p-6 sm:p-8"
-            >
-                <DialogHeader class="pb-2">
+                class="rounded-none border border-border bg-card p-6 text-card-foreground shadow-xl sm:max-w-2xl">
+                <DialogHeader class="border-b border-border/60 pb-3">
                     <DialogTitle
-                        class="flex items-center gap-3 text-lg font-bold text-foreground"
-                    >
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400">
-                            <UserPlus class="h-5 w-5" />
+                        class="flex items-center gap-2.5 text-base font-bold tracking-wider text-foreground uppercase">
+                        <div
+                            class="flex h-7 w-7 items-center justify-center rounded-none border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                            <UserPlus class="h-4 w-4" />
                         </div>
                         <span>{{
                             form.id
@@ -493,93 +419,75 @@ const resetDevice = (user: UserItem) => {
                     </DialogTitle>
                 </DialogHeader>
 
-                <form @submit.prevent="submitForm" class="space-y-5 pt-2">
+                <form @submit.prevent="submitForm" class="space-y-4 pt-2">
                     <!-- Row 1: Identitas utama (2 cols) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label for="nip" class="text-xs font-semibold text-foreground/80">NIP Pegawai</Label>
-                            <Input
-                                id="nip"
-                                v-model="form.nip"
-                                required
-                                placeholder="19850101..."
-                                class="h-10 text-xs sm:text-sm rounded-xl"
-                            />
+                            <Label for="nip"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">NIP
+                                Pegawai</Label>
+                            <Input id="nip" v-model="form.nip" required placeholder="19850101..."
+                                class="h-10 rounded-none text-xs sm:text-sm" />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="name" class="text-xs font-semibold text-foreground/80">Nama Lengkap & Gelar</Label>
-                            <Input
-                                id="name"
-                                v-model="form.name"
-                                required
-                                placeholder="Nama & Gelar"
-                                class="h-10 text-xs sm:text-sm rounded-xl"
-                            />
+                            <Label for="name"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Nama
+                                Lengkap & Gelar</Label>
+                            <Input id="name" v-model="form.name" required placeholder="Nama & Gelar"
+                                class="h-10 rounded-none text-xs sm:text-sm" />
                         </div>
                     </div>
 
                     <!-- Row 2: Email & Password (2 cols) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label for="email" class="text-xs font-semibold text-foreground/80">Email Kedinasan</Label>
-                            <Input
-                                id="email"
-                                v-model="form.email"
-                                type="email"
-                                placeholder="email@soppengkab.go.id"
-                                class="h-10 text-xs sm:text-sm rounded-xl"
-                            />
+                            <Label for="email"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Email
+                                Kedinasan</Label>
+                            <Input id="email" v-model="form.email" type="email" placeholder="email@soppengkab.go.id"
+                                class="h-10 rounded-none text-xs sm:text-sm" />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="password" class="text-xs font-semibold text-foreground/80">
-                                {{ form.id ? 'Password Baru (Opsional)' : 'Password Akun' }}
+                            <Label for="password"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                                {{
+                                    form.id
+                                        ? 'Password Baru (Opsional)'
+                                        : 'Password Akun'
+                                }}
                             </Label>
-                            <Input
-                                id="password"
-                                v-model="form.password"
-                                type="password"
-                                :required="!form.id"
-                                placeholder="••••••••"
-                                class="h-10 text-xs sm:text-sm rounded-xl"
-                            />
+                            <Input id="password" v-model="form.password" type="password" :required="!form.id"
+                                placeholder="••••••••" class="h-10 rounded-none text-xs sm:text-sm" />
                         </div>
                     </div>
 
                     <!-- Row 3: Struktur Penugasan & Role (2 cols) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="space-y-1.5">
-                            <Label class="text-xs font-semibold text-foreground/80">OPD / Instansi Kantor</Label>
+                            <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">OPD /
+                                Instansi
+                                Kantor</Label>
                             <Select v-model="form.office_id">
-                                <SelectTrigger
-                                    class="h-10 bg-background text-xs sm:text-sm rounded-xl"
-                                >
+                                <SelectTrigger class="h-10 rounded-none text-xs sm:text-sm">
                                     <SelectValue placeholder="Pilih OPD / Kantor" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem
-                                        v-for="o in offices"
-                                        :key="o.id"
-                                        :value="String(o.id)"
-                                    >
+                                    <SelectItem v-for="o in offices" :key="o.id" :value="String(o.id)">
                                         {{ o.opd_name }}
                                     </SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
                         <div class="space-y-1.5">
-                            <Label class="text-xs font-semibold text-foreground/80">Role Hak Akses System</Label>
+                            <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Role Hak
+                                Akses
+                                System</Label>
                             <Select v-model="form.role_id">
-                                <SelectTrigger
-                                    class="h-10 bg-background text-xs sm:text-sm rounded-xl"
-                                >
+                                <SelectTrigger class="h-10 rounded-none text-xs sm:text-sm">
                                     <SelectValue placeholder="Pilih Role System" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem
-                                        v-for="r in roles"
-                                        :key="r.id"
-                                        :value="String(r.id)"
-                                    >
+                                    <SelectItem v-for="r in roles" :key="r.id" :value="String(r.id)">
                                         {{ r.display_name }}
                                     </SelectItem>
                                 </SelectContent>
@@ -588,54 +496,40 @@ const resetDevice = (user: UserItem) => {
                     </div>
 
                     <!-- Row 4: Jabatan, Sub OPD, & Kuota Cuti (3 cols) -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div class="space-y-1.5">
-                            <Label for="jabatan" class="text-xs font-semibold text-foreground/80">Jabatan Pegawai</Label>
-                            <Input
-                                id="jabatan"
-                                v-model="form.jabatan"
-                                placeholder="Kepala Bidang..."
-                                class="h-10 text-xs sm:text-sm rounded-xl"
-                            />
+                            <Label for="jabatan"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Jabatan
+                                Pegawai</Label>
+                            <Input id="jabatan" v-model="form.jabatan" placeholder="Kepala Bidang..."
+                                class="h-10 rounded-none text-xs sm:text-sm" />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="unit_kerja" class="text-xs font-semibold text-foreground/80">Sub OPD / Unit Kerja</Label>
-                            <Input
-                                id="unit_kerja"
-                                v-model="form.unit_kerja"
-                                placeholder="Sekretariat / Bidang..."
-                                class="h-10 text-xs sm:text-sm rounded-xl"
-                            />
+                            <Label for="unit_kerja"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Sub OPD /
+                                Unit
+                                Kerja</Label>
+                            <Input id="unit_kerja" v-model="form.unit_kerja" placeholder="Sekretariat / Bidang..."
+                                class="h-10 rounded-none text-xs sm:text-sm" />
                         </div>
                         <div class="space-y-1.5">
-                            <Label for="sisa_cuti_tahunan" class="text-xs font-semibold text-foreground/80">Sisa Cuti Tahunan (Hari)</Label>
-                            <Input
-                                id="sisa_cuti_tahunan"
-                                v-model.number="form.sisa_cuti_tahunan"
-                                type="number"
-                                min="0"
-                                max="100"
-                                placeholder="12"
-                                class="h-10 text-xs sm:text-sm font-bold text-teal-600 dark:text-teal-400 rounded-xl"
-                            />
+                            <Label for="sisa_cuti_tahunan"
+                                class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Sisa Cuti
+                                Tahunan
+                                (Hari)</Label>
+                            <Input id="sisa_cuti_tahunan" v-model.number="form.sisa_cuti_tahunan" type="number" min="0"
+                                max="100" placeholder="12"
+                                class="h-10 rounded-none font-mono text-xs font-bold text-emerald-600 sm:text-sm dark:text-emerald-400" />
                         </div>
                     </div>
 
-                    <div
-                        class="flex items-center justify-end gap-3 border-t border-border/60 pt-4 mt-6"
-                    >
-                        <Button
-                            type="button"
-                            variant="outline"
-                            @click="resetForm"
-                            class="h-10 px-5 rounded-xl cursor-pointer text-xs sm:text-sm"
-                        >
+                    <div class="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4">
+                        <Button type="button" variant="outline" @click="resetForm"
+                            class="h-10 cursor-pointer rounded-none px-5 text-xs font-bold tracking-wider uppercase">
                             Batal
                         </Button>
-                        <Button
-                            type="submit"
-                            class="h-10 px-6 rounded-xl cursor-pointer bg-teal-600 text-white hover:bg-teal-700 shadow-md font-semibold text-xs sm:text-sm"
-                        >
+                        <Button type="submit"
+                            class="h-10 cursor-pointer rounded-none bg-primary px-6 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90">
                             {{ form.id ? 'Simpan Perubahan' : 'Tambah ASN' }}
                         </Button>
                     </div>
@@ -646,19 +540,12 @@ const resetDevice = (user: UserItem) => {
         <!-- Shadcn Dialog ID Card Digital ASN -->
         <Dialog v-model:open="showCardModal">
             <DialogContent
-                class="border-teal-500/30 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 text-white sm:max-w-sm"
-            >
+                class="border-teal-500/30 bg-gradient-to-br from-slate-900 via-slate-800 to-teal-950 text-white sm:max-w-sm">
                 <div v-if="selectedCardUser" class="space-y-3 pt-2 text-center">
                     <div class="flex items-center justify-center gap-2">
-                        <img
-                            src="/images/logo.png"
-                            class="h-8 w-8 object-contain"
-                            alt="Logo Pemda"
-                        />
+                        <img src="/images/logo.png" class="h-8 w-8 object-contain" alt="Logo Pemda" />
                         <div class="text-left">
-                            <h4
-                                class="text-xs font-black tracking-wider text-teal-400"
-                            >
+                            <h4 class="text-xs font-black tracking-wider text-teal-400">
                                 PEMKAB SOPPENG
                             </h4>
                             <p class="text-[9px] font-medium text-slate-300">
@@ -668,8 +555,7 @@ const resetDevice = (user: UserItem) => {
                     </div>
 
                     <div
-                        class="mx-auto my-3 flex h-20 w-20 items-center justify-center rounded-full border-2 border-teal-400 bg-teal-500/20 text-xl font-bold text-teal-300 shadow-inner"
-                    >
+                        class="mx-auto my-3 flex h-20 w-20 items-center justify-center rounded-full border-2 border-teal-400 bg-teal-500/20 text-xl font-bold text-teal-300 shadow-inner">
                         {{
                             selectedCardUser.name
                                 .split(' ')
@@ -689,9 +575,7 @@ const resetDevice = (user: UserItem) => {
                         </p>
                     </div>
 
-                    <div
-                        class="space-y-1 border-t border-slate-700/60 pt-2 text-xs"
-                    >
+                    <div class="space-y-1 border-t border-slate-700/60 pt-2 text-xs">
                         <p class="font-semibold text-slate-300">
                             {{
                                 selectedCardUser.office?.opd_name ||

@@ -11,10 +11,9 @@ import {
     Megaphone,
     ShieldCheck,
     Trophy,
-    Settings
-    
+    Settings,
 } from '@lucide/vue';
-import type {LucideIcon} from '@lucide/vue';
+import type { LucideIcon } from '@lucide/vue';
 import { computed } from 'vue';
 
 const props = defineProps<{
@@ -58,7 +57,7 @@ const iconComponent = computed<LucideIcon>(() => {
 <template>
     <Link
         :href="href"
-        class="group relative flex cursor-pointer items-center gap-3 rounded-none px-3 py-2.5 text-xs transition-all duration-200"
+        class="group relative flex cursor-pointer items-center gap-3 rounded-none px-3 py-2.5 text-sm font-bold transition-all duration-200"
         :class="[
             active
                 ? 'border-y border-r border-l-2 border-primary/30 border-l-primary bg-primary/10 font-bold text-primary shadow-xs'

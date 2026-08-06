@@ -68,8 +68,8 @@ const statusFilters = computed(() => {
 
 const filteredRequests = computed(() => {
     if (activeStatus.value === 'all') {
-return props.requests;
-}
+        return props.requests;
+    }
 
     return props.requests.filter((r) => r.status === activeStatus.value);
 });
@@ -125,13 +125,15 @@ const updateStatus = (id: number, status: string) => {
         </Card>
 
         <!-- Requests Table Card -->
-        <Card class="border-border/60 bg-card/95 shadow-md backdrop-blur-xl rounded-2xl overflow-hidden">
+        <Card
+            class="rounded-none border border-border bg-card text-card-foreground shadow-xs overflow-hidden"
+        >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border/60 bg-muted/40 text-left text-xs uppercase tracking-wider font-semibold text-muted-foreground"
+                                class="border-b border-border bg-muted/40 text-left text-[11px] uppercase tracking-wider font-bold text-foreground"
                             >
                                 <th
                                     class="w-10 px-5 py-3.5 text-center font-semibold"
@@ -179,15 +181,27 @@ const updateStatus = (id: number, status: string) => {
                                     <p class="font-bold text-foreground">
                                         {{ req.user?.name || 'Pegawai ASN' }}
                                     </p>
-                                    <div class="flex items-center gap-1.5 mt-0.5">
-                                        <span class="text-[11px] text-muted-foreground">
-                                            {{ req.user?.office?.opd_name || '-' }}
+                                    <div
+                                        class="mt-0.5 flex items-center gap-1.5"
+                                    >
+                                        <span
+                                            class="text-[11px] text-muted-foreground"
+                                        >
+                                            {{
+                                                req.user?.office?.opd_name ||
+                                                '-'
+                                            }}
                                         </span>
                                         <Badge
                                             variant="outline"
                                             class="border-teal-500/30 bg-teal-500/10 text-[10px] font-semibold text-teal-600 dark:text-teal-400"
                                         >
-                                            Sisa Cuti: {{ req.user?.sisa_cuti_tahunan ?? 12 }} Hari
+                                            Sisa Cuti:
+                                            {{
+                                                req.user?.sisa_cuti_tahunan ??
+                                                12
+                                            }}
+                                            Hari
                                         </Badge>
                                     </div>
                                 </td>
@@ -202,8 +216,14 @@ const updateStatus = (id: number, status: string) => {
                                 <td
                                     class="px-5 py-3.5 font-mono text-[11px] text-muted-foreground"
                                 >
-                                    <p>{{ req.tanggal_mulai }} s/d {{ req.tanggal_selesai }}</p>
-                                    <p v-if="req.duration" class="font-sans font-semibold text-teal-600 dark:text-teal-400 mt-0.5">
+                                    <p>
+                                        {{ req.tanggal_mulai }} s/d
+                                        {{ req.tanggal_selesai }}
+                                    </p>
+                                    <p
+                                        v-if="req.duration"
+                                        class="mt-0.5 font-sans font-semibold text-teal-600 dark:text-teal-400"
+                                    >
                                         Durasi: {{ req.duration }} Hari
                                     </p>
                                 </td>
