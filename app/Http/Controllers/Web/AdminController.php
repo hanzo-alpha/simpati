@@ -18,6 +18,7 @@ use App\Models\ShiftSwapRequest;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Models\WorkSchedule;
+use App\Services\FcmService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -657,11 +658,25 @@ class AdminController extends Controller
             'approved_at' => now(),
         ]);
 
-        if (($data['status'] === LeaveStatus::DISETUJUI->value || $data['status'] === LeaveStatus::DISETUJUI) && $leaveRequest->type === LeaveType::CUTI) {
+        $statusStr = $data['status'] instanceof LeaveStatus ? $data['status']->value : (string) $data['status'];
+        $isApproved = ($statusStr === LeaveStatus::DISETUJUI->value);
+
+        if ($isApproved && $leaveRequest->type === LeaveType::CUTI) {
             $profile = $leaveRequest->user->profile;
             if ($profile) {
                 $profile->decrement('sisa_cuti_tahunan', $leaveRequest->duration);
             }
+        }
+
+        // Send FCM Notification to User
+        if ($leaveRequest->user) {
+            $statusLabel = $isApproved ? 'DISETUJUI' : 'DITOLAK';
+            FcmService::sendToUser(
+                $leaveRequest->user,
+                "Status Pengajuan Izin: $statusLabel",
+                "Permohonan {$leaveRequest->type_label} Anda pada tanggal {$leaveRequest->tanggal_mulai->format('d/m/Y')} telah $statusLabel oleh Atasan/Admin.",
+                ['type' => 'leave_request_status', 'id' => $leaveRequest->id]
+            );
         }
 
         return back()->with('success', 'Pengajuan izin/cuti berhasil diperbarui.');
@@ -749,7 +764,15 @@ class AdminController extends Controller
             'kategori' => 'required|in:informasi,penting,darurat',
         ]);
 
-        Announcement::create($data);
+        $announcement = Announcement::create($data);
+
+        // Broadcast FCM Push Notification to All ASN users
+        FcmService::broadcast(
+            '📢 Broadcast Edaran Pemda: '.$data['judul'],
+            mb_strimwidth(strip_tags($data['konten']), 0, 100, '...'),
+            $data['office_id'] ?? null,
+            ['type' => 'announcement', 'id' => $announcement->id]
+        );
 
         return back()->with('success', 'Pengumuman berhasil dipublikasikan.');
     }

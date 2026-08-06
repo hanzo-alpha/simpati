@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use App\Models\WorkSchedule;
+use App\Services\FcmService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
 class SendAttendanceReminders extends Command
 {
@@ -55,22 +55,12 @@ class SendAttendanceReminders extends Command
             ->get();
 
         foreach ($users as $user) {
-            $this->sendPushNotification($user->fcm_token, 'SIMPATI Reminder', $message, [
+            FcmService::sendToUser($user, '⏰ SIMPATI Reminder', $message, [
                 'type' => 'reminder',
                 'event' => $type,
             ]);
         }
 
         $this->info("Sent $type reminders to office ID: {$schedule->office_id}");
-    }
-
-    private function sendPushNotification($token, $title, $body, $data = [])
-    {
-        // Mocking push notification for now
-        Log::info("Push Notification Sent to $token: $title - $body", $data);
-
-        // In real implementation:
-        // Http::withToken(config('services.firebase.key'))
-        //     ->post('https://fcm.googleapis.com/fcm/send', [ ... ]);
     }
 }

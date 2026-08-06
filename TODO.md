@@ -99,8 +99,8 @@
 - [x] **21. Multi-Level Approval Flow untuk Pengajuan Cuti/Dinas**
   - [x] Support multi-stage approval (Atasan Langsung -> Kepala OPD/HR).
 
-- [ ] **22. Push Notifications Realtime via FCM (Firebase Cloud Messaging)**
-  - [ ] Push notifications for attendance reminders & leave approval updates.
+- [x] **22. Push Notifications Realtime via FCM (Firebase Cloud Messaging)**
+  - [x] Push notifications for attendance reminders & leave approval updates (`FcmService.php` & `SendAttendanceReminders.php`).
 
 - [ ] **23. Autentikasi Biometrik (Fingerprint / Face ID)**
   - [ ] Local auth integration with `local_auth` package in Flutter.
