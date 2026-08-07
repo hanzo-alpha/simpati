@@ -128,6 +128,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/shift-swaps', [AdminController::class, 'shiftSwaps'])->name('admin.shift-swaps');
     Route::put('/shift-swaps/{shiftSwap}', [AdminController::class, 'updateShiftSwapStatus']);
 
+    // Attendance Corrections (Koreksi Presensi) Management
+    Route::get('/attendance-corrections', [AdminController::class, 'attendanceCorrections'])->name('admin.attendance-corrections');
+    Route::put('/attendance-corrections/{attendanceCorrection}', [AdminController::class, 'updateAttendanceCorrectionStatus']);
+
+    // Presensi Apel / Event / Upacara
+    Route::get('/events', [AdminController::class, 'events'])->name('admin.events');
+    Route::post('/events', [AdminController::class, 'storeEvent'])->name('admin.events.store');
+
     // Security Audit Logs
     Route::get('/audit-logs', [AdminController::class, 'auditLogs'])->name('admin.audit-logs');
 

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::syncMasterData
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:25
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:26
  * @route '/api/v1/simpeg/sync-master'
  */
 export const syncMasterData = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ syncMasterData.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::syncMasterData
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:25
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:26
  * @route '/api/v1/simpeg/sync-master'
  */
 syncMasterData.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ syncMasterData.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::syncMasterData
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:25
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:26
  * @route '/api/v1/simpeg/sync-master'
  */
 syncMasterData.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ syncMasterData.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => 
 
     /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::syncMasterData
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:25
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:26
  * @route '/api/v1/simpeg/sync-master'
  */
     const syncMasterDataForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ syncMasterData.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => 
 
             /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::syncMasterData
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:25
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:26
  * @route '/api/v1/simpeg/sync-master'
  */
         syncMasterDataForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -56,7 +56,7 @@ syncMasterData.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => 
     syncMasterData.form = syncMasterDataForm
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
 export const getRecapForSimpeg = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -71,7 +71,7 @@ getRecapForSimpeg.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
 getRecapForSimpeg.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ getRecapForSimpeg.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
 getRecapForSimpeg.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -89,7 +89,7 @@ getRecapForSimpeg.get = (options?: RouteQueryOptions): RouteDefinition<'get'> =>
 })
 /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
 getRecapForSimpeg.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -99,7 +99,7 @@ getRecapForSimpeg.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
 
     /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
     const getRecapForSimpegForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -109,7 +109,7 @@ getRecapForSimpeg.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
 
             /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
         getRecapForSimpegForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -118,7 +118,7 @@ getRecapForSimpeg.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
         })
             /**
 * @see \App\Http\Controllers\Api\SimpegIntegrationController::getRecapForSimpeg
- * @see app/Http/Controllers/Api/SimpegIntegrationController.php:109
+ * @see app/Http/Controllers/Api/SimpegIntegrationController.php:110
  * @route '/api/v1/simpeg/recap'
  */
         getRecapForSimpegForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

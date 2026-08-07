@@ -12,13 +12,40 @@ class ShiftSwapController extends Controller
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        $requests = ShiftSwapRequest::with(['requester.profile', 'targetUser.profile'])
+        $requests = ShiftSwapRequest::with(['requester.profile', 'targetUser.profile', 'approver:id,name'])
             ->where('user_id', $user->id)
             ->orWhere('target_user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
         return response()->json(['shift_swaps' => $requests]);
+    }
+
+    public function subordinatesIndex(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $query = ShiftSwapRequest::with(['requester.profile', 'requester.office', 'targetUser.profile', 'approver:id,name'])
+            ->orderBy('created_at', 'desc');
+
+        if ($user->isSuperAdmin()) {
+            // Super Admin can see all
+        } elseif ($user->isAdminOpd()) {
+            $query->whereHas('requester', function ($q) use ($user) {
+                $q->where('office_id', $user->office_id);
+            });
+        } else {
+            $query->whereHas('requester', function ($q) use ($user) {
+                $q->where('supervisor_id', $user->id)
+                    ->orWhere('office_id', $user->office_id);
+            })->where('user_id', '!=', $user->id);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        return response()->json(['shift_swaps' => $query->get()]);
     }
 
     public function store(Request $request): JsonResponse

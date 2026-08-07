@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\AnnouncementController;
 use App\Http\Controllers\Api\AttendanceController;
+use App\Http\Controllers\Api\AttendanceCorrectionController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EventPresensiController;
 use App\Http\Controllers\Api\LeaveRequestController;
 use App\Http\Controllers\Api\RankingController;
 use App\Http\Controllers\Api\ShiftSwapController;
@@ -45,8 +47,19 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Tukar Shift
     Route::get('/shift-swaps', [ShiftSwapController::class, 'index']);
+    Route::get('/shift-swaps/subordinates', [ShiftSwapController::class, 'subordinatesIndex']);
     Route::post('/shift-swaps', [ShiftSwapController::class, 'store']);
     Route::patch('/shift-swaps/{shiftSwap}/status', [ShiftSwapController::class, 'updateStatus']);
+
+    // Koreksi Presensi
+    Route::get('/attendance-corrections', [AttendanceCorrectionController::class, 'index']);
+    Route::get('/attendance-corrections/subordinates', [AttendanceCorrectionController::class, 'subordinatesIndex']);
+    Route::post('/attendance-corrections', [AttendanceCorrectionController::class, 'store']);
+    Route::patch('/attendance-corrections/{attendanceCorrection}/status', [AttendanceCorrectionController::class, 'updateStatus']);
+
+    // Presensi Event / Apel / Kegiatan
+    Route::get('/events/active', [EventPresensiController::class, 'index']);
+    Route::post('/events/scan', [EventPresensiController::class, 'scan']);
 
     // Stats
     Route::get('/statistics', [StatisticController::class, 'index']);

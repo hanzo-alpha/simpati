@@ -166,6 +166,22 @@ const initials = computed(() => {
                     Tukar Shift ASN
                 </SidebarLink>
                 <SidebarLink
+                    href="/admin/attendance-corrections"
+                    :active="
+                        $page.url.startsWith('/admin/attendance-corrections')
+                    "
+                    icon="clock"
+                >
+                    Koreksi Presensi
+                </SidebarLink>
+                <SidebarLink
+                    href="/admin/events"
+                    :active="$page.url.startsWith('/admin/events')"
+                    icon="calendar"
+                >
+                    Presensi Apel / Upacara
+                </SidebarLink>
+                <SidebarLink
                     :href="adminRoutes.announcements.url()"
                     :active="
                         $page.url.startsWith(adminRoutes.announcements.url())

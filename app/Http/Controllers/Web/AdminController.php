@@ -10,6 +10,8 @@ use App\Enums\ScheduleType;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\Attendance;
+use App\Models\AttendanceCorrection;
+use App\Models\EventPresensi;
 use App\Models\LeaveRequest;
 use App\Models\Office;
 use App\Models\Role;
@@ -22,6 +24,7 @@ use App\Services\FcmService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 
 class AdminController extends Controller
@@ -249,6 +252,7 @@ class AdminController extends Controller
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'radius_meters' => 'required|integer',
+            'polygon_coordinates' => 'nullable|array',
             'alamat' => 'nullable|string',
         ]);
 
@@ -271,6 +275,7 @@ class AdminController extends Controller
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
             'radius_meters' => 'required|integer',
+            'polygon_coordinates' => 'nullable|array',
             'alamat' => 'nullable|string',
         ]);
 
@@ -853,6 +858,53 @@ class AdminController extends Controller
         return back()->with('success', 'Status pengajuan tukar shift berhasil diperbarui.');
     }
 
+    public function attendanceCorrections()
+    {
+        $corrections = AttendanceCorrection::with(['user.office', 'user.profile', 'approver'])->latest()->get();
+
+        return inertia('Admin/AttendanceCorrections', [
+            'corrections' => $corrections,
+        ]);
+    }
+
+    public function updateAttendanceCorrectionStatus(Request $request, AttendanceCorrection $attendanceCorrection)
+    {
+        $data = $request->validate([
+            'status' => 'required|in:disetujui,ditolak',
+            'catatan_approval' => 'nullable|string',
+        ]);
+
+        $attendanceCorrection->update([
+            'status' => $data['status'],
+            'approved_by' => $request->user()->id,
+            'catatan_approval' => $data['catatan_approval'] ?? null,
+        ]);
+
+        if ($data['status'] === 'disetujui') {
+            $targetUser = $attendanceCorrection->user;
+            $office = $targetUser?->office;
+            $tanggalStr = Carbon::parse($attendanceCorrection->tanggal)->toDateString();
+
+            Attendance::updateOrCreate(
+                [
+                    'user_id' => $attendanceCorrection->user_id,
+                    'tanggal' => $tanggalStr,
+                    'jenis' => $attendanceCorrection->jenis,
+                ],
+                [
+                    'waktu' => $attendanceCorrection->jam_koreksi,
+                    'latitude' => $office?->latitude ?? 0,
+                    'longitude' => $office?->longitude ?? 0,
+                    'status' => AttendanceStatus::TEPAT_WAKTU->value,
+                    'in_radius' => true,
+                    'keterangan' => "Koreksi Presensi Disetujui (Ref #{$attendanceCorrection->id})",
+                ]
+            );
+        }
+
+        return back()->with('success', 'Status pengajuan koreksi presensi berhasil diperbarui.');
+    }
+
     public function auditLogs()
     {
         $outOfRadiusAtts = Attendance::with(['user.office'])
@@ -956,12 +1008,15 @@ class AdminController extends Controller
             'admin_email' => Setting::get('admin_email', 'admin.simpati@soppengkab.go.id'),
             'admin_phone' => Setting::get('admin_phone', '081234567890'),
 
-            // Attendance
+            // Attendance & TPP Rule Engine
             'jam_buka_masuk' => Setting::get('jam_buka_masuk', '06:00'),
             'jam_cutoff_harian' => Setting::get('jam_cutoff_harian', '18:00'),
             'toleransi_menit' => (int) Setting::get('toleransi_menit', 15),
-            'potongan_terlambat' => (float) Setting::get('potongan_terlambat', 1.5),
+            'potongan_terlambat' => (float) Setting::get('potongan_terlambat', 1.0),
+            'potongan_sangat_terlambat' => (float) Setting::get('potongan_sangat_terlambat', 2.5),
+            'potongan_psw' => (float) Setting::get('potongan_psw', 1.0),
             'potongan_tk' => (float) Setting::get('potongan_tk', 5.0),
+            'potongan_max_tpp' => (float) Setting::get('potongan_max_tpp', 100.0),
 
             // Mobile App Security
             'device_binding_enabled' => Setting::get('device_binding_enabled', 'true') === 'true',
@@ -995,7 +1050,10 @@ class AdminController extends Controller
             'jam_cutoff_harian' => 'required|string',
             'toleransi_menit' => 'required|numeric',
             'potongan_terlambat' => 'required|numeric',
+            'potongan_sangat_terlambat' => 'nullable|numeric',
+            'potongan_psw' => 'nullable|numeric',
             'potongan_tk' => 'required|numeric',
+            'potongan_max_tpp' => 'nullable|numeric',
 
             'device_binding_enabled' => 'required|boolean',
             'fake_gps_block_enabled' => 'required|boolean',
@@ -1032,5 +1090,34 @@ class AdminController extends Controller
             'message' => "Koneksi ke Server SIMPEG ($apiUrl) Berhasil! Endpoint Sync Aktif.",
             'timestamp' => now()->toIso8601String(),
         ]);
+    }
+
+    public function events()
+    {
+        $events = EventPresensi::withCount('participants')->latest()->get();
+
+        return inertia('Admin/Events', [
+            'events' => $events,
+        ]);
+    }
+
+    public function storeEvent(Request $request)
+    {
+        $data = $request->validate([
+            'nama_kegiatan' => 'required|string|max:255',
+            'penyelenggara' => 'nullable|string|max:255',
+            'tanggal' => 'required|date',
+            'jam_mulai' => 'required|string',
+            'jam_selesai' => 'required|string',
+            'lokasi' => 'required|string|max:255',
+        ]);
+
+        $data['qr_token'] = 'SIMPATI-EVT-'.strtoupper(Str::random(8));
+        $data['penyelenggara'] = $data['penyelenggara'] ?? 'Pemerintah Kab. Soppeng';
+        $data['is_active'] = true;
+
+        EventPresensi::create($data);
+
+        return back()->with('success', 'Event presensi / apel baru berhasil diterbitkan dengan QR Token!');
     }
 }

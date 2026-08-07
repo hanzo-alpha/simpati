@@ -43,6 +43,7 @@ interface OfficeItem {
     latitude?: number;
     longitude?: number;
     radius_meters?: number;
+    polygon_coordinates?: Array<{ lat: number; lng: number }> | null;
     parent?: OfficeItem | null;
 }
 
@@ -118,6 +119,7 @@ const form = useForm({
     latitude: '' as number | string,
     longitude: '' as number | string,
     radius_meters: 100,
+    polygon_coordinates: [] as Array<{ lat: number; lng: number }>,
 });
 
 const editOffice = (office: OfficeItem) => {
@@ -130,13 +132,27 @@ const editOffice = (office: OfficeItem) => {
     form.latitude = office.latitude || '';
     form.longitude = office.longitude || '';
     form.radius_meters = office.radius_meters || 100;
+    form.polygon_coordinates = office.polygon_coordinates
+        ? [...office.polygon_coordinates]
+        : [];
     showForm.value = true;
+};
+
+const addPolygonPoint = () => {
+    const lat = Number(form.latitude) || -4.3422;
+    const lng = Number(form.longitude) || 120.0123;
+    form.polygon_coordinates.push({ lat, lng });
+};
+
+const removePolygonPoint = (index: number) => {
+    form.polygon_coordinates.splice(index, 1);
 };
 
 const resetForm = () => {
     form.reset();
     form.id = null;
     form.parent_id = 'none';
+    form.polygon_coordinates = [];
     parentSearch.value = '';
     showForm.value = false;
 };
@@ -600,6 +616,82 @@ const deleteOffice = (id: number) => {
                                 placeholder="100"
                                 class="h-10 rounded-none font-mono text-xs font-bold text-emerald-600 sm:text-sm dark:text-emerald-400"
                             />
+                        </div>
+                    </div>
+
+                    <!-- Polygon Geofence Coordinates Section -->
+                    <div
+                        class="mt-4 space-y-3 border border-border bg-muted/20 p-4"
+                    >
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4
+                                    class="text-xs font-bold text-foreground uppercase"
+                                >
+                                    Polygon Geofence (Batas Kompleks
+                                    Non-Lingkaran)
+                                </h4>
+                                <p class="text-[11px] text-muted-foreground">
+                                    Tambahkan koordinat titik-titik polygon jika
+                                    kantormemiliki area kompleks tidak teratur.
+                                </p>
+                            </div>
+                            <Button
+                                type="button"
+                                size="sm"
+                                variant="outline"
+                                @click="addPolygonPoint"
+                                class="h-7 cursor-pointer text-xs font-bold"
+                            >
+                                + Tambah Titik
+                            </Button>
+                        </div>
+
+                        <div
+                            v-if="form.polygon_coordinates.length > 0"
+                            class="space-y-2"
+                        >
+                            <div
+                                v-for="(point, idx) in form.polygon_coordinates"
+                                :key="idx"
+                                class="flex items-center gap-2"
+                            >
+                                <span
+                                    class="w-12 font-mono text-[10px] font-bold text-muted-foreground"
+                                    >#{{ idx + 1 }}</span
+                                >
+                                <Input
+                                    v-model.number="point.lat"
+                                    placeholder="Latitude"
+                                    type="number"
+                                    step="any"
+                                    class="h-8 rounded-none font-mono text-xs"
+                                />
+                                <Input
+                                    v-model.number="point.lng"
+                                    placeholder="Longitude"
+                                    type="number"
+                                    step="any"
+                                    class="h-8 rounded-none font-mono text-xs"
+                                />
+                                <Button
+                                    type="button"
+                                    variant="destructive"
+                                    size="sm"
+                                    @click="removePolygonPoint(idx)"
+                                    class="h-8 w-8 cursor-pointer p-0"
+                                >
+                                    ✕
+                                </Button>
+                            </div>
+                        </div>
+                        <div
+                            v-else
+                            class="text-[11px] text-muted-foreground italic"
+                        >
+                            Belum ada titik polygon diset. (Sistem akan
+                            menggunakan Geofence Radius Lingkaran
+                            {{ form.radius_meters || 100 }}m).
                         </div>
                     </div>
 

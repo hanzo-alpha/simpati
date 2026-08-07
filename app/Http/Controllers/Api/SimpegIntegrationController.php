@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\LeaveRequest;
 use App\Models\Office;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserProfile;
 use Carbon\Carbon;
@@ -183,11 +184,16 @@ class SimpegIntegrationController extends Controller
 
             $tkDays = max(0, $workingDays - $hadirDays - $sakitDays - $cutiDays - $dlDays);
 
-            // Calculate TPP deduction percentage
-            $potonganTerlambat = $terlambatCount * 1.5;
-            $potonganPsw = $pswCount * 1.5;
-            $potonganTk = $tkDays * 5.0;
-            $totalPotonganTpp = min(100.0, $potonganTerlambat + $potonganPsw + $potonganTk);
+            // Calculate TPP deduction percentage (Dynamic Perbup Config)
+            $rateTerlambat = (float) Setting::get('potongan_terlambat', 1.0);
+            $ratePsw = (float) Setting::get('potongan_psw', 1.0);
+            $rateTk = (float) Setting::get('potongan_tk', 5.0);
+            $maxPotongan = (float) Setting::get('potongan_max_tpp', 100.0);
+
+            $potonganTerlambat = $terlambatCount * $rateTerlambat;
+            $potonganPsw = $pswCount * $ratePsw;
+            $potonganTk = $tkDays * $rateTk;
+            $totalPotonganTpp = min($maxPotongan, $potonganTerlambat + $potonganPsw + $potonganTk);
 
             $result[] = [
                 'nip' => $user->profile?->nip ?? $user->nip,

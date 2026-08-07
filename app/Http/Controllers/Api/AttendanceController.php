@@ -9,6 +9,7 @@ use App\Models\Attendance;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\WorkSchedule;
+use App\Services\WatermarkService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -93,9 +94,18 @@ class AttendanceController extends Controller
             ], 422);
         }
 
-        // Store selfie photo
+        // Store selfie photo & apply security watermark
         $fotoPath = $request->file('foto_selfie')
             ->store("presensi/{$user->id}/".now()->format('Y/m'), 'public');
+
+        $fullPath = storage_path("app/public/{$fotoPath}");
+        WatermarkService::applyWatermark(
+            $fullPath,
+            $user->name,
+            $user->profile?->nip ?? $user->nip ?? '-',
+            (float) $request->latitude,
+            (float) $request->longitude
+        );
 
         // Determine status based on work schedule or out-of-office type
         $status = $isOutOfOfficeType

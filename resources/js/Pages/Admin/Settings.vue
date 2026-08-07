@@ -38,15 +38,29 @@ const form = useForm({
         props.settings.app_tagline ||
         'Sistem Presensi Digital ASN Kabupaten Soppeng',
     pemda_name: props.settings.pemda_name || 'Pemerintah Kabupaten Soppeng',
-    admin_email: props.settings.admin_email || 'admin@soppengkab.go.id',
+    admin_email: props.settings.admin_email || 'admin@soppeng.go.id',
     admin_phone: props.settings.admin_phone || '081234567890',
     attendance_tolerance_minutes:
-        props.settings.attendance_tolerance_minutes || '15',
+        props.settings.attendance_tolerance_minutes ||
+        props.settings.toleransi_menit ||
+        '15',
     default_geofence_radius: props.settings.default_geofence_radius || '200',
-    tpp_deduction_late_percent:
-        props.settings.tpp_deduction_late_percent || '1.5',
-    tpp_deduction_absent_percent:
-        props.settings.tpp_deduction_absent_percent || '5.0',
+    potongan_terlambat: props.settings.potongan_terlambat || '1.0',
+    potongan_sangat_terlambat:
+        props.settings.potongan_sangat_terlambat || '2.5',
+    potongan_psw: props.settings.potongan_psw || '1.0',
+    potongan_tk:
+        props.settings.potongan_tk ||
+        props.settings.potongan_absent_percent ||
+        '5.0',
+    potongan_max_tpp: props.settings.potongan_max_tpp || '100.0',
+    jam_buka_masuk: props.settings.jam_buka_masuk || '06:00',
+    jam_cutoff_harian: props.settings.jam_cutoff_harian || '18:00',
+    toleransi_menit: props.settings.toleransi_menit || '15',
+    min_mobile_version: props.settings.min_mobile_version || '1.2.0',
+    force_mobile_update:
+        props.settings.force_mobile_update === '1' ||
+        props.settings.force_mobile_update === 'true',
     enable_device_binding:
         props.settings.enable_device_binding === '1' ||
         props.settings.enable_device_binding === 'true',
@@ -296,40 +310,98 @@ const testSimpeg = async () => {
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                                <div class="space-y-1.5">
-                                    <Label
-                                        for="late_tpp"
-                                        class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                        >Potongan TPP Terlambat (%)</Label
-                                    >
-                                    <Input
-                                        id="late_tpp"
-                                        v-model="
-                                            form.tpp_deduction_late_percent
-                                        "
-                                        type="number"
-                                        step="0.1"
-                                        required
-                                        class="h-10 rounded-none bg-background font-mono text-xs"
-                                    />
+                            <div class="space-y-3 border-t border-border pt-3">
+                                <h4
+                                    class="text-xs font-bold text-foreground uppercase"
+                                >
+                                    Rule Engine Potongan TPP (Regulasi Perbup)
+                                </h4>
+                                <div
+                                    class="grid grid-cols-1 gap-3 sm:grid-cols-3"
+                                >
+                                    <div class="space-y-1.5">
+                                        <Label
+                                            for="potongan_terlambat"
+                                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                            >Terlambat (TL1) %</Label
+                                        >
+                                        <Input
+                                            id="potongan_terlambat"
+                                            v-model="form.potongan_terlambat"
+                                            type="number"
+                                            step="0.1"
+                                            required
+                                            class="h-10 rounded-none bg-background font-mono text-xs"
+                                        />
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <Label
+                                            for="potongan_sangat_terlambat"
+                                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                            >Terlambat Parah (TL2-TL4) %</Label
+                                        >
+                                        <Input
+                                            id="potongan_sangat_terlambat"
+                                            v-model="
+                                                form.potongan_sangat_terlambat
+                                            "
+                                            type="number"
+                                            step="0.1"
+                                            required
+                                            class="h-10 rounded-none bg-background font-mono text-xs"
+                                        />
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <Label
+                                            for="potongan_psw"
+                                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                            >Pulang Cepat (PSW) %</Label
+                                        >
+                                        <Input
+                                            id="potongan_psw"
+                                            v-model="form.potongan_psw"
+                                            type="number"
+                                            step="0.1"
+                                            required
+                                            class="h-10 rounded-none bg-background font-mono text-xs"
+                                        />
+                                    </div>
                                 </div>
-                                <div class="space-y-1.5">
-                                    <Label
-                                        for="absent_tpp"
-                                        class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                                        >Potongan TPP Alpha (%)</Label
-                                    >
-                                    <Input
-                                        id="absent_tpp"
-                                        v-model="
-                                            form.tpp_deduction_absent_percent
-                                        "
-                                        type="number"
-                                        step="0.1"
-                                        required
-                                        class="h-10 rounded-none bg-background font-mono text-xs"
-                                    />
+                                <div
+                                    class="grid grid-cols-1 gap-3 sm:grid-cols-2"
+                                >
+                                    <div class="space-y-1.5">
+                                        <Label
+                                            for="potongan_tk"
+                                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                            >Tanpa Keterangan (Alpha) % /
+                                            Hari</Label
+                                        >
+                                        <Input
+                                            id="potongan_tk"
+                                            v-model="form.potongan_tk"
+                                            type="number"
+                                            step="0.1"
+                                            required
+                                            class="h-10 rounded-none bg-background font-mono text-xs"
+                                        />
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <Label
+                                            for="potongan_max_tpp"
+                                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                                            >Maksimum Potongan TPP % /
+                                            Bulan</Label
+                                        >
+                                        <Input
+                                            id="potongan_max_tpp"
+                                            v-model="form.potongan_max_tpp"
+                                            type="number"
+                                            step="0.1"
+                                            required
+                                            class="h-10 rounded-none bg-background font-mono text-xs font-bold text-rose-600 dark:text-rose-400"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 

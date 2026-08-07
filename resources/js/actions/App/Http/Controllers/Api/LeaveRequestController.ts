@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::index
- * @see app/Http/Controllers/Api/LeaveRequestController.php:18
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:21
  * @route '/api/leave-requests'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
 export const subordinatesIndex = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ subordinatesIndex.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
 subordinatesIndex.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ subordinatesIndex.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
 subordinatesIndex.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ subordinatesIndex.get = (options?: RouteQueryOptions): RouteDefinition<'get'> =>
 })
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
 subordinatesIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ subordinatesIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
 
     /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
     const subordinatesIndexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ subordinatesIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
 
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
         subordinatesIndexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ subordinatesIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
         })
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::subordinatesIndex
- * @see app/Http/Controllers/Api/LeaveRequestController.php:36
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:39
  * @route '/api/leave-requests/subordinates'
  */
         subordinatesIndexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ subordinatesIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> 
     subordinatesIndex.form = subordinatesIndexForm
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::store
- * @see app/Http/Controllers/Api/LeaveRequestController.php:68
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:71
  * @route '/api/leave-requests'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -172,7 +172,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::store
- * @see app/Http/Controllers/Api/LeaveRequestController.php:68
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:71
  * @route '/api/leave-requests'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::store
- * @see app/Http/Controllers/Api/LeaveRequestController.php:68
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:71
  * @route '/api/leave-requests'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -191,7 +191,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::store
- * @see app/Http/Controllers/Api/LeaveRequestController.php:68
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:71
  * @route '/api/leave-requests'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -201,7 +201,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::store
- * @see app/Http/Controllers/Api/LeaveRequestController.php:68
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:71
  * @route '/api/leave-requests'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -212,7 +212,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
 export const show = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -227,7 +227,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
 show.url = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -260,7 +260,7 @@ show.url = (args: { leaveRequest: number | { id: number } } | [leaveRequest: num
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
 show.get = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -269,7 +269,7 @@ show.get = (args: { leaveRequest: number | { id: number } } | [leaveRequest: num
 })
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
 show.head = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -279,7 +279,7 @@ show.head = (args: { leaveRequest: number | { id: number } } | [leaveRequest: nu
 
     /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
     const showForm = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -289,7 +289,7 @@ show.head = (args: { leaveRequest: number | { id: number } } | [leaveRequest: nu
 
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
         showForm.get = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -298,7 +298,7 @@ show.head = (args: { leaveRequest: number | { id: number } } | [leaveRequest: nu
         })
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::show
- * @see app/Http/Controllers/Api/LeaveRequestController.php:118
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:161
  * @route '/api/leave-requests/{leaveRequest}'
  */
         showForm.head = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -314,7 +314,7 @@ show.head = (args: { leaveRequest: number | { id: number } } | [leaveRequest: nu
     show.form = showForm
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::updateStatus
- * @see app/Http/Controllers/Api/LeaveRequestController.php:133
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:176
  * @route '/api/leave-requests/{leaveRequest}/status'
  */
 export const updateStatus = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -329,7 +329,7 @@ updateStatus.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::updateStatus
- * @see app/Http/Controllers/Api/LeaveRequestController.php:133
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:176
  * @route '/api/leave-requests/{leaveRequest}/status'
  */
 updateStatus.url = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -362,7 +362,7 @@ updateStatus.url = (args: { leaveRequest: number | { id: number } } | [leaveRequ
 
 /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::updateStatus
- * @see app/Http/Controllers/Api/LeaveRequestController.php:133
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:176
  * @route '/api/leave-requests/{leaveRequest}/status'
  */
 updateStatus.patch = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -372,7 +372,7 @@ updateStatus.patch = (args: { leaveRequest: number | { id: number } } | [leaveRe
 
     /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::updateStatus
- * @see app/Http/Controllers/Api/LeaveRequestController.php:133
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:176
  * @route '/api/leave-requests/{leaveRequest}/status'
  */
     const updateStatusForm = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -387,7 +387,7 @@ updateStatus.patch = (args: { leaveRequest: number | { id: number } } | [leaveRe
 
             /**
 * @see \App\Http\Controllers\Api\LeaveRequestController::updateStatus
- * @see app/Http/Controllers/Api/LeaveRequestController.php:133
+ * @see app/Http/Controllers/Api/LeaveRequestController.php:176
  * @route '/api/leave-requests/{leaveRequest}/status'
  */
         updateStatusForm.patch = (args: { leaveRequest: number | { id: number } } | [leaveRequest: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

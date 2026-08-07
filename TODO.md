@@ -104,3 +104,32 @@
 
 - [x] **23. Autentikasi Biometrik (Fingerprint / Face ID)**
   - [x] Local auth integration with `local_auth` package in Flutter (`BiometricService.dart` & `login_screen.dart`).
+
+---
+
+## 🧭 Phase 6: Gap Analysis & Advanced Feature Roadmap (New)
+- [x] **24. Monitoring Peta Realtime ASN di Mobile untuk Atasan / Kepala OPD (Gap #1)**
+  - [x] Tambahkan API endpoint `GET /api/supervision/live-locations` untuk mengambil lokasi presensi real-time bawahan OPD.
+  - [x] Buat layar interactive map `monitoring_map_screen.dart` (menggunakan flutter_map / map picker) di `simpati_mobile` untuk Atasan/Kepala OPD.
+  - [x] Tampilkan marker lokasi bawahan (Hadir, Terlambat, Dinas Luar) beserta radius geofence kantor.
+
+- [x] **25. Approval Pertukaran Shift (Shift Swap) untuk Atasan di Mobile (Gap #2)**
+  - [x] Tambahkan tab/layar Approval Shift Swap di aplikasi Mobile untuk Atasan.
+  - [x] Sambungkan API persetujuan shift swap ke mobile UI.
+
+- [x] **26. Pengajuan Koreksi Presensi / Lupa Absen di Mobile & Web (Gap #3)**
+  - [x] Buat tabel & API model pengajuan koreksi presensi (Attendance Correction Request).
+  - [x] Tambahkan form pengajuan koreksi presensi di Flutter Mobile & dashboard approval di Web/Mobile.
+
+- [x] **27. Polygon Geofence Builder di Web Admin (Peningkatan Web)**
+  - [x] Integrasikan Leaflet Draw & Ray-Casting Polygon Geofence di Web Admin & Backend untuk membuat batas geofence polygon (non-lingkaran).
+
+- [x] **28. Dynamic TPP Deduction Rule Engine (Peningkatan Web)**
+  - [x] Buat halaman konfigurasi aturan kalkulasi potongan TPP dinamis sesuai Peraturan Bupati (Perbup) di Web Admin.
+
+- [x] **29. Presensi Apel / Upacara / Kegiatan via Dynamic QR Scanner (Peningkatan Mobile)**
+  - [x] Buat generator QR Code Dinamis di Web Admin untuk panitia apel/kegiatan.
+  - [x] Implementasikan QR Code Scanner di Flutter Mobile untuk presensi kegiatan.
+
+- [x] **30. Dynamic Watermark Foto Presensi (Peningkatan Keamanan)**
+  - [x] Tambahkan watermark otomatis (NIP, Nama, Lat/Long, Timestamp) pada foto presensi yang diunggah.

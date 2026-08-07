@@ -78,8 +78,86 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     index.form = indexForm
 /**
-* @see \App\Http\Controllers\Api\ShiftSwapController::store
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
  * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+export const subordinatesIndex = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: subordinatesIndex.url(options),
+    method: 'get',
+})
+
+subordinatesIndex.definition = {
+    methods: ["get","head"],
+    url: '/api/shift-swaps/subordinates',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+subordinatesIndex.url = (options?: RouteQueryOptions) => {
+    return subordinatesIndex.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+subordinatesIndex.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: subordinatesIndex.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+subordinatesIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: subordinatesIndex.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+    const subordinatesIndexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: subordinatesIndex.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+        subordinatesIndexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: subordinatesIndex.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\Api\ShiftSwapController::subordinatesIndex
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @route '/api/shift-swaps/subordinates'
+ */
+        subordinatesIndexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: subordinatesIndex.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    subordinatesIndex.form = subordinatesIndexForm
+/**
+* @see \App\Http\Controllers\Api\ShiftSwapController::store
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:51
  * @route '/api/shift-swaps'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +172,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::store
- * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:51
  * @route '/api/shift-swaps'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -103,7 +181,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::store
- * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:51
  * @route '/api/shift-swaps'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -113,7 +191,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::store
- * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:51
  * @route '/api/shift-swaps'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -123,7 +201,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::store
- * @see app/Http/Controllers/Api/ShiftSwapController.php:24
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:51
  * @route '/api/shift-swaps'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -134,7 +212,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::updateStatus
- * @see app/Http/Controllers/Api/ShiftSwapController.php:46
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:73
  * @route '/api/shift-swaps/{shiftSwap}/status'
  */
 export const updateStatus = (args: { shiftSwap: number | { id: number } } | [shiftSwap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -149,7 +227,7 @@ updateStatus.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::updateStatus
- * @see app/Http/Controllers/Api/ShiftSwapController.php:46
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:73
  * @route '/api/shift-swaps/{shiftSwap}/status'
  */
 updateStatus.url = (args: { shiftSwap: number | { id: number } } | [shiftSwap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -182,7 +260,7 @@ updateStatus.url = (args: { shiftSwap: number | { id: number } } | [shiftSwap: n
 
 /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::updateStatus
- * @see app/Http/Controllers/Api/ShiftSwapController.php:46
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:73
  * @route '/api/shift-swaps/{shiftSwap}/status'
  */
 updateStatus.patch = (args: { shiftSwap: number | { id: number } } | [shiftSwap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -192,7 +270,7 @@ updateStatus.patch = (args: { shiftSwap: number | { id: number } } | [shiftSwap:
 
     /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::updateStatus
- * @see app/Http/Controllers/Api/ShiftSwapController.php:46
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:73
  * @route '/api/shift-swaps/{shiftSwap}/status'
  */
     const updateStatusForm = (args: { shiftSwap: number | { id: number } } | [shiftSwap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -207,7 +285,7 @@ updateStatus.patch = (args: { shiftSwap: number | { id: number } } | [shiftSwap:
 
             /**
 * @see \App\Http\Controllers\Api\ShiftSwapController::updateStatus
- * @see app/Http/Controllers/Api/ShiftSwapController.php:46
+ * @see app/Http/Controllers/Api/ShiftSwapController.php:73
  * @route '/api/shift-swaps/{shiftSwap}/status'
  */
         updateStatusForm.patch = (args: { shiftSwap: number | { id: number } } | [shiftSwap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -221,6 +299,6 @@ updateStatus.patch = (args: { shiftSwap: number | { id: number } } | [shiftSwap:
         })
     
     updateStatus.form = updateStatusForm
-const ShiftSwapController = { index, store, updateStatus }
+const ShiftSwapController = { index, subordinatesIndex, store, updateStatus }
 
 export default ShiftSwapController

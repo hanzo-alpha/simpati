@@ -8,6 +8,7 @@ use App\Enums\LeaveStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\LeaveRequest;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -104,26 +105,32 @@ class StatisticController extends Controller
             $currDate->addDay();
         }
 
-        // 5. TPP Deduction Calculation (Regulasi Pemda)
+        // 5. TPP Deduction Calculation (Dynamic Perbup Config)
+        $rateTerlambat = (float) Setting::get('potongan_terlambat', 1.0);
+        $rateSangatTerlambat = (float) Setting::get('potongan_sangat_terlambat', 2.5);
+        $rateTk = (float) Setting::get('potongan_tk', 5.0);
+        $maxPotongan = (float) Setting::get('potongan_max_tpp', 100.0);
+
         $tppDeductionPercent = 0.0;
         $tppBreakdown = [
-            'terlambat_sedang' => 0, // 1.0%
-            'sangat_terlambat' => 0, // 2.5%
-            'alpha' => $alphaCount,  // 5.0% per day
+            'terlambat_sedang' => 0,
+            'sangat_terlambat' => 0,
+            'alpha' => $alphaCount,
         ];
 
         foreach ($attendances as $att) {
             $statusVal = is_string($att->status) ? $att->status : ($att->status->value ?? $att->status);
             if ($statusVal === 'terlambat') {
-                $tppDeductionPercent += 1.0;
+                $tppDeductionPercent += $rateTerlambat;
                 $tppBreakdown['terlambat_sedang']++;
             } elseif ($statusVal === 'sangat_terlambat') {
-                $tppDeductionPercent += 2.5;
+                $tppDeductionPercent += $rateSangatTerlambat;
                 $tppBreakdown['sangat_terlambat']++;
             }
         }
 
-        $tppDeductionPercent += ($alphaCount * 5.0);
+        $tppDeductionPercent += ($alphaCount * $rateTk);
+        $tppDeductionPercent = min($maxPotongan, $tppDeductionPercent);
 
         $tppSummary = [
             'total_deduction_percent' => round($tppDeductionPercent, 2),

@@ -17,6 +17,7 @@ class Office extends Model
         'latitude',
         'longitude',
         'radius_meters',
+        'polygon_coordinates',
         'alamat',
         'is_active',
     ];
@@ -24,6 +25,7 @@ class Office extends Model
     protected $casts = [
         'latitude' => 'decimal:7',
         'longitude' => 'decimal:7',
+        'polygon_coordinates' => 'array',
         'is_active' => 'boolean',
     ];
 
@@ -54,13 +56,45 @@ class Office extends Model
     }
 
     /**
-     * Check if given coordinates are within the office radius.
+     * Check if given coordinates are within the office radius or polygon geofence.
      */
     public function isWithinRadius(float $lat, float $lng): bool
     {
+        if (! empty($this->polygon_coordinates) && count($this->polygon_coordinates) >= 3) {
+            return $this->isPointInPolygon($lat, $lng, $this->polygon_coordinates);
+        }
+
         $distance = $this->calculateDistance($lat, $lng);
 
         return $distance <= $this->radius_meters;
+    }
+
+    /**
+     * Ray-casting algorithm to test if point (lat, lng) is inside polygon coordinates.
+     */
+    public function isPointInPolygon(float $lat, float $lng, array $polygon): bool
+    {
+        $inside = false;
+        $count = count($polygon);
+
+        for ($i = 0, $j = $count - 1; $i < $count; $j = $i++) {
+            $pointI = $polygon[$i];
+            $pointJ = $polygon[$j];
+
+            $xi = (float) ($pointI['lat'] ?? $pointI['latitude'] ?? $pointI[0] ?? 0);
+            $yi = (float) ($pointI['lng'] ?? $pointI['longitude'] ?? $pointI[1] ?? 0);
+            $xj = (float) ($pointJ['lat'] ?? $pointJ['latitude'] ?? $pointJ[0] ?? 0);
+            $yj = (float) ($pointJ['lng'] ?? $pointJ['longitude'] ?? $pointJ[1] ?? 0);
+
+            $intersect = (($yi > $lng) !== ($yj > $lng))
+                && ($lat < ($xj - $xi) * ($lng - $yi) / (($yj - $yi) ?: 0.00000001) + $xi);
+
+            if ($intersect) {
+                $inside = ! $inside;
+            }
+        }
+
+        return $inside;
     }
 
     /**

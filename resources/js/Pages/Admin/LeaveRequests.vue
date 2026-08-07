@@ -69,11 +69,13 @@ const previewFileType = ref<'image' | 'pdf'>('image');
 
 const openPreview = (url: string) => {
     previewUrl.value = url;
+
     if (url.toLowerCase().endsWith('.pdf')) {
         previewFileType.value = 'pdf';
     } else {
         previewFileType.value = 'image';
     }
+
     showPreviewModal.value = true;
 };
 
