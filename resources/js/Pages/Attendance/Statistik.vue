@@ -83,6 +83,7 @@ const prevMonth = () => {
     } else {
         currentMonthIndex.value--;
     }
+
     fetchMonthData();
 };
 
@@ -93,6 +94,7 @@ const nextMonth = () => {
     } else {
         currentMonthIndex.value++;
     }
+
     fetchMonthData();
 };
 </script>

@@ -59,21 +59,31 @@ const colorClasses = computed(() => {
     <!-- Neaten Stat Widget Card with Sera Top Border Accent -->
     <Card
         class="rounded-none border border-border bg-card text-card-foreground shadow-xs transition-colors hover:border-border/80"
-        :class="colorClasses.borderTop">
+        :class="colorClasses.borderTop"
+    >
         <CardContent class="flex items-center justify-between gap-3 p-2">
             <div class="space-y-1">
-                <p class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                <p
+                    class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                >
                     {{ label }}
                 </p>
-                <p class="font-mono text-2xl font-bold tracking-tight text-foreground">
+                <p
+                    class="font-mono text-2xl font-bold tracking-tight text-foreground"
+                >
                     {{ value }}
                 </p>
-                <p v-if="sub" class="text-[10px] font-medium text-muted-foreground">
+                <p
+                    v-if="sub"
+                    class="text-[10px] font-medium text-muted-foreground"
+                >
                     {{ sub }}
                 </p>
             </div>
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-none border"
-                :class="colorClasses.iconBg">
+            <div
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-none border"
+                :class="colorClasses.iconBg"
+            >
                 <component :is="iconComponent" class="h-5 w-5" />
             </div>
         </CardContent>

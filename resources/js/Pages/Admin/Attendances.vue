@@ -375,11 +375,16 @@ const downloadRecapPdf = (type: string) => {
 </script>
 
 <template>
-    <AdminLayout title="Rekap Presensi ASN" :subtitle="`Data log presensi periode ${monthName}`">
+    <AdminLayout
+        title="Rekap Presensi ASN"
+        :subtitle="`Data log presensi periode ${monthName}`"
+    >
         <!-- Page Header Actions (Scan QR Prominent Button) -->
         <template #actions>
-            <Button @click="openQrModal"
-                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90">
+            <Button
+                @click="openQrModal"
+                class="flex h-10 cursor-pointer items-center gap-2 rounded-none bg-primary px-4 text-xs font-bold tracking-wider text-primary-foreground uppercase shadow-none hover:bg-primary/90"
+            >
                 <QrCode class="h-4 w-4" />
                 <span>Scan QR Presensi ASN</span>
             </Button>
@@ -387,13 +392,18 @@ const downloadRecapPdf = (type: string) => {
 
         <!-- 1. Top Summary KPI Widget Cards (Paling Atas) -->
         <div class="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
-            <Card v-for="s in summaryCards" :key="s.label"
-                class="rounded-none border border-border bg-card text-center text-card-foreground shadow-xs">
+            <Card
+                v-for="s in summaryCards"
+                :key="s.label"
+                class="rounded-none border border-border bg-card text-center text-card-foreground shadow-xs"
+            >
                 <CardContent class="p-2">
                     <p class="text-xl font-bold" :class="s.color">
                         {{ s.value }}
                     </p>
-                    <p class="mt-1 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+                    <p
+                        class="mt-1 text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                    >
                         {{ s.label }}
                     </p>
                 </CardContent>
@@ -401,22 +411,37 @@ const downloadRecapPdf = (type: string) => {
         </div>
 
         <!-- 2. Filter & Search & Export Card -->
-        <Card class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs">
-            <CardHeader class="flex flex-row items-center justify-between border-b border-border/60 pb-1">
+        <Card
+            class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
+        >
+            <CardHeader
+                class="flex flex-row items-center justify-between border-b border-border/60 pb-1"
+            >
                 <div class="flex items-center gap-3">
                     <CardTitle
-                        class="flex items-center gap-2 text-sm font-extrabold tracking-wider text-foreground uppercase">
-                        <Filter class="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                        class="flex items-center gap-2 text-sm font-extrabold tracking-wider text-foreground uppercase"
+                    >
+                        <Filter
+                            class="h-4 w-4 text-emerald-600 dark:text-emerald-400"
+                        />
                         <span>Pencarian & Filter Rekap Presensi</span>
                     </CardTitle>
-                    <Badge v-if="hasActiveFilters" variant="outline"
-                        class="rounded-none border-amber-500/30 bg-amber-500/10 text-[10px] font-bold text-amber-600 uppercase dark:text-amber-400">
+                    <Badge
+                        v-if="hasActiveFilters"
+                        variant="outline"
+                        class="rounded-none border-amber-500/30 bg-amber-500/10 text-[10px] font-bold text-amber-600 uppercase dark:text-amber-400"
+                    >
                         Filter Aktif
                     </Badge>
                 </div>
 
-                <Button v-if="hasActiveFilters" variant="outline" size="sm" @click="resetFilters"
-                    class="h-8 shrink-0 cursor-pointer rounded-none border border-rose-500/30 bg-rose-500/5 px-3 text-[11px] font-bold tracking-wider text-rose-600 uppercase shadow-none hover:bg-rose-500/15 dark:text-rose-400">
+                <Button
+                    v-if="hasActiveFilters"
+                    variant="outline"
+                    size="sm"
+                    @click="resetFilters"
+                    class="h-8 shrink-0 cursor-pointer rounded-none border border-rose-500/30 bg-rose-500/5 px-3 text-[11px] font-bold tracking-wider text-rose-600 uppercase shadow-none hover:bg-rose-500/15 dark:text-rose-400"
+                >
                     <RotateCcw class="mr-1.5 h-3.5 w-3.5 text-rose-500" />
                     <span>Reset Filter</span>
                 </Button>
@@ -424,37 +449,61 @@ const downloadRecapPdf = (type: string) => {
 
             <CardContent class="space-y-4 pt-2">
                 <!-- Search & Action Toolbar -->
-                <div class="flex flex-col items-center justify-between gap-3 md:flex-row">
+                <div
+                    class="flex flex-col items-center justify-between gap-3 md:flex-row"
+                >
                     <div class="relative w-full md:flex-1">
                         <Search
-                            class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                        <Input id="search" v-model="searchQuery" @keyup.enter="reload" type="text"
+                            class="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground"
+                        />
+                        <Input
+                            id="search"
+                            v-model="searchQuery"
+                            @keyup.enter="reload"
+                            type="text"
                             placeholder="Ketik Nama / NIP Pegawai lalu Tekan Enter..."
-                            class="h-10 w-full rounded-none pl-9 text-xs transition-all focus-visible:ring-primary" />
+                            class="h-10 w-full rounded-none pl-9 text-xs transition-all focus-visible:ring-primary"
+                        />
                     </div>
 
-                    <div class="flex w-full flex-wrap items-center justify-end gap-2 md:w-auto">
+                    <div
+                        class="flex w-full flex-wrap items-center justify-end gap-2 md:w-auto"
+                    >
                         <!-- Shadcn DropdownMenu for Rekap Per Jenis -->
                         <DropdownMenu>
                             <DropdownMenuTrigger as-child>
-                                <Button variant="outline" size="sm"
-                                    class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase">
-                                    <FileText class="mr-1.5 h-3.5 w-3.5 text-sky-500" />
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
+                                >
+                                    <FileText
+                                        class="mr-1.5 h-3.5 w-3.5 text-sky-500"
+                                    />
                                     <span>Rekap Per Jenis</span>
                                     <ChevronDown class="ml-1 h-3.5 w-3.5" />
                                 </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end"
-                                class="w-56 rounded-none border border-border bg-card shadow-xl">
+                            <DropdownMenuContent
+                                align="end"
+                                class="w-56 rounded-none border border-border bg-card shadow-xl"
+                            >
                                 <DropdownMenuLabel
-                                    class="text-[10px] font-bold tracking-wider text-muted-foreground uppercase">
+                                    class="text-[10px] font-bold tracking-wider text-muted-foreground uppercase"
+                                >
                                     Option Cetak PDF
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem v-for="opt in recapTypeOptions" :key="opt.value"
+                                <DropdownMenuItem
+                                    v-for="opt in recapTypeOptions"
+                                    :key="opt.value"
                                     @click="downloadRecapPdf(opt.value)"
-                                    class="flex cursor-pointer items-center gap-2.5 rounded-none text-xs font-medium">
-                                    <span class="h-2 w-2 rounded-none" :class="opt.dot"></span>
+                                    class="flex cursor-pointer items-center gap-2.5 rounded-none text-xs font-medium"
+                                >
+                                    <span
+                                        class="h-2 w-2 rounded-none"
+                                        :class="opt.dot"
+                                    ></span>
                                     <span class="font-medium text-foreground">{{
                                         opt.label
                                     }}</span>
@@ -462,21 +511,39 @@ const downloadRecapPdf = (type: string) => {
                             </DropdownMenuContent>
                         </DropdownMenu>
 
-                        <Button variant="outline" size="sm" @click="downloadSummaryReport"
-                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase">
-                            <FileSpreadsheet class="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            @click="downloadSummaryReport"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
+                        >
+                            <FileSpreadsheet
+                                class="mr-1.5 h-3.5 w-3.5 text-amber-500"
+                            />
                             <span>Rekap Matriks</span>
                         </Button>
 
-                        <Button variant="outline" size="sm" @click="downloadTppReport"
-                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase">
-                            <FileText class="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            @click="downloadTppReport"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
+                        >
+                            <FileText
+                                class="mr-1.5 h-3.5 w-3.5 text-emerald-500"
+                            />
                             <span>Laporan TPP</span>
                         </Button>
 
-                        <Button variant="outline" size="sm" @click="downloadCsv"
-                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase hover:border-emerald-500/50 hover:text-emerald-500">
-                            <FileSpreadsheet class="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            @click="downloadCsv"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase hover:border-emerald-500/50 hover:text-emerald-500"
+                        >
+                            <FileSpreadsheet
+                                class="mr-1.5 h-3.5 w-3.5 text-emerald-500"
+                            />
                             <span>Excel / CSV</span>
                         </Button>
                     </div>
@@ -484,17 +551,29 @@ const downloadRecapPdf = (type: string) => {
 
                 <!-- 6-Column Grid Filter Selects -->
                 <div
-                    class="grid grid-cols-1 gap-3 border-t border-border/60 pt-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                    class="grid grid-cols-1 gap-3 border-t border-border/60 pt-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+                >
                     <!-- Filter Bulan -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Bulan</Label>
-                        <Select v-model="selectedMonth" @update:model-value="reload">
-                            <SelectTrigger class="h-10 w-full rounded-none bg-background text-xs">
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >Bulan</Label
+                        >
+                        <Select
+                            v-model="selectedMonth"
+                            @update:model-value="reload"
+                        >
+                            <SelectTrigger
+                                class="h-10 w-full rounded-none bg-background text-xs"
+                            >
                                 <SelectValue placeholder="Pilih Bulan" />
                             </SelectTrigger>
                             <SelectContent class="rounded-none">
-                                <SelectItem v-for="m in months" :key="m.value" :value="m.value">
+                                <SelectItem
+                                    v-for="m in months"
+                                    :key="m.value"
+                                    :value="m.value"
+                                >
                                     {{ m.label }}
                                 </SelectItem>
                             </SelectContent>
@@ -504,13 +583,24 @@ const downloadRecapPdf = (type: string) => {
                     <!-- Filter Tahun -->
                     <div class="space-y-1">
                         <Label
-                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Tahun</Label>
-                        <Select v-model="selectedYear" @update:model-value="reload">
-                            <SelectTrigger class="h-10 w-full rounded-none bg-background text-xs">
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >Tahun</Label
+                        >
+                        <Select
+                            v-model="selectedYear"
+                            @update:model-value="reload"
+                        >
+                            <SelectTrigger
+                                class="h-10 w-full rounded-none bg-background text-xs"
+                            >
                                 <SelectValue placeholder="Pilih Tahun" />
                             </SelectTrigger>
                             <SelectContent class="rounded-none">
-                                <SelectItem v-for="y in ['2024', '2025', '2026']" :key="y" :value="y">
+                                <SelectItem
+                                    v-for="y in ['2024', '2025', '2026']"
+                                    :key="y"
+                                    :value="y"
+                                >
                                     {{ y }}
                                 </SelectItem>
                             </SelectContent>
@@ -519,15 +609,28 @@ const downloadRecapPdf = (type: string) => {
 
                     <!-- Filter OPD Utama -->
                     <div class="space-y-1">
-                        <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">OPD
-                            Utama</Label>
-                        <Select v-model="selectedOpd" @update:model-value="onOpdChange">
-                            <SelectTrigger class="h-10 w-full rounded-none bg-background text-xs">
+                        <Label
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >OPD Utama</Label
+                        >
+                        <Select
+                            v-model="selectedOpd"
+                            @update:model-value="onOpdChange"
+                        >
+                            <SelectTrigger
+                                class="h-10 w-full rounded-none bg-background text-xs"
+                            >
                                 <SelectValue placeholder="Semua OPD Utama" />
                             </SelectTrigger>
                             <SelectContent class="max-h-64 rounded-none">
-                                <SelectItem value="all">Semua OPD Utama</SelectItem>
-                                <SelectItem v-for="o in mainOffices" :key="o.id" :value="String(o.id)">
+                                <SelectItem value="all"
+                                    >Semua OPD Utama</SelectItem
+                                >
+                                <SelectItem
+                                    v-for="o in mainOffices"
+                                    :key="o.id"
+                                    :value="String(o.id)"
+                                >
                                     {{ o.opd_name }}
                                 </SelectItem>
                             </SelectContent>
@@ -536,15 +639,28 @@ const downloadRecapPdf = (type: string) => {
 
                     <!-- Filter Sub OPD / Unit Kerja -->
                     <div class="space-y-1">
-                        <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Sub Unit
-                            Kerja</Label>
-                        <Select v-model="selectedUnitKerja" @update:model-value="reload">
-                            <SelectTrigger class="h-10 w-full rounded-none bg-background text-xs">
+                        <Label
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >Sub Unit Kerja</Label
+                        >
+                        <Select
+                            v-model="selectedUnitKerja"
+                            @update:model-value="reload"
+                        >
+                            <SelectTrigger
+                                class="h-10 w-full rounded-none bg-background text-xs"
+                            >
                                 <SelectValue placeholder="Semua Unit Kerja" />
                             </SelectTrigger>
                             <SelectContent class="max-h-64 rounded-none">
-                                <SelectItem value="all">Semua Unit Kerja</SelectItem>
-                                <SelectItem v-for="opt in subUnitOptions" :key="opt.value" :value="opt.value">
+                                <SelectItem value="all"
+                                    >Semua Unit Kerja</SelectItem
+                                >
+                                <SelectItem
+                                    v-for="opt in subUnitOptions"
+                                    :key="opt.value"
+                                    :value="opt.value"
+                                >
                                     {{ opt.label }}
                                 </SelectItem>
                             </SelectContent>
@@ -553,10 +669,17 @@ const downloadRecapPdf = (type: string) => {
 
                     <!-- Filter Jenis Presensi -->
                     <div class="space-y-1">
-                        <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Jenis
-                            Presensi</Label>
-                        <Select v-model="selectedJenis" @update:model-value="reload">
-                            <SelectTrigger class="h-10 w-full rounded-none bg-background text-xs">
+                        <Label
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >Jenis Presensi</Label
+                        >
+                        <Select
+                            v-model="selectedJenis"
+                            @update:model-value="reload"
+                        >
+                            <SelectTrigger
+                                class="h-10 w-full rounded-none bg-background text-xs"
+                            >
                                 <SelectValue placeholder="Semua Jenis" />
                             </SelectTrigger>
                             <SelectContent class="rounded-none">
@@ -564,8 +687,12 @@ const downloadRecapPdf = (type: string) => {
                                 <SelectItem value="masuk">Masuk</SelectItem>
                                 <SelectItem value="pulang">Pulang</SelectItem>
                                 <SelectItem value="wfh">WFH</SelectItem>
-                                <SelectItem value="dinas_luar">Dinas Luar</SelectItem>
-                                <SelectItem value="istirahat">Istirahat</SelectItem>
+                                <SelectItem value="dinas_luar"
+                                    >Dinas Luar</SelectItem
+                                >
+                                <SelectItem value="istirahat"
+                                    >Istirahat</SelectItem
+                                >
                                 <SelectItem value="kembali">Kembali</SelectItem>
                             </SelectContent>
                         </Select>
@@ -573,16 +700,29 @@ const downloadRecapPdf = (type: string) => {
 
                     <!-- Filter Status Presensi -->
                     <div class="space-y-1">
-                        <Label class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase">Status
-                            Presensi</Label>
-                        <Select v-model="selectedStatus" @update:model-value="reload">
-                            <SelectTrigger class="h-10 w-full rounded-none bg-background text-xs">
+                        <Label
+                            class="text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                            >Status Presensi</Label
+                        >
+                        <Select
+                            v-model="selectedStatus"
+                            @update:model-value="reload"
+                        >
+                            <SelectTrigger
+                                class="h-10 w-full rounded-none bg-background text-xs"
+                            >
                                 <SelectValue placeholder="Semua Status" />
                             </SelectTrigger>
                             <SelectContent class="rounded-none">
-                                <SelectItem value="all">Semua Status</SelectItem>
-                                <SelectItem value="tepat_waktu">Tepat Waktu</SelectItem>
-                                <SelectItem value="terlambat">Terlambat</SelectItem>
+                                <SelectItem value="all"
+                                    >Semua Status</SelectItem
+                                >
+                                <SelectItem value="tepat_waktu"
+                                    >Tepat Waktu</SelectItem
+                                >
+                                <SelectItem value="terlambat"
+                                    >Terlambat</SelectItem
+                                >
                             </SelectContent>
                         </Select>
                     </div>
@@ -591,14 +731,19 @@ const downloadRecapPdf = (type: string) => {
         </Card>
 
         <!-- 3. Table Presensi Card -->
-        <Card class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs">
+        <Card
+            class="overflow-hidden rounded-none border border-border bg-card text-card-foreground shadow-xs"
+        >
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
                     <table class="w-full text-xs">
                         <thead>
                             <tr
-                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase">
-                                <th class="w-10 px-4 py-3.5 text-center font-semibold">
+                                class="border-b border-border bg-muted/40 text-left text-[11px] font-bold tracking-wider text-foreground uppercase"
+                            >
+                                <th
+                                    class="w-10 px-4 py-3.5 text-center font-semibold"
+                                >
                                     #
                                 </th>
                                 <th class="px-4 py-3.5 font-semibold">
@@ -610,36 +755,53 @@ const downloadRecapPdf = (type: string) => {
                                 <th class="px-4 py-3.5 font-semibold">
                                     OPD & Unit Kerja
                                 </th>
-                                <th class="px-4 py-3.5 text-center font-semibold">
+                                <th
+                                    class="px-4 py-3.5 text-center font-semibold"
+                                >
                                     Jenis
                                 </th>
-                                <th class="px-4 py-3.5 text-center font-semibold">
+                                <th
+                                    class="px-4 py-3.5 text-center font-semibold"
+                                >
                                     Waktu Presensi
                                 </th>
-                                <th class="px-4 py-3.5 text-center font-semibold">
+                                <th
+                                    class="px-4 py-3.5 text-center font-semibold"
+                                >
                                     Status
                                 </th>
-                                <th class="px-4 py-3.5 text-center font-semibold">
+                                <th
+                                    class="px-4 py-3.5 text-center font-semibold"
+                                >
                                     Koordinat GPS
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
-                            <tr v-for="(att, i) in paginatedAttendances" :key="att.id"
-                                class="transition-colors hover:bg-muted/40">
-                                <td class="px-4 py-3.5 text-center font-mono text-muted-foreground">
+                            <tr
+                                v-for="(att, i) in paginatedAttendances"
+                                :key="att.id"
+                                class="transition-colors hover:bg-muted/40"
+                            >
+                                <td
+                                    class="px-4 py-3.5 text-center font-mono text-muted-foreground"
+                                >
                                     {{
                                         (currentPage - 1) * itemsPerPage + i + 1
                                     }}
                                 </td>
-                                <td class="px-4 py-3.5 font-mono text-[11px] font-semibold text-muted-foreground">
+                                <td
+                                    class="px-4 py-3.5 font-mono text-[11px] font-semibold text-muted-foreground"
+                                >
                                     {{ att.tanggal }}
                                 </td>
                                 <td class="px-4 py-3.5">
                                     <p class="font-semibold text-foreground">
                                         {{ att.name }}
                                     </p>
-                                    <p class="font-mono text-[10px] font-bold text-teal-600 dark:text-teal-400">
+                                    <p
+                                        class="font-mono text-[10px] font-bold text-teal-600 dark:text-teal-400"
+                                    >
                                         NIP: {{ att.nip }}
                                     </p>
                                 </td>
@@ -647,30 +809,41 @@ const downloadRecapPdf = (type: string) => {
                                     <p class="font-medium text-foreground">
                                         {{ att.opd }}
                                     </p>
-                                    <span v-if="att.unit_kerja"
-                                        class="inline-block rounded-md border border-teal-500/20 bg-teal-500/10 px-1.5 py-0.5 text-[9px] font-semibold text-teal-600 dark:text-teal-400">
+                                    <span
+                                        v-if="att.unit_kerja"
+                                        class="inline-block rounded-md border border-teal-500/20 bg-teal-500/10 px-1.5 py-0.5 text-[9px] font-semibold text-teal-600 dark:text-teal-400"
+                                    >
                                         {{ att.unit_kerja }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <Badge variant="outline" class="px-2 py-0.5 text-[10px] font-semibold uppercase">
+                                    <Badge
+                                        variant="outline"
+                                        class="px-2 py-0.5 text-[10px] font-semibold uppercase"
+                                    >
                                         {{ att.jenis }}
                                     </Badge>
                                 </td>
                                 <td
-                                    class="px-4 py-3.5 text-center font-mono text-xs font-bold text-teal-600 dark:text-teal-400">
+                                    class="px-4 py-3.5 text-center font-mono text-xs font-bold text-teal-600 dark:text-teal-400"
+                                >
                                     {{ att.waktu }} WITA
                                 </td>
                                 <td class="px-4 py-3.5 text-center">
-                                    <Badge :variant="att.status === 'tepat_waktu'
-                                        ? 'default'
-                                        : 'outline'
-                                        " class="px-2.5 py-0.5 text-[10px] font-semibold uppercase" :class="{
+                                    <Badge
+                                        :variant="
+                                            att.status === 'tepat_waktu'
+                                                ? 'default'
+                                                : 'outline'
+                                        "
+                                        class="px-2.5 py-0.5 text-[10px] font-semibold uppercase"
+                                        :class="{
                                             'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400':
                                                 att.status === 'tepat_waktu',
                                             'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400':
                                                 att.status !== 'tepat_waktu',
-                                        }">
+                                        }"
+                                    >
                                         {{
                                             att.status
                                                 ? att.status.replace('_', ' ')
@@ -678,16 +851,24 @@ const downloadRecapPdf = (type: string) => {
                                         }}
                                     </Badge>
                                 </td>
-                                <td class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground">
-                                    <span v-if="att.latitude && att.longitude"
-                                        class="flex items-center justify-center gap-1">
-                                        <MapPin class="h-3 w-3 shrink-0 text-sky-500" />
-                                        <span>{{
-                                            Number(att.latitude).toFixed(4)
+                                <td
+                                    class="px-4 py-3.5 text-center font-mono text-[11px] text-muted-foreground"
+                                >
+                                    <span
+                                        v-if="att.latitude && att.longitude"
+                                        class="flex items-center justify-center gap-1"
+                                    >
+                                        <MapPin
+                                            class="h-3 w-3 shrink-0 text-sky-500"
+                                        />
+                                        <span
+                                            >{{
+                                                Number(att.latitude).toFixed(4)
                                             }},
                                             {{
                                                 Number(att.longitude).toFixed(4)
-                                            }}</span>
+                                            }}</span
+                                        >
                                     </span>
                                     <span v-else>-</span>
                                 </td>
@@ -695,22 +876,35 @@ const downloadRecapPdf = (type: string) => {
                         </tbody>
                     </table>
 
-                    <div v-if="!paginatedAttendances.length" class="space-y-2 py-10 text-center text-muted-foreground">
-                        <ClipboardList class="mx-auto h-8 w-8 text-muted-foreground/50" />
+                    <div
+                        v-if="!paginatedAttendances.length"
+                        class="space-y-2 py-10 text-center text-muted-foreground"
+                    >
+                        <ClipboardList
+                            class="mx-auto h-8 w-8 text-muted-foreground/50"
+                        />
                         <p>Belum ada log data presensi untuk filter ini.</p>
                     </div>
 
-                    <Pagination v-if="paginatedAttendances.length > 0" v-model:currentPage="currentPage"
-                        :totalItems="paginatedAttendances.length" :itemsPerPage="itemsPerPage" />
+                    <Pagination
+                        v-if="paginatedAttendances.length > 0"
+                        v-model:currentPage="currentPage"
+                        :totalItems="paginatedAttendances.length"
+                        :itemsPerPage="itemsPerPage"
+                    />
                 </div>
             </CardContent>
         </Card>
 
         <!-- Scan QR Presensi Shadcn Dialog -->
         <Dialog v-model:open="showQrModal">
-            <DialogContent class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-md">
+            <DialogContent
+                class="border-border/80 bg-card/95 backdrop-blur-2xl sm:max-w-md"
+            >
                 <DialogHeader>
-                    <DialogTitle class="flex items-center gap-2 text-base font-bold">
+                    <DialogTitle
+                        class="flex items-center gap-2 text-base font-bold"
+                    >
                         <QrCode class="h-4 w-4 text-emerald-500" />
                         <span>Scan QR Presensi ASN</span>
                     </DialogTitle>
@@ -718,28 +912,52 @@ const downloadRecapPdf = (type: string) => {
 
                 <form @submit.prevent="submitQrScan" class="space-y-3 pt-2">
                     <div class="space-y-1.5">
-                        <Label for="qr_input" class="text-xs">Barcode / QR Code NIP ASN</Label>
-                        <Input id="qr_input" ref="qrInputRef" v-model="qrInput" required
-                            placeholder="Scan dengan Scanner Barcode..." class="h-10 font-mono text-xs" />
+                        <Label for="qr_input" class="text-xs"
+                            >Barcode / QR Code NIP ASN</Label
+                        >
+                        <Input
+                            id="qr_input"
+                            ref="qrInputRef"
+                            v-model="qrInput"
+                            required
+                            placeholder="Scan dengan Scanner Barcode..."
+                            class="h-10 font-mono text-xs"
+                        />
                     </div>
 
                     <div class="space-y-1.5">
-                        <Label for="qr_acara" class="text-xs">Nama Acara / Kehadiran Rapat (Opsional)</Label>
-                        <Input id="qr_acara" v-model="qrAcara" placeholder="Misal: Apel Bersama / Rapat Paripurna"
-                            class="h-9 text-xs" />
+                        <Label for="qr_acara" class="text-xs"
+                            >Nama Acara / Kehadiran Rapat (Opsional)</Label
+                        >
+                        <Input
+                            id="qr_acara"
+                            v-model="qrAcara"
+                            placeholder="Misal: Apel Bersama / Rapat Paripurna"
+                            class="h-9 text-xs"
+                        />
                     </div>
 
-                    <Button type="submit" :disabled="isVerifying"
-                        class="h-10 w-full cursor-pointer bg-emerald-600 font-semibold text-white hover:bg-emerald-700">
-                        <Loader2 v-if="isVerifying" class="mr-2 h-4 w-4 animate-spin" />
+                    <Button
+                        type="submit"
+                        :disabled="isVerifying"
+                        class="h-10 w-full cursor-pointer bg-emerald-600 font-semibold text-white hover:bg-emerald-700"
+                    >
+                        <Loader2
+                            v-if="isVerifying"
+                            class="mr-2 h-4 w-4 animate-spin"
+                        />
                         <span>Submit Verifikasi QR</span>
                     </Button>
                 </form>
 
                 <!-- QR Result Alert -->
-                <div v-if="qrResult"
-                    class="space-y-1 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-foreground">
-                    <div class="flex items-center gap-2 font-bold text-emerald-600 dark:text-emerald-400">
+                <div
+                    v-if="qrResult"
+                    class="space-y-1 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-foreground"
+                >
+                    <div
+                        class="flex items-center gap-2 font-bold text-emerald-600 dark:text-emerald-400"
+                    >
                         <CheckCircle2 class="h-4 w-4" />
                         <span>Presensi Berhasil Terverifikasi!</span>
                     </div>
@@ -750,8 +968,10 @@ const downloadRecapPdf = (type: string) => {
                 </div>
 
                 <!-- QR Error Alert -->
-                <div v-if="qrError"
-                    class="flex items-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3.5 text-xs font-semibold text-rose-500">
+                <div
+                    v-if="qrError"
+                    class="flex items-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3.5 text-xs font-semibold text-rose-500"
+                >
                     <AlertTriangle class="h-4 w-4 shrink-0" />
                     <span>{{ qrError }}</span>
                 </div>

@@ -44,8 +44,13 @@ const userRole = computed(
 );
 const isSuperAdmin = computed(() => userRole.value === 'super_admin');
 const roleLabel = computed(() => {
-    if (userRole.value === 'super_admin') return 'Super Admin';
-    if (userRole.value === 'admin_opd') return 'Admin OPD';
+    if (userRole.value === 'super_admin') {
+return 'Super Admin';
+}
+
+    if (userRole.value === 'admin_opd') {
+return 'Admin OPD';
+}
 
     return 'Administrator';
 });

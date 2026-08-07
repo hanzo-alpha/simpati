@@ -1,72 +1,61 @@
-import {
-    queryParams,
-    type RouteQueryOptions,
-    type RouteDefinition,
-    type RouteFormDefinition,
-} from './../../../wayfinder';
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 /**
- * @see \App\Http\Controllers\Web\Admin\EventController::store
+* @see \App\Http\Controllers\Web\Admin\EventController::store
  * @see app/Http/Controllers/Web/Admin/EventController.php:34
  * @route '/admin/events'
  */
-export const store = (
-    options?: RouteQueryOptions,
-): RouteDefinition<'post'> => ({
+export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
-});
+})
 
 store.definition = {
-    methods: ['post'],
+    methods: ["post"],
     url: '/admin/events',
-} satisfies RouteDefinition<['post']>;
+} satisfies RouteDefinition<["post"]>
 
 /**
- * @see \App\Http\Controllers\Web\Admin\EventController::store
+* @see \App\Http\Controllers\Web\Admin\EventController::store
  * @see app/Http/Controllers/Web/Admin/EventController.php:34
  * @route '/admin/events'
  */
 store.url = (options?: RouteQueryOptions) => {
-    return store.definition.url + queryParams(options);
-};
+    return store.definition.url + queryParams(options)
+}
 
 /**
- * @see \App\Http\Controllers\Web\Admin\EventController::store
+* @see \App\Http\Controllers\Web\Admin\EventController::store
  * @see app/Http/Controllers/Web/Admin/EventController.php:34
  * @route '/admin/events'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: store.url(options),
     method: 'post',
-});
+})
 
-/**
- * @see \App\Http\Controllers\Web\Admin\EventController::store
+    /**
+* @see \App\Http\Controllers\Web\Admin\EventController::store
  * @see app/Http/Controllers/Web/Admin/EventController.php:34
  * @route '/admin/events'
  */
-const storeForm = (
-    options?: RouteQueryOptions,
-): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-});
+    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: store.url(options),
+        method: 'post',
+    })
 
-/**
- * @see \App\Http\Controllers\Web\Admin\EventController::store
+            /**
+* @see \App\Http\Controllers\Web\Admin\EventController::store
  * @see app/Http/Controllers/Web/Admin/EventController.php:34
  * @route '/admin/events'
  */
-storeForm.post = (
-    options?: RouteQueryOptions,
-): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
-    method: 'post',
-});
-
-store.form = storeForm;
+        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: store.url(options),
+            method: 'post',
+        })
+    
+    store.form = storeForm
 const events = {
     store: Object.assign(store, store),
-};
+}
 
-export default events;
+export default events
