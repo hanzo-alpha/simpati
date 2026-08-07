@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::store
- * @see app/Http/Controllers/Web/Admin/UserController.php:53
+ * @see app/Http/Controllers/Web/Admin/UserController.php:57
  * @route '/admin/users'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::store
- * @see app/Http/Controllers/Web/Admin/UserController.php:53
+ * @see app/Http/Controllers/Web/Admin/UserController.php:57
  * @route '/admin/users'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::store
- * @see app/Http/Controllers/Web/Admin/UserController.php:53
+ * @see app/Http/Controllers/Web/Admin/UserController.php:57
  * @route '/admin/users'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -113,7 +113,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\Admin\UserController::store
- * @see app/Http/Controllers/Web/Admin/UserController.php:53
+ * @see app/Http/Controllers/Web/Admin/UserController.php:57
  * @route '/admin/users'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -123,7 +123,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\Admin\UserController::store
- * @see app/Http/Controllers/Web/Admin/UserController.php:53
+ * @see app/Http/Controllers/Web/Admin/UserController.php:57
  * @route '/admin/users'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -134,7 +134,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::update
- * @see app/Http/Controllers/Web/Admin/UserController.php:77
+ * @see app/Http/Controllers/Web/Admin/UserController.php:81
  * @route '/admin/users/{user}'
  */
 export const update = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -149,7 +149,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::update
- * @see app/Http/Controllers/Web/Admin/UserController.php:77
+ * @see app/Http/Controllers/Web/Admin/UserController.php:81
  * @route '/admin/users/{user}'
  */
 update.url = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -182,7 +182,7 @@ update.url = (args: { user: number | { id: number } } | [user: number | { id: nu
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::update
- * @see app/Http/Controllers/Web/Admin/UserController.php:77
+ * @see app/Http/Controllers/Web/Admin/UserController.php:81
  * @route '/admin/users/{user}'
  */
 update.put = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -192,7 +192,7 @@ update.put = (args: { user: number | { id: number } } | [user: number | { id: nu
 
     /**
 * @see \App\Http\Controllers\Web\Admin\UserController::update
- * @see app/Http/Controllers/Web/Admin/UserController.php:77
+ * @see app/Http/Controllers/Web/Admin/UserController.php:81
  * @route '/admin/users/{user}'
  */
     const updateForm = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -207,7 +207,7 @@ update.put = (args: { user: number | { id: number } } | [user: number | { id: nu
 
             /**
 * @see \App\Http\Controllers\Web\Admin\UserController::update
- * @see app/Http/Controllers/Web/Admin/UserController.php:77
+ * @see app/Http/Controllers/Web/Admin/UserController.php:81
  * @route '/admin/users/{user}'
  */
         updateForm.put = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -223,7 +223,7 @@ update.put = (args: { user: number | { id: number } } | [user: number | { id: nu
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::toggle
- * @see app/Http/Controllers/Web/Admin/UserController.php:105
+ * @see app/Http/Controllers/Web/Admin/UserController.php:109
  * @route '/admin/users/{user}/toggle'
  */
 export const toggle = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -238,7 +238,7 @@ toggle.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::toggle
- * @see app/Http/Controllers/Web/Admin/UserController.php:105
+ * @see app/Http/Controllers/Web/Admin/UserController.php:109
  * @route '/admin/users/{user}/toggle'
  */
 toggle.url = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -271,7 +271,7 @@ toggle.url = (args: { user: number | { id: number } } | [user: number | { id: nu
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::toggle
- * @see app/Http/Controllers/Web/Admin/UserController.php:105
+ * @see app/Http/Controllers/Web/Admin/UserController.php:109
  * @route '/admin/users/{user}/toggle'
  */
 toggle.put = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -281,7 +281,7 @@ toggle.put = (args: { user: number | { id: number } } | [user: number | { id: nu
 
     /**
 * @see \App\Http\Controllers\Web\Admin\UserController::toggle
- * @see app/Http/Controllers/Web/Admin/UserController.php:105
+ * @see app/Http/Controllers/Web/Admin/UserController.php:109
  * @route '/admin/users/{user}/toggle'
  */
     const toggleForm = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -296,7 +296,7 @@ toggle.put = (args: { user: number | { id: number } } | [user: number | { id: nu
 
             /**
 * @see \App\Http\Controllers\Web\Admin\UserController::toggle
- * @see app/Http/Controllers/Web/Admin/UserController.php:105
+ * @see app/Http/Controllers/Web/Admin/UserController.php:109
  * @route '/admin/users/{user}/toggle'
  */
         toggleForm.put = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -312,7 +312,7 @@ toggle.put = (args: { user: number | { id: number } } | [user: number | { id: nu
     toggle.form = toggleForm
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::resetDeviceBinding
- * @see app/Http/Controllers/Web/Admin/UserController.php:114
+ * @see app/Http/Controllers/Web/Admin/UserController.php:118
  * @route '/admin/users/{user}/reset-device'
  */
 export const resetDeviceBinding = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -327,7 +327,7 @@ resetDeviceBinding.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::resetDeviceBinding
- * @see app/Http/Controllers/Web/Admin/UserController.php:114
+ * @see app/Http/Controllers/Web/Admin/UserController.php:118
  * @route '/admin/users/{user}/reset-device'
  */
 resetDeviceBinding.url = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -360,7 +360,7 @@ resetDeviceBinding.url = (args: { user: number | { id: number } } | [user: numbe
 
 /**
 * @see \App\Http\Controllers\Web\Admin\UserController::resetDeviceBinding
- * @see app/Http/Controllers/Web/Admin/UserController.php:114
+ * @see app/Http/Controllers/Web/Admin/UserController.php:118
  * @route '/admin/users/{user}/reset-device'
  */
 resetDeviceBinding.put = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -370,7 +370,7 @@ resetDeviceBinding.put = (args: { user: number | { id: number } } | [user: numbe
 
     /**
 * @see \App\Http\Controllers\Web\Admin\UserController::resetDeviceBinding
- * @see app/Http/Controllers/Web/Admin/UserController.php:114
+ * @see app/Http/Controllers/Web/Admin/UserController.php:118
  * @route '/admin/users/{user}/reset-device'
  */
     const resetDeviceBindingForm = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -385,7 +385,7 @@ resetDeviceBinding.put = (args: { user: number | { id: number } } | [user: numbe
 
             /**
 * @see \App\Http\Controllers\Web\Admin\UserController::resetDeviceBinding
- * @see app/Http/Controllers/Web/Admin/UserController.php:114
+ * @see app/Http/Controllers/Web/Admin/UserController.php:118
  * @route '/admin/users/{user}/reset-device'
  */
         resetDeviceBindingForm.put = (args: { user: number | { id: number } } | [user: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

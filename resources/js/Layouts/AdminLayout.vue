@@ -39,6 +39,15 @@ const toggleTheme = () => {
 
 const page = usePage();
 
+const userRole = computed(() => page.props.auth?.user?.role?.name || '');
+const isSuperAdmin = computed(() => userRole.value === 'super_admin');
+const roleLabel = computed(() => {
+    if (userRole.value === 'super_admin') return 'Super Admin';
+    if (userRole.value === 'admin_opd') return 'Admin OPD';
+
+    return 'Administrator';
+});
+
 const currentDate = computed(() => {
     return new Date().toLocaleDateString('id-ID', {
         weekday: 'long',
@@ -221,18 +230,22 @@ const initials = computed(() => {
                     Peringkat Kehadiran
                 </SidebarLink>
 
-                <p
-                    class="mt-5 mb-2 px-3 text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
-                >
-                    Sistem & Konfigurasi
-                </p>
-                <SidebarLink
-                    :href="adminRoutes.settings.url()"
-                    :active="$page.url.startsWith(adminRoutes.settings.url())"
-                    icon="cog"
-                >
-                    Pengaturan Sistem
-                </SidebarLink>
+                <template v-if="isSuperAdmin">
+                    <p
+                        class="mt-5 mb-2 px-3 text-[11px] font-bold tracking-wider text-muted-foreground uppercase"
+                    >
+                        Sistem & Konfigurasi
+                    </p>
+                    <SidebarLink
+                        :href="adminRoutes.settings.url()"
+                        :active="
+                            $page.url.startsWith(adminRoutes.settings.url())
+                        "
+                        icon="cog"
+                    >
+                        Pengaturan Sistem
+                    </SidebarLink>
+                </template>
             </nav>
 
             <!-- Sidebar Footer User Profile -->
@@ -257,7 +270,7 @@ const initials = computed(() => {
                                 class="flex items-center gap-1 text-[11px] font-medium text-muted-foreground"
                             >
                                 <ShieldCheck class="h-3 w-3 text-emerald-500" />
-                                <span>Administrator</span>
+                                <span>{{ roleLabel }}</span>
                             </p>
                         </div>
                     </Link>

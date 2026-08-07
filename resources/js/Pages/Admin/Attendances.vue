@@ -88,7 +88,7 @@ interface FiltersProps {
 
 const props = withDefaults(
     defineProps<{
-        attendances?: AttendanceItem[];
+        attendances?: AttendanceItem[] | { data: AttendanceItem[] };
         offices?: Office[];
         unitKerjaList?: string[];
         summary?: SummaryProps;
@@ -188,6 +188,10 @@ const currentPage = ref(1);
 const itemsPerPage = 10;
 
 const paginatedAttendances = computed(() => {
+    if (!Array.isArray(props.attendances)) {
+        return (props.attendances as any)?.data || [];
+    }
+
     const start = (currentPage.value - 1) * itemsPerPage;
 
     return props.attendances.slice(start, start + itemsPerPage);

@@ -15,7 +15,7 @@ class EnsureUserIsAdmin
     {
         $user = $request->user();
 
-        if (! $user || ! in_array($user->role?->name, ['super_admin', 'admin_opd'])) {
+        if (! $user || (! $user->isSuperAdmin() && ! $user->isAdminOpd())) {
             if ($request->wantsJson()) {
                 return response()->json(['message' => 'Akses ditolak. Halaman khusus Administrator.'], 403);
             }

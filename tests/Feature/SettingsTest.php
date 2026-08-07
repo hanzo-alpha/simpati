@@ -15,13 +15,13 @@ class SettingsTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Role::create(['id' => 1, 'name' => 'asn', 'display_name' => 'ASN']);
-        Role::create(['id' => 2, 'name' => 'super_admin', 'display_name' => 'Super Admin']);
+        Role::create(['id' => 1, 'name' => 'super_admin', 'display_name' => 'Super Admin']);
+        Role::create(['id' => 2, 'name' => 'admin_opd', 'display_name' => 'Admin OPD']);
     }
 
     public function test_admin_can_view_settings_page(): void
     {
-        $admin = User::factory()->create(['nip' => '198001012010011001', 'role_id' => 2]);
+        $admin = User::factory()->create(['nip' => '198001012010011001', 'role_id' => 1]);
 
         $response = $this->actingAs($admin)->get('/admin/settings');
 
@@ -30,7 +30,7 @@ class SettingsTest extends TestCase
 
     public function test_admin_can_update_settings(): void
     {
-        $admin = User::factory()->create(['nip' => '198001012010011002', 'role_id' => 2]);
+        $admin = User::factory()->create(['nip' => '198001012010011002', 'role_id' => 1]);
 
         $payload = [
             'app_name' => 'SIMPATI Premium',

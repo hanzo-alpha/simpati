@@ -79,10 +79,10 @@ interface UserItem {
 }
 
 const props = defineProps<{
-    users: UserItem[];
+    users: UserItem[] | { data: UserItem[] };
     offices: Office[];
     roles: Role[];
-    supervisors: UserItem[];
+    supervisors?: UserItem[];
 }>();
 
 const activeFilter = ref('all');
@@ -125,8 +125,16 @@ const form = useForm({
     is_active: true,
 });
 
+const userList = computed<UserItem[]>(() => {
+    if (Array.isArray(props.users)) {
+        return props.users;
+    }
+
+    return (props.users as any)?.data || [];
+});
+
 const filteredUsers = computed(() => {
-    return props.users.filter((u) => {
+    return userList.value.filter((u) => {
         if (activeFilter.value === 'active' && !u.is_active) {
             return false;
         }

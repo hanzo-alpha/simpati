@@ -9,8 +9,12 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if (! $request->user()?->isSuperAdmin()) {
+            return redirect()->route('admin.dashboard')->with('error', 'Halaman Pengaturan Sistem hanya dapat diakses oleh Super Admin.');
+        }
+
         $allSettings = [
             // General
             'app_name' => Setting::get('app_name', 'SIMPATI'),

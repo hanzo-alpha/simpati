@@ -87,22 +87,22 @@ class User extends Authenticatable
 
     public function isSuperAdmin(): bool
     {
-        return $this->role?->name === 'super_admin';
+        return $this->role?->name === 'super_admin' || (int) $this->role_id === 1;
     }
 
     public function isAdminOpd(): bool
     {
-        return $this->role?->name === 'admin_opd';
+        return $this->role?->name === 'admin_opd' || (int) $this->role_id === 2;
     }
 
     public function isAtasan(): bool
     {
-        return $this->role?->name === 'atasan';
+        return $this->role?->name === 'atasan' || (int) $this->role_id === 3;
     }
 
     public function isAsn(): bool
     {
-        return $this->role?->name === 'asn';
+        return $this->role?->name === 'asn' || (int) $this->role_id === 4;
     }
 
     // ─── Attendance Helpers ──────────────────────────

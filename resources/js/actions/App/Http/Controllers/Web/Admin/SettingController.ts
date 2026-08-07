@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::update
- * @see app/Http/Controllers/Web/Admin/SettingController.php:51
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:55
  * @route '/admin/settings'
  */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::update
- * @see app/Http/Controllers/Web/Admin/SettingController.php:51
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:55
  * @route '/admin/settings'
  */
 update.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::update
- * @see app/Http/Controllers/Web/Admin/SettingController.php:51
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:55
  * @route '/admin/settings'
  */
 update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -113,7 +113,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::update
- * @see app/Http/Controllers/Web/Admin/SettingController.php:51
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:55
  * @route '/admin/settings'
  */
     const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -123,7 +123,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::update
- * @see app/Http/Controllers/Web/Admin/SettingController.php:51
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:55
  * @route '/admin/settings'
  */
         updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -134,7 +134,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:69
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:73
  * @route '/admin/settings/test-simpeg'
  */
 export const testSimpegConnection = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -149,7 +149,7 @@ testSimpegConnection.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:69
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:73
  * @route '/admin/settings/test-simpeg'
  */
 testSimpegConnection.url = (options?: RouteQueryOptions) => {
@@ -158,7 +158,7 @@ testSimpegConnection.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:69
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:73
  * @route '/admin/settings/test-simpeg'
  */
 testSimpegConnection.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -168,7 +168,7 @@ testSimpegConnection.post = (options?: RouteQueryOptions): RouteDefinition<'post
 
     /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:69
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:73
  * @route '/admin/settings/test-simpeg'
  */
     const testSimpegConnectionForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -178,7 +178,7 @@ testSimpegConnection.post = (options?: RouteQueryOptions): RouteDefinition<'post
 
             /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:69
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:73
  * @route '/admin/settings/test-simpeg'
  */
         testSimpegConnectionForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

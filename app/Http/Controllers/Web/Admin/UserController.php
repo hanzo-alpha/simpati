@@ -41,11 +41,15 @@ class UserController extends Controller
         $users = $query->paginate(15)->withQueryString();
         $offices = Office::select('id', 'name', 'opd_name')->get();
         $roles = Role::select('id', 'name', 'display_name')->get();
+        $supervisors = User::whereHas('role', fn ($q) => $q->where('name', 'atasan'))
+            ->select('id', 'name', 'nip')
+            ->get();
 
         return inertia('Admin/Users', [
             'users' => $users,
             'offices' => $offices,
             'roles' => $roles,
+            'supervisors' => $supervisors,
             'filters' => $request->only(['search', 'office_id', 'role_id']),
         ]);
     }
