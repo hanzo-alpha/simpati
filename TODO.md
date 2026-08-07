@@ -149,12 +149,12 @@
   - [x] Tampilkan banner informasi halus saat koneksi lambat/offline bahwa presensi tersimpan lokal dan akan sinkron otomatis saat online.
 
 ### 💻 2. Rekomendasi UI/UX Web Admin Panel (Pengelola BKPSDM & OPD)
-- [ ] **35. Aksi Massal (Bulk Actions) dengan Checkbox Multi-Select**
-  - [ ] Tambahkan persetujuan/penolakan massal (*Bulk Approve / Reject*) pada pengajuan cuti, koreksi presensi, & shift swap.
-- [ ] **36. Command Palette / Pencarian Pintar Global (`Ctrl + K`)**
-  - [ ] Sediakan modal pencarian pintas `Ctrl + K` untuk cepat berpindah ke data pegawai, OPD, atau halaman admin.
-- [ ] **37. Opsi Ekspor Laporan Serbaguna (Excel `.xlsx` & PDF)**
-  - [ ] Tambahkan ekspor laporan presensi OPD format Excel `.xlsx` selain PDF.
-- [ ] **38. Grafik Tren Kehadiran Interaktif (Dashboard Analytics)**
-  - [ ] Tambahkan chart tren persetujuan & kehadiran ASN per minggu/bulan di Web Admin Dashboard.
+- [x] **35. Aksi Massal (Bulk Actions) dengan Checkbox Multi-Select**
+  - [x] Tambahkan persetujuan/penolakan massal (*Bulk Approve / Reject*) pada pengajuan cuti, koreksi presensi, & shift swap di `LeaveRequests.vue`.
+- [x] **36. Command Palette / Pencarian Pintar Global (`Ctrl + K`)**
+  - [x] Sediakan modal pencarian pintas `Ctrl + K` di `AdminLayout.vue` (`CommandPalette.vue`) untuk cepat berpindah ke data pegawai, OPD, atau halaman admin.
+- [x] **37. Opsi Ekspor Laporan Serbaguna (Excel `.xlsx` & PDF)**
+  - [x] Tambahkan ekspor laporan presensi OPD format Excel `.xlsx` / CSV di `Admin/Attendances.vue` selain PDF.
+- [x] **38. Grafik Tren Kehadiran Interaktif (Dashboard Analytics)**
+  - [x] Tambahkan chart tren persetujuan & kehadiran ASN per minggu/bulan di Web Admin Dashboard (`Dashboard.vue`).
 

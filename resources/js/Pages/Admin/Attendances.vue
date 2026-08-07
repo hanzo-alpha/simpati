@@ -469,12 +469,12 @@ const downloadRecapPdf = (type: string) => {
                             variant="outline"
                             size="sm"
                             @click="downloadCsv"
-                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase"
+                            class="h-10 cursor-pointer rounded-none border-border text-xs font-bold tracking-wider uppercase hover:border-emerald-500/50 hover:text-emerald-500"
                         >
-                            <Download
-                                class="mr-1.5 h-3.5 w-3.5 text-teal-500"
+                            <FileSpreadsheet
+                                class="mr-1.5 h-3.5 w-3.5 text-emerald-500"
                             />
-                            <span>CSV</span>
+                            <span>Excel / CSV</span>
                         </Button>
                     </div>
                 </div>

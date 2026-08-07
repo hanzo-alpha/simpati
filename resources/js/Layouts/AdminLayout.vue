@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { Link, Head, usePage } from '@inertiajs/vue3';
-import { Sun, Moon, LogOut, ShieldCheck } from '@lucide/vue';
+import { Sun, Moon, LogOut, ShieldCheck, Search } from '@lucide/vue';
 import { computed, ref, onMounted } from 'vue';
 import SidebarLink from '@/Components/SidebarLink.vue';
 import Toaster from '@/Components/ui/sonner/Sonner.vue';
 import ConfirmDialog from '@/Components/ConfirmDialog.vue';
+import CommandPalette from '@/Components/CommandPalette.vue';
 import { useFlashToast } from '@/composables/useFlashToast';
 import { useConfirm } from '@/composables/useConfirm';
 import * as webRoutes from '@/routes';
@@ -24,6 +25,8 @@ const {
     handleConfirm,
     handleCancel,
 } = useConfirm();
+
+const commandPaletteRef = ref();
 
 const theme = ref('dark');
 onMounted(() => {
@@ -301,6 +304,17 @@ const initials = computed(() => {
                         </p>
                     </div>
                     <div class="flex items-center gap-3">
+                        <button
+                            @click="commandPaletteRef?.toggleOpen()"
+                            class="flex items-center gap-2 rounded-none border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground shadow-xs transition-all hover:border-emerald-500/50 hover:text-emerald-500 cursor-pointer"
+                            title="Pencarian Pintar (Ctrl + K)"
+                        >
+                            <Search class="h-3.5 w-3.5" />
+                            <span class="hidden sm:inline font-medium">Cari menu...</span>
+                            <kbd class="pointer-events-none hidden h-4 select-none items-center gap-0.5 rounded border border-border bg-muted px-1 font-mono text-[10px] font-medium opacity-100 sm:flex">
+                                Ctrl K
+                            </kbd>
+                        </button>
                         <div
                             class="hidden items-center gap-2 rounded-none border border-border bg-card px-3 py-1.5 font-mono text-xs text-muted-foreground shadow-xs md:flex"
                         >
@@ -328,7 +342,8 @@ const initials = computed(() => {
             </div>
         </main>
 
-        <!-- Global Toast Notifications & Shadcn Confirm Dialog -->
+        <!-- Command Palette (Ctrl+K) & Global Toast Notifications & Shadcn Confirm Dialog -->
+        <CommandPalette ref="commandPaletteRef" />
         <Toaster richColors position="top-right" closeButton />
         <ConfirmDialog
             v-model:open="isConfirmOpen"
