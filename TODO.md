@@ -133,3 +133,28 @@
 
 - [x] **30. Dynamic Watermark Foto Presensi (Peningkatan Keamanan)**
   - [x] Tambahkan watermark otomatis (NIP, Nama, Lat/Long, Timestamp) pada foto presensi yang diunggah.
+
+---
+
+## 🎨 Phase 7: UI/UX Master Roadmap (Mobile & Web Admin)
+
+### 📱 1. Rekomendasi UI/UX Aplikasi Mobile (Pegawai ASN)
+- [x] **31. Visual Ringkasan Presensi Kalender (Month Grid Visualizer)**
+  - [x] Tampilkan grid kalender bulanan interaktif dengan indikator warna (*color-coded dots/highlights*): Hijau (Tepat Waktu), Kuning (Terlambat), Biru (Izin/Cuti), Merah (Alpha) di `riwayat_screen.dart`.
+- [x] **32. Indikator Countdown & Radius Presensi Real-Time di Dashboard**
+  - [x] Tampilkan *live timer* sisa waktu menuju batas jam masuk/pulang & indikator jarak radius kantor real-time di `dashboard_screen.dart` / `presensi_screen.dart`.
+- [x] **33. Umpan Balik Haptik & Audio Ringan (Haptic Feedback)**
+  - [x] Integrasikan `HapticFeedback.lightImpact()` / `mediumImpact()` saat selfie liveness terverifikasi dan presensi berhasil.
+- [x] **34. Banner Status Mode Offline (Offline Sync Status Banner)**
+  - [x] Tampilkan banner informasi halus saat koneksi lambat/offline bahwa presensi tersimpan lokal dan akan sinkron otomatis saat online.
+
+### 💻 2. Rekomendasi UI/UX Web Admin Panel (Pengelola BKPSDM & OPD)
+- [ ] **35. Aksi Massal (Bulk Actions) dengan Checkbox Multi-Select**
+  - [ ] Tambahkan persetujuan/penolakan massal (*Bulk Approve / Reject*) pada pengajuan cuti, koreksi presensi, & shift swap.
+- [ ] **36. Command Palette / Pencarian Pintar Global (`Ctrl + K`)**
+  - [ ] Sediakan modal pencarian pintas `Ctrl + K` untuk cepat berpindah ke data pegawai, OPD, atau halaman admin.
+- [ ] **37. Opsi Ekspor Laporan Serbaguna (Excel `.xlsx` & PDF)**
+  - [ ] Tambahkan ekspor laporan presensi OPD format Excel `.xlsx` selain PDF.
+- [ ] **38. Grafik Tren Kehadiran Interaktif (Dashboard Analytics)**
+  - [ ] Tambahkan chart tren persetujuan & kehadiran ASN per minggu/bulan di Web Admin Dashboard.
+
