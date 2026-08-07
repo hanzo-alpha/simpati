@@ -3,6 +3,7 @@ import { router } from '@inertiajs/vue3';
 import { Check, X, Clock, FileText } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
@@ -56,15 +57,29 @@ const paginatedCorrections = computed(() => {
     return props.corrections.slice(start, start + itemsPerPage);
 });
 
-const updateStatus = (correction: AttendanceCorrectionItem, status: string) => {
-    const catatan =
-        status === 'ditolak' ? prompt('Alasan penolakan (opsional):') : null;
+const { confirm: confirmAction } = useConfirm();
 
-    router.put(
-        `/admin/attendance-corrections/${correction.id}`,
-        { status, catatan_approval: catatan },
-        { preserveScroll: true },
-    );
+const updateStatus = async (correction: AttendanceCorrectionItem, status: string) => {
+    const isApprove = status === 'disetujui';
+    const isOk = await confirmAction({
+        title: isApprove ? 'Setujui Pengajuan Koreksi' : 'Tolak Pengajuan Koreksi',
+        description: isApprove
+            ? `Apakah Anda yakin ingin menyetujui pengajuan koreksi presensi dari ${correction.user?.name || 'pegawai'}?`
+            : `Apakah Anda yakin ingin menolak pengajuan koreksi presensi dari ${correction.user?.name || 'pegawai'}?`,
+        confirmText: isApprove ? 'Ya, Setujui' : 'Ya, Tolak',
+        variant: isApprove ? 'success' : 'danger',
+    });
+
+    if (isOk) {
+        const catatan =
+            status === 'ditolak' ? prompt('Alasan penolakan (opsional):') : null;
+
+        router.put(
+            `/admin/attendance-corrections/${correction.id}`,
+            { status, catatan_approval: catatan },
+            { preserveScroll: true },
+        );
+    }
 };
 
 const formatJenis = (jenis?: string) => {

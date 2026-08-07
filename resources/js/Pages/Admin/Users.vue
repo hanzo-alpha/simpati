@@ -14,6 +14,7 @@ import {
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -203,18 +204,28 @@ const submitForm = () => {
     }
 };
 
-const toggleUserStatus = (user: UserItem) => {
-    if (
-        confirm(
-            `Apakah Anda yakin ingin mengganti status keaktifan ${user.name}?`,
-        )
-    ) {
+const { confirm } = useConfirm();
+
+const toggleUserStatus = async (user: UserItem) => {
+    const isOk = await confirm({
+        title: 'Konfirmasi Status Keaktifan',
+        description: `Apakah Anda yakin ingin mengganti status keaktifan akun ASN "${user.name}"?`,
+        confirmText: 'Ya, Ubah Status',
+        variant: 'warning',
+    });
+    if (isOk) {
         form.put(`/admin/users/${user.id}/toggle`, { preserveScroll: true });
     }
 };
 
-const resetDevice = (user: UserItem) => {
-    if (confirm(`Reset Device Binding HP untuk pegawai ${user.name}?`)) {
+const resetDevice = async (user: UserItem) => {
+    const isOk = await confirm({
+        title: 'Reset Binding HP',
+        description: `Reset Device Binding HP untuk pegawai "${user.name}"? Pegawai dapat mendaftarkan HP baru pada presensi berikutnya.`,
+        confirmText: 'Ya, Reset Device',
+        variant: 'warning',
+    });
+    if (isOk) {
         form.put(`/admin/users/${user.id}/reset-device`, {
             preserveScroll: true,
         });

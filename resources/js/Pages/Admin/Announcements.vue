@@ -2,6 +2,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { Megaphone, Plus, Edit3, Trash2, Pin } from '@lucide/vue';
 import { ref } from 'vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -61,8 +62,16 @@ const submitForm = () => {
     }
 };
 
-const deleteAnnouncement = (id: number) => {
-    if (confirm('Yakin hapus pengumuman ini?')) {
+const { confirm: confirmDelete } = useConfirm();
+
+const deleteAnnouncement = async (id: number) => {
+    const isOk = await confirmDelete({
+        title: 'Hapus Pengumuman Edaran',
+        description: 'Apakah Anda yakin ingin menghapus pengumuman edaran ini?',
+        confirmText: 'Ya, Hapus Pengumuman',
+        variant: 'danger',
+    });
+    if (isOk) {
         useForm({}).delete(`/admin/announcements/${id}`);
     }
 };

@@ -13,6 +13,7 @@ import {
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -165,8 +166,16 @@ const submitForm = () => {
     }
 };
 
-const deleteOffice = (id: number) => {
-    if (confirm('Yakin hapus data kantor OPD ini?')) {
+const { confirm: confirmDelete } = useConfirm();
+
+const deleteOffice = async (id: number) => {
+    const isOk = await confirmDelete({
+        title: 'Hapus Unit Kantor / OPD',
+        description: 'Apakah Anda yakin ingin menghapus data unit kantor OPD ini?',
+        confirmText: 'Ya, Hapus Kantor',
+        variant: 'danger',
+    });
+    if (isOk) {
         useForm({}).delete(`/admin/offices/${id}`);
     }
 };

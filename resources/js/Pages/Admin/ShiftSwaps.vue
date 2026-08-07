@@ -3,6 +3,7 @@ import { router } from '@inertiajs/vue3';
 import { ArrowLeftRight, Check, X } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
@@ -45,12 +46,26 @@ const paginatedSwaps = computed(() => {
     return props.swaps.slice(start, start + itemsPerPage);
 });
 
-const updateStatus = (swap: ShiftSwapItem, status: string) => {
-    router.put(
-        `/admin/shift-swaps/${swap.id}`,
-        { status },
-        { preserveScroll: true },
-    );
+const { confirm: confirmAction } = useConfirm();
+
+const updateStatus = async (swap: ShiftSwapItem, status: string) => {
+    const isApprove = status === 'disetujui';
+    const isOk = await confirmAction({
+        title: isApprove ? 'Setujui Tukar Shift' : 'Tolak Tukar Shift',
+        description: isApprove
+            ? 'Apakah Anda yakin ingin menyetujui pertukaran shift kerja ini?'
+            : 'Apakah Anda yakin ingin menolak pertukaran shift kerja ini?',
+        confirmText: isApprove ? 'Ya, Setujui' : 'Ya, Tolak',
+        variant: isApprove ? 'success' : 'danger',
+    });
+
+    if (isOk) {
+        router.put(
+            `/admin/shift-swaps/${swap.id}`,
+            { status },
+            { preserveScroll: true },
+        );
+    }
 };
 </script>
 

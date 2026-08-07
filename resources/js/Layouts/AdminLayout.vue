@@ -3,6 +3,10 @@ import { Link, Head, usePage } from '@inertiajs/vue3';
 import { Sun, Moon, LogOut, ShieldCheck } from '@lucide/vue';
 import { computed, ref, onMounted } from 'vue';
 import SidebarLink from '@/Components/SidebarLink.vue';
+import Toaster from '@/Components/ui/sonner/Sonner.vue';
+import ConfirmDialog from '@/Components/ConfirmDialog.vue';
+import { useFlashToast } from '@/composables/useFlashToast';
+import { useConfirm } from '@/composables/useConfirm';
 import * as webRoutes from '@/routes';
 import * as adminRoutes from '@/routes/admin';
 import { toggleTheme as utilToggleTheme, currentTheme } from '@/Utils/theme';
@@ -11,6 +15,15 @@ defineProps<{
     title?: string;
     subtitle?: string;
 }>();
+
+useFlashToast();
+const {
+    isOpen: isConfirmOpen,
+    options: confirmOptions,
+    loading: isConfirmLoading,
+    handleConfirm,
+    handleCancel,
+} = useConfirm();
 
 const theme = ref('dark');
 onMounted(() => {
@@ -314,5 +327,19 @@ const initials = computed(() => {
                 <slot />
             </div>
         </main>
+
+        <!-- Global Toast Notifications & Shadcn Confirm Dialog -->
+        <Toaster richColors position="top-right" closeButton />
+        <ConfirmDialog
+            v-model:open="isConfirmOpen"
+            :title="confirmOptions.title"
+            :description="confirmOptions.description"
+            :confirm-text="confirmOptions.confirmText"
+            :cancel-text="confirmOptions.cancelText"
+            :variant="confirmOptions.variant"
+            :loading="isConfirmLoading"
+            @confirm="handleConfirm"
+            @cancel="handleCancel"
+        />
     </div>
 </template>

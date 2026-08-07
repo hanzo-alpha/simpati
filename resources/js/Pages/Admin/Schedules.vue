@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { Clock, Plus, Edit3, Trash2, Search } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -108,8 +109,16 @@ const submitForm = () => {
     }
 };
 
-const deleteSchedule = (id: number) => {
-    if (confirm('Yakin hapus jadwal kerja ini?')) {
+const { confirm: confirmDelete } = useConfirm();
+
+const deleteSchedule = async (id: number) => {
+    const isOk = await confirmDelete({
+        title: 'Hapus Jam Kerja',
+        description: 'Apakah Anda yakin ingin menghapus jadwal jam kerja ini?',
+        confirmText: 'Ya, Hapus',
+        variant: 'danger',
+    });
+    if (isOk) {
         useForm({}).delete(`/admin/schedules/${id}`);
     }
 };

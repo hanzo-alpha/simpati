@@ -16,6 +16,7 @@ import {
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -126,12 +127,26 @@ const paginatedRequests = computed(() => {
     return filteredRequests.value.slice(start, start + itemsPerPage);
 });
 
-const updateStatus = (id: number, status: string) => {
-    router.put(
-        `/admin/leave-requests/${id}`,
-        { status },
-        { preserveScroll: true },
-    );
+const { confirm: confirmAction } = useConfirm();
+
+const updateStatus = async (id: number, status: string) => {
+    const isApprove = status === 'disetujui';
+    const isOk = await confirmAction({
+        title: isApprove ? 'Setujui Permohonan Izin / Cuti' : 'Tolak Permohonan Izin / Cuti',
+        description: isApprove
+            ? 'Apakah Anda yakin ingin menyetujui permohonan izin/cuti ini?'
+            : 'Apakah Anda yakin ingin menolak permohonan izin/cuti ini?',
+        confirmText: isApprove ? 'Ya, Setujui' : 'Ya, Tolak',
+        variant: isApprove ? 'success' : 'danger',
+    });
+
+    if (isOk) {
+        router.put(
+            `/admin/leave-requests/${id}`,
+            { status },
+            { preserveScroll: true },
+        );
+    }
 };
 </script>
 
