@@ -61,8 +61,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/events/active', [EventPresensiController::class, 'index']);
     Route::post('/events/scan', [EventPresensiController::class, 'scan']);
 
-    // Stats
+    // Stats & Reports
     Route::get('/statistics', [StatisticController::class, 'index']);
+    Route::get('/statistics/pdf', [StatisticController::class, 'pdf']);
 
     // SIMPEG Integration API
     Route::prefix('v1/simpeg')->group(function () {

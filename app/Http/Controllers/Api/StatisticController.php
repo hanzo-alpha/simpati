@@ -152,4 +152,124 @@ class StatisticController extends Controller
             'month_name' => $startDate->translatedFormat('F Y'),
         ]);
     }
+
+    /**
+     * Generate HTML/PDF report preview for monthly attendance recap.
+     */
+    public function pdf(Request $request)
+    {
+        $user = $request->user();
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        $startDate = Carbon::createFromDate($year, $month, 1)->startOfMonth();
+        $endDate = $startDate->copy()->endOfMonth();
+
+        $attendances = Attendance::where('user_id', $user->id)
+            ->whereYear('tanggal', $year)
+            ->whereMonth('tanggal', $month)
+            ->orderBy('tanggal')
+            ->orderBy('waktu')
+            ->get();
+
+        $pemdaName = Setting::get('pemda_name', 'PEMERINTAH KABUPATEN SOPPENG');
+        $appName = Setting::get('app_name', 'SIMPATI');
+        $opdName = $user->office?->opd_name ?? 'Pemerintah Kabupaten Soppeng';
+        $nip = $user->profile?->nip ?? $user->nip ?? '-';
+        $jabatan = $user->profile?->jabatan ?? 'Aparatur Sipil Negara';
+        $monthName = strtoupper($startDate->translatedFormat('F Y'));
+
+        $rows = '';
+        foreach ($attendances as $idx => $att) {
+            $no = $idx + 1;
+            $tgl = $att->tanggal ? Carbon::parse($att->tanggal)->format('d/m/Y') : '-';
+            $jam = $att->waktu ? Carbon::parse($att->waktu)->format('H:i:s') : '-';
+            $jenis = strtoupper($att->jenis instanceof AttendanceType ? $att->jenis->value : (string)$att->jenis);
+            $status = strtoupper($att->status instanceof AttendanceStatus ? $att->status->value : (string)$att->status);
+            $ket = htmlspecialchars($att->keterangan ?? 'Hadir Presensi Digital Mobile');
+
+            $rows .= "<tr>
+                <td style='text-align:center;'>{$no}</td>
+                <td style='text-align:center;'>{$tgl}</td>
+                <td style='text-align:center;'>{$jam}</td>
+                <td style='text-align:center;'>{$jenis}</td>
+                <td style='text-align:center; font-weight:bold;'>{$status}</td>
+                <td>{$ket}</td>
+            </tr>";
+        }
+
+        $html = "<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset='utf-8'>
+            <title>Rekap Presensi - {$user->name} ({$monthName})</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 30px; color: #1e293b; }
+                .header { text-align: center; border-bottom: 3px double #0f172a; padding-bottom: 15px; margin-bottom: 20px; }
+                .header h3 { margin: 2px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+                .header h2 { margin: 4px; font-size: 18px; text-transform: uppercase; font-weight: bold; }
+                .header p { margin: 2px; font-size: 11px; color: #64748b; }
+                .info-table { width: 100%; margin-bottom: 20px; font-size: 12px; }
+                .info-table td { padding: 4px 8px; vertical-align: top; }
+                .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; }
+                .data-table th, .data-table td { border: 1px solid #cbd5e1; padding: 8px; }
+                .data-table th { background-color: #f1f5f9; text-transform: uppercase; font-weight: bold; }
+                .footer { margin-top: 40px; float: right; text-align: center; font-size: 12px; width: 220px; }
+            </style>
+        </head>
+        <body>
+            <div class='header'>
+                <h3>{$pemdaName}</h3>
+                <h2>{$opdName}</h2>
+                <p>SISTEM INFORMASI MANAJEMEN PRESENSI TERINTEGRASI ({$appName})</p>
+            </div>
+
+            <h4 style='text-align:center; text-transform:uppercase; margin-bottom:15px;'>
+                LAPORAN REKAPITULASI PRESENSI BULANAN<br><span style='font-size:12px; color:#475569;'>PERIODE: {$monthName}</span>
+            </h4>
+
+            <table class='info-table'>
+                <tr>
+                    <td width='15%'><strong>Nama Pegawai</strong></td>
+                    <td width='2%'>:</td>
+                    <td width='33%'>{$user->name}</td>
+                    <td width='15%'><strong>OPD / Instansi</strong></td>
+                    <td width='2%'>:</td>
+                    <td width='33%'>{$opdName}</td>
+                </tr>
+                <tr>
+                    <td><strong>NIP</strong></td>
+                    <td>:</td>
+                    <td>{$nip}</td>
+                    <td><strong>Jabatan</strong></td>
+                    <td>:</td>
+                    <td>{$jabatan}</td>
+                </tr>
+            </table>
+
+            <table class='data-table'>
+                <thead>
+                    <tr>
+                        <th width='5%'>NO</th>
+                        <th width='15%'>TANGGAL</th>
+                        <th width='12%'>WAKTU</th>
+                        <th width='15%'>JENIS PRESENSI</th>
+                        <th width='18%'>STATUS</th>
+                        <th>KETERANGAN / CATATAN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {$rows}
+                </tbody>
+            </table>
+
+            <div class='footer'>
+                <p>Soppeng, " . now()->translatedFormat('d F Y') . "</p>
+                <p style='margin-top:50px;'><strong>{$user->name}</strong><br>NIP. {$nip}</p>
+            </div>
+        </body>
+        </html>";
+
+        return response($html, 200)->header('Content-Type', 'text/html');
+    }
 }
