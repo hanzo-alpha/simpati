@@ -161,6 +161,7 @@ const subUnitOptions = computed(() => {
 // Handle change on OPD Utama dropdown
 const onOpdChange = (val: any) => {
     selectedOpd.value = String(val ?? 'all');
+
     // Reset sub unit kerja filter if the currently selected sub unit is not in subUnitOptions
     if (selectedUnitKerja.value !== 'all') {
         const isValid = subUnitOptions.value.some(
@@ -410,25 +411,34 @@ const downloadRecapPdf = (type: string) => {
             class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
             <CardHeader
-                class="flex-row items-center justify-between space-y-0 border-b border-border/60 pb-3"
+                class="flex flex-row items-center justify-between border-b border-border/60 pb-3"
             >
-                <CardTitle
-                    class="flex items-center gap-2 text-base font-bold tracking-wider text-foreground uppercase"
-                >
-                    <Filter
-                        class="h-4 w-4 text-emerald-600 dark:text-emerald-400"
-                    />
-                    <span>Pencarian & Filter Rekap Presensi</span>
-                </CardTitle>
+                <div class="flex items-center gap-3">
+                    <CardTitle
+                        class="flex items-center gap-2 text-sm font-extrabold tracking-wider text-foreground uppercase"
+                    >
+                        <Filter
+                            class="h-4 w-4 text-emerald-600 dark:text-emerald-400"
+                        />
+                        <span>Pencarian & Filter Rekap Presensi</span>
+                    </CardTitle>
+                    <Badge
+                        v-if="hasActiveFilters"
+                        variant="outline"
+                        class="rounded-none border-amber-500/30 bg-amber-500/10 text-[10px] font-bold text-amber-600 uppercase dark:text-amber-400"
+                    >
+                        Filter Aktif
+                    </Badge>
+                </div>
 
                 <Button
                     v-if="hasActiveFilters"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     @click="resetFilters"
-                    class="h-8 cursor-pointer rounded-none text-xs font-bold tracking-wider text-rose-500 uppercase hover:bg-rose-500/10"
+                    class="h-8 shrink-0 cursor-pointer rounded-none border border-rose-500/30 bg-rose-500/5 px-3 text-[11px] font-bold tracking-wider text-rose-600 uppercase shadow-none hover:bg-rose-500/15 dark:text-rose-400"
                 >
-                    <RotateCcw class="mr-1 h-3.5 w-3.5" />
+                    <RotateCcw class="mr-1.5 h-3.5 w-3.5 text-rose-500" />
                     <span>Reset Filter</span>
                 </Button>
             </CardHeader>
