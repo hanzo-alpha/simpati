@@ -13,19 +13,19 @@ use App\Http\Controllers\Api\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/request-device-reset', [AuthController::class, 'requestDeviceReset']);
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
+Route::post('/request-device-reset', [AuthController::class, 'requestDeviceReset'])->middleware('throttle:3,1');
 
 // Protected routes
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'throttle:60,1'])->group(function () {
     // Auth
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/fcm-token', [AuthController::class, 'updateFcmToken']);
 
     // Presensi
-    Route::post('/attendance', [AttendanceController::class, 'store']);
-    Route::post('/attendance/scan-qr', [AttendanceController::class, 'scanQr']);
+    Route::post('/attendance', [AttendanceController::class, 'store'])->middleware('throttle:10,1');
+    Route::post('/attendance/scan-qr', [AttendanceController::class, 'scanQr'])->middleware('throttle:10,1');
     Route::get('/attendance/today', [AttendanceController::class, 'today']);
     Route::get('/attendance/history', [AttendanceController::class, 'history']);
     Route::get('/attendance/schedule', [AttendanceController::class, 'getSchedule']);

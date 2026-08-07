@@ -25,6 +25,12 @@ class SimpegIntegrationController extends Controller
      */
     public function syncMasterData(Request $request): JsonResponse
     {
+        $secretKey = Setting::get('simpeg_secret_key');
+        $providedKey = $request->header('X-SIMPEG-SECRET') ?? $request->input('secret_key');
+        if ($secretKey && $providedKey !== $secretKey) {
+            return response()->json(['message' => 'Akses ditolak. Secret Key SIMPEG tidak valid.'], 401);
+        }
+
         $data = $request->validate([
             'offices' => 'nullable|array',
             'offices.*.id' => 'required',
@@ -109,6 +115,12 @@ class SimpegIntegrationController extends Controller
      */
     public function getRecapForSimpeg(Request $request): JsonResponse
     {
+        $secretKey = Setting::get('simpeg_secret_key');
+        $providedKey = $request->header('X-SIMPEG-SECRET') ?? $request->input('secret_key');
+        if ($secretKey && $providedKey !== $secretKey) {
+            return response()->json(['message' => 'Akses ditolak. Secret Key SIMPEG tidak valid.'], 401);
+        }
+
         $year = (int) $request->input('year', now()->year);
         $month = (int) $request->input('month', now()->month);
         $nip = $request->input('nip');
