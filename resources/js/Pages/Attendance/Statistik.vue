@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { router } from '@inertiajs/vue3';
 import {
     BarChart3,
     ChevronLeft,
@@ -64,6 +65,17 @@ const monthLabel = computed(() => {
     return `${monthNames[currentMonthIndex.value]} ${currentYearNum.value}`;
 });
 
+const fetchMonthData = () => {
+    router.get(
+        '/statistik',
+        {
+            month: currentMonthIndex.value + 1,
+            year: currentYearNum.value,
+        },
+        { preserveState: true, preserveScroll: true, replace: true },
+    );
+};
+
 const prevMonth = () => {
     if (currentMonthIndex.value === 0) {
         currentMonthIndex.value = 11;
@@ -71,6 +83,7 @@ const prevMonth = () => {
     } else {
         currentMonthIndex.value--;
     }
+    fetchMonthData();
 };
 
 const nextMonth = () => {
@@ -80,6 +93,7 @@ const nextMonth = () => {
     } else {
         currentMonthIndex.value++;
     }
+    fetchMonthData();
 };
 </script>
 

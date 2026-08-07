@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { router } from '@inertiajs/vue3';
 import {
     Trophy,
     Award,
@@ -40,16 +41,26 @@ interface RankUser {
 const props = defineProps<{
     rankings: RankUser[];
     myRank: { rank: number; totalAsn: number; score: number; badge: string };
+    filters?: { period?: string; month?: number; year?: number };
     isAdmin?: boolean;
 }>();
 
-const activePeriod = ref('month');
+const activePeriod = ref(props.filters?.period || 'month');
 
 const periodTabs = [
     { label: 'Bulan Ini', value: 'month' },
     { label: 'Bulan Lalu', value: 'last_month' },
     { label: 'Tahun 2026', value: 'year' },
 ];
+
+const changePeriod = (val: string) => {
+    activePeriod.value = val;
+    router.get(
+        window.location.pathname,
+        { period: val },
+        { preserveState: true, preserveScroll: true, replace: true },
+    );
+};
 
 const topThree = computed(() => {
     return props.rankings.slice(0, 3);
@@ -69,7 +80,7 @@ const topThree = computed(() => {
                 <button
                     v-for="tab in periodTabs"
                     :key="tab.value"
-                    @click="activePeriod = tab.value"
+                    @click="changePeriod(tab.value)"
                     class="cursor-pointer rounded-none px-3.5 py-1.5 text-xs font-semibold transition-all"
                     :class="
                         activePeriod === tab.value
@@ -82,7 +93,7 @@ const topThree = computed(() => {
             </div>
         </template>
 
-        <div class="space-y-6 pb-8">
+        <div class="space-y-6 pb-2">
             <!-- 1. KPI Stats Summary Cards (Sera Preset Stat Widgets) -->
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <StatCard

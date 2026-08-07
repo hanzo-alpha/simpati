@@ -39,7 +39,9 @@ const toggleTheme = () => {
 
 const page = usePage();
 
-const userRole = computed(() => page.props.auth?.user?.role?.name || '');
+const userRole = computed(
+    () => (page.props.auth?.user as any)?.role?.name || '',
+);
 const isSuperAdmin = computed(() => userRole.value === 'super_admin');
 const roleLabel = computed(() => {
     if (userRole.value === 'super_admin') return 'Super Admin';

@@ -204,7 +204,7 @@ const updateStatus = async (id: number, status: string) => {
     >
         <!-- Search & Status Filter Toolbar Card -->
         <Card
-            class="mb-6 rounded-none border border-border bg-card text-card-foreground shadow-xs"
+            class="mb-4 rounded-none border border-border bg-card p-1 text-card-foreground shadow-xs"
         >
             <CardContent
                 class="flex flex-col items-center justify-between gap-3 p-4 md:flex-row"

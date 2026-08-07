@@ -200,65 +200,69 @@ const deleteOffice = async (id: number) => {
 
         <!-- Filter Card -->
         <Card
-            class="mb-4 rounded-none border border-border bg-card p-4 text-card-foreground shadow-xs"
+            class="mb-4 rounded-none border border-border bg-card p-1 text-card-foreground shadow-xs"
         >
-            <div
-                class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+            <CardContent
+                class="flex flex-col items-center justify-between gap-4 p-4 md:flex-row"
             >
-                <!-- Tabs filter -->
-                <div class="flex items-center gap-1.5 overflow-x-auto">
-                    <button
-                        @click="activeFilter = 'all'"
-                        class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
-                        :class="
-                            activeFilter === 'all'
-                                ? 'border-primary bg-primary text-primary-foreground'
-                                : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
-                        "
-                    >
-                        Semua ({{ offices.length }})
-                    </button>
-                    <button
-                        @click="activeFilter = 'parent'"
-                        class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
-                        :class="
-                            activeFilter === 'parent'
-                                ? 'border-primary bg-primary text-primary-foreground'
-                                : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
-                        "
-                    >
-                        OPD Induk ({{
-                            offices.filter((o) => !o.parent_id).length
-                        }})
-                    </button>
-                    <button
-                        @click="activeFilter = 'sub'"
-                        class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
-                        :class="
-                            activeFilter === 'sub'
-                                ? 'border-primary bg-primary text-primary-foreground'
-                                : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
-                        "
-                    >
-                        Sub OPD / UPTD ({{
-                            offices.filter((o) => !!o.parent_id).length
-                        }})
-                    </button>
-                </div>
+                <div
+                    class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+                >
+                    <!-- Tabs filter -->
+                    <div class="flex items-center gap-1.5 overflow-x-auto">
+                        <button
+                            @click="activeFilter = 'all'"
+                            class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
+                            :class="
+                                activeFilter === 'all'
+                                    ? 'border-primary bg-primary text-primary-foreground'
+                                    : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
+                            "
+                        >
+                            Semua ({{ offices.length }})
+                        </button>
+                        <button
+                            @click="activeFilter = 'parent'"
+                            class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
+                            :class="
+                                activeFilter === 'parent'
+                                    ? 'border-primary bg-primary text-primary-foreground'
+                                    : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
+                            "
+                        >
+                            OPD Induk ({{
+                                offices.filter((o) => !o.parent_id).length
+                            }})
+                        </button>
+                        <button
+                            @click="activeFilter = 'sub'"
+                            class="h-8 cursor-pointer border px-3 text-xs font-bold tracking-wider uppercase transition-colors"
+                            :class="
+                                activeFilter === 'sub'
+                                    ? 'border-primary bg-primary text-primary-foreground'
+                                    : 'border-border bg-muted/30 text-muted-foreground hover:bg-muted/60'
+                            "
+                        >
+                            Sub OPD / UPTD ({{
+                                offices.filter((o) => !!o.parent_id).length
+                            }})
+                        </button>
+                    </div>
 
-                <!-- Search bar -->
-                <div class="relative w-full md:w-72">
-                    <Search
-                        class="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
-                    />
-                    <Input
-                        v-model="searchQuery"
-                        type="text"
-                        placeholder="Cari OPD / Sub OPD / Kode..."
-                        class="h-9 rounded-none pl-9 text-xs"
-                    />
+                    <!-- Search bar -->
+                    <div class="relative w-full md:w-72">
+                        <Search
+                            class="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+                        />
+                        <Input
+                            v-model="searchQuery"
+                            type="text"
+                            placeholder="Cari OPD / Sub OPD / Kode..."
+                            class="h-9 rounded-none pl-9 text-xs"
+                        />
+                    </div>
                 </div>
-            </div>
+            </CardContent>
         </Card>
 
         <!-- Offices Table Card -->

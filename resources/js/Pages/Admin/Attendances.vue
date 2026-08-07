@@ -877,7 +877,7 @@ const downloadRecapPdf = (type: string) => {
                     </table>
 
                     <div
-                        v-if="!attendances.length"
+                        v-if="!paginatedAttendances.length"
                         class="space-y-2 py-10 text-center text-muted-foreground"
                     >
                         <ClipboardList
@@ -887,9 +887,9 @@ const downloadRecapPdf = (type: string) => {
                     </div>
 
                     <Pagination
-                        v-if="attendances.length > 0"
+                        v-if="paginatedAttendances.length > 0"
                         v-model:currentPage="currentPage"
-                        :totalItems="attendances.length"
+                        :totalItems="paginatedAttendances.length"
                         :itemsPerPage="itemsPerPage"
                     />
                 </div>

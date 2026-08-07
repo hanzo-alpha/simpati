@@ -137,14 +137,23 @@ class AttendanceController extends Controller
      */
     public function peringkat(Request $request): Response
     {
-        $year = now()->year;
-        $month = now()->month;
+        $period = $request->input('period', 'month');
 
-        // Get all ASN users
+        $now = now();
+        if ($period === 'last_month') {
+            $lastMonth = $now->copy()->subMonth();
+            $year = (int) $lastMonth->year;
+            $month = (int) $lastMonth->month;
+        } elseif ($period === 'year') {
+            $year = (int) $request->input('year', $now->year);
+            $month = (int) $now->month;
+        } else {
+            $year = (int) $request->input('year', $now->year);
+            $month = (int) $request->input('month', $now->month);
+        }
+
+        // Get all active ASN users for ranking leaderboard
         $users = User::where('is_active', true)
-            ->whereHas('role', function ($q) {
-                $q->where('name', 'asn');
-            })
             ->with('office:id,opd_name')
             ->get();
 
@@ -183,6 +192,11 @@ class AttendanceController extends Controller
                 'score' => $myRank['score'] ?? 0,
                 'totalAsn' => $rankings->count(),
                 'badge' => $myRank['badge'] ?? 'Baik',
+            ],
+            'filters' => [
+                'period' => $period,
+                'month' => $month,
+                'year' => $year,
             ],
             'isAdmin' => $isAdmin,
         ]);
