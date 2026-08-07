@@ -47,6 +47,39 @@ const submitForm = () => {
         },
     });
 };
+
+const formatTanggal = (dateStr?: string) => {
+    if (!dateStr) {
+return '-';
+}
+
+    const rawDate = dateStr.split('T')[0];
+    const parts = rawDate.split('-');
+
+    if (parts.length === 3) {
+        const year = parts[0];
+        const monthIndex = parseInt(parts[1], 10) - 1;
+        const day = parseInt(parts[2], 10);
+        const months = [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember',
+        ];
+
+        return `${day} ${months[monthIndex] || ''} ${year}`;
+    }
+
+    return dateStr;
+};
 </script>
 
 <template>
@@ -111,8 +144,10 @@ const submitForm = () => {
                                 class="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400"
                             />
                             <span
-                                >{{ item.tanggal }} ({{ item.jam_mulai }} -
-                                {{ item.jam_selesai }} WITA)</span
+                                >{{ formatTanggal(item.tanggal) }} ({{
+                                    item.jam_mulai
+                                }}
+                                - {{ item.jam_selesai }} WITA)</span
                             >
                         </div>
                         <div
@@ -126,15 +161,20 @@ const submitForm = () => {
 
                         <!-- QR Code Token Card -->
                         <div
-                            class="mt-3 border border-dashed border-emerald-500/40 bg-emerald-500/5 p-3 text-center"
+                            class="mt-3 flex flex-col items-center justify-center border border-dashed border-emerald-500/40 bg-emerald-500/5 p-3 text-center"
                         >
+                            <img
+                                :src="`https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=4&data=${encodeURIComponent(item.qr_token)}`"
+                                alt="QR Code"
+                                class="h-24 w-24 rounded-md border border-slate-200 bg-white p-1"
+                            />
                             <div
-                                class="font-mono text-[11px] text-muted-foreground"
+                                class="mt-2 font-mono text-[10px] text-muted-foreground uppercase"
                             >
                                 KODE TOKEN PRESET
                             </div>
                             <div
-                                class="font-mono text-base font-black tracking-widest text-emerald-600 dark:text-emerald-400"
+                                class="font-mono text-sm font-black tracking-widest text-emerald-600 dark:text-emerald-400"
                             >
                                 {{ item.qr_token }}
                             </div>
@@ -280,7 +320,7 @@ const submitForm = () => {
         <!-- Dialog Fullscreen QR Code Display -->
         <Dialog :open="!!activeQrModal" @update:open="activeQrModal = null">
             <DialogContent
-                class="max-w-lg rounded-none border-border bg-card p-8 text-center"
+                class="max-w-lg rounded-none border-border bg-card p-8 text-center shadow-2xl"
             >
                 <div v-if="activeQrModal" class="space-y-4">
                     <Badge
@@ -292,22 +332,34 @@ const submitForm = () => {
                         {{ activeQrModal.nama_kegiatan }}
                     </h2>
                     <p class="text-xs text-muted-foreground">
-                        {{ activeQrModal.lokasi }} | {{ activeQrModal.tanggal }}
+                        {{ activeQrModal.lokasi }} |
+                        {{ formatTanggal(activeQrModal.tanggal) }} ({{
+                            activeQrModal.jam_mulai
+                        }}
+                        - {{ activeQrModal.jam_selesai }} WITA)
                     </p>
 
                     <div
-                        class="mx-auto my-6 inline-block border-4 border-emerald-500 bg-white p-6 shadow-lg"
+                        class="mx-auto my-4 flex flex-col items-center justify-center rounded-xl border-4 border-emerald-500 bg-white p-6 shadow-2xl"
                     >
-                        <!-- Big QR Display -->
+                        <!-- Real 2D QR Code Image Generator -->
+                        <img
+                            :src="`https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data=${encodeURIComponent(activeQrModal.qr_token)}`"
+                            alt="QR Code Presensi Event"
+                            class="h-64 w-64 bg-white p-2"
+                        />
+
+                        <!-- Token Text Code -->
                         <div
-                            class="font-mono text-2xl font-black tracking-widest break-all text-slate-900 select-all"
+                            class="mt-4 rounded-md border border-slate-200 bg-slate-50 px-4 py-2 font-mono text-lg font-black tracking-widest text-slate-900 select-all"
                         >
                             {{ activeQrModal.qr_token }}
                         </div>
                         <p
-                            class="mt-2 font-sans text-[10px] font-bold text-slate-500 uppercase"
+                            class="mt-2 font-sans text-[11px] font-bold tracking-wider text-slate-500 uppercase"
                         >
-                            Pindai QR ini melalui aplikasi SIMPATI Mobile
+                            Pindai QR ini atau masukkan Kode Token via SIMPATI
+                            Mobile
                         </p>
                     </div>
 

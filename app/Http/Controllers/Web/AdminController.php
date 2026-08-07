@@ -1094,7 +1094,20 @@ class AdminController extends Controller
 
     public function events()
     {
-        $events = EventPresensi::withCount('participants')->latest()->get();
+        $events = EventPresensi::withCount('participants')->latest()->get()->map(function ($event) {
+            return [
+                'id' => $event->id,
+                'nama_kegiatan' => $event->nama_kegiatan,
+                'penyelenggara' => $event->penyelenggara,
+                'tanggal' => $event->tanggal ? (is_string($event->tanggal) ? explode('T', $event->tanggal)[0] : $event->tanggal->format('Y-m-d')) : '-',
+                'jam_mulai' => $event->jam_mulai,
+                'jam_selesai' => $event->jam_selesai,
+                'lokasi' => $event->lokasi,
+                'qr_token' => $event->qr_token,
+                'is_active' => (bool) $event->is_active,
+                'participants_count' => $event->participants_count ?? 0,
+            ];
+        });
 
         return inertia('Admin/Events', [
             'events' => $events,

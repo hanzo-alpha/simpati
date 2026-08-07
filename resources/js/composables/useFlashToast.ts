@@ -9,8 +9,8 @@ export function useFlashToast() {
         () => page.props.flash,
         (flash: any) => {
             if (!flash) {
-return;
-}
+                return;
+            }
 
             if (flash.success) {
                 toast.success('Berhasil', {

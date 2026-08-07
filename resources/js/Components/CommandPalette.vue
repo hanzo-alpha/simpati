@@ -91,8 +91,8 @@ const navigationItems = [
 
 const filteredItems = computed(() => {
     if (!query.value.trim()) {
-return navigationItems;
-}
+        return navigationItems;
+    }
 
     const q = query.value.toLowerCase();
 

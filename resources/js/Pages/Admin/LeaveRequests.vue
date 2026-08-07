@@ -148,8 +148,8 @@ const { confirm: confirmAction } = useConfirm();
 
 const bulkUpdateStatus = async (status: string) => {
     if (selectedIds.value.length === 0) {
-return;
-}
+        return;
+    }
 
     const isApprove = status === 'disetujui';
     const isOk = await confirmAction({
