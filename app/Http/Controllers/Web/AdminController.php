@@ -8,6 +8,12 @@ use App\Enums\LeaveStatus;
 use App\Enums\LeaveType;
 use App\Enums\ScheduleType;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreAnnouncementRequest;
+use App\Http\Requests\Admin\StoreEventRequest;
+use App\Http\Requests\Admin\StoreOfficeRequest;
+use App\Http\Requests\Admin\UpdateAnnouncementRequest;
+use App\Http\Requests\Admin\UpdateOfficeRequest;
+use App\Http\Requests\Admin\UpdateSettingsRequest;
 use App\Models\Announcement;
 use App\Models\Attendance;
 use App\Models\AttendanceCorrection;
@@ -238,46 +244,26 @@ class AdminController extends Controller
         ]);
     }
 
-    public function storeOffice(Request $request)
+    public function storeOffice(StoreOfficeRequest $request)
     {
         if ($request->parent_id === 'none' || $request->parent_id === '') {
             $request->merge(['parent_id' => null]);
         }
 
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'opd_name' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:offices,id',
-            'unit_code' => 'nullable|string|max:50',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'radius_meters' => 'required|integer',
-            'polygon_coordinates' => 'nullable|array',
-            'alamat' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
         Office::create($data);
 
         return back()->with('success', 'Data Kantor / OPD berhasil ditambahkan.');
     }
 
-    public function updateOffice(Request $request, Office $office)
+    public function updateOffice(UpdateOfficeRequest $request, Office $office)
     {
         if ($request->parent_id === 'none' || $request->parent_id === '') {
             $request->merge(['parent_id' => null]);
         }
 
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'opd_name' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:offices,id',
-            'unit_code' => 'nullable|string|max:50',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-            'radius_meters' => 'required|integer',
-            'polygon_coordinates' => 'nullable|array',
-            'alamat' => 'nullable|string',
-        ]);
+        $data = $request->validated();
 
         $office->update($data);
 
@@ -785,17 +771,9 @@ class AdminController extends Controller
         ]);
     }
 
-    public function storeAnnouncement(Request $request)
+    public function storeAnnouncement(StoreAnnouncementRequest $request)
     {
-        $data = $request->validate([
-            'office_id' => 'nullable|exists:offices,id',
-            'judul' => 'required|string|max:255',
-            'konten' => 'nullable|string',
-            'isi' => 'nullable|string',
-            'kategori' => 'nullable|in:informasi,penting,darurat',
-            'pinned' => 'nullable|boolean',
-        ]);
-
+        $data = $request->validated();
         $kontenText = $data['konten'] ?? $data['isi'] ?? '';
 
         $announcement = Announcement::create([
@@ -817,17 +795,9 @@ class AdminController extends Controller
         return back()->with('success', 'Pengumuman edaran berhasil dipublikasikan.');
     }
 
-    public function updateAnnouncement(Request $request, Announcement $announcement)
+    public function updateAnnouncement(UpdateAnnouncementRequest $request, Announcement $announcement)
     {
-        $data = $request->validate([
-            'office_id' => 'nullable|exists:offices,id',
-            'judul' => 'required|string|max:255',
-            'konten' => 'nullable|string',
-            'isi' => 'nullable|string',
-            'kategori' => 'nullable|in:informasi,penting,darurat',
-            'pinned' => 'nullable|boolean',
-        ]);
-
+        $data = $request->validated();
         $kontenText = $data['konten'] ?? $data['isi'] ?? $announcement->konten;
 
         $announcement->update([
@@ -1096,35 +1066,9 @@ class AdminController extends Controller
         ]);
     }
 
-    public function updateSettings(Request $request)
+    public function updateSettings(UpdateSettingsRequest $request)
     {
-        $data = $request->validate([
-            'app_name' => 'required|string|max:255',
-            'app_tagline' => 'required|string|max:255',
-            'pemda_name' => 'required|string|max:255',
-            'admin_email' => 'required|email',
-            'admin_phone' => 'nullable|string',
-
-            'jam_buka_masuk' => 'required|string',
-            'jam_cutoff_harian' => 'required|string',
-            'toleransi_menit' => 'required|numeric',
-            'potongan_terlambat' => 'required|numeric',
-            'potongan_sangat_terlambat' => 'nullable|numeric',
-            'potongan_psw' => 'nullable|numeric',
-            'potongan_tk' => 'required|numeric',
-            'potongan_max_tpp' => 'nullable|numeric',
-
-            'device_binding_enabled' => 'required|boolean',
-            'fake_gps_block_enabled' => 'required|boolean',
-            'allow_rear_camera' => 'nullable|boolean',
-            'allow_gallery_upload' => 'nullable|boolean',
-            'min_mobile_version' => 'required|string',
-            'force_mobile_update' => 'required|boolean',
-
-            'simpeg_api_url' => 'required|string',
-            'simpeg_secret_key' => 'required|string',
-            'simpeg_auto_sync' => 'required|boolean',
-        ]);
+        $data = $request->validated();
 
         foreach ($data as $key => $value) {
             $group = match (true) {
@@ -1173,16 +1117,9 @@ class AdminController extends Controller
         ]);
     }
 
-    public function storeEvent(Request $request)
+    public function storeEvent(StoreEventRequest $request)
     {
-        $data = $request->validate([
-            'nama_kegiatan' => 'required|string|max:255',
-            'penyelenggara' => 'nullable|string|max:255',
-            'tanggal' => 'required|date',
-            'jam_mulai' => 'required|string',
-            'jam_selesai' => 'required|string',
-            'lokasi' => 'required|string|max:255',
-        ]);
+        $data = $request->validated();
 
         $data['qr_token'] = 'SIMPATI-EVT-'.strtoupper(Str::random(8));
         $data['penyelenggara'] = $data['penyelenggara'] ?? 'Pemerintah Kab. Soppeng';

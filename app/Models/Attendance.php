@@ -62,6 +62,46 @@ class Attendance extends Model
     }
 
     /**
+     * Scope: filter attendances by OPD (main OPD or sub-office).
+     */
+    public function scopeFilterByOpd($query, $opdId)
+    {
+        if (empty($opdId) || $opdId === 'all') {
+            return $query;
+        }
+
+        return $query->whereHas('user', function ($q) use ($opdId) {
+            $q->where('office_id', $opdId)
+                ->orWhereHas('office', function ($oq) use ($opdId) {
+                    $oq->where('parent_id', $opdId);
+                });
+        });
+    }
+
+    /**
+     * Scope: filter attendances by Sub Unit Kerja.
+     */
+    public function scopeFilterByUnitKerja($query, $unitKerja)
+    {
+        if (empty($unitKerja) || $unitKerja === 'all') {
+            return $query;
+        }
+
+        return $query->whereHas('user', function ($q) use ($unitKerja) {
+            if (is_numeric($unitKerja)) {
+                $q->where('office_id', $unitKerja);
+            } else {
+                $q->whereHas('office', function ($oq) use ($unitKerja) {
+                    $oq->where('opd_name', $unitKerja)
+                        ->orWhere('name', $unitKerja);
+                })->orWhereHas('profile', function ($pq) use ($unitKerja) {
+                    $pq->where('unit_kerja', $unitKerja);
+                });
+            }
+        });
+    }
+
+    /**
      * Check if attendance is on time.
      */
     public function isOnTime(): bool
