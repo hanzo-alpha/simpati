@@ -122,6 +122,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     // Announcements / Broadcast Edaran
     Route::get('/announcements', [AdminController::class, 'announcements'])->name('admin.announcements');
     Route::post('/announcements', [AdminController::class, 'storeAnnouncement']);
+    Route::put('/announcements/{announcement}', [AdminController::class, 'updateAnnouncement']);
     Route::delete('/announcements/{announcement}', [AdminController::class, 'destroyAnnouncement']);
 
     // Shift Swap Management

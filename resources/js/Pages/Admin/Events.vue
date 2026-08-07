@@ -50,8 +50,8 @@ const submitForm = () => {
 
 const formatTanggal = (dateStr?: string) => {
     if (!dateStr) {
-return '-';
-}
+        return '-';
+    }
 
     const rawDate = dateStr.split('T')[0];
     const parts = rawDate.split('-');
