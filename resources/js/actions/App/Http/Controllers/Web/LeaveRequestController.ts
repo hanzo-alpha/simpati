@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::index
- * @see app/Http/Controllers/Web/LeaveRequestController.php:16
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:17
  * @route '/pengajuan'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
     const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
         createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::create
- * @see app/Http/Controllers/Web/LeaveRequestController.php:47
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:48
  * @route '/pengajuan/buat'
  */
         createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     create.form = createForm
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::store
- * @see app/Http/Controllers/Web/LeaveRequestController.php:59
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:60
  * @route '/pengajuan'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -172,7 +172,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::store
- * @see app/Http/Controllers/Web/LeaveRequestController.php:59
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:60
  * @route '/pengajuan'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::store
- * @see app/Http/Controllers/Web/LeaveRequestController.php:59
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:60
  * @route '/pengajuan'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -191,7 +191,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::store
- * @see app/Http/Controllers/Web/LeaveRequestController.php:59
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:60
  * @route '/pengajuan'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -201,7 +201,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\LeaveRequestController::store
- * @see app/Http/Controllers/Web/LeaveRequestController.php:59
+ * @see app/Http/Controllers/Web/LeaveRequestController.php:60
  * @route '/pengajuan'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

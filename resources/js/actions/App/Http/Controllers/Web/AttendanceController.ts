@@ -322,6 +322,84 @@ export const peringkat = {
     '/admin/peringkat': peringkatfe5c9d6e26cd4499906036fc9049b161,
 }
 
-const AttendanceController = { riwayat, statistik, peringkat }
+/**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+export const presensi = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: presensi.url(options),
+    method: 'get',
+})
+
+presensi.definition = {
+    methods: ["get","head"],
+    url: '/presensi',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+presensi.url = (options?: RouteQueryOptions) => {
+    return presensi.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+presensi.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: presensi.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+presensi.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: presensi.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+    const presensiForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: presensi.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+        presensiForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: presensi.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\Web\AttendanceController::presensi
+ * @see app/Http/Controllers/Web/AttendanceController.php:194
+ * @route '/presensi'
+ */
+        presensiForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: presensi.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    presensi.form = presensiForm
+const AttendanceController = { riwayat, statistik, peringkat, presensi }
 
 export default AttendanceController

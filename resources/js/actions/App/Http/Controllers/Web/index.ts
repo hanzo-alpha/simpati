@@ -1,12 +1,14 @@
+import AuthController from './AuthController'
 import DashboardController from './DashboardController'
 import AttendanceController from './AttendanceController'
 import LeaveRequestController from './LeaveRequestController'
-import AdminController from './AdminController'
+import Admin from './Admin'
 const Web = {
-    DashboardController: Object.assign(DashboardController, DashboardController),
+    AuthController: Object.assign(AuthController, AuthController),
+DashboardController: Object.assign(DashboardController, DashboardController),
 AttendanceController: Object.assign(AttendanceController, AttendanceController),
 LeaveRequestController: Object.assign(LeaveRequestController, LeaveRequestController),
-AdminController: Object.assign(AdminController, AdminController),
+Admin: Object.assign(Admin, Admin),
 }
 
 export default Web

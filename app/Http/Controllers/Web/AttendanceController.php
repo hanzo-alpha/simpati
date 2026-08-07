@@ -188,6 +188,22 @@ class AttendanceController extends Controller
         ]);
     }
 
+    /**
+     * Presensi Harian Form page.
+     */
+    public function presensi(Request $request): Response
+    {
+        $todayAttendances = Attendance::where('user_id', $request->user()->id)
+            ->where('tanggal', now()->toDateString())
+            ->orderBy('waktu')
+            ->get();
+
+        return Inertia::render('Attendance/Presensi', [
+            'todayAttendances' => $todayAttendances,
+            'office' => $request->user()->office,
+        ]);
+    }
+
     private function getWorkDaysInMonth(int $year, int $month): int
     {
         $days = 0;

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../wayfinder'
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
 export const exportMethod = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +15,8 @@ exportMethod.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
 exportMethod.url = (options?: RouteQueryOptions) => {
@@ -24,8 +24,8 @@ exportMethod.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
 exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -33,8 +33,8 @@ exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
 exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -43,8 +43,8 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
     const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -53,8 +53,8 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
         exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -62,8 +62,8 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::exportMethod
- * @see app/Http/Controllers/Web/AdminController.php:375
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportMethod
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:98
  * @route '/admin/attendances/export'
  */
         exportMethodForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -78,8 +78,8 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     exportMethod.form = exportMethodForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
 export const exportTpp = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -93,8 +93,8 @@ exportTpp.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.url = (options?: RouteQueryOptions) => {
@@ -102,8 +102,8 @@ exportTpp.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -111,8 +111,8 @@ exportTpp.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
 exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -121,8 +121,8 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
     const exportTppForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -131,8 +131,8 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
         exportTppForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -140,8 +140,8 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::exportTpp
- * @see app/Http/Controllers/Web/AdminController.php:821
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportTpp
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:203
  * @route '/admin/attendances/export-tpp'
  */
         exportTppForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -156,8 +156,8 @@ exportTpp.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     exportTpp.form = exportTppForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
 export const exportRecap = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -171,8 +171,8 @@ exportRecap.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
 exportRecap.url = (options?: RouteQueryOptions) => {
@@ -180,8 +180,8 @@ exportRecap.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
 exportRecap.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -189,8 +189,8 @@ exportRecap.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
 exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -199,8 +199,8 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
     const exportRecapForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -209,8 +209,8 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
         exportRecapForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -218,8 +218,8 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::exportRecap
- * @see app/Http/Controllers/Web/AdminController.php:419
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::exportRecap
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:143
  * @route '/admin/attendances/export-recap'
  */
         exportRecapForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -234,86 +234,8 @@ exportRecap.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     exportRecap.form = exportRecapForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-export const exportSummary = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: exportSummary.url(options),
-    method: 'get',
-})
-
-exportSummary.definition = {
-    methods: ["get","head"],
-    url: '/admin/attendances/export-summary',
-} satisfies RouteDefinition<["get","head"]>
-
-/**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-exportSummary.url = (options?: RouteQueryOptions) => {
-    return exportSummary.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-exportSummary.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: exportSummary.url(options),
-    method: 'get',
-})
-/**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-exportSummary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: exportSummary.url(options),
-    method: 'head',
-})
-
-    /**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-    const exportSummaryForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: exportSummary.url(options),
-        method: 'get',
-    })
-
-            /**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-        exportSummaryForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: exportSummary.url(options),
-            method: 'get',
-        })
-            /**
-* @see \App\Http\Controllers\Web\AdminController::exportSummary
- * @see app/Http/Controllers/Web/AdminController.php:478
- * @route '/admin/attendances/export-summary'
- */
-        exportSummaryForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: exportSummary.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'HEAD',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'get',
-        })
-    
-    exportSummary.form = exportSummaryForm
-/**
-* @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:961
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::verifyQr
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:262
  * @route '/admin/attendances/verify-qr'
  */
 export const verifyQr = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -327,8 +249,8 @@ verifyQr.definition = {
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:961
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::verifyQr
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:262
  * @route '/admin/attendances/verify-qr'
  */
 verifyQr.url = (options?: RouteQueryOptions) => {
@@ -336,8 +258,8 @@ verifyQr.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:961
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::verifyQr
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:262
  * @route '/admin/attendances/verify-qr'
  */
 verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -346,8 +268,8 @@ verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:961
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::verifyQr
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:262
  * @route '/admin/attendances/verify-qr'
  */
     const verifyQrForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -356,8 +278,8 @@ verifyQr.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::verifyQr
- * @see app/Http/Controllers/Web/AdminController.php:961
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::verifyQr
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:262
  * @route '/admin/attendances/verify-qr'
  */
         verifyQrForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -370,7 +292,6 @@ const attendances = {
     export: Object.assign(exportMethod, exportMethod),
 exportTpp: Object.assign(exportTpp, exportTpp),
 exportRecap: Object.assign(exportRecap, exportRecap),
-exportSummary: Object.assign(exportSummary, exportSummary),
 verifyQr: Object.assign(verifyQr, verifyQr),
 }
 

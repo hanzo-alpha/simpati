@@ -1,9 +1,9 @@
-import Api from './Api'
 import Web from './Web'
+import Api from './Api'
 import Settings from './Settings'
 const Controllers = {
-    Api: Object.assign(Api, Api),
-Web: Object.assign(Web, Web),
+    Web: Object.assign(Web, Web),
+Api: Object.assign(Api, Api),
 Settings: Object.assign(Settings, Settings),
 }
 

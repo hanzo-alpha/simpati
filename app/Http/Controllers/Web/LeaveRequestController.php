@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreLeaveRequestRequest;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -56,15 +57,9 @@ class LeaveRequestController extends Controller
     /**
      * Store a new leave request.
      */
-    public function store(Request $request)
+    public function store(StoreLeaveRequestRequest $request)
     {
-        $validated = $request->validate([
-            'type' => 'required|in:cuti,sakit,dinas_luar,dinas_dalam',
-            'tanggal_mulai' => 'required|date|after_or_equal:today',
-            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-            'alasan' => 'required|string|max:1000',
-            'lampiran' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240',
-        ]);
+        $validated = $request->validated();
 
         $user = $request->user();
 

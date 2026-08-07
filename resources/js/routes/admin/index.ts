@@ -3,8 +3,8 @@ import attendances50f278 from './attendances'
 import events735790 from './events'
 import settings69f00b from './settings'
 /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -18,8 +18,8 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -27,8 +27,8 @@ dashboard.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -36,8 +36,8 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -46,8 +46,8 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
     const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -56,8 +56,8 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
         dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,8 +65,8 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::dashboard
- * @see app/Http/Controllers/Web/AdminController.php:38
+* @see \App\Http\Controllers\Web\Admin\DashboardController::dashboard
+ * @see app/Http/Controllers/Web/Admin/DashboardController.php:16
  * @route '/admin'
  */
         dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -81,8 +81,8 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     dashboard.form = dashboardForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
 export const offices = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -96,8 +96,8 @@ offices.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
 offices.url = (options?: RouteQueryOptions) => {
@@ -105,8 +105,8 @@ offices.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
 offices.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -114,8 +114,8 @@ offices.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
 offices.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -124,8 +124,8 @@ offices.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
     const officesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -134,8 +134,8 @@ offices.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
         officesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -143,8 +143,8 @@ offices.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::offices
- * @see app/Http/Controllers/Web/AdminController.php:238
+* @see \App\Http\Controllers\Web\Admin\OfficeController::offices
+ * @see app/Http/Controllers/Web/Admin/OfficeController.php:12
  * @route '/admin/offices'
  */
         officesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -159,8 +159,8 @@ offices.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     offices.form = officesForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
 export const users = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -174,8 +174,8 @@ users.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
 users.url = (options?: RouteQueryOptions) => {
@@ -183,8 +183,8 @@ users.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
 users.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -192,8 +192,8 @@ users.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
 users.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -202,8 +202,8 @@ users.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
     const usersForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -212,8 +212,8 @@ users.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
         usersForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -221,8 +221,8 @@ users.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::users
- * @see app/Http/Controllers/Web/AdminController.php:153
+* @see \App\Http\Controllers\Web\Admin\UserController::users
+ * @see app/Http/Controllers/Web/Admin/UserController.php:17
  * @route '/admin/users'
  */
         usersForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -237,8 +237,8 @@ users.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     users.form = usersForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
 export const attendances = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -252,8 +252,8 @@ attendances.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
 attendances.url = (options?: RouteQueryOptions) => {
@@ -261,8 +261,8 @@ attendances.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
 attendances.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -270,8 +270,8 @@ attendances.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
 attendances.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -280,8 +280,8 @@ attendances.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
     const attendancesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -290,8 +290,8 @@ attendances.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
         attendancesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -299,8 +299,8 @@ attendances.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::attendances
- * @see app/Http/Controllers/Web/AdminController.php:273
+* @see \App\Http\Controllers\Web\Admin\AttendanceController::attendances
+ * @see app/Http/Controllers/Web/Admin/AttendanceController.php:18
  * @route '/admin/attendances'
  */
         attendancesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -315,8 +315,8 @@ attendances.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     attendances.form = attendancesForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
 export const leaveRequests = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -330,8 +330,8 @@ leaveRequests.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
 leaveRequests.url = (options?: RouteQueryOptions) => {
@@ -339,8 +339,8 @@ leaveRequests.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
 leaveRequests.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -348,8 +348,8 @@ leaveRequests.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
 leaveRequests.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -358,8 +358,8 @@ leaveRequests.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
     const leaveRequestsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -368,8 +368,8 @@ leaveRequests.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
         leaveRequestsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -377,8 +377,8 @@ leaveRequests.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::leaveRequests
- * @see app/Http/Controllers/Web/AdminController.php:628
+* @see \App\Http\Controllers\Web\Admin\LeaveRequestController::leaveRequests
+ * @see app/Http/Controllers/Web/Admin/LeaveRequestController.php:14
  * @route '/admin/leave-requests'
  */
         leaveRequestsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -393,8 +393,8 @@ leaveRequests.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     
     leaveRequests.form = leaveRequestsForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
 export const schedules = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -408,8 +408,8 @@ schedules.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
 schedules.url = (options?: RouteQueryOptions) => {
@@ -417,8 +417,8 @@ schedules.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
 schedules.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -426,8 +426,8 @@ schedules.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
 schedules.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -436,8 +436,8 @@ schedules.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
     const schedulesForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -446,8 +446,8 @@ schedules.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
         schedulesForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -455,8 +455,8 @@ schedules.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::schedules
- * @see app/Http/Controllers/Web/AdminController.php:690
+* @see \App\Http\Controllers\Web\Admin\ScheduleController::schedules
+ * @see app/Http/Controllers/Web/Admin/ScheduleController.php:13
  * @route '/admin/schedules'
  */
         schedulesForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -471,8 +471,8 @@ schedules.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     schedules.form = schedulesForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
 export const announcements = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -486,8 +486,8 @@ announcements.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
 announcements.url = (options?: RouteQueryOptions) => {
@@ -495,8 +495,8 @@ announcements.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
 announcements.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -504,8 +504,8 @@ announcements.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
 announcements.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -514,8 +514,8 @@ announcements.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
     const announcementsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -524,8 +524,8 @@ announcements.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
         announcementsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -533,8 +533,8 @@ announcements.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::announcements
- * @see app/Http/Controllers/Web/AdminController.php:752
+* @see \App\Http\Controllers\Web\Admin\AnnouncementController::announcements
+ * @see app/Http/Controllers/Web/Admin/AnnouncementController.php:14
  * @route '/admin/announcements'
  */
         announcementsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -549,8 +549,8 @@ announcements.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     
     announcements.form = announcementsForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
 export const shiftSwaps = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -564,8 +564,8 @@ shiftSwaps.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
 shiftSwaps.url = (options?: RouteQueryOptions) => {
@@ -573,8 +573,8 @@ shiftSwaps.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
 shiftSwaps.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -582,8 +582,8 @@ shiftSwaps.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
 shiftSwaps.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -592,8 +592,8 @@ shiftSwaps.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
     const shiftSwapsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -602,8 +602,8 @@ shiftSwaps.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
         shiftSwapsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -611,8 +611,8 @@ shiftSwaps.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::shiftSwaps
- * @see app/Http/Controllers/Web/AdminController.php:866
+* @see \App\Http\Controllers\Web\Admin\ShiftSwapController::shiftSwaps
+ * @see app/Http/Controllers/Web/Admin/ShiftSwapController.php:11
  * @route '/admin/shift-swaps'
  */
         shiftSwapsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -627,8 +627,8 @@ shiftSwaps.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     shiftSwaps.form = shiftSwapsForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
 export const attendanceCorrections = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -642,8 +642,8 @@ attendanceCorrections.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
 attendanceCorrections.url = (options?: RouteQueryOptions) => {
@@ -651,8 +651,8 @@ attendanceCorrections.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
 attendanceCorrections.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -660,8 +660,8 @@ attendanceCorrections.get = (options?: RouteQueryOptions): RouteDefinition<'get'
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
 attendanceCorrections.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -670,8 +670,8 @@ attendanceCorrections.head = (options?: RouteQueryOptions): RouteDefinition<'hea
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
     const attendanceCorrectionsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -680,8 +680,8 @@ attendanceCorrections.head = (options?: RouteQueryOptions): RouteDefinition<'hea
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
         attendanceCorrectionsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -689,8 +689,8 @@ attendanceCorrections.head = (options?: RouteQueryOptions): RouteDefinition<'hea
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::attendanceCorrections
- * @see app/Http/Controllers/Web/AdminController.php:890
+* @see \App\Http\Controllers\Web\Admin\CorrectionController::attendanceCorrections
+ * @see app/Http/Controllers/Web/Admin/CorrectionController.php:14
  * @route '/admin/attendance-corrections'
  */
         attendanceCorrectionsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -705,8 +705,8 @@ attendanceCorrections.head = (options?: RouteQueryOptions): RouteDefinition<'hea
     
     attendanceCorrections.form = attendanceCorrectionsForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
 export const events = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -720,8 +720,8 @@ events.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
 events.url = (options?: RouteQueryOptions) => {
@@ -729,8 +729,8 @@ events.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
 events.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -738,8 +738,8 @@ events.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
 events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -748,8 +748,8 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
     const eventsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -758,8 +758,8 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
         eventsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -767,8 +767,8 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::events
- * @see app/Http/Controllers/Web/AdminController.php:1098
+* @see \App\Http\Controllers\Web\Admin\EventController::events
+ * @see app/Http/Controllers/Web/Admin/EventController.php:12
  * @route '/admin/events'
  */
         eventsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -783,8 +783,8 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     events.form = eventsForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
 export const auditLogs = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -798,8 +798,8 @@ auditLogs.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
 auditLogs.url = (options?: RouteQueryOptions) => {
@@ -807,8 +807,8 @@ auditLogs.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
 auditLogs.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -816,8 +816,8 @@ auditLogs.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
 auditLogs.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -826,8 +826,8 @@ auditLogs.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
     const auditLogsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -836,8 +836,8 @@ auditLogs.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
         auditLogsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -845,8 +845,8 @@ auditLogs.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::auditLogs
- * @see app/Http/Controllers/Web/AdminController.php:937
+* @see \App\Http\Controllers\Web\Admin\AuditLogController::auditLogs
+ * @see app/Http/Controllers/Web/Admin/AuditLogController.php:11
  * @route '/admin/audit-logs'
  */
         auditLogsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -939,8 +939,8 @@ peringkat.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     peringkat.form = peringkatForm
 /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
 export const settings = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -954,8 +954,8 @@ settings.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
 settings.url = (options?: RouteQueryOptions) => {
@@ -963,8 +963,8 @@ settings.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
 settings.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -972,8 +972,8 @@ settings.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
 settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -982,8 +982,8 @@ settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
     const settingsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -992,8 +992,8 @@ settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
         settingsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -1001,8 +1001,8 @@ settings.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Web\AdminController::settings
- * @see app/Http/Controllers/Web/AdminController.php:1030
+* @see \App\Http\Controllers\Web\Admin\SettingController::settings
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:12
  * @route '/admin/settings'
  */
         settingsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
