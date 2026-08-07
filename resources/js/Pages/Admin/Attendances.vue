@@ -50,6 +50,8 @@ import * as adminRoutes from '@/routes/admin';
 interface Office {
     id: number;
     opd_name: string;
+    name?: string;
+    parent_id?: number | null;
 }
 
 interface AttendanceItem {
@@ -118,6 +120,60 @@ const selectedOpd = ref(props.filters.opd ? String(props.filters.opd) : 'all');
 const selectedUnitKerja = ref(props.filters.unit_kerja || 'all');
 const selectedJenis = ref(props.filters.jenis || 'all');
 const selectedStatus = ref(props.filters.status || 'all');
+
+// Main OPDs (where parent_id is null / falsy)
+const mainOffices = computed(() => {
+    return props.offices.filter((o) => !o.parent_id);
+});
+
+// Sub offices under selected OPD Utama (or all sub offices if OPD Utama is 'all')
+const availableSubOffices = computed(() => {
+    if (selectedOpd.value === 'all') {
+        return props.offices.filter((o) => o.parent_id != null);
+    }
+
+    const opdId = Number(selectedOpd.value);
+
+    return props.offices.filter((o) => o.parent_id === opdId);
+});
+
+// Combined sub unit options: sub offices from database + unitKerjaList from user_profiles
+const subUnitOptions = computed(() => {
+    const subsFromDb = availableSubOffices.value.map((s) => ({
+        value: String(s.id),
+        label: s.opd_name || s.name || `Sub Unit #${s.id}`,
+    }));
+
+    // Add string unit_kerja from user profiles if not already included in sub offices
+    const textUnits = props.unitKerjaList
+        .filter(
+            (u) =>
+                u && u.trim() !== '' && !subsFromDb.some((s) => s.label === u),
+        )
+        .map((u) => ({
+            value: u,
+            label: u,
+        }));
+
+    return [...subsFromDb, ...textUnits];
+});
+
+// Handle change on OPD Utama dropdown
+const onOpdChange = (val: any) => {
+    selectedOpd.value = String(val ?? 'all');
+    // Reset sub unit kerja filter if the currently selected sub unit is not in subUnitOptions
+    if (selectedUnitKerja.value !== 'all') {
+        const isValid = subUnitOptions.value.some(
+            (opt) => opt.value === selectedUnitKerja.value,
+        );
+
+        if (!isValid) {
+            selectedUnitKerja.value = 'all';
+        }
+    }
+
+    reload();
+};
 
 const showQrModal = ref(false);
 const qrInput = ref('');
@@ -545,17 +601,19 @@ const downloadRecapPdf = (type: string) => {
                         >
                         <Select
                             v-model="selectedOpd"
-                            @update:model-value="reload"
+                            @update:model-value="onOpdChange"
                         >
                             <SelectTrigger
                                 class="h-10 w-full rounded-none bg-background text-xs"
                             >
-                                <SelectValue placeholder="Semua OPD" />
+                                <SelectValue placeholder="Semua OPD Utama" />
                             </SelectTrigger>
-                            <SelectContent class="rounded-none">
-                                <SelectItem value="all">Semua OPD</SelectItem>
+                            <SelectContent class="max-h-64 rounded-none">
+                                <SelectItem value="all"
+                                    >Semua OPD Utama</SelectItem
+                                >
                                 <SelectItem
-                                    v-for="o in offices"
+                                    v-for="o in mainOffices"
                                     :key="o.id"
                                     :value="String(o.id)"
                                 >
@@ -580,16 +638,16 @@ const downloadRecapPdf = (type: string) => {
                             >
                                 <SelectValue placeholder="Semua Unit Kerja" />
                             </SelectTrigger>
-                            <SelectContent class="rounded-none">
+                            <SelectContent class="max-h-64 rounded-none">
                                 <SelectItem value="all"
                                     >Semua Unit Kerja</SelectItem
                                 >
                                 <SelectItem
-                                    v-for="u in unitKerjaList"
-                                    :key="u"
-                                    :value="u"
+                                    v-for="opt in subUnitOptions"
+                                    :key="opt.value"
+                                    :value="opt.value"
                                 >
-                                    {{ u }}
+                                    {{ opt.label }}
                                 </SelectItem>
                             </SelectContent>
                         </Select>

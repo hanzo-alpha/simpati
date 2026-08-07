@@ -295,14 +295,28 @@ class AdminController extends Controller
             ->whereMonth('tanggal', $month);
 
         if ($request->filled('opd')) {
-            $query->whereHas('user', function ($q) use ($request) {
-                $q->where('office_id', $request->opd);
+            $opdId = $request->opd;
+            $query->whereHas('user', function ($q) use ($opdId) {
+                $q->where('office_id', $opdId)
+                    ->orWhereHas('office', function ($oq) use ($opdId) {
+                        $oq->where('parent_id', $opdId);
+                    });
             });
         }
 
         if ($request->filled('unit_kerja')) {
-            $query->whereHas('user.profile', function ($q) use ($request) {
-                $q->where('unit_kerja', $request->unit_kerja);
+            $unitKerja = $request->unit_kerja;
+            $query->whereHas('user', function ($q) use ($unitKerja) {
+                if (is_numeric($unitKerja)) {
+                    $q->where('office_id', $unitKerja);
+                } else {
+                    $q->whereHas('office', function ($oq) use ($unitKerja) {
+                        $oq->where('opd_name', $unitKerja)
+                            ->orWhere('name', $unitKerja);
+                    })->orWhereHas('profile', function ($pq) use ($unitKerja) {
+                        $pq->where('unit_kerja', $unitKerja);
+                    });
+                }
             });
         }
 
@@ -364,7 +378,7 @@ class AdminController extends Controller
         return inertia('Admin/Attendances', [
             'attendances' => $atts,
             'summary' => $summary,
-            'offices' => Office::all(),
+            'offices' => Office::select('id', 'name', 'opd_name', 'parent_id')->get(),
             'unitKerjaList' => $unitKerjaList,
             'currentMonth' => (int) $month,
             'currentYear' => (int) $year,
