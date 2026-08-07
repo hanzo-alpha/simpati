@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Admin Panel Routes
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     // Offices
