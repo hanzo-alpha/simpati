@@ -3,7 +3,6 @@ import { useForm } from '@inertiajs/vue3';
 import { Clock, Plus, Edit3, Trash2, Search } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
-import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -22,6 +21,7 @@ import {
     SelectContent,
     SelectItem,
 } from '@/Components/ui/select';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
@@ -118,6 +118,7 @@ const deleteSchedule = async (id: number) => {
         confirmText: 'Ya, Hapus',
         variant: 'danger',
     });
+
     if (isOk) {
         useForm({}).delete(`/admin/schedules/${id}`);
     }

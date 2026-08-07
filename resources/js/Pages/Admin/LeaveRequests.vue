@@ -16,7 +16,6 @@ import {
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
-import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -27,6 +26,7 @@ import {
     DialogTitle,
 } from '@/Components/ui/dialog';
 import { Input } from '@/Components/ui/input';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
@@ -124,7 +124,10 @@ const itemsPerPage = 10;
 const selectedIds = ref<number[]>([]);
 
 const isAllSelected = computed(() => {
-    return paginatedRequests.value.length > 0 && paginatedRequests.value.every((r) => selectedIds.value.includes(r.id));
+    return (
+        paginatedRequests.value.length > 0 &&
+        paginatedRequests.value.every((r) => selectedIds.value.includes(r.id))
+    );
 });
 
 const toggleSelectAll = () => {
@@ -144,10 +147,15 @@ const paginatedRequests = computed(() => {
 const { confirm: confirmAction } = useConfirm();
 
 const bulkUpdateStatus = async (status: string) => {
-    if (selectedIds.value.length === 0) return;
+    if (selectedIds.value.length === 0) {
+return;
+}
+
     const isApprove = status === 'disetujui';
     const isOk = await confirmAction({
-        title: isApprove ? 'Setujui Permohonan Terpilih' : 'Tolak Permohonan Terpilih',
+        title: isApprove
+            ? 'Setujui Permohonan Terpilih'
+            : 'Tolak Permohonan Terpilih',
         description: `Apakah Anda yakin ingin ${isApprove ? 'MENYETUJUI' : 'MENOLAK'} ${selectedIds.value.length} permohonan izin/cuti yang dipilih sekaligus?`,
         confirmText: isApprove ? 'Ya, Setujui Semua' : 'Ya, Tolak Semua',
         variant: isApprove ? 'success' : 'danger',
@@ -155,8 +163,13 @@ const bulkUpdateStatus = async (status: string) => {
 
     if (isOk) {
         for (const id of selectedIds.value) {
-            router.put(`/admin/leave-requests/${id}`, { status }, { preserveScroll: true });
+            router.put(
+                `/admin/leave-requests/${id}`,
+                { status },
+                { preserveScroll: true },
+            );
         }
+
         selectedIds.value = [];
     }
 };
@@ -164,7 +177,9 @@ const bulkUpdateStatus = async (status: string) => {
 const updateStatus = async (id: number, status: string) => {
     const isApprove = status === 'disetujui';
     const isOk = await confirmAction({
-        title: isApprove ? 'Setujui Permohonan Izin / Cuti' : 'Tolak Permohonan Izin / Cuti',
+        title: isApprove
+            ? 'Setujui Permohonan Izin / Cuti'
+            : 'Tolak Permohonan Izin / Cuti',
         description: isApprove
             ? 'Apakah Anda yakin ingin menyetujui permohonan izin/cuti ini?'
             : 'Apakah Anda yakin ingin menolak permohonan izin/cuti ini?',
@@ -243,15 +258,27 @@ const updateStatus = async (id: number, status: string) => {
         </Card>
 
         <!-- Bulk Action Floating Bar -->
-        <div v-if="selectedIds.length > 0" class="mb-4 flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 px-4 text-xs">
+        <div
+            v-if="selectedIds.length > 0"
+            class="mb-4 flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3 px-4 text-xs"
+        >
             <span class="font-bold text-emerald-600 dark:text-emerald-400">
                 Terpilih {{ selectedIds.length }} permohonan izin/cuti
             </span>
             <div class="flex items-center gap-2">
-                <Button size="sm" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-8 text-xs cursor-pointer" @click="bulkUpdateStatus('disetujui')">
+                <Button
+                    size="sm"
+                    class="h-8 cursor-pointer bg-emerald-600 text-xs font-bold text-white hover:bg-emerald-700"
+                    @click="bulkUpdateStatus('disetujui')"
+                >
                     Setujui Terpilih ({{ selectedIds.length }})
                 </Button>
-                <Button size="sm" variant="destructive" class="font-bold h-8 text-xs cursor-pointer" @click="bulkUpdateStatus('ditolak')">
+                <Button
+                    size="sm"
+                    variant="destructive"
+                    class="h-8 cursor-pointer text-xs font-bold"
+                    @click="bulkUpdateStatus('ditolak')"
+                >
                     Tolak Terpilih ({{ selectedIds.length }})
                 </Button>
             </div>
@@ -273,7 +300,7 @@ const updateStatus = async (id: number, status: string) => {
                                         type="checkbox"
                                         :checked="isAllSelected"
                                         @change="toggleSelectAll"
-                                        class="rounded border-border text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                                        class="cursor-pointer rounded border-border text-emerald-600 focus:ring-emerald-500"
                                     />
                                 </th>
                                 <th
@@ -315,7 +342,7 @@ const updateStatus = async (id: number, status: string) => {
                                         type="checkbox"
                                         v-model="selectedIds"
                                         :value="req.id"
-                                        class="rounded border-border text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                                        class="cursor-pointer rounded border-border text-emerald-600 focus:ring-emerald-500"
                                     />
                                 </td>
                                 <td

@@ -2,12 +2,12 @@
 import { Link, Head, usePage } from '@inertiajs/vue3';
 import { Sun, Moon, LogOut, ShieldCheck, Search } from '@lucide/vue';
 import { computed, ref, onMounted } from 'vue';
+import CommandPalette from '@/Components/CommandPalette.vue';
+import ConfirmDialog from '@/Components/ConfirmDialog.vue';
 import SidebarLink from '@/Components/SidebarLink.vue';
 import Toaster from '@/Components/ui/sonner/Sonner.vue';
-import ConfirmDialog from '@/Components/ConfirmDialog.vue';
-import CommandPalette from '@/Components/CommandPalette.vue';
-import { useFlashToast } from '@/composables/useFlashToast';
 import { useConfirm } from '@/composables/useConfirm';
+import { useFlashToast } from '@/composables/useFlashToast';
 import * as webRoutes from '@/routes';
 import * as adminRoutes from '@/routes/admin';
 import { toggleTheme as utilToggleTheme, currentTheme } from '@/Utils/theme';
@@ -306,12 +306,16 @@ const initials = computed(() => {
                     <div class="flex items-center gap-3">
                         <button
                             @click="commandPaletteRef?.toggleOpen()"
-                            class="flex items-center gap-2 rounded-none border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground shadow-xs transition-all hover:border-emerald-500/50 hover:text-emerald-500 cursor-pointer"
+                            class="flex cursor-pointer items-center gap-2 rounded-none border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground shadow-xs transition-all hover:border-emerald-500/50 hover:text-emerald-500"
                             title="Pencarian Pintar (Ctrl + K)"
                         >
                             <Search class="h-3.5 w-3.5" />
-                            <span class="hidden sm:inline font-medium">Cari menu...</span>
-                            <kbd class="pointer-events-none hidden h-4 select-none items-center gap-0.5 rounded border border-border bg-muted px-1 font-mono text-[10px] font-medium opacity-100 sm:flex">
+                            <span class="hidden font-medium sm:inline"
+                                >Cari menu...</span
+                            >
+                            <kbd
+                                class="pointer-events-none hidden h-4 items-center gap-0.5 rounded border border-border bg-muted px-1 font-mono text-[10px] font-medium opacity-100 select-none sm:flex"
+                            >
                                 Ctrl K
                             </kbd>
                         </button>

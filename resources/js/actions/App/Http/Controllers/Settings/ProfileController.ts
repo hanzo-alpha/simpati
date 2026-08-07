@@ -1,73 +1,73 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-const editadd0e44966c55b0d628f61554b3c4ce2 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: editadd0e44966c55b0d628f61554b3c4ce2.url(options),
+export const show = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: show.url(options),
     method: 'get',
 })
 
-editadd0e44966c55b0d628f61554b3c4ce2.definition = {
+show.definition = {
     methods: ["get","head"],
     url: '/profil',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-editadd0e44966c55b0d628f61554b3c4ce2.url = (options?: RouteQueryOptions) => {
-    return editadd0e44966c55b0d628f61554b3c4ce2.definition.url + queryParams(options)
+show.url = (options?: RouteQueryOptions) => {
+    return show.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-editadd0e44966c55b0d628f61554b3c4ce2.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: editadd0e44966c55b0d628f61554b3c4ce2.url(options),
+show.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: show.url(options),
     method: 'get',
 })
 /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-editadd0e44966c55b0d628f61554b3c4ce2.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: editadd0e44966c55b0d628f61554b3c4ce2.url(options),
+show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: show.url(options),
     method: 'head',
 })
 
     /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-    const editadd0e44966c55b0d628f61554b3c4ce2Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-        action: editadd0e44966c55b0d628f61554b3c4ce2.url(options),
+    const showForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: show.url(options),
         method: 'get',
     })
 
             /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-        editadd0e44966c55b0d628f61554b3c4ce2Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: editadd0e44966c55b0d628f61554b3c4ce2.url(options),
+        showForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(options),
             method: 'get',
         })
             /**
-* @see \App\Http\Controllers\Settings\ProfileController::edit
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+* @see \App\Http\Controllers\Settings\ProfileController::show
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
-        editadd0e44966c55b0d628f61554b3c4ce2Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-            action: editadd0e44966c55b0d628f61554b3c4ce2.url({
+        showForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url({
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
                             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -76,8 +76,138 @@ editadd0e44966c55b0d628f61554b3c4ce2.head = (options?: RouteQueryOptions): Route
             method: 'get',
         })
     
-    editadd0e44966c55b0d628f61554b3c4ce2.form = editadd0e44966c55b0d628f61554b3c4ce2Form
+    show.form = showForm
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::update
+ * @see app/Http/Controllers/Settings/ProfileController.php:35
+ * @route '/profil'
+ */
+export const update = (options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: update.url(options),
+    method: 'put',
+})
+
+update.definition = {
+    methods: ["put"],
+    url: '/profil',
+} satisfies RouteDefinition<["put"]>
+
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::update
+ * @see app/Http/Controllers/Settings/ProfileController.php:35
+ * @route '/profil'
+ */
+update.url = (options?: RouteQueryOptions) => {
+    return update.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::update
+ * @see app/Http/Controllers/Settings/ProfileController.php:35
+ * @route '/profil'
+ */
+update.put = (options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+    url: update.url(options),
+    method: 'put',
+})
+
     /**
+* @see \App\Http\Controllers\Settings\ProfileController::update
+ * @see app/Http/Controllers/Settings/ProfileController.php:35
+ * @route '/profil'
+ */
+    const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: update.url({
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'PUT',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\Settings\ProfileController::update
+ * @see app/Http/Controllers/Settings/ProfileController.php:35
+ * @route '/profil'
+ */
+        updateForm.put = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PUT',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    update.form = updateForm
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::destroy
+ * @see app/Http/Controllers/Settings/ProfileController.php:47
+ * @route '/profil'
+ */
+export const destroy = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy.url(options),
+    method: 'delete',
+})
+
+destroy.definition = {
+    methods: ["delete"],
+    url: '/profil',
+} satisfies RouteDefinition<["delete"]>
+
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::destroy
+ * @see app/Http/Controllers/Settings/ProfileController.php:47
+ * @route '/profil'
+ */
+destroy.url = (options?: RouteQueryOptions) => {
+    return destroy.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::destroy
+ * @see app/Http/Controllers/Settings/ProfileController.php:47
+ * @route '/profil'
+ */
+destroy.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+    url: destroy.url(options),
+    method: 'delete',
+})
+
+    /**
+* @see \App\Http\Controllers\Settings\ProfileController::destroy
+ * @see app/Http/Controllers/Settings/ProfileController.php:47
+ * @route '/profil'
+ */
+    const destroyForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: destroy.url({
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'DELETE',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\Settings\ProfileController::destroy
+ * @see app/Http/Controllers/Settings/ProfileController.php:47
+ * @route '/profil'
+ */
+        destroyForm.delete = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: destroy.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'DELETE',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    destroy.form = destroyForm
+/**
 * @see \App\Http\Controllers\Settings\ProfileController::edit
  * @see app/Http/Controllers/Settings/ProfileController.php:21
  * @route '/admin/profil'
@@ -155,6 +285,84 @@ edit1b0b25d57de8d27fea6f116f8af4c45a.head = (options?: RouteQueryOptions): Route
         })
     
     edit1b0b25d57de8d27fea6f116f8af4c45a.form = edit1b0b25d57de8d27fea6f116f8af4c45aForm
+    /**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+const editfc6874003af373efc88e5e18eecd9c17 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: editfc6874003af373efc88e5e18eecd9c17.url(options),
+    method: 'get',
+})
+
+editfc6874003af373efc88e5e18eecd9c17.definition = {
+    methods: ["get","head"],
+    url: '/settings/profile',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+editfc6874003af373efc88e5e18eecd9c17.url = (options?: RouteQueryOptions) => {
+    return editfc6874003af373efc88e5e18eecd9c17.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+editfc6874003af373efc88e5e18eecd9c17.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: editfc6874003af373efc88e5e18eecd9c17.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+editfc6874003af373efc88e5e18eecd9c17.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: editfc6874003af373efc88e5e18eecd9c17.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+    const editfc6874003af373efc88e5e18eecd9c17Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: editfc6874003af373efc88e5e18eecd9c17.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+        editfc6874003af373efc88e5e18eecd9c17Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: editfc6874003af373efc88e5e18eecd9c17.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\Settings\ProfileController::edit
+ * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @route '/settings/profile'
+ */
+        editfc6874003af373efc88e5e18eecd9c17Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: editfc6874003af373efc88e5e18eecd9c17.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    editfc6874003af373efc88e5e18eecd9c17.form = editfc6874003af373efc88e5e18eecd9c17Form
 
 /**
 * Multiple routes resolve to \App\Http\Controllers\Settings\ProfileController::edit, so this export is a
@@ -162,216 +370,10 @@ edit1b0b25d57de8d27fea6f116f8af4c45a.head = (options?: RouteQueryOptions): Route
 * or import the route by name from your generated `routes/` directory.
 */
 export const edit = {
-    '/profil': editadd0e44966c55b0d628f61554b3c4ce2,
     '/admin/profil': edit1b0b25d57de8d27fea6f116f8af4c45a,
+    '/settings/profile': editfc6874003af373efc88e5e18eecd9c17,
 }
 
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-const updateadd0e44966c55b0d628f61554b3c4ce2 = (options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: updateadd0e44966c55b0d628f61554b3c4ce2.url(options),
-    method: 'put',
-})
-
-updateadd0e44966c55b0d628f61554b3c4ce2.definition = {
-    methods: ["put"],
-    url: '/profil',
-} satisfies RouteDefinition<["put"]>
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-updateadd0e44966c55b0d628f61554b3c4ce2.url = (options?: RouteQueryOptions) => {
-    return updateadd0e44966c55b0d628f61554b3c4ce2.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-updateadd0e44966c55b0d628f61554b3c4ce2.put = (options?: RouteQueryOptions): RouteDefinition<'put'> => ({
-    url: updateadd0e44966c55b0d628f61554b3c4ce2.url(options),
-    method: 'put',
-})
-
-    /**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-    const updateadd0e44966c55b0d628f61554b3c4ce2Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: updateadd0e44966c55b0d628f61554b3c4ce2.url({
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'PUT',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-        updateadd0e44966c55b0d628f61554b3c4ce2Form.put = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: updateadd0e44966c55b0d628f61554b3c4ce2.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'PUT',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    updateadd0e44966c55b0d628f61554b3c4ce2.form = updateadd0e44966c55b0d628f61554b3c4ce2Form
-    /**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-const updateadd0e44966c55b0d628f61554b3c4ce2 = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
-    url: updateadd0e44966c55b0d628f61554b3c4ce2.url(options),
-    method: 'patch',
-})
-
-updateadd0e44966c55b0d628f61554b3c4ce2.definition = {
-    methods: ["patch"],
-    url: '/profil',
-} satisfies RouteDefinition<["patch"]>
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-updateadd0e44966c55b0d628f61554b3c4ce2.url = (options?: RouteQueryOptions) => {
-    return updateadd0e44966c55b0d628f61554b3c4ce2.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-updateadd0e44966c55b0d628f61554b3c4ce2.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
-    url: updateadd0e44966c55b0d628f61554b3c4ce2.url(options),
-    method: 'patch',
-})
-
-    /**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-    const updateadd0e44966c55b0d628f61554b3c4ce2Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: updateadd0e44966c55b0d628f61554b3c4ce2.url({
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'PATCH',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\Settings\ProfileController::update
- * @see app/Http/Controllers/Settings/ProfileController.php:35
- * @route '/profil'
- */
-        updateadd0e44966c55b0d628f61554b3c4ce2Form.patch = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: updateadd0e44966c55b0d628f61554b3c4ce2.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'PATCH',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    updateadd0e44966c55b0d628f61554b3c4ce2.form = updateadd0e44966c55b0d628f61554b3c4ce2Form
-
-/**
-* Multiple routes resolve to \App\Http\Controllers\Settings\ProfileController::update, so this export is a
-* dictionary keyed by URI rather than a callable. Call a specific route with `update['<uri>'](...)`,
-* or import the route by name from your generated `routes/` directory.
-*/
-export const update = {
-    '/profil': updateadd0e44966c55b0d628f61554b3c4ce2,
-    '/profil': updateadd0e44966c55b0d628f61554b3c4ce2,
-}
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::destroy
- * @see app/Http/Controllers/Settings/ProfileController.php:47
- * @route '/profil'
- */
-export const destroy = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(options),
-    method: 'delete',
-})
-
-destroy.definition = {
-    methods: ["delete"],
-    url: '/profil',
-} satisfies RouteDefinition<["delete"]>
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::destroy
- * @see app/Http/Controllers/Settings/ProfileController.php:47
- * @route '/profil'
- */
-destroy.url = (options?: RouteQueryOptions) => {
-    return destroy.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\Settings\ProfileController::destroy
- * @see app/Http/Controllers/Settings/ProfileController.php:47
- * @route '/profil'
- */
-destroy.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
-    url: destroy.url(options),
-    method: 'delete',
-})
-
-    /**
-* @see \App\Http\Controllers\Settings\ProfileController::destroy
- * @see app/Http/Controllers/Settings/ProfileController.php:47
- * @route '/profil'
- */
-    const destroyForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: destroy.url({
-                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                        _method: 'DELETE',
-                        ...(options?.query ?? options?.mergeQuery ?? {}),
-                    }
-                }),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\Settings\ProfileController::destroy
- * @see app/Http/Controllers/Settings/ProfileController.php:47
- * @route '/profil'
- */
-        destroyForm.delete = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: destroy.url({
-                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
-                            _method: 'DELETE',
-                            ...(options?.query ?? options?.mergeQuery ?? {}),
-                        }
-                    }),
-            method: 'post',
-        })
-    
-    destroy.form = destroyForm
-const ProfileController = { edit, update, destroy }
+const ProfileController = { show, update, destroy, edit }
 
 export default ProfileController

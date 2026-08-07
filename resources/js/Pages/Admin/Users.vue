@@ -14,7 +14,6 @@ import {
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
-import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -43,6 +42,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/Components/ui/table';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
@@ -213,6 +213,7 @@ const toggleUserStatus = async (user: UserItem) => {
         confirmText: 'Ya, Ubah Status',
         variant: 'warning',
     });
+
     if (isOk) {
         form.put(`/admin/users/${user.id}/toggle`, { preserveScroll: true });
     }
@@ -225,6 +226,7 @@ const resetDevice = async (user: UserItem) => {
         confirmText: 'Ya, Reset Device',
         variant: 'warning',
     });
+
     if (isOk) {
         form.put(`/admin/users/${user.id}/reset-device`, {
             preserveScroll: true,

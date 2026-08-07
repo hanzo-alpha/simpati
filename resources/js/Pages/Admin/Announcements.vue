@@ -2,7 +2,6 @@
 import { useForm } from '@inertiajs/vue3';
 import { Megaphone, Plus, Edit3, Trash2, Pin } from '@lucide/vue';
 import { ref } from 'vue';
-import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -15,6 +14,7 @@ import {
 } from '@/Components/ui/dialog';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface AnnouncementItem {
@@ -71,6 +71,7 @@ const deleteAnnouncement = async (id: number) => {
         confirmText: 'Ya, Hapus Pengumuman',
         variant: 'danger',
     });
+
     if (isOk) {
         useForm({}).delete(`/admin/announcements/${id}`);
     }

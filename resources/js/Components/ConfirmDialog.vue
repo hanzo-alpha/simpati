@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { AlertTriangle, Info, Trash2, CheckCircle2 } from '@lucide/vue';
+import { Button } from '@/Components/ui/button';
 import {
     Dialog,
     DialogContent,
@@ -7,8 +9,6 @@ import {
     DialogDescription,
     DialogFooter,
 } from '@/Components/ui/dialog';
-import { Button } from '@/Components/ui/button';
-import { AlertTriangle, Info, Trash2, CheckCircle2 } from '@lucide/vue';
 
 const props = withDefaults(
     defineProps<{
@@ -28,7 +28,7 @@ const props = withDefaults(
         cancelText: 'Batal',
         variant: 'danger',
         loading: false,
-    }
+    },
 );
 
 const emit = defineEmits<{
@@ -78,15 +78,21 @@ const handleCancel = () => {
                     </div>
 
                     <div class="space-y-0.5">
-                        <DialogTitle class="text-base font-bold">{{ title }}</DialogTitle>
-                        <DialogDescription class="text-xs text-muted-foreground">
+                        <DialogTitle class="text-base font-bold">{{
+                            title
+                        }}</DialogTitle>
+                        <DialogDescription
+                            class="text-xs text-muted-foreground"
+                        >
                             {{ description }}
                         </DialogDescription>
                     </div>
                 </div>
             </DialogHeader>
 
-            <DialogFooter class="mt-4 flex flex-row items-center justify-end gap-2 sm:gap-2">
+            <DialogFooter
+                class="mt-4 flex flex-row items-center justify-end gap-2 sm:gap-2"
+            >
                 <Button
                     type="button"
                     variant="outline"
@@ -101,9 +107,12 @@ const handleCancel = () => {
                     :disabled="loading"
                     class="font-semibold text-white"
                     :class="{
-                        'bg-red-600 hover:bg-red-700 dark:bg-red-600': variant === 'danger',
-                        'bg-amber-600 hover:bg-amber-700 dark:bg-amber-600': variant === 'warning',
-                        'bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600': variant === 'success',
+                        'bg-red-600 hover:bg-red-700 dark:bg-red-600':
+                            variant === 'danger',
+                        'bg-amber-600 hover:bg-amber-700 dark:bg-amber-600':
+                            variant === 'warning',
+                        'bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600':
+                            variant === 'success',
                     }"
                     @click="handleConfirm"
                 >

@@ -583,7 +583,7 @@ presensi.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     presensi.form = presensiForm
 /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
 export const profil = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -598,7 +598,7 @@ profil.definition = {
 
 /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
 profil.url = (options?: RouteQueryOptions) => {
@@ -607,7 +607,7 @@ profil.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
 profil.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -616,7 +616,7 @@ profil.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
 profil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -626,7 +626,7 @@ profil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
     const profilForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -636,7 +636,7 @@ profil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
         profilForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -645,7 +645,7 @@ profil.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Settings\ProfileController::profil
- * @see app/Http/Controllers/Settings/ProfileController.php:21
+ * @see app/Http/Controllers/Settings/ProfileController.php:0
  * @route '/profil'
  */
         profilForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

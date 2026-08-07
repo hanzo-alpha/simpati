@@ -3,10 +3,10 @@ import { router } from '@inertiajs/vue3';
 import { Check, X, Clock, FileText } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
-import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
@@ -59,10 +59,15 @@ const paginatedCorrections = computed(() => {
 
 const { confirm: confirmAction } = useConfirm();
 
-const updateStatus = async (correction: AttendanceCorrectionItem, status: string) => {
+const updateStatus = async (
+    correction: AttendanceCorrectionItem,
+    status: string,
+) => {
     const isApprove = status === 'disetujui';
     const isOk = await confirmAction({
-        title: isApprove ? 'Setujui Pengajuan Koreksi' : 'Tolak Pengajuan Koreksi',
+        title: isApprove
+            ? 'Setujui Pengajuan Koreksi'
+            : 'Tolak Pengajuan Koreksi',
         description: isApprove
             ? `Apakah Anda yakin ingin menyetujui pengajuan koreksi presensi dari ${correction.user?.name || 'pegawai'}?`
             : `Apakah Anda yakin ingin menolak pengajuan koreksi presensi dari ${correction.user?.name || 'pegawai'}?`,
@@ -72,7 +77,9 @@ const updateStatus = async (correction: AttendanceCorrectionItem, status: string
 
     if (isOk) {
         const catatan =
-            status === 'ditolak' ? prompt('Alasan penolakan (opsional):') : null;
+            status === 'ditolak'
+                ? prompt('Alasan penolakan (opsional):')
+                : null;
 
         router.put(
             `/admin/attendance-corrections/${correction.id}`,
@@ -84,8 +91,8 @@ const updateStatus = async (correction: AttendanceCorrectionItem, status: string
 
 const formatJenis = (jenis?: string) => {
     if (!jenis) {
-return '-';
-}
+        return '-';
+    }
 
     switch (jenis.toLowerCase()) {
         case 'masuk':

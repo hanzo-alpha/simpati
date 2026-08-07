@@ -36,6 +36,7 @@ export function useConfirm() {
             resolvePromise(true);
             resolvePromise = null;
         }
+
         isOpen.value = false;
     };
 
@@ -44,6 +45,7 @@ export function useConfirm() {
             resolvePromise(false);
             resolvePromise = null;
         }
+
         isOpen.value = false;
     };
 

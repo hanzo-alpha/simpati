@@ -10,10 +10,7 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', '/profil');
 
     // Profile Settings
-    Route::get('profil', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('profil', [ProfileController::class, 'edit'])->name('profil');
-    Route::patch('profil', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('profil', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
     // Security / Password Settings
     Route::get('settings/security', [SecurityController::class, 'edit'])->name('security.edit');

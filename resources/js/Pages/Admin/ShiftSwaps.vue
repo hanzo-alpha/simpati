@@ -3,10 +3,10 @@ import { router } from '@inertiajs/vue3';
 import { ArrowLeftRight, Check, X } from '@lucide/vue';
 import { ref, computed } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
-import { useConfirm } from '@/composables/useConfirm';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardContent } from '@/Components/ui/card';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 interface Office {
