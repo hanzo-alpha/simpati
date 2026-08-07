@@ -184,8 +184,8 @@ class StatisticController extends Controller
             $no = $idx + 1;
             $tgl = $att->tanggal ? Carbon::parse($att->tanggal)->format('d/m/Y') : '-';
             $jam = $att->waktu ? Carbon::parse($att->waktu)->format('H:i:s') : '-';
-            $jenis = strtoupper($att->jenis instanceof AttendanceType ? $att->jenis->value : (string)$att->jenis);
-            $status = strtoupper($att->status instanceof AttendanceStatus ? $att->status->value : (string)$att->status);
+            $jenis = strtoupper($att->jenis instanceof AttendanceType ? $att->jenis->value : (string) $att->jenis);
+            $status = strtoupper($att->status instanceof AttendanceStatus ? $att->status->value : (string) $att->status);
             $ket = htmlspecialchars($att->keterangan ?? 'Hadir Presensi Digital Mobile');
 
             $rows .= "<tr>
@@ -264,7 +264,7 @@ class StatisticController extends Controller
             </table>
 
             <div class='footer'>
-                <p>Soppeng, " . now()->translatedFormat('d F Y') . "</p>
+                <p>Soppeng, ".now()->translatedFormat('d F Y')."</p>
                 <p style='margin-top:50px;'><strong>{$user->name}</strong><br>NIP. {$nip}</p>
             </div>
         </body>
