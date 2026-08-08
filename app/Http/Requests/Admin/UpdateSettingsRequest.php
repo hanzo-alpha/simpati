@@ -29,16 +29,21 @@ class UpdateSettingsRequest extends FormRequest
             'potongan_tk' => 'required|numeric',
             'potongan_max_tpp' => 'nullable|numeric',
 
-            'device_binding_enabled' => 'required|boolean',
-            'fake_gps_block_enabled' => 'required|boolean',
+            'device_binding_enabled' => 'nullable|boolean',
+            'fake_gps_block_enabled' => 'nullable|boolean',
             'allow_rear_camera' => 'nullable|boolean',
             'allow_gallery_upload' => 'nullable|boolean',
-            'min_mobile_version' => 'required|string',
-            'force_mobile_update' => 'required|boolean',
+            'min_mobile_version' => 'nullable|string',
+            'force_mobile_update' => 'nullable|boolean',
 
-            'simpeg_api_url' => 'required|string',
-            'simpeg_secret_key' => 'required|string',
-            'simpeg_auto_sync' => 'required|boolean',
+            'simpeg_api_url' => 'nullable|string',
+            'simpeg_secret_key' => 'nullable|string',
+            'simpeg_auto_sync' => 'nullable|boolean',
+
+            'enable_device_binding' => 'nullable|boolean',
+            'enable_fake_gps_detection' => 'nullable|boolean',
+            'simpeg_api_key' => 'nullable|string',
+            'enable_auto_checkout' => 'nullable|boolean',
         ];
     }
 }

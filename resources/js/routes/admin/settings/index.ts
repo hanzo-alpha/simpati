@@ -56,7 +56,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpeg
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
 export const testSimpeg = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ testSimpeg.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpeg
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
 testSimpeg.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ testSimpeg.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpeg
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
 testSimpeg.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ testSimpeg.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpeg
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
     const testSimpegForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ testSimpeg.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpeg
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
         testSimpegForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

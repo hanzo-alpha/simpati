@@ -134,7 +134,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
 export const testSimpegConnection = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -149,7 +149,7 @@ testSimpegConnection.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
 testSimpegConnection.url = (options?: RouteQueryOptions) => {
@@ -158,7 +158,7 @@ testSimpegConnection.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
 testSimpegConnection.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -168,7 +168,7 @@ testSimpegConnection.post = (options?: RouteQueryOptions): RouteDefinition<'post
 
     /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
     const testSimpegConnectionForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -178,7 +178,7 @@ testSimpegConnection.post = (options?: RouteQueryOptions): RouteDefinition<'post
 
             /**
 * @see \App\Http\Controllers\Web\Admin\SettingController::testSimpegConnection
- * @see app/Http/Controllers/Web/Admin/SettingController.php:73
+ * @see app/Http/Controllers/Web/Admin/SettingController.php:87
  * @route '/admin/settings/test-simpeg'
  */
         testSimpegConnectionForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

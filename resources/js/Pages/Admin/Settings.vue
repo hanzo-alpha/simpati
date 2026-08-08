@@ -95,10 +95,15 @@ const saveSettings = () => {
                 successMessage.value = '';
             }, 4000);
         },
-        onError: () => {
+        onError: (errors) => {
+            const firstErrKey = Object.keys(errors)[0];
+            const firstErrVal = Object.values(errors)[0];
+            const errMsg = firstErrVal
+                ? `${firstErrKey}: ${firstErrVal}`
+                : 'Silakan periksa kembali form dan coba beberapa saat lagi.';
+
             toast.error('Gagal Menyimpan Pengaturan', {
-                description:
-                    'Silakan periksa kembali form dan coba beberapa saat lagi.',
+                description: errMsg,
             });
         },
     });

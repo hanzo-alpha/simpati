@@ -56,7 +56,21 @@ class SettingController extends Controller
     {
         $data = $request->validated();
 
+        if (isset($data['enable_device_binding'])) {
+            $data['device_binding_enabled'] = $data['enable_device_binding'];
+        }
+        if (isset($data['enable_fake_gps_detection'])) {
+            $data['fake_gps_block_enabled'] = $data['enable_fake_gps_detection'];
+        }
+        if (isset($data['simpeg_api_key'])) {
+            $data['simpeg_secret_key'] = $data['simpeg_api_key'];
+        }
+
         foreach ($data as $key => $value) {
+            if ($value === null) {
+                continue;
+            }
+
             $group = match (true) {
                 str_contains($key, 'simpeg') => 'simpeg',
                 str_contains($key, 'mobile') || str_contains($key, 'device') || str_contains($key, 'fake_gps') => 'mobile',
@@ -64,7 +78,7 @@ class SettingController extends Controller
                 default => 'general',
             };
 
-            Setting::set($key, is_bool($value) ? ($value ? 'true' : 'false') : $value, $group);
+            Setting::set($key, is_bool($value) ? ($value ? 'true' : 'false') : (string) $value, $group);
         }
 
         return back()->with('success', 'Pengaturan sistem SIMPATI berhasil diperbarui!');
