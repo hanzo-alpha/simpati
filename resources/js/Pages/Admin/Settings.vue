@@ -14,6 +14,7 @@ import {
 } from '@lucide/vue';
 import axios from 'axios';
 import { ref } from 'vue';
+import { toast } from 'vue-sonner';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -85,11 +86,20 @@ const form = useForm({
 const saveSettings = () => {
     form.post('/admin/settings', {
         onSuccess: () => {
+            toast.success('Pengaturan Berhasil Disimpan', {
+                description: 'Pengaturan sistem SIMPATI telah berhasil diperbarui.',
+            });
             successMessage.value =
                 'Pengaturan sistem SIMPATI berhasil diperbarui!';
             setTimeout(() => {
                 successMessage.value = '';
             }, 4000);
+        },
+        onError: () => {
+            toast.error('Gagal Menyimpan Pengaturan', {
+                description:
+                    'Silakan periksa kembali form dan coba beberapa saat lagi.',
+            });
         },
     });
 };
@@ -104,13 +114,22 @@ const testSimpeg = async () => {
             api_key: form.simpeg_api_key,
         });
         simpegTestResult.value = response.data;
+        if (response.data?.success) {
+            toast.success('Koneksi SIMPEG Berhasil', {
+                description: response.data.message,
+            });
+        }
     } catch (e: any) {
+        const msg =
+            e.response?.data?.message ||
+            'Gagal terhubung ke API SIMPATI/SIMPEG.';
         simpegTestResult.value = {
             success: false,
-            message:
-                e.response?.data?.message ||
-                'Gagal terhubung ke API SIMPATI/SIMPEG.',
+            message: msg,
         };
+        toast.error('Koneksi SIMPEG Gagal', {
+            description: msg,
+        });
     } finally {
         testingConnection.value = false;
     }
