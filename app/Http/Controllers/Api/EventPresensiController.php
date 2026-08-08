@@ -18,9 +18,11 @@ class EventPresensiController extends Controller
         $user = $request->user();
         $today = now()->toDateString();
 
-        $events = EventPresensi::with(['participants' => function ($q) use ($user) {
-            $q->where('user_id', $user->id);
-        }])
+        $events = EventPresensi::with([
+            'participants' => function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            },
+        ])
             ->where('tanggal', $today)
             ->where('is_active', true)
             ->get()

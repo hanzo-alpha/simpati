@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\Api\EventPresensiController::scan
- * @see app/Http/Controllers/Api/EventPresensiController.php:58
+ * @see app/Http/Controllers/Api/EventPresensiController.php:60
  * @route '/api/events/scan'
  */
 export const scan = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ scan.definition = {
 
 /**
 * @see \App\Http\Controllers\Api\EventPresensiController::scan
- * @see app/Http/Controllers/Api/EventPresensiController.php:58
+ * @see app/Http/Controllers/Api/EventPresensiController.php:60
  * @route '/api/events/scan'
  */
 scan.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ scan.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Api\EventPresensiController::scan
- * @see app/Http/Controllers/Api/EventPresensiController.php:58
+ * @see app/Http/Controllers/Api/EventPresensiController.php:60
  * @route '/api/events/scan'
  */
 scan.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -113,7 +113,7 @@ scan.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Api\EventPresensiController::scan
- * @see app/Http/Controllers/Api/EventPresensiController.php:58
+ * @see app/Http/Controllers/Api/EventPresensiController.php:60
  * @route '/api/events/scan'
  */
     const scanForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -123,7 +123,7 @@ scan.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Api\EventPresensiController::scan
- * @see app/Http/Controllers/Api/EventPresensiController.php:58
+ * @see app/Http/Controllers/Api/EventPresensiController.php:60
  * @route '/api/events/scan'
  */
         scanForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

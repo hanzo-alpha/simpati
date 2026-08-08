@@ -73,6 +73,7 @@ const form = useForm({
     jam_mulai: '07:00',
     jam_selesai: '09:00',
     lokasi: 'Halaman Kantor Bupati Soppeng',
+    is_active: true,
 });
 
 const editForm = useForm({
@@ -466,6 +467,20 @@ const formatTanggal = (dateStr?: string) => {
                             placeholder="Contoh: Halaman Kantor Bupati Soppeng"
                             class="h-10 rounded-none text-xs"
                         />
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-1">
+                        <input
+                            type="checkbox"
+                            id="create_is_active"
+                            v-model="form.is_active"
+                            class="h-4 w-4 rounded-none border-border accent-emerald-600"
+                        />
+                        <Label
+                            for="create_is_active"
+                            class="cursor-pointer text-xs font-bold text-foreground"
+                            >Status Event Aktif (Siap Menerima Presensi)</Label
+                        >
                     </div>
 
                     <div

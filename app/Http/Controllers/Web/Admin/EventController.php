@@ -54,7 +54,7 @@ class EventController extends Controller
 
         $data['qr_token'] = 'SIMPATI-EVT-'.strtoupper(Str::random(8));
         $data['penyelenggara'] = $data['penyelenggara'] ?? 'Pemerintah Kab. Soppeng';
-        $data['is_active'] = true;
+        $data['is_active'] = $data['is_active'] ?? true;
 
         EventPresensi::create($data);
 

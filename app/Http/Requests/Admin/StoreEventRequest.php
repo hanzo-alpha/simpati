@@ -20,6 +20,7 @@ class StoreEventRequest extends FormRequest
             'jam_mulai' => 'required|string',
             'jam_selesai' => 'required|string',
             'lokasi' => 'required|string|max:255',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }
