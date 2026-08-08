@@ -577,28 +577,28 @@ const formatTanggal = (dateStr?: string) => {
         <!-- Dialog Modal Daftar ASN Hadir / Absen -->
         <Dialog v-model:open="showParticipantsModal">
             <DialogContent class="sm:max-w-4xl rounded-none border-border bg-card p-6">
-                <div class="flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                        <h3 class="flex items-center gap-2 text-sm font-bold text-foreground uppercase">
-                            <Users class="h-4 w-4 text-emerald-500" />
-                            <span>Daftar ASN Hadir — {{ activeParticipantsEvent?.nama_kegiatan }}</span>
-                        </h3>
-                        <p class="text-xs text-muted-foreground">
-                            Total {{ activeParticipantsEvent?.participants_count || 0 }} Pegawai ASN telah melakukan presensi QR Code
-                        </p>
-                    </div>
+                <div class="border-b border-border pb-3 pr-8">
+                    <h3 class="flex items-center gap-2 text-sm font-bold text-foreground uppercase">
+                        <Users class="h-4 w-4 text-emerald-500" />
+                        <span>Daftar ASN Hadir — {{ activeParticipantsEvent?.nama_kegiatan }}</span>
+                    </h3>
+                    <p class="text-xs text-muted-foreground">
+                        Total {{ activeParticipantsEvent?.participants_count || 0 }} Pegawai ASN telah melakukan presensi QR Code
+                    </p>
+                </div>
 
-                    <div class="relative w-full sm:w-64">
+                <div class="mt-3 flex items-center justify-between">
+                    <div class="relative w-full max-w-sm">
                         <Search class="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             v-model="participantSearchQuery"
                             placeholder="Cari nama, NIP, atau OPD..."
-                            class="h-8 rounded-none border-border bg-background pl-9 text-xs"
+                            class="h-9 rounded-none border-border bg-background pl-9 text-xs"
                         />
                     </div>
                 </div>
 
-                <div class="mt-4 max-h-96 overflow-y-auto border border-border">
+                <div class="mt-3 max-h-96 overflow-y-auto border border-border">
                     <table class="w-full text-xs">
                         <thead>
                             <tr class="border-b border-border bg-muted/40 text-left text-muted-foreground">
