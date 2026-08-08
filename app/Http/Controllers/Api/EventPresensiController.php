@@ -24,6 +24,7 @@ class EventPresensiController extends Controller
             ->where('tanggal', $today)
             ->where('is_active', true)
             ->get()
+            ->reject(fn ($event) => $event->is_expired)
             ->map(function ($event) {
                 $participant = $event->participants->first();
 
@@ -36,10 +37,14 @@ class EventPresensiController extends Controller
                     'jam_selesai' => $event->jam_selesai,
                     'lokasi' => $event->lokasi,
                     'qr_token' => $event->qr_token,
+                    'status' => $event->status->value,
+                    'status_label' => $event->status_label,
+                    'is_expired' => $event->is_expired,
                     'is_attended' => $participant !== null,
                     'waktu_presensi' => $participant ? $participant->waktu_presensi->format('H:i:s') : null,
                 ];
-            });
+            })
+            ->values();
 
         return response()->json([
             'success' => true,
@@ -63,10 +68,10 @@ class EventPresensiController extends Controller
             ->where('is_active', true)
             ->first();
 
-        if (! $event) {
+        if (! $event || $event->is_expired) {
             return response()->json([
                 'success' => false,
-                'message' => 'Kode QR / Token Event Kegiatan tidak valid atau sudah tidak aktif.',
+                'message' => 'Kode QR / Token Event Kegiatan tidak valid, belum dimulai, atau telah berakhir.',
             ], 404);
         }
 

@@ -27,6 +27,8 @@ class EventController extends Controller
                     'lokasi' => $event->lokasi,
                     'qr_token' => $event->qr_token,
                     'is_active' => (bool) $event->is_active,
+                    'is_expired' => $event->is_expired,
+                    'status_label' => $event->status_label,
                     'participants_count' => $event->participants_count ?? 0,
                     'participants' => $event->participants->map(function ($p) {
                         return [

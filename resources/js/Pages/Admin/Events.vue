@@ -42,6 +42,8 @@ interface EventItem {
     lokasi: string;
     qr_token: string;
     is_active: boolean;
+    is_expired?: boolean;
+    status_label?: string;
     participants_count?: number;
     participants?: Participant[];
 }
@@ -241,17 +243,17 @@ const formatTanggal = (dateStr?: string) => {
                         <div class="flex items-center justify-between gap-2">
                             <div class="flex items-center gap-2">
                                 <Badge
-                                    :variant="
-                                        item.is_active ? 'default' : 'outline'
-                                    "
-                                    class="rounded-none text-[10px] font-bold uppercase"
+                                    variant="outline"
+                                    class="rounded-none text-[10px] font-bold uppercase px-2 py-0.5"
                                     :class="
-                                        item.is_active
+                                        item.status_label === 'AKTIF'
                                             ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                                            : ''
+                                            : item.status_label === 'MENDATANG'
+                                              ? 'border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400'
+                                              : 'border-border bg-muted/50 text-muted-foreground'
                                     "
                                 >
-                                    {{ item.is_active ? 'AKTIF' : 'SELESAI' }}
+                                    {{ item.status_label || (item.is_active ? 'AKTIF' : 'SELESAI') }}
                                 </Badge>
                                 <button
                                     @click="openParticipantsModal(item)"
