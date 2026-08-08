@@ -27,7 +27,6 @@ const props = defineProps<{
     settings: Record<string, string>;
 }>();
 
-const successMessage = ref('');
 const testingConnection = ref(false);
 const simpegTestResult = ref<{ success?: boolean; message?: string } | null>(
     null,
@@ -85,16 +84,6 @@ const form = useForm({
 
 const saveSettings = () => {
     form.post('/admin/settings', {
-        onSuccess: () => {
-            toast.success('Pengaturan Berhasil Disimpan', {
-                description: 'Pengaturan sistem SIMPATI telah berhasil diperbarui.',
-            });
-            successMessage.value =
-                'Pengaturan sistem SIMPATI berhasil diperbarui!';
-            setTimeout(() => {
-                successMessage.value = '';
-            }, 4000);
-        },
         onError: (errors) => {
             const firstErrKey = Object.keys(errors)[0];
             const firstErrVal = Object.values(errors)[0];
@@ -157,23 +146,6 @@ const testSimpeg = async () => {
                 <span>Simpan Pengaturan</span>
             </Button>
         </template>
-
-        <!-- Alert Notification -->
-        <div
-            v-if="successMessage"
-            class="mb-6 flex items-center justify-between rounded-none border border-emerald-500/30 bg-emerald-500/10 p-4 text-xs font-bold text-emerald-600 shadow-xs dark:text-emerald-400"
-        >
-            <div class="flex items-center gap-3">
-                <CheckCircle2 class="h-5 w-5 shrink-0" />
-                <span>{{ successMessage }}</span>
-            </div>
-            <button
-                @click="successMessage = ''"
-                class="cursor-pointer text-xs hover:text-foreground"
-            >
-                ✕
-            </button>
-        </div>
 
         <form @submit.prevent="saveSettings" class="space-y-6">
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
