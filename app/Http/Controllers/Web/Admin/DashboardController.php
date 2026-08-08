@@ -47,18 +47,34 @@ class DashboardController extends Controller
         ];
 
         $todayAttendances = Attendance::with(['user.office', 'user.profile'])
+            ->where('tanggal', $today)
             ->latest('waktu')
-            ->take(10)
             ->get()
-            ->map(function ($att) {
+            ->groupBy('user_id')
+            ->take(15)
+            ->map(function ($userAtts) {
+                $first = $userAtts->first();
+                $user = $first->user;
+
+                $masuk = $userAtts->firstWhere('jenis', AttendanceType::MASUK);
+                $istirahat = $userAtts->firstWhere('jenis', AttendanceType::ISTIRAHAT);
+                $kembali = $userAtts->firstWhere('jenis', AttendanceType::KEMBALI);
+                $pulang = $userAtts->firstWhere('jenis', AttendanceType::PULANG);
+
+                $statusObj = $masuk?->status ?? $first->status;
+
                 return [
-                    'user_id' => $att->user_id,
-                    'name' => $att->user->name ?? '-',
-                    'opd' => $att->user->office->opd_name ?? '-',
-                    'masuk' => $att->waktu ? $att->waktu->format('H:i') : '-',
-                    'status' => $att->status->value ?? $att->status,
+                    'user_id' => $first->user_id,
+                    'name' => $user->name ?? '-',
+                    'opd' => $user->office->opd_name ?? '-',
+                    'masuk' => $masuk?->waktu ? $masuk->waktu->format('H:i') : null,
+                    'istirahat' => $istirahat?->waktu ? $istirahat->waktu->format('H:i') : null,
+                    'kembali' => $kembali?->waktu ? $kembali->format('H:i') : null,
+                    'pulang' => $pulang?->waktu ? $pulang->waktu->format('H:i') : null,
+                    'status' => $statusObj instanceof \BackedEnum ? $statusObj->value : (string) $statusObj,
                 ];
-            });
+            })
+            ->values();
 
         $recentRequests = LeaveRequest::with(['user.office', 'user.profile'])
             ->where('status', LeaveStatus::MENUNGGU)

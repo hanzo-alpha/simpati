@@ -543,13 +543,28 @@ onMounted(() => {
         <Card
             class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
         >
-            <CardHeader class="border-b border-border/60 p-5">
-                <CardTitle
-                    class="flex items-center gap-2 text-sm font-bold tracking-wider text-foreground uppercase"
+            <CardHeader
+                class="flex flex-col gap-2 border-b border-border/60 p-5 sm:flex-row sm:items-center sm:justify-between"
+            >
+                <div>
+                    <CardTitle
+                        class="flex items-center gap-2 text-sm font-bold tracking-wider text-foreground uppercase"
+                    >
+                        <Clock class="h-4 w-4 text-emerald-500" />
+                        <span>Log Presensi Hari Ini</span>
+                    </CardTitle>
+                    <p class="mt-0.5 text-xs text-muted-foreground">
+                        Aktivitas terkini jam presensi pegawai ASN Kabupaten Soppeng hari ini
+                    </p>
+                </div>
+
+                <Link
+                    href="/admin/attendances"
+                    class="flex items-center gap-1 text-xs font-semibold text-primary transition-colors hover:underline"
                 >
-                    <Clock class="h-4 w-4 text-emerald-500" />
-                    <span>Log Presensi Hari Ini</span>
-                </CardTitle>
+                    <span>Lihat Seluruh Rekap Presensi</span>
+                    <ArrowUpRight class="h-3.5 w-3.5" />
+                </Link>
             </CardHeader>
             <CardContent class="p-0">
                 <div class="overflow-x-auto">
