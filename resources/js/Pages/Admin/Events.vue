@@ -576,7 +576,7 @@ const formatTanggal = (dateStr?: string) => {
 
         <!-- Dialog Modal Daftar ASN Hadir / Absen -->
         <Dialog v-model:open="showParticipantsModal">
-            <DialogContent class="max-w-2xl rounded-none border-border bg-card p-6">
+            <DialogContent class="sm:max-w-4xl rounded-none border-border bg-card p-6">
                 <div class="flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <h3 class="flex items-center gap-2 text-sm font-bold text-foreground uppercase">
@@ -603,10 +603,10 @@ const formatTanggal = (dateStr?: string) => {
                         <thead>
                             <tr class="border-b border-border bg-muted/40 text-left text-muted-foreground">
                                 <th class="w-12 px-4 py-3 text-center font-bold uppercase">#</th>
-                                <th class="px-4 py-3 font-bold uppercase">Nama & NIP Pegawai ASN</th>
-                                <th class="px-4 py-3 font-bold uppercase">Instansi / OPD</th>
-                                <th class="px-4 py-3 text-center font-bold uppercase">Waktu Scan</th>
-                                <th class="px-4 py-3 text-center font-bold uppercase">Status</th>
+                                <th class="px-4 py-3 font-bold uppercase min-w-[200px]">Nama & NIP Pegawai ASN</th>
+                                <th class="px-4 py-3 font-bold uppercase min-w-[180px]">Instansi / OPD</th>
+                                <th class="px-4 py-3 text-center font-bold uppercase min-w-[140px] whitespace-nowrap">Waktu Scan</th>
+                                <th class="px-4 py-3 text-center font-bold uppercase min-w-[150px] whitespace-nowrap">Status Presensi</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-border/40">
@@ -625,12 +625,12 @@ const formatTanggal = (dateStr?: string) => {
                                 <td class="px-4 py-3 text-muted-foreground">
                                     {{ p.opd }}
                                 </td>
-                                <td class="px-4 py-3 text-center font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                <td class="px-4 py-3 text-center font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">
                                     {{ p.waktu_presensi }}
                                 </td>
-                                <td class="px-4 py-3 text-center">
-                                    <Badge variant="outline" class="rounded-none border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-600 dark:text-emerald-400">
-                                        <CheckCircle2 class="mr-1 h-3 w-3" />
+                                <td class="px-4 py-3 text-center whitespace-nowrap">
+                                    <Badge variant="outline" class="rounded-none border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] text-emerald-600 dark:text-emerald-400">
+                                        <CheckCircle2 class="mr-1 h-3 w-3 shrink-0" />
                                         {{ p.keterangan || 'Hadir Tepat Waktu' }}
                                     </Badge>
                                 </td>
