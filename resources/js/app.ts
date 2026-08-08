@@ -7,7 +7,9 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { initTheme } from './Utils/theme';
 
-initTheme();
+if (typeof window !== 'undefined') {
+    initTheme();
+}
 
 const appName = import.meta.env.VITE_APP_NAME || 'SIMPATI';
 
@@ -22,13 +24,9 @@ createInertiaApp({
             import.meta.glob<DefineComponent>('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        const vueApp = createApp({ render: () => h(App, props) }).use(plugin);
-
-        if (el) {
-            vueApp.mount(el);
-        }
-
-        return vueApp;
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .mount(el);
     },
     progress: {
         color: '#0dccf2',
