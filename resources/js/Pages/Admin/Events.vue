@@ -13,6 +13,7 @@ import {
     CheckCircle2,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
+import Pagination from '@/Components/Pagination.vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
@@ -57,7 +58,11 @@ const showParticipantsModal = ref(false);
 const activeQrModal = ref<EventItem | null>(null);
 const activeParticipantsEvent = ref<EventItem | null>(null);
 const editingEventId = ref<number | null>(null);
+
 const participantSearchQuery = ref('');
+const selectedOpdFilter = ref('all');
+const currentParticipantPage = ref(1);
+const participantsPerPage = ref(10);
 
 const form = useForm({
     nama_kegiatan: '',
@@ -128,25 +133,51 @@ const deleteEvent = async (item: EventItem) => {
 const openParticipantsModal = (item: EventItem) => {
     activeParticipantsEvent.value = item;
     participantSearchQuery.value = '';
+    selectedOpdFilter.value = 'all';
+    currentParticipantPage.value = 1;
     showParticipantsModal.value = true;
 };
+
+const availableOpds = computed(() => {
+    if (!activeParticipantsEvent.value?.participants) {
+        return [];
+    }
+
+    const opds = activeParticipantsEvent.value.participants
+        .map((p) => p.opd)
+        .filter((opd, index, self) => opd && self.indexOf(opd) === index);
+
+    return opds.sort();
+});
 
 const filteredParticipants = computed(() => {
     if (!activeParticipantsEvent.value?.participants) {
         return [];
     }
 
-    const query = participantSearchQuery.value.trim().toLowerCase();
-    if (!query) {
-        return activeParticipantsEvent.value.participants;
+    let result = activeParticipantsEvent.value.participants;
+
+    if (selectedOpdFilter.value !== 'all') {
+        result = result.filter((p) => p.opd === selectedOpdFilter.value);
     }
 
-    return activeParticipantsEvent.value.participants.filter(
-        (p) =>
-            p.user_name.toLowerCase().includes(query) ||
-            p.nip.toLowerCase().includes(query) ||
-            p.opd.toLowerCase().includes(query),
-    );
+    const query = participantSearchQuery.value.trim().toLowerCase();
+    if (query) {
+        result = result.filter(
+            (p) =>
+                p.user_name.toLowerCase().includes(query) ||
+                p.nip.toLowerCase().includes(query) ||
+                p.opd.toLowerCase().includes(query),
+        );
+    }
+
+    return result;
+});
+
+const paginatedParticipants = computed(() => {
+    const start = (currentParticipantPage.value - 1) * participantsPerPage.value;
+    const end = start + participantsPerPage.value;
+    return filteredParticipants.value.slice(start, end);
 });
 
 const formatTanggal = (dateStr?: string) => {
@@ -587,18 +618,33 @@ const formatTanggal = (dateStr?: string) => {
                     </p>
                 </div>
 
-                <div class="mt-3 flex items-center justify-between">
-                    <div class="relative w-full max-w-sm">
+                <div class="mt-3 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="relative w-full sm:w-72">
                         <Search class="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             v-model="participantSearchQuery"
                             placeholder="Cari nama, NIP, atau OPD..."
-                            class="h-9 rounded-none border-border bg-background pl-9 text-xs"
+                            class="h-8.5 rounded-none border-border bg-background pl-9 text-xs"
+                            @input="currentParticipantPage = 1"
                         />
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-muted-foreground whitespace-nowrap">Filter OPD:</span>
+                        <select
+                            v-model="selectedOpdFilter"
+                            @change="currentParticipantPage = 1"
+                            class="h-8.5 rounded-none border border-border bg-background px-3 text-xs focus:ring-1 focus:ring-primary focus:outline-hidden"
+                        >
+                            <option value="all">Semua Instansi / OPD ({{ availableOpds.length }} OPD)</option>
+                            <option v-for="opd in availableOpds" :key="opd" :value="opd">
+                                {{ opd }}
+                            </option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="mt-3 max-h-96 overflow-y-auto border border-border">
+                <div class="mt-3 max-h-[50vh] overflow-y-auto border border-border">
                     <table class="w-full text-xs">
                         <thead>
                             <tr class="border-b border-border bg-muted/40 text-left text-muted-foreground">
@@ -611,12 +657,12 @@ const formatTanggal = (dateStr?: string) => {
                         </thead>
                         <tbody class="divide-y divide-border/40">
                             <tr
-                                v-for="(p, index) in filteredParticipants"
+                                v-for="(p, index) in paginatedParticipants"
                                 :key="p.id"
                                 class="transition-colors hover:bg-muted/30"
                             >
                                 <td class="px-4 py-3 text-center font-mono font-bold text-muted-foreground">
-                                    {{ index + 1 }}
+                                    {{ (currentParticipantPage - 1) * participantsPerPage + index + 1 }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <p class="font-bold text-foreground">{{ p.user_name }}</p>
@@ -637,21 +683,33 @@ const formatTanggal = (dateStr?: string) => {
                             </tr>
                             <tr v-if="!filteredParticipants.length">
                                 <td colspan="5" class="py-8 text-center text-xs text-muted-foreground">
-                                    Belum ada data ASN yang tercatat hadir pada kegiatan ini.
+                                    Tidak ada data ASN yang sesuai dengan filter / pencarian.
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="mt-4 flex justify-end">
-                    <Button
-                        variant="outline"
-                        @click="showParticipantsModal = false"
-                        class="h-9 rounded-none text-xs font-bold uppercase"
-                    >
-                        Tutup
-                    </Button>
+                <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-border pt-4">
+                    <div class="text-xs text-muted-foreground font-mono">
+                        Tampil {{ paginatedParticipants.length }} dari {{ filteredParticipants.length }} peserta
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <Pagination
+                            v-if="filteredParticipants.length > 0"
+                            v-model:currentPage="currentParticipantPage"
+                            :totalItems="filteredParticipants.length"
+                            :itemsPerPage="participantsPerPage"
+                        />
+                        <Button
+                            variant="outline"
+                            @click="showParticipantsModal = false"
+                            class="h-8.5 rounded-none text-xs font-bold uppercase"
+                        >
+                            Tutup
+                        </Button>
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>
