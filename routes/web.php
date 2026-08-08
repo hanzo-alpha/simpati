@@ -98,6 +98,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     // Presensi Apel / Event / Upacara
     Route::get('/events', [AdminEventController::class, 'index'])->name('admin.events');
     Route::post('/events', [AdminEventController::class, 'store'])->name('admin.events.store');
+    Route::put('/events/{eventPresensi}', [AdminEventController::class, 'update'])->name('admin.events.update');
+    Route::delete('/events/{eventPresensi}', [AdminEventController::class, 'destroy'])->name('admin.events.destroy');
 
     // Security Audit Logs
     Route::get('/audit-logs', [AdminAuditLogController::class, 'index'])->name('admin.audit-logs');

@@ -706,7 +706,7 @@ attendanceCorrections.head = (options?: RouteQueryOptions): RouteDefinition<'hea
     attendanceCorrections.form = attendanceCorrectionsForm
 /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
 export const events = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -721,7 +721,7 @@ events.definition = {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
 events.url = (options?: RouteQueryOptions) => {
@@ -730,7 +730,7 @@ events.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
 events.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -739,7 +739,7 @@ events.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
 events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -749,7 +749,7 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
     const eventsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -759,7 +759,7 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
         eventsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -768,7 +768,7 @@ events.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\Web\Admin\EventController::events
- * @see app/Http/Controllers/Web/Admin/EventController.php:12
+ * @see app/Http/Controllers/Web/Admin/EventController.php:13
  * @route '/admin/events'
  */
         eventsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

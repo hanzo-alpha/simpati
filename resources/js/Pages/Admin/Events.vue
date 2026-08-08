@@ -1,14 +1,35 @@
 <script setup lang="ts">
-import { useForm } from '@inertiajs/vue3';
-import { QrCode, Plus, Calendar, MapPin, Users, Clock } from '@lucide/vue';
-import { ref } from 'vue';
+import { router, useForm } from '@inertiajs/vue3';
+import {
+    QrCode,
+    Plus,
+    Calendar,
+    MapPin,
+    Users,
+    Clock,
+    Pencil,
+    Trash2,
+    Search,
+    CheckCircle2,
+} from '@lucide/vue';
+import { ref, computed } from 'vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
 import { Dialog, DialogContent } from '@/Components/ui/dialog';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
+import { useConfirm } from '@/composables/useConfirm';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+
+interface Participant {
+    id: number;
+    user_name: string;
+    nip: string;
+    opd: string;
+    waktu_presensi: string;
+    keterangan: string;
+}
 
 interface EventItem {
     id: number;
@@ -21,14 +42,22 @@ interface EventItem {
     qr_token: string;
     is_active: boolean;
     participants_count?: number;
+    participants?: Participant[];
 }
 
 const props = defineProps<{
     events: EventItem[];
 }>();
 
+const { confirm } = useConfirm();
+
 const showForm = ref(false);
+const showEditForm = ref(false);
+const showParticipantsModal = ref(false);
 const activeQrModal = ref<EventItem | null>(null);
+const activeParticipantsEvent = ref<EventItem | null>(null);
+const editingEventId = ref<number | null>(null);
+const participantSearchQuery = ref('');
 
 const form = useForm({
     nama_kegiatan: '',
@@ -39,6 +68,16 @@ const form = useForm({
     lokasi: 'Halaman Kantor Bupati Soppeng',
 });
 
+const editForm = useForm({
+    nama_kegiatan: '',
+    penyelenggara: '',
+    tanggal: '',
+    jam_mulai: '',
+    jam_selesai: '',
+    lokasi: '',
+    is_active: true,
+});
+
 const submitForm = () => {
     form.post('/admin/events', {
         onSuccess: () => {
@@ -47,6 +86,68 @@ const submitForm = () => {
         },
     });
 };
+
+const openEditModal = (item: EventItem) => {
+    editingEventId.value = item.id;
+    editForm.nama_kegiatan = item.nama_kegiatan;
+    editForm.penyelenggara = item.penyelenggara;
+    editForm.tanggal = item.tanggal;
+    editForm.jam_mulai = item.jam_mulai;
+    editForm.jam_selesai = item.jam_selesai;
+    editForm.lokasi = item.lokasi;
+    editForm.is_active = item.is_active;
+    showEditForm.value = true;
+};
+
+const submitEditForm = () => {
+    if (!editingEventId.value) {
+        return;
+    }
+
+    editForm.put(`/admin/events/${editingEventId.value}`, {
+        onSuccess: () => {
+            showEditForm.value = false;
+            editingEventId.value = null;
+        },
+    });
+};
+
+const deleteEvent = async (item: EventItem) => {
+    const isConfirmed = await confirm({
+        title: 'Hapus Event Presensi?',
+        description: `Apakah Anda yakin ingin menghapus "${item.nama_kegiatan}"? Seluruh riwayat presensi peserta pada event ini juga akan dihapus secara permanen.`,
+        confirmText: 'Hapus Event',
+        variant: 'destructive',
+    });
+
+    if (isConfirmed) {
+        router.delete(`/admin/events/${item.id}`);
+    }
+};
+
+const openParticipantsModal = (item: EventItem) => {
+    activeParticipantsEvent.value = item;
+    participantSearchQuery.value = '';
+    showParticipantsModal.value = true;
+};
+
+const filteredParticipants = computed(() => {
+    if (!activeParticipantsEvent.value?.participants) {
+        return [];
+    }
+
+    const query = participantSearchQuery.value.trim().toLowerCase();
+    if (!query) {
+        return activeParticipantsEvent.value.participants;
+    }
+
+    return activeParticipantsEvent.value.participants.filter(
+        (p) =>
+            p.user_name.toLowerCase().includes(query) ||
+            p.nip.toLowerCase().includes(query) ||
+            p.opd.toLowerCase().includes(query),
+    );
+});
 
 const formatTanggal = (dateStr?: string) => {
     if (!dateStr) {
@@ -102,30 +203,58 @@ const formatTanggal = (dateStr?: string) => {
             <Card
                 v-for="item in events"
                 :key="item.id"
-                class="flex flex-col justify-between rounded-none border border-border bg-card text-card-foreground shadow-xs"
+                class="flex flex-col justify-between rounded-none border border-border bg-card text-card-foreground shadow-xs transition-shadow hover:shadow-md"
             >
                 <div>
                     <CardHeader class="border-b border-border pb-3">
-                        <div class="flex items-center justify-between">
-                            <Badge
-                                :variant="
-                                    item.is_active ? 'default' : 'outline'
-                                "
-                                class="rounded-none text-[10px] font-bold uppercase"
-                                :class="
-                                    item.is_active
-                                        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                                        : ''
-                                "
-                            >
-                                {{ item.is_active ? 'AKTIF' : 'SELESAI' }}
-                            </Badge>
-                            <span
-                                class="font-mono text-xs font-bold text-muted-foreground"
-                            >
-                                {{ item.participants_count || 0 }} ASN Hadir
-                            </span>
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2">
+                                <Badge
+                                    :variant="
+                                        item.is_active ? 'default' : 'outline'
+                                    "
+                                    class="rounded-none text-[10px] font-bold uppercase"
+                                    :class="
+                                        item.is_active
+                                            ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                            : ''
+                                    "
+                                >
+                                    {{ item.is_active ? 'AKTIF' : 'SELESAI' }}
+                                </Badge>
+                                <button
+                                    @click="openParticipantsModal(item)"
+                                    class="flex cursor-pointer items-center gap-1 font-mono text-xs font-bold text-muted-foreground hover:text-emerald-500"
+                                    title="Klik untuk melihat daftar ASN yang sudah absen"
+                                >
+                                    <Users class="h-3.5 w-3.5" />
+                                    <span>{{ item.participants_count || 0 }} ASN Hadir</span>
+                                </button>
+                            </div>
+
+                            <!-- Action Buttons Edit & Delete -->
+                            <div class="flex items-center gap-1">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    @click="openEditModal(item)"
+                                    title="Edit Event Presensi"
+                                    class="h-7 w-7 rounded-none text-muted-foreground hover:bg-muted hover:text-foreground"
+                                >
+                                    <Pencil class="h-3.5 w-3.5" />
+                                </Button>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    @click="deleteEvent(item)"
+                                    title="Hapus Event Presensi"
+                                    class="h-7 w-7 rounded-none text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500"
+                                >
+                                    <Trash2 class="h-3.5 w-3.5" />
+                                </Button>
+                            </div>
                         </div>
+
                         <CardTitle
                             class="mt-2 text-sm font-extrabold text-foreground"
                         >
@@ -182,15 +311,24 @@ const formatTanggal = (dateStr?: string) => {
                     </CardContent>
                 </div>
 
-                <div class="border-t border-border p-3">
+                <div class="grid grid-cols-2 gap-2 border-t border-border p-3">
                     <Button
                         variant="outline"
                         size="sm"
+                        @click="openParticipantsModal(item)"
+                        class="cursor-pointer rounded-none text-[11px] font-bold uppercase"
+                    >
+                        <Users class="mr-1.5 h-3.5 w-3.5 text-sky-500" />
+                        Daftar ASN Hadir ({{ item.participants_count || 0 }})
+                    </Button>
+                    <Button
+                        variant="default"
+                        size="sm"
                         @click="activeQrModal = item"
-                        class="w-full cursor-pointer rounded-none text-xs font-bold uppercase"
+                        class="cursor-pointer rounded-none bg-primary text-[11px] font-bold text-primary-foreground uppercase shadow-none hover:bg-primary/90"
                     >
                         <QrCode class="mr-1.5 h-3.5 w-3.5" />
-                        Tampilkan Layar QR Presensi
+                        Layar QR Presensi
                     </Button>
                 </div>
             </Card>
@@ -314,6 +452,207 @@ const formatTanggal = (dateStr?: string) => {
                         >
                     </div>
                 </form>
+            </DialogContent>
+        </Dialog>
+
+        <!-- Dialog Modal Edit Event -->
+        <Dialog v-model:open="showEditForm">
+            <DialogContent class="max-w-md rounded-none border-border bg-card">
+                <div class="border-b border-border pb-3">
+                    <h3 class="text-sm font-bold text-foreground uppercase">
+                        Edit Presensi Apel / Upacara
+                    </h3>
+                    <p class="text-xs text-muted-foreground">
+                        Perbarui detail jadwal, lokasi, atau status event
+                    </p>
+                </div>
+
+                <form @submit.prevent="submitEditForm" class="space-y-4 pt-2">
+                    <div class="space-y-1.5">
+                        <Label
+                            class="text-[11px] font-bold text-muted-foreground uppercase"
+                            >Nama Kegiatan / Upacara</Label
+                        >
+                        <Input
+                            v-model="editForm.nama_kegiatan"
+                            required
+                            class="h-10 rounded-none text-xs"
+                        />
+                    </div>
+                    <div class="space-y-1.5">
+                        <Label
+                            class="text-[11px] font-bold text-muted-foreground uppercase"
+                            >Penyelenggara</Label
+                        >
+                        <Input
+                            v-model="editForm.penyelenggara"
+                            required
+                            class="h-10 rounded-none text-xs"
+                        />
+                    </div>
+                    <div class="space-y-1.5">
+                        <Label
+                            class="text-[11px] font-bold text-muted-foreground uppercase"
+                            >Tanggal Pelaksanaan</Label
+                        >
+                        <Input
+                            v-model="editForm.tanggal"
+                            type="date"
+                            required
+                            class="h-10 rounded-none font-mono text-xs"
+                        />
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-1.5">
+                            <Label
+                                class="text-[11px] font-bold text-muted-foreground uppercase"
+                                >Jam Mulai</Label
+                            >
+                            <Input
+                                v-model="editForm.jam_mulai"
+                                type="time"
+                                required
+                                class="h-10 rounded-none font-mono text-xs"
+                            />
+                        </div>
+                        <div class="space-y-1.5">
+                            <Label
+                                class="text-[11px] font-bold text-muted-foreground uppercase"
+                                >Jam Selesai</Label
+                            >
+                            <Input
+                                v-model="editForm.jam_selesai"
+                                type="time"
+                                required
+                                class="h-10 rounded-none font-mono text-xs"
+                            />
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <Label
+                            class="text-[11px] font-bold text-muted-foreground uppercase"
+                            >Lokasi Kegiatan</Label
+                        >
+                        <Input
+                            v-model="editForm.lokasi"
+                            required
+                            class="h-10 rounded-none text-xs"
+                        />
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-1">
+                        <input
+                            type="checkbox"
+                            id="edit_is_active"
+                            v-model="editForm.is_active"
+                            class="h-4 w-4 rounded-none border-border accent-emerald-600"
+                        />
+                        <Label
+                            for="edit_is_active"
+                            class="cursor-pointer text-xs font-bold text-foreground"
+                            >Status Event Aktif (Siap Menerima Presensi)</Label
+                        >
+                    </div>
+
+                    <div
+                        class="flex justify-end gap-2 border-t border-border pt-4"
+                    >
+                        <Button
+                            type="button"
+                            variant="outline"
+                            @click="showEditForm = false"
+                            class="h-10 rounded-none text-xs font-bold uppercase"
+                            >Batal</Button
+                        >
+                        <Button
+                            type="submit"
+                            class="h-10 rounded-none bg-primary text-xs font-bold text-primary-foreground uppercase"
+                            >Simpan Perubahan</Button
+                        >
+                    </div>
+                </form>
+            </DialogContent>
+        </Dialog>
+
+        <!-- Dialog Modal Daftar ASN Hadir / Absen -->
+        <Dialog v-model:open="showParticipantsModal">
+            <DialogContent class="max-w-2xl rounded-none border-border bg-card p-6">
+                <div class="flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h3 class="flex items-center gap-2 text-sm font-bold text-foreground uppercase">
+                            <Users class="h-4 w-4 text-emerald-500" />
+                            <span>Daftar ASN Hadir — {{ activeParticipantsEvent?.nama_kegiatan }}</span>
+                        </h3>
+                        <p class="text-xs text-muted-foreground">
+                            Total {{ activeParticipantsEvent?.participants_count || 0 }} Pegawai ASN telah melakukan presensi QR Code
+                        </p>
+                    </div>
+
+                    <div class="relative w-full sm:w-64">
+                        <Search class="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                        <Input
+                            v-model="participantSearchQuery"
+                            placeholder="Cari nama, NIP, atau OPD..."
+                            class="h-8 rounded-none border-border bg-background pl-9 text-xs"
+                        />
+                    </div>
+                </div>
+
+                <div class="mt-4 max-h-96 overflow-y-auto border border-border">
+                    <table class="w-full text-xs">
+                        <thead>
+                            <tr class="border-b border-border bg-muted/40 text-left text-muted-foreground">
+                                <th class="w-12 px-4 py-3 text-center font-bold uppercase">#</th>
+                                <th class="px-4 py-3 font-bold uppercase">Nama & NIP Pegawai ASN</th>
+                                <th class="px-4 py-3 font-bold uppercase">Instansi / OPD</th>
+                                <th class="px-4 py-3 text-center font-bold uppercase">Waktu Scan</th>
+                                <th class="px-4 py-3 text-center font-bold uppercase">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-border/40">
+                            <tr
+                                v-for="(p, index) in filteredParticipants"
+                                :key="p.id"
+                                class="transition-colors hover:bg-muted/30"
+                            >
+                                <td class="px-4 py-3 text-center font-mono font-bold text-muted-foreground">
+                                    {{ index + 1 }}
+                                </td>
+                                <td class="px-4 py-3">
+                                    <p class="font-bold text-foreground">{{ p.user_name }}</p>
+                                    <p class="font-mono text-[11px] text-muted-foreground">NIP. {{ p.nip }}</p>
+                                </td>
+                                <td class="px-4 py-3 text-muted-foreground">
+                                    {{ p.opd }}
+                                </td>
+                                <td class="px-4 py-3 text-center font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                    {{ p.waktu_presensi }}
+                                </td>
+                                <td class="px-4 py-3 text-center">
+                                    <Badge variant="outline" class="rounded-none border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-600 dark:text-emerald-400">
+                                        <CheckCircle2 class="mr-1 h-3 w-3" />
+                                        {{ p.keterangan || 'Hadir Tepat Waktu' }}
+                                    </Badge>
+                                </td>
+                            </tr>
+                            <tr v-if="!filteredParticipants.length">
+                                <td colspan="5" class="py-8 text-center text-xs text-muted-foreground">
+                                    Belum ada data ASN yang tercatat hadir pada kegiatan ini.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 flex justify-end">
+                    <Button
+                        variant="outline"
+                        @click="showParticipantsModal = false"
+                        class="h-9 rounded-none text-xs font-bold uppercase"
+                    >
+                        Tutup
+                    </Button>
+                </div>
             </DialogContent>
         </Dialog>
 
