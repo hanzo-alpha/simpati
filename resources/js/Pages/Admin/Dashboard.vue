@@ -11,14 +11,12 @@ import {
     Clock,
     AlertCircle,
 } from '@lucide/vue';
-import L from 'leaflet';
 import { ref, computed, onMounted } from 'vue';
 import StatCard from '@/Components/StatCard.vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import 'leaflet/dist/leaflet.css';
 
 interface StatProps {
     totalUsers: number;
@@ -119,7 +117,14 @@ const maxDailyTotal = computed(() => {
     return Math.max(...props.dailyTrend.map((d) => d.total || 0), 1);
 });
 
-onMounted(() => {
+onMounted(async () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    const L = (await import('leaflet')).default;
+    await import('leaflet/dist/leaflet.css');
+
     const mapElement = document.getElementById('dashboardMap');
 
     if (!mapElement) {

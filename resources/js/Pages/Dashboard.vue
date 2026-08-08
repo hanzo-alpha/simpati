@@ -11,13 +11,11 @@ import {
     FileText,
     Navigation,
 } from '@lucide/vue';
-import L from 'leaflet';
 import { ref, computed, onMounted } from 'vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import 'leaflet/dist/leaflet.css';
 
 interface TodayAttendance {
     masuk?: string;
@@ -164,15 +162,27 @@ const calculateDistance = (
     return R * c;
 };
 
-let map: L.Map | null = null;
-let userMarker: L.CircleMarker | null = null;
+let map: any = null;
+let userMarker: any = null;
+let leafletInstance: any = null;
 
-const initMap = () => {
+const initMap = async () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
     const mapEl = document.getElementById('userMap');
 
     if (!mapEl) {
         return;
     }
+
+    if (!leafletInstance) {
+        leafletInstance = (await import('leaflet')).default;
+        await import('leaflet/dist/leaflet.css');
+    }
+
+    const L = leafletInstance;
 
     map = L.map('userMap').setView([officeLat.value, officeLng.value], 14);
 
@@ -189,6 +199,10 @@ const initMap = () => {
 };
 
 const locateUser = () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition((pos) => {
             userLat.value = pos.coords.latitude;
@@ -200,7 +214,9 @@ const locateUser = () => {
                 officeLng.value,
             );
 
-            if (map) {
+            if (map && leafletInstance) {
+                const L = leafletInstance;
+
                 if (userMarker) {
                     map.removeLayer(userMarker);
                 }
@@ -217,8 +233,12 @@ const locateUser = () => {
     }
 };
 
-onMounted(() => {
-    initMap();
+onMounted(async () => {
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    await initMap();
     locateUser();
 });
 </script>
