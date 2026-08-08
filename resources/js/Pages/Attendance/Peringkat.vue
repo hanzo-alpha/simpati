@@ -9,12 +9,15 @@ import {
     CheckCircle2,
     Clock,
     Users,
+    Search,
 } from '@lucide/vue';
 import { ref, computed } from 'vue';
+import Pagination from '@/Components/Pagination.vue';
 import StatCard from '@/Components/StatCard.vue';
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/Components/ui/card';
+import { Input } from '@/Components/ui/input';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
@@ -46,6 +49,9 @@ const props = defineProps<{
 }>();
 
 const activePeriod = ref(props.filters?.period || 'month');
+const searchQuery = ref('');
+const currentPage = ref(1);
+const itemsPerPage = ref(10);
 
 const periodTabs = [
     { label: 'Bulan Ini', value: 'month' },
@@ -55,6 +61,7 @@ const periodTabs = [
 
 const changePeriod = (val: string) => {
     activePeriod.value = val;
+    currentPage.value = 1;
     const path = typeof window !== 'undefined' ? window.location.pathname : '/peringkat';
     router.get(
         path,
@@ -62,6 +69,25 @@ const changePeriod = (val: string) => {
         { preserveState: true, preserveScroll: true, replace: true },
     );
 };
+
+const filteredRankings = computed(() => {
+    let result = props.rankings;
+    if (searchQuery.value.trim()) {
+        const query = searchQuery.value.toLowerCase();
+        result = result.filter(
+            (p) =>
+                p.name.toLowerCase().includes(query) ||
+                (p.opd && p.opd.toLowerCase().includes(query)),
+        );
+    }
+    return result;
+});
+
+const paginatedRankings = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage.value;
+    const end = start + itemsPerPage.value;
+    return filteredRankings.value.slice(start, end);
+});
 
 const topThree = computed(() => {
     return props.rankings.slice(0, 3);
@@ -331,16 +357,29 @@ const topThree = computed(() => {
             <Card
                 class="rounded-none border border-border bg-card text-card-foreground shadow-xs"
             >
-                <CardHeader class="border-b border-border/60 p-5">
+                <CardHeader
+                    class="flex flex-col gap-4 border-b border-border/60 p-5 sm:flex-row sm:items-center sm:justify-between"
+                >
                     <CardTitle
                         class="flex items-center gap-2 text-xs font-bold tracking-wider text-foreground uppercase"
                     >
                         <Trophy class="h-4 w-4 text-emerald-500" />
                         <span
-                            >Daftar Leaderboard Peringkat Kehadiran ASN (Top
-                            50)</span
+                            >Daftar Leaderboard Peringkat Kehadiran ASN ({{ filteredRankings.length }} Pegawai)</span
                         >
                     </CardTitle>
+
+                    <div class="relative w-full sm:w-64">
+                        <Search
+                            class="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
+                        />
+                        <Input
+                            v-model="searchQuery"
+                            placeholder="Cari nama ASN / OPD..."
+                            class="h-8 rounded-none border-border bg-background pl-9 text-xs"
+                            @input="currentPage = 1"
+                        />
+                    </div>
                 </CardHeader>
                 <CardContent class="p-0">
                     <div class="overflow-x-auto">
@@ -388,7 +427,7 @@ const topThree = computed(() => {
                             </thead>
                             <tbody class="divide-y divide-border/40">
                                 <tr
-                                    v-for="(person, index) in rankings"
+                                    v-for="(person, index) in paginatedRankings"
                                     :key="person.id"
                                     class="transition-colors hover:bg-muted/40"
                                     :class="{
@@ -400,20 +439,20 @@ const topThree = computed(() => {
                                         <div
                                             class="mx-auto flex h-7 w-8 items-center justify-center rounded-none border font-mono text-xs font-bold"
                                             :class="
-                                                index === 0
+                                                (currentPage - 1) * itemsPerPage + index === 0
                                                     ? 'border-amber-600 bg-amber-500 text-white'
-                                                    : index === 1
+                                                    : (currentPage - 1) * itemsPerPage + index === 1
                                                       ? 'border-slate-400 bg-slate-300 text-slate-900 dark:bg-slate-700 dark:text-white'
-                                                      : index === 2
+                                                      : (currentPage - 1) * itemsPerPage + index === 2
                                                         ? 'border-amber-800 bg-amber-700 text-white'
                                                         : 'border-border bg-muted text-muted-foreground'
                                             "
                                         >
                                             <Trophy
-                                                v-if="index === 0"
+                                                v-if="(currentPage - 1) * itemsPerPage + index === 0"
                                                 class="h-3.5 w-3.5"
                                             />
-                                            <span v-else>#{{ index + 1 }}</span>
+                                            <span v-else>#{{ (currentPage - 1) * itemsPerPage + index + 1 }}</span>
                                         </div>
                                     </td>
                                     <td class="px-5 py-3.5">
@@ -477,8 +516,28 @@ const topThree = computed(() => {
                                         {{ person.score }} Pts
                                     </td>
                                 </tr>
+
+                                <tr v-if="!filteredRankings.length">
+                                    <td
+                                        colspan="7"
+                                        class="py-10 text-center text-xs text-muted-foreground"
+                                    >
+                                        Tidak ada data peringkat ASN yang sesuai pencarian.
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <div
+                        v-if="filteredRankings.length > 0"
+                        class="border-t border-border p-4"
+                    >
+                        <Pagination
+                            v-model:currentPage="currentPage"
+                            :totalItems="filteredRankings.length"
+                            :itemsPerPage="itemsPerPage"
+                        />
                     </div>
                 </CardContent>
             </Card>

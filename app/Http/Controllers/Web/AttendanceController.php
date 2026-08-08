@@ -186,7 +186,7 @@ class AttendanceController extends Controller
         $isAdmin = in_array($request->user()->role?->name, ['super_admin', 'admin_opd']);
 
         return Inertia::render('Attendance/Peringkat', [
-            'rankings' => $rankings->take(50),
+            'rankings' => $rankings,
             'myRank' => [
                 'rank' => $myIndex !== false ? $myIndex + 1 : 0,
                 'score' => $myRank['score'] ?? 0,
