@@ -55,8 +55,9 @@ const periodTabs = [
 
 const changePeriod = (val: string) => {
     activePeriod.value = val;
+    const path = typeof window !== 'undefined' ? window.location.pathname : '/peringkat';
     router.get(
-        window.location.pathname,
+        path,
         { period: val },
         { preserveState: true, preserveScroll: true, replace: true },
     );

@@ -22,9 +22,13 @@ createInertiaApp({
             import.meta.glob<DefineComponent>('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .mount(el);
+        const vueApp = createApp({ render: () => h(App, props) }).use(plugin);
+
+        if (el) {
+            vueApp.mount(el);
+        }
+
+        return vueApp;
     },
     progress: {
         color: '#0dccf2',
